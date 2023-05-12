@@ -41,6 +41,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
+  colour:
+    dependency: transitive
+    description:
+      name: colour
+      sha256: "496ea0e7614480acf1b1b669bd5c136cc9fb89461b36bb6b475513221409e96b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
+  colours:
+    dependency: "direct main"
+    description:
+      name: colours
+      sha256: e0a300fc51e6c6cc3e4d5e1f6810259982eefa77a3013d22792a9fd84c387119
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -70,11 +86,32 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_segment:
+    dependency: "direct main"
+    description:
+      name: flutter_segment
+      sha256: f6365b4df453b492b7a243243ef8d7db9b9ba83dc1423be63a89af267d9f64c5
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.13.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -115,6 +152,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -123,6 +168,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  pigment:
+    dependency: transitive
+    description:
+      name: pigment
+      sha256: b8c56059e21ecb9379a304c78a4f20e399d41e54384a7f64de21103b4b5c38dd
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -160,6 +221,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: afc6ddd660c898a3af3f4fe47cfc9219407bcea497c992854e102aa9dcd5a477
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.1.41"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "05b079cb1be26a8d5c1afe714172d2eed9178049f4a7dc773b2cbb8b053eff8d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.1.41"
   term_glyph:
     dependency: transitive
     description:
@@ -186,3 +263,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.6 <3.0.0"
+  flutter: ">=1.16.0"
