@@ -10,14 +10,9 @@ class Produk extends StatefulWidget {
 class _ProdukState extends State<Produk> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Produk",
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('halo'),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/provider/bottomNavbar_provider.dart';
 import 'package:tim_apel/screen/Home.dart';
 import 'package:tim_apel/Widget/BottomNavbar.dart';
+import 'package:tim_apel/screen/Login.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const BottomNavbar(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }
