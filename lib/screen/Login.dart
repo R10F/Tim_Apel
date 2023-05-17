@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tim_apel/Widget/BottomNavbar.dart';
 import 'package:tim_apel/provider/Login_provider.dart';
 import 'package:tim_apel/provider/SharedPreferences_Provider.dart';
 
@@ -78,7 +76,7 @@ class _LoginState extends State<Login> {
               children: [
                 Expanded(
                     child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     loginProvider.setIsUsernameEmpty =
                         loginProvider.usernameController.text.isEmpty;
                     loginProvider.setIsPasswordEmpty =
@@ -86,11 +84,8 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      SharedPreferProvider.setIsLogin(true);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const BottomNavbar()));
+                      await SharedPreferProvider.setIsLogin(true);
+
                       loginProvider.usernameController.clear();
                       loginProvider.passwordController.clear();
                     }

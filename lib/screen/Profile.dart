@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tim_apel/provider/darkMode_provider.dart';
-import 'package:tim_apel/screen/Login.dart';
 
 import '../provider/SharedPreferences_Provider.dart';
 
@@ -198,11 +196,8 @@ class _ProfileState extends State<Profile> {
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: ElevatedButton(
-            onPressed: () {
-              print("info Login ${SharedPreferProvider.isLogin}");
-              SharedPreferProvider.removeLogin();
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => const Login()));
+            onPressed: () async {
+              await SharedPreferProvider.removeLogin();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
             child: const Text('Logout'),

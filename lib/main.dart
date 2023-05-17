@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tim_apel/Widget/BottomNavbar.dart';
 import 'package:tim_apel/provider/Login_provider.dart';
 import 'package:tim_apel/provider/RegistStaf_Provider.dart';
@@ -11,6 +10,8 @@ import 'package:tim_apel/screen/Login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SharedPreferenceProvider().loadPreferences();
 
   runApp(MultiProvider(
     providers: [
@@ -30,12 +31,12 @@ void main() async {
         create: (_) => SharedPreferenceProvider(),
       ),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({
+  const MyApp({
     super.key,
   });
 
@@ -43,12 +44,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
-    var SharedPreferProvider = Provider.of<SharedPreferenceProvider>(context);
+    var sharedPreferProvider = Provider.of<SharedPreferenceProvider>(context);
 
     return MaterialApp(
       title: 'Flutter Demo',
       theme: darkModeSwitch.getTheme(),
-      home: SharedPreferProvider.isLogin ? BottomNavbar() : Login(),
+      home: sharedPreferProvider.isLogin ? const BottomNavbar() : const Login(),
       debugShowCheckedModeBanner: false,
     );
   }
