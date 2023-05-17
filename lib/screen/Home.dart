@@ -2,7 +2,6 @@ import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:tim_apel/screen/Login.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -73,6 +72,10 @@ class _HomeState extends State<Home> {
     ),
   ];
 
+  String date = DateFormat.d().format(DateTime.now());
+  String month = DateFormat.MMM().format(DateTime.now());
+  String year = DateFormat.y().format(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -82,9 +85,9 @@ class _HomeState extends State<Home> {
           child: Text(
             "Hai, Athalia!",
             style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: 32),
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Figtree',
+                fontSize: 20),
           ),
         ),
         const Padding(
@@ -128,10 +131,7 @@ class _HomeState extends State<Home> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colours.lightSalmon,
                       minimumSize: const Size(30, 30)),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const Login()));
-                  },
+                  onPressed: () {},
                   child: const Text(
                     "Buat Order Baru",
                     style: TextStyle(color: Colors.black),
@@ -143,11 +143,11 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Row(
                   children: [
-                    const Text(
+                    Text(
                       "Profit Per Bulan",
                       style: TextStyle(
                         fontFamily: 'Figtree',
@@ -175,6 +175,132 @@ class _HomeState extends State<Home> {
                           yValueMapper: (SalesData sales, _) => sales.sales),
                     ]),
               )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 10.0),
+          child: Text(
+            "Insight Harian - $date $month $year",
+            style: const TextStyle(
+                fontSize: 20,
+                fontFamily: 'Plus Jakarta Sans',
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Card(
+                  child: SizedBox(
+                      width: 150,
+                      height: 66,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: Text(
+                              currency.format(125000),
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Center(
+                            child: Text(
+                              'Omzet (Rp)',
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+              ),
+              Center(
+                child: Card(
+                  child: SizedBox(
+                      width: 150,
+                      height: 66,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: Text(
+                              currency.format(75000),
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const Center(
+                            child: Text(
+                              'Profit',
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Card(
+                  child: SizedBox(
+                      width: 150,
+                      height: 66,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: Text(
+                              '25',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              'Produk Terjual',
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+              ),
+              Center(
+                child: Card(
+                  child: SizedBox(
+                      width: 150,
+                      height: 66,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: Text(
+                              '1',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              'Jumlah Transaksi',
+                              style: TextStyle(color: Colors.teal),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+              ),
             ],
           ),
         ),

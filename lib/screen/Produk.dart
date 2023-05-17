@@ -10,8 +10,8 @@ class Produk extends StatefulWidget {
 class _ProdukState extends State<Produk> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
       child: Text('halo'),
     );
   }
