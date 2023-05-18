@@ -1,10 +1,8 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../provider/SharedPreferences_Provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

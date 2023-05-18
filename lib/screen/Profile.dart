@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/provider/darkMode_provider.dart';
 
-import '../provider/SharedPreferences_Provider.dart';
+import '../provider/SecureStorage_Provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
-    var SharedPreferProvider = Provider.of<SharedPreferenceProvider>(context);
+    var SecureProvider = Provider.of<SecureStorageProvider>(context);
     return ListView(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -197,7 +197,7 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: ElevatedButton(
             onPressed: () async {
-              await SharedPreferProvider.removeLogin();
+              await SecureProvider.clearLoggedInStatus();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
             child: const Text('Logout'),

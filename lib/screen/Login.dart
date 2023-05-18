@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/provider/Login_provider.dart';
-import 'package:tim_apel/provider/SharedPreferences_Provider.dart';
+import 'package:tim_apel/provider/SecureStorage_Provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,7 +15,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     var loginProvider = Provider.of<LoginProvider>(context);
 
-    var SharedPreferProvider = Provider.of<SharedPreferenceProvider>(context);
+    var StorageProvider = Provider.of<SecureStorageProvider>(context);
 
     return Scaffold(
       body: ListView(
@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      await SharedPreferProvider.setIsLogin(true);
+                      await StorageProvider.setLoggedInStatus(true);
 
                       loginProvider.usernameController.clear();
                       loginProvider.passwordController.clear();
