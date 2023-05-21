@@ -1,12 +1,17 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/Widget/AppBarOwner.dart';
+import 'package:tim_apel/Widget/AppBarStaf.dart';
 import 'package:tim_apel/Widget/DrawerOwner.dart';
 import 'package:tim_apel/provider/bottomNavbar_provider.dart';
 import 'package:tim_apel/screen/Home.dart';
 import 'package:tim_apel/screen/Produk.dart';
 import 'package:tim_apel/screen/Profile.dart';
 import 'package:tim_apel/screen/Transaksi.dart';
+
+import '../provider/Login_provider.dart';
+import '../provider/SecureStorage_Provider.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -26,34 +31,21 @@ class _BottomNavbarState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+    var StorageProvider = Provider.of<SecureStorageProvider>(context);
 
     return Scaffold(
-        appBar: AppBar(
-            // iconTheme: const IconThemeData(color: Colors.black),
-            title: (bottomnavProvider.getSelectedIdx == 0)
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo.png',
-                        height: 48,
-                        width: 48,
-                      ),
-                    ],
-                  )
-                : (bottomnavProvider.getSelectedIdx == 1)
-                    ? const Text(
-                        "Produk",
-                      )
-                    : (bottomnavProvider.getSelectedIdx == 2)
-                        ? const Text(
-                            'Transaksi',
-                          )
-                        : const Text(
-                            'Profile',
-                          )),
+        appBar: StorageProvider.userRole == 'Owner'
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight),
+                child: AppBarOwner(),
+              )
+            : PreferredSize(
+                preferredSize: Size.fromHeight(kToolbarHeight),
+                child: AppBarStaf(),
+              ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        drawer: DrawerOwner(),
+        drawer:
+            StorageProvider.userRole == 'Owner' ? const DrawerOwner() : null,
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
