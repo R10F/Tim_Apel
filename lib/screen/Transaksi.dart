@@ -10,14 +10,9 @@ class Transaksi extends StatefulWidget {
 class _TransaksiState extends State<Transaksi> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Transaksi',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-      ),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Text('transaksi'),
     );
   }
 }

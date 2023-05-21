@@ -1,12 +1,10 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/provider/bottomNavbar_provider.dart';
 import 'package:tim_apel/screen/Home.dart';
-import 'package:tim_apel/screen/Login.dart';
 import 'package:tim_apel/screen/Produk.dart';
+import 'package:tim_apel/screen/Profile.dart';
 import 'package:tim_apel/screen/Transaksi.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -21,13 +19,39 @@ class _BottomNavbarState extends State<BottomNavbar> {
     const Home(),
     const Produk(),
     const Transaksi(),
+    const Profile()
   ];
 
   @override
   Widget build(BuildContext context) {
-    var bottomNav_Provider = Provider.of<bottomNavbarProvider>(context);
+    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+
     return Scaffold(
-        body: halamanBottomNav[bottomNav_Provider.getSelectedIdx],
+        appBar: AppBar(
+            // iconTheme: const IconThemeData(color: Colors.black),
+            title: (bottomnavProvider.getSelectedIdx == 0)
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 48,
+                        width: 48,
+                      ),
+                    ],
+                  )
+                : (bottomnavProvider.getSelectedIdx == 1)
+                    ? const Text(
+                        "Produk",
+                      )
+                    : (bottomnavProvider.getSelectedIdx == 2)
+                        ? const Text(
+                            'Transaksi',
+                          )
+                        : const Text(
+                            'Profile',
+                          )),
+        body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -42,12 +66,17 @@ class _BottomNavbarState extends State<BottomNavbar> {
               icon: Icon(Icons.receipt_long),
               label: 'Transaksi',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
           ],
-          currentIndex: bottomNav_Provider.getSelectedIdx,
+          currentIndex: bottomnavProvider.getSelectedIdx,
           selectedItemColor: Colours.lightSalmon,
           onTap: (value) {
-            bottomNav_Provider.setSelectedIdx = value;
+            bottomnavProvider.setSelectedIdx = value;
           },
+          type: BottomNavigationBarType.fixed,
         ));
   }
 }
