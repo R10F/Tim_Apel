@@ -26,7 +26,7 @@ class _ProdukState extends State<Produk> {
                   darkModeSwitch.getdarkModeswitchvalue ? null : Colors.white,
               child: TabBar(
                 isScrollable: true,
-                tabs: <Tab>[
+                tabs: const <Tab>[
                   Tab(
                     text: "All",
                   ),
@@ -42,9 +42,9 @@ class _ProdukState extends State<Produk> {
                     : Colors.black,
               ),
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height,
-              child: TabBarView(
+              child: const TabBarView(
                 children: <Widget>[
                   Center(child: Text('Tab 1 Content')),
                   Center(child: Text('Tab 2 Content')),
