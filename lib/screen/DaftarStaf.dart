@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/provider/RegistStaf_Provider.dart';
 
+import '../provider/darkMode_provider.dart';
+
 class DaftarStaf extends StatefulWidget {
   const DaftarStaf({super.key});
 
@@ -13,6 +15,7 @@ class _DaftarStafState extends State<DaftarStaf> {
   @override
   Widget build(BuildContext context) {
     var regisStafProvider = Provider.of<RegistStafProvider>(context);
+    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrasi Staf'),
@@ -36,7 +39,10 @@ class _DaftarStafState extends State<DaftarStaf> {
                   errorText: regisStafProvider.isNameEmpty
                       ? 'Nama Tidak Boleh Kosong'
                       : null,
-                  labelStyle: const TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(
+                      color: darkModeSwitch.getdarkModeswitchvalue
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Nama',
                   border: const OutlineInputBorder()),
             ),
@@ -49,7 +55,10 @@ class _DaftarStafState extends State<DaftarStaf> {
                   errorText: regisStafProvider.isUsernameEmpty
                       ? 'Username Tidak Boleh Kosong'
                       : null,
-                  labelStyle: const TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(
+                      color: darkModeSwitch.getdarkModeswitchvalue
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Username',
                   border: const OutlineInputBorder()),
             ),
@@ -63,7 +72,10 @@ class _DaftarStafState extends State<DaftarStaf> {
                   errorText: regisStafProvider.isPasswordEmpty
                       ? 'Password Tidak Boleh Kosong'
                       : null,
-                  labelStyle: const TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(
+                      color: darkModeSwitch.getdarkModeswitchvalue
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -90,7 +102,10 @@ class _DaftarStafState extends State<DaftarStaf> {
                   errorText: regisStafProvider.isJadwalEmpty
                       ? 'Jadwal Tidak Boleh Kosong'
                       : null,
-                  labelStyle: const TextStyle(color: Colors.black),
+                  labelStyle: TextStyle(
+                      color: darkModeSwitch.getdarkModeswitchvalue
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Jadwal',
                   border: const OutlineInputBorder()),
             ),

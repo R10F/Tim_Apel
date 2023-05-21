@@ -27,50 +27,36 @@ class _BottomNavbarState extends State<BottomNavbar> {
     const Transaksi(),
     const Profile()
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
-    var StorageProvider = Provider.of<SecureStorageProvider>(context);
 
-    return Scaffold(
-        appBar: StorageProvider.userRole == 'Owner'
-            ? PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight),
-                child: AppBarOwner(),
-              )
-            : PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight),
-                child: AppBarStaf(),
-              ),
-        body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        drawer:
-            StorageProvider.userRole == 'Owner' ? const DrawerOwner() : null,
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
-              label: 'Produk',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.receipt_long),
-              label: 'Transaksi',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: bottomnavProvider.getSelectedIdx,
-          selectedItemColor: Colours.lightSalmon,
-          onTap: (value) {
-            bottomnavProvider.setSelectedIdx = value;
-          },
-          type: BottomNavigationBarType.fixed,
-        ));
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Beranda',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag),
+          label: 'Produk',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.receipt_long),
+          label: 'Transaksi',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
+        ),
+      ],
+      currentIndex: bottomnavProvider.getSelectedIdx,
+      selectedItemColor: Colours.lightSalmon,
+      onTap: (value) {
+        bottomnavProvider.setSelectedIdx = value;
+      },
+      type: BottomNavigationBarType.fixed,
+    );
   }
 }

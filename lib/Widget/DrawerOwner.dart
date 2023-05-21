@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/screen/DaftarStaf.dart';
 import 'package:tim_apel/screen/ListStaf.dart';
+
+import '../provider/darkMode_provider.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     return Drawer(
       child: ListView(
         children: [
@@ -33,7 +37,11 @@ class DrawerOwner extends StatelessWidget {
             child: Text(
               'Staf',
               style: TextStyle(
-                  fontFamily: 'Figtree', fontSize: 16, color: Colors.grey[700]),
+                  fontFamily: 'Figtree',
+                  fontSize: 16,
+                  color: darkModeSwitch.getdarkModeswitchvalue
+                      ? Colors.grey[300]
+                      : Colors.grey[700]),
             ),
           ),
           ListTile(
@@ -41,7 +49,9 @@ class DrawerOwner extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 'List Staf',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
             onTap: () {
@@ -54,12 +64,14 @@ class DrawerOwner extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               child: Text(
                 'Registrasi Staf',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const DaftarStaf()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const DaftarStaf()));
             },
           ),
           const Divider(
@@ -73,7 +85,9 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: darkModeSwitch.getdarkModeswitchvalue
+                    ? Colors.grey[300]
+                    : Colors.grey[700],
               ),
             ),
           ),
@@ -82,7 +96,9 @@ class DrawerOwner extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   'Segera Restock',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               onTap: () {}),
@@ -97,7 +113,9 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: darkModeSwitch.getdarkModeswitchvalue
+                    ? Colors.grey[300]
+                    : Colors.grey[700],
               ),
             ),
           ),
@@ -106,7 +124,9 @@ class DrawerOwner extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   'Produk Terlaris',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               onTap: () {}),
@@ -115,7 +135,9 @@ class DrawerOwner extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   'Produk Tidak laris',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               onTap: () {}),
