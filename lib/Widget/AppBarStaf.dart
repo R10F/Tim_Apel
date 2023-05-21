@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/provider/bottomNavbar_provider.dart';
 
-import '../provider/bottomNavbar_provider.dart';
-
-class AppBarStaf extends StatefulWidget implements PreferredSizeWidget {
+class AppBarStaf extends StatelessWidget {
   const AppBarStaf({super.key});
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-
-  @override
-  State<AppBarStaf> createState() => _AppBarStafState();
-}
-
-class _AppBarStafState extends State<AppBarStaf> {
   @override
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
