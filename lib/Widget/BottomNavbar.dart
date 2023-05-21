@@ -22,7 +22,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     const Transaksi(),
     const Profile()
   ];
-
+  
   @override
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
@@ -51,7 +51,8 @@ class _BottomNavbarState extends State<BottomNavbar> {
                           )
                         : const Text(
                             'Profile',
-                          )),
+                          ), 
+        ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
         drawer: DrawerOwner(),
         bottomNavigationBar: BottomNavigationBar(
