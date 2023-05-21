@@ -1,6 +1,7 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/Widget/DrawerOwner.dart';
 import 'package:tim_apel/provider/bottomNavbar_provider.dart';
 import 'package:tim_apel/screen/Home.dart';
 import 'package:tim_apel/screen/Produk.dart';
@@ -52,6 +53,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
                             'Profile',
                           )),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
+        drawer: DrawerOwner(),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
