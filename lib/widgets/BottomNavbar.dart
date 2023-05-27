@@ -1,11 +1,11 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/provider/bottomNavbar_provider.dart';
-import 'package:tim_apel/screen/Home.dart';
-import 'package:tim_apel/screen/Produk.dart';
-import 'package:tim_apel/screen/Profile.dart';
-import 'package:tim_apel/screen/Transaksi.dart';
+import 'package:tim_apel/providers/bottomNavbar_provider.dart';
+import 'package:tim_apel/screens/Home.dart';
+import 'package:tim_apel/screens/Produk.dart';
+import 'package:tim_apel/screens/Profile.dart';
+import 'package:tim_apel/screens/Transaksi.dart';
 
 
 class BottomNavbar extends StatefulWidget {

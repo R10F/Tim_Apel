@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/Widget/MainApp.dart';
-import 'package:tim_apel/provider/Login_provider.dart';
-import 'package:tim_apel/provider/RegistStaf_Provider.dart';
-import 'package:tim_apel/provider/SecureStorage_Provider.dart';
-import 'package:tim_apel/provider/bottomNavbar_provider.dart';
-import 'package:tim_apel/provider/darkMode_provider.dart';
-import 'package:tim_apel/screen/Login.dart';
+import 'package:tim_apel/widgets/MainApp.dart';
+import 'package:tim_apel/providers/Login_provider.dart';
+import 'package:tim_apel/providers/RegistStaf_Provider.dart';
+import 'package:tim_apel/providers/SecureStorage_Provider.dart';
+import 'package:tim_apel/providers/bottomNavbar_provider.dart';
+import 'package:tim_apel/providers/darkMode_provider.dart';
+import 'package:tim_apel/screens/Login.dart';
 
 void main() {
   runApp(MultiProvider(

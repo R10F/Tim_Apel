@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/screen/DaftarStaf.dart';
+import 'package:tim_apel/screens/DaftarStaf.dart';
 
-import '../provider/RegistStaf_Provider.dart';
+import '../providers/RegistStaf_Provider.dart';
 
 class ListStaf extends StatefulWidget {
   const ListStaf({super.key});

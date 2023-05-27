@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tim_apel/screen/DaftarStaf.dart';
+import 'package:tim_apel/screens/DaftarStaf.dart';
 
 class RegistDone extends StatelessWidget {
   const RegistDone({super.key});

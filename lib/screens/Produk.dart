@@ -2,7 +2,7 @@ import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/darkMode_provider.dart';
+import '../providers/darkMode_provider.dart';
 
 class Produk extends StatefulWidget {
   const Produk({super.key});

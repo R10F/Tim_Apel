@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/screen/DaftarStaf.dart';
-import 'package:tim_apel/screen/ListStaf.dart';
+import 'package:tim_apel/screens/DaftarStaf.dart';
+import 'package:tim_apel/screens/ListStaf.dart';
 
-import '../provider/darkMode_provider.dart';
+import '../providers/darkMode_provider.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});

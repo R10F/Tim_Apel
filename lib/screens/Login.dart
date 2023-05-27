@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/provider/Login_provider.dart';
-import 'package:tim_apel/provider/SecureStorage_Provider.dart';
+import 'package:tim_apel/providers/Login_provider.dart';
+import 'package:tim_apel/providers/SecureStorage_Provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

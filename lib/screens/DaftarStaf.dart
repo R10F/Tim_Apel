@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/provider/RegistStaf_Provider.dart';
+import 'package:tim_apel/providers/RegistStaf_Provider.dart';
 
-import '../provider/darkMode_provider.dart';
+import '../providers/darkMode_provider.dart';
 
 class DaftarStaf extends StatefulWidget {
   const DaftarStaf({super.key});
