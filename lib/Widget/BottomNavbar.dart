@@ -7,6 +7,7 @@ import 'package:tim_apel/screen/Produk.dart';
 import 'package:tim_apel/screen/Profile.dart';
 import 'package:tim_apel/screen/Transaksi.dart';
 
+
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
 
@@ -26,57 +27,31 @@ class _BottomNavbarState extends State<BottomNavbar> {
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
 
-    return Scaffold(
-        appBar: AppBar(
-            // iconTheme: const IconThemeData(color: Colors.black),
-            title: (bottomnavProvider.getSelectedIdx == 0)
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo.png',
-                        height: 48,
-                        width: 48,
-                      ),
-                    ],
-                  )
-                : (bottomnavProvider.getSelectedIdx == 1)
-                    ? const Text(
-                        "Produk",
-                      )
-                    : (bottomnavProvider.getSelectedIdx == 2)
-                        ? const Text(
-                            'Transaksi',
-                          )
-                        : const Text(
-                            'Profile',
-                          )),
-        body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
-              label: 'Produk',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.receipt_long),
-              label: 'Transaksi',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-          currentIndex: bottomnavProvider.getSelectedIdx,
-          selectedItemColor: Colours.lightSalmon,
-          onTap: (value) {
-            bottomnavProvider.setSelectedIdx = value;
-          },
-          type: BottomNavigationBarType.fixed,
-        ));
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Beranda',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag),
+          label: 'Produk',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.receipt_long),
+          label: 'Transaksi',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
+        ),
+      ],
+      currentIndex: bottomnavProvider.getSelectedIdx,
+      selectedItemColor: Colours.lightSalmon,
+      onTap: (value) {
+        bottomnavProvider.setSelectedIdx = value;
+      },
+      type: BottomNavigationBarType.fixed,
+    );
   }
 }

@@ -84,11 +84,16 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      await StorageProvider.setLoggedInStatus(true);
-
-                      loginProvider.usernameController.clear();
-                      loginProvider.passwordController.clear();
+                      if (loginProvider.usernameController.text
+                          .contains('owner')) {
+                        StorageProvider.setLoggedInStatus(true, 'Owner');
+                      } else {
+                        StorageProvider.setLoggedInStatus(true, 'Staf');
+                      }
                     }
+
+                    loginProvider.usernameController.clear();
+                    loginProvider.passwordController.clear();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal[700]),
