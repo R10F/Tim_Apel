@@ -15,7 +15,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     var loginProvider = Provider.of<LoginProvider>(context);
 
-    var StorageProvider = Provider.of<SecureStorageProvider>(context);
+    var storageProvider = Provider.of<SecureStorageProvider>(context);
 
     return Scaffold(
       body: ListView(
@@ -86,9 +86,23 @@ class _LoginState extends State<Login> {
                         !loginProvider.isPasswordEmpty) {
                       if (loginProvider.usernameController.text
                           .contains('owner')) {
-                        StorageProvider.setLoggedInStatus(true, 'Owner');
+                        storageProvider.setLoggedInStatus(true, 'Owner');
+                      } else if (loginProvider.usernameController.text
+                          .contains('staf')) {
+                        storageProvider.setLoggedInStatus(true, 'Staf');
                       } else {
-                        StorageProvider.setLoggedInStatus(true, 'Staf');
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Username atau Password Anda Salah '),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
                       }
                     }
 

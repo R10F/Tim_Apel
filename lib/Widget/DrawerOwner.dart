@@ -17,7 +17,6 @@ class DrawerOwner extends StatelessWidget {
           DrawerHeader(
               child: Image.asset(
             'assets/images/logo.png',
-            width: 50,
           )),
           const Padding(
             padding: EdgeInsets.only(bottom: 15),

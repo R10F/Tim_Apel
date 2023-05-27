@@ -32,21 +32,32 @@ class _MainAppState extends State<MainApp> {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
     var StorageProvider = Provider.of<SecureStorageProvider>(context);
 
-    return Scaffold(
-        appBar: StorageProvider.userRole == 'Owner'
-            ? const PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight),
-                child: AppBarOwner(),
-              )
-            : const PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight),
-                child: AppBarStaf(),
-              ),
-        body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        drawer: StorageProvider.userRole == 'Owner' &&
-                bottomnavProvider.getSelectedIdx == 0
-            ? const DrawerOwner()
-            : null,
-        bottomNavigationBar: const BottomNavbar());
+    return DefaultTabController(
+      length: bottomnavProvider.getSelectedIdx == 1 ? 5 : 2,
+      child: Scaffold(
+          appBar: StorageProvider.userRole == 'Owner'
+              ? PreferredSize(
+                  preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
+                          bottomnavProvider.getSelectedIdx == 2
+                      ? const Size.fromHeight(
+                          kToolbarHeight + kTextTabBarHeight)
+                      : const Size.fromHeight(kToolbarHeight),
+                  child: const AppBarOwner(),
+                )
+              : PreferredSize(
+                  preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
+                          bottomnavProvider.getSelectedIdx == 2
+                      ? const Size.fromHeight(
+                          kToolbarHeight + kTextTabBarHeight)
+                      : const Size.fromHeight(kToolbarHeight),
+                  child: const AppBarStaf(),
+                ),
+          body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
+          drawer: StorageProvider.userRole == 'Owner' &&
+                  bottomnavProvider.getSelectedIdx == 0
+              ? const DrawerOwner()
+              : null,
+          bottomNavigationBar: const BottomNavbar()),
+    );
   }
 }
