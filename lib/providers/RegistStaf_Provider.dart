@@ -21,11 +21,13 @@ class RegistStafProvider extends ChangeNotifier {
 
   set setListStaf(value) {
     _listStaf.add(value);
+    print(_listStaf);
     notifyListeners();
   }
 
   set setStaf(value) {
     _staf = value;
+    print(_staf);
     notifyListeners();
   }
 

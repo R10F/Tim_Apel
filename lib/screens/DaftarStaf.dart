@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/RegistStaf_Provider.dart';
+import 'package:tim_apel/screens/RegistDone.dart';
 
 import '../providers/darkMode_provider.dart';
 
@@ -143,6 +144,9 @@ class _DaftarStafState extends State<DaftarStaf> {
                           regisStafProvider.jadwalController.text;
 
                       regisStafProvider.setListStaf = regisStafProvider.staf;
+
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_) => RegistDone()));
 
                       regisStafProvider.namaController.clear();
                       regisStafProvider.usernameController.clear();

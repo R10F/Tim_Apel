@@ -10,9 +10,9 @@ class Transaksi extends StatefulWidget {
 class _TransaksiState extends State<Transaksi> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text('transaksi'),
-    );
+    return TabBarView(children: <Widget>[
+      Center(child: Text('Konten Transaksi Belum Selesai')),
+      Center(child: Text('Konten Transaksi Sudah Selesai')),
+    ]);
   }
 }

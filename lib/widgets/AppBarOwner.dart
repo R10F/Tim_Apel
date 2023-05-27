@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/widgets/TabNavigasiProduk.dart';
+import 'package:tim_apel/widgets/TabNavigasiTransaksi.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 
 class AppBarOwner extends StatelessWidget {
@@ -21,6 +23,15 @@ class AppBarOwner extends StatelessWidget {
                       )
                     : const Text(
                         'Profile',
-                      ));
+                      ),
+        bottom: bottomnavProvider.getSelectedIdx == 1
+            ? const PreferredSize(
+                preferredSize: Size.fromHeight(kTextTabBarHeight),
+                child: TabNavigasiProduk())
+            : bottomnavProvider.getSelectedIdx == 2
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(kTextTabBarHeight),
+                    child: TabNavigasiTransaksi())
+                : null);
   }
 }

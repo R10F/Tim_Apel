@@ -14,8 +14,10 @@ class DarkModeProvider extends ChangeNotifier {
       ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
-      appBarTheme:
-          const AppBarTheme(color: Colors.white, foregroundColor: Colors.black),
+      appBarTheme: const AppBarTheme(
+        color: Colors.white,
+        foregroundColor: Colors.black,
+      ),
       primarySwatch: Colors.blue,
       brightness: Brightness.light);
 

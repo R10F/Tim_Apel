@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 
+import 'TabNavigasiProduk.dart';
+import 'TabNavigasiTransaksi.dart';
+
 class AppBarStaf extends StatelessWidget {
   const AppBarStaf({super.key});
 
@@ -30,6 +33,16 @@ class AppBarStaf extends StatelessWidget {
                       )
                     : const Text(
                         'Profile',
-                      ));
+                      ),
+        bottom: bottomnavProvider.getSelectedIdx == 1
+            ? const PreferredSize(
+                preferredSize: Size.fromHeight(kTextTabBarHeight),
+                child: TabNavigasiProduk())
+            : bottomnavProvider.getSelectedIdx == 2
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(kTextTabBarHeight),
+                    child: TabNavigasiTransaksi())
+                : null);
+    ;
   }
 }
