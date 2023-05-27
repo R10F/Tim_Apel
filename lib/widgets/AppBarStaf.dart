@@ -43,6 +43,5 @@ class AppBarStaf extends StatelessWidget {
                     preferredSize: Size.fromHeight(kTextTabBarHeight),
                     child: TabNavigasiTransaksi())
                 : null);
-    ;
   }
 }

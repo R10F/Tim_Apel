@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,60 +26,41 @@ class _HomeState extends State<Home> {
 
   final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
 
-  final List<SalesData> chartData = [
-    SalesData(DateFormat.MMM().format(DateTime(2023, 1)), 500000),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 2)),
-      800000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 3)),
-      1000000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 4)),
-      600000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 5)),
-      750000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 6)),
-      850000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 7)),
-      950000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 8)),
-      500000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 9)),
-      200000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 10)),
-      100000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 11)),
-      980000,
-    ),
-    SalesData(
-      DateFormat.MMM().format(DateTime(2023, 12)),
-      1200000,
-    ),
-  ];
-
   String date = DateFormat.d().format(DateTime.now());
   String month = DateFormat.MMM().format(DateTime.now());
   String year = DateFormat.y().format(DateTime.now());
 
+  late List<SalesData> chartData;
+
+  List<SalesData> generateSalesData() {
+    int currentYear = DateTime.now().year;
+    int currentMonth = DateTime.now().month;
+
+    if (currentMonth < 12) {
+      currentMonth = 12 - currentMonth - 1;
+      currentYear -= 1;
+    }
+
+    return List<SalesData>.generate(11, (index) {
+      if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear += 1;
+      }
+
+      return SalesData(
+          DateFormat.MMM().format(DateTime(currentYear, currentMonth++)),
+          (Random().nextInt(20) + 10) * 50000);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    chartData = generateSalesData();
+    chartData.add(SalesData(
+        DateFormat.MMM()
+            .format(DateTime(DateTime.now().year, DateTime.now().month)),
+        500000));
+
     return ListView(
       children: [
         const Padding(
