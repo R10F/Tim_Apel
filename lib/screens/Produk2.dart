@@ -16,14 +16,11 @@ class _ProdukState extends State<Produk> {
   @override
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
-    List <String> kategori = produkProv.kategori;
-    return
-    TabBarView(
-      children: <Widget>[
-        ProdukBuilder(produk: produkProv.semuaProduk),
-        for (int i=0; i<kategori.length; i++)
-          ProdukBuilder(produk: produkProv.getProdukPerKategori(kategori[i]))
-      ]
-    );
+    List<String> kategori = produkProv.kategori;
+    return TabBarView(children: <Widget>[
+      ProdukBuilder(produk: produkProv.semuaProduk),
+      for (int i = 0; i < kategori.length; i++)
+        ProdukBuilder(produk: produkProv.getProdukPerKategori(kategori[i]))
+    ]);
   }
 }
