@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/providers/auth_provider.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
 import 'package:tim_apel/providers/Login_provider.dart';
 import 'package:tim_apel/providers/RegistStaf_Provider.dart';
@@ -14,6 +15,9 @@ void main() {
     providers: [
       ChangeNotifierProvider(
         create: (_) => bottomNavbarProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => AuthProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
