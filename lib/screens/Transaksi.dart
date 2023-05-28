@@ -10,8 +10,8 @@ class Transaksi extends StatefulWidget {
 class _TransaksiState extends State<Transaksi> {
   @override
   Widget build(BuildContext context) {
-    return TabBarView(children: <Widget>[
-      Center(child: Text('Konten Transaksi Belum Selesai')),
+    return const TabBarView(children: [
+      Center(child: Text('Konten Transaksi Dalam Proses')),
       Center(child: Text('Konten Transaksi Sudah Selesai')),
     ]);
   }

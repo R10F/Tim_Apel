@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            title: Text('Username atau Password Anda Salah '),
+                            title: const Text('Username atau Password Anda Salah '),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context, 'OK'),

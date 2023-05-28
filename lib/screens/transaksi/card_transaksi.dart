@@ -11,7 +11,7 @@ class _CardTransaksiState extends State<CardTransaksi> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
@@ -23,11 +23,11 @@ class _CardTransaksiState extends State<CardTransaksi> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
+            const Column(
               children: [Text('Order M'), Text('Total Belanja: Rp')],
             ),
             Container(
-              child: Text('Athalia'),
+              child: const Text('Athalia'),
             )
           ],
         ),
