@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/produk_data_model.dart';
+import '../screens/DetailProduk.dart';
 
 class ProdukBuilder extends StatefulWidget {
   final List <Produk> produk;
@@ -27,7 +28,11 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
           child:
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => DetailProduk(produk: widget.produk[i]))
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -57,7 +62,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     ),
                   ),
                 ],
-                
+
               ),
             ),
           ),
