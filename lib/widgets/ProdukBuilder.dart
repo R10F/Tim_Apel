@@ -12,7 +12,7 @@ class ProdukBuilder extends StatefulWidget {
 
 class _ProdukBuilderState extends State<ProdukBuilder> {
   final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-  
+
   @override
   Widget build(BuildContext context) {
     return
@@ -31,13 +31,13 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset('$widget.produk[i].gambar'),
+                  Image.asset(widget.produk[i].gambar!),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        '$widget.produk[i].nama',
+                        widget.produk[i].nama,
                         style:
                             TextStyle(fontFamily: 'Figtree', fontSize: 16),
                       ),
@@ -48,7 +48,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        currency.format('$widget.produk[i].hargaJual'),
+                        currency.format(widget.produk[i].hargaJual),
                         style: TextStyle(
                             fontFamily: 'Figtree',
                             fontSize: 14,
@@ -57,6 +57,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     ),
                   ),
                 ],
+                
               ),
             ),
           ),
