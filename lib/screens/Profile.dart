@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/darkMode_provider.dart';
 
 import '../providers/SecureStorage_Provider.dart';
+import '../providers/auth_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,6 +17,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
     var SecureProvider = Provider.of<SecureStorageProvider>(context);
     return ListView(children: [
       Padding(
@@ -198,6 +200,7 @@ class _ProfileState extends State<Profile> {
           child: ElevatedButton(
             onPressed: () async {
               await SecureProvider.clearLoggedInStatus();
+              authProvider.logout();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
             child: const Text('Logout'),

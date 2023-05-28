@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/screens/DaftarStaf.dart';
-import 'package:tim_apel/screens/ListStaf.dart';
+import 'package:tim_apel/screens/admin/account/register_staf.dart';
+import 'package:tim_apel/screens/admin/account/list_staf.dart';
 
 import '../providers/darkMode_provider.dart';
 

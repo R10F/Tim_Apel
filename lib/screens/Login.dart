@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/Login_provider.dart';
 import 'package:tim_apel/providers/SecureStorage_Provider.dart';
 
+import '../providers/auth_provider.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -14,6 +16,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     var loginProvider = Provider.of<LoginProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
 
     var storageProvider = Provider.of<SecureStorageProvider>(context);
 
@@ -84,8 +87,9 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      if (loginProvider.usernameController.text
-                          .contains('owner')) {
+                      if (authProvider.login(
+                          loginProvider.usernameController.text,
+                          loginProvider.passwordController.text)) {
                         storageProvider.setLoggedInStatus(true, 'Owner');
                       } else if (loginProvider.usernameController.text
                           .contains('staf')) {
