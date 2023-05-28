@@ -15,24 +15,28 @@ class DrawerOwner extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-              child: Image.asset(
-            'assets/images/logo.png',
-          )),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 15),
-            child: Center(
-              child: Text(
-                'Makmur App',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          const Divider(
-            height: 15,
-            thickness: 2,
-          ),
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: Divider.createBorderSide(context, width: 2))),
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/logo.png',
+                    width: 75,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 18, bottom: 15),
+                    child: Center(
+                      child: Text(
+                        'Makmur App',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
             child: Text(
               'Staf',
               style: TextStyle(
@@ -60,7 +64,9 @@ class DrawerOwner extends StatelessWidget {
           ),
           ListTile(
             title: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              padding: EdgeInsets.symmetric(
+                horizontal: 8,
+              ),
               child: Text(
                 'Registrasi Staf',
                 style: TextStyle(
@@ -78,7 +84,7 @@ class DrawerOwner extends StatelessWidget {
             thickness: 2,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
             child: Text(
               'Stok',
               style: TextStyle(
@@ -106,7 +112,7 @@ class DrawerOwner extends StatelessWidget {
             thickness: 2,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
             child: Text(
               'Analisis Penjualan',
               style: TextStyle(

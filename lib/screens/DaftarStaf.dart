@@ -146,7 +146,7 @@ class _DaftarStafState extends State<DaftarStaf> {
                       regisStafProvider.setListStaf = regisStafProvider.staf;
 
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (_) => RegistDone()));
+                          MaterialPageRoute(builder: (_) => const RegistDone()));
 
                       regisStafProvider.namaController.clear();
                       regisStafProvider.usernameController.clear();

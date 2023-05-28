@@ -12,7 +12,9 @@ class AppBarOwner extends StatelessWidget {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
     return AppBar(
         title: (bottomnavProvider.getSelectedIdx == 0)
-            ? const Text('Makmur App')
+            ? const Text(
+                'Makmur App',
+              )
             : (bottomnavProvider.getSelectedIdx == 1)
                 ? const Text(
                     "Produk",

@@ -11,7 +11,8 @@ class TabNavigasiTransaksi extends StatelessWidget {
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     return TabBar(
-      isScrollable: true,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 12),
+      labelStyle: const TextStyle(fontSize: 15),
       tabs: const [
         Tab(
           text: "Dalam Proses",
