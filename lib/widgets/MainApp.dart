@@ -56,7 +56,14 @@ class _MainAppState extends State<MainApp> {
                   bottomnavProvider.getSelectedIdx == 0
               ? const DrawerOwner()
               : null,
-          bottomNavigationBar: const BottomNavbar()),
+          bottomNavigationBar: const BottomNavbar(),
+          floatingActionButton: StorageProvider.userRole == 'Owner' && bottomnavProvider.getSelectedIdx == 1
+          ? FloatingActionButton.extended(
+            onPressed: () {
+            
+          }, label: const Text("Tambah"), icon: const Icon(Icons.add),)
+          : null,
+      ),
     );
   }
 }
