@@ -1,7 +1,6 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/darkMode_provider.dart';
 
 class TabNavigasiProduk extends StatelessWidget {
@@ -11,8 +10,6 @@ class TabNavigasiProduk extends StatelessWidget {
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     return TabBar(
-      labelPadding: const EdgeInsets.symmetric(horizontal: 12),
-      labelStyle: const TextStyle(fontSize: 16, fontFamily: 'Figtree'),
       isScrollable: true,
       tabs: const [
         Tab(
