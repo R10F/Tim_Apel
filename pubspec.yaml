@@ -55,7 +55,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/profile.png
-    - assets/images/registDone.png
+    - assets/images/register-done.png
     - assets/product_images/produk_1.jpg
     - assets/product_images/produk_2.jpg
     - assets/product_images/produk_3.jpg

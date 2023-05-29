@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
-
-import '../providers/darkMode_provider.dart';
+import 'package:tim_apel/providers/darkMode_provider.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});
@@ -76,7 +75,7 @@ class DrawerOwner extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const DaftarStaf()));
+                  MaterialPageRoute(builder: (_) => const RegisterStaf()));
             },
           ),
           const Divider(

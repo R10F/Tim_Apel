@@ -1,9 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/auth_provider.dart';
 import 'package:tim_apel/providers/Login_provider.dart';
-import 'package:tim_apel/providers/SecureStorage_Provider.dart';
-
-import '../providers/auth_provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,10 +15,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    var loginProvider = Provider.of<LoginProvider>(context);
     var authProvider = Provider.of<AuthProvider>(context);
-
-    var storageProvider = Provider.of<SecureStorageProvider>(context);
+    var loginProvider = Provider.of<LoginProvider>(context);
 
     return Scaffold(
       body: ListView(
@@ -87,18 +85,15 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      if (await authProvider.login(
+                      bool status = await authProvider.login(
                           loginProvider.usernameController.text,
-                          loginProvider.passwordController.text)) {
-                        storageProvider.setLoggedInStatus(true, 'Owner');
-                      } else if (loginProvider.usernameController.text
-                          .contains('staf')) {
-                        storageProvider.setLoggedInStatus(true, 'Staf');
-                      } else {
+                          loginProvider.passwordController.text);
+                      if (!status) {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            title: const Text('Username atau Password Anda Salah '),
+                            title: const Text(
+                                'Username atau Password Anda Salah '),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context, 'OK'),

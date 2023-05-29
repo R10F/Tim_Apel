@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 
-class RegistDone extends StatelessWidget {
-  const RegistDone({super.key});
+class RegisterDone extends StatelessWidget {
+  const RegisterDone({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class RegistDone extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 100, bottom: 25),
-              child: Image.asset('assets/images/registDone.png'),
+              child: Image.asset('assets/images/register-done.png'),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
@@ -54,8 +54,10 @@ class RegistDone extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => const DaftarStaf()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const RegisterStaf()));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal[700]),

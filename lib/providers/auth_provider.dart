@@ -29,6 +29,25 @@ class AuthProvider extends ChangeNotifier {
     _checkLoginStatus();
   }
 
+  get isLoggedIn => _currentLoggedInUserIndex > -1;
+  get userAccounts => _userAccounts;
+  get currentUser => _userAccounts[_currentLoggedInUserIndex];
+  get id => _currentLoggedInUserIndex;
+  get isOwner => currentUser['is_owner'];
+
+  set register(data) {
+    _userAccounts.add({
+      'nama': data['nama'],
+      'username': data['username'].toString().trim(),
+      'password': data['password'],
+      'is_owner': false,
+      'jadwal': data['jadwal'],
+      'settings': {'dark_mode': false, 'dashboard_minimal': false}
+    });
+    print(_userAccounts);
+    notifyListeners();
+  }
+
   Future<void> _checkLoginStatus() async {
     String? value = await _storage.read(key: 'makmurApp_LoginID');
     print(value);
@@ -40,38 +59,20 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  get isLoggedIn => _currentLoggedInUserIndex > -1;
-  get userAccounts => _userAccounts;
-  get currentUser => _userAccounts[_currentLoggedInUserIndex];
-  get id => _currentLoggedInUserIndex;
-  get isOwner => currentUser['is_owner'];
-
-  set register(data) {
-    _userAccounts.add({
-      'nama': data['nama'],
-      'username': data['username'],
-      'password': data['password'],
-      'is_owner': false,
-      'jadwal': data['jadwal'],
-      'settings': {'dark_mode': false, 'dashboard_minimal': false}
-    });
-    print(_userAccounts);
-    notifyListeners();
-  }
-
   Future<bool> login(String username, String password) async {
     bool verified = false;
 
     for (int i = 0; i < _userAccounts.length; i++) {
       var user = _userAccounts[i];
 
-      if ((user['username'] == username) && (user['password'] == password)) {
+      if (user['username'] == username.trim() && user['password'] == password) {
         await _storage.write(key: 'makmurApp_LoginID', value: i.toString());
         _currentLoggedInUserIndex = i;
         verified = true;
         break;
       }
     }
+    notifyListeners();
     String? value = await _storage.read(key: 'makmurApp_LoginID');
     print(value);
     return verified;

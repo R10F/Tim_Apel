@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/RegistStaf_Provider.dart';
 import 'package:tim_apel/screens/admin/account/register_done.dart';
+import 'package:tim_apel/providers/RegistStaf_Provider.dart';
 import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/darkMode_provider.dart';
 
-import '../../../providers/darkMode_provider.dart';
-
-class DaftarStaf extends StatefulWidget {
-  const DaftarStaf({super.key});
+class RegisterStaf extends StatefulWidget {
+  const RegisterStaf({super.key});
 
   @override
-  State<DaftarStaf> createState() => _DaftarStafState();
+  State<RegisterStaf> createState() => _RegisterStafState();
 }
 
-class _DaftarStafState extends State<DaftarStaf> {
+class _RegisterStafState extends State<RegisterStaf> {
   @override
   Widget build(BuildContext context) {
     var regisStafProvider = Provider.of<RegistStafProvider>(context);
     var authProvider = Provider.of<AuthProvider>(context);
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrasi Staf'),
@@ -148,8 +148,10 @@ class _DaftarStafState extends State<DaftarStaf> {
                       authProvider.register = regisStafProvider.staf;
                       // regisStafProvider.setListStaf = regisStafProvider.staf;
 
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (_) => const RegistDone()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const RegisterDone()));
 
                       regisStafProvider.namaController.clear();
                       regisStafProvider.usernameController.clear();
