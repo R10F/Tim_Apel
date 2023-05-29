@@ -6,7 +6,7 @@ import 'package:tim_apel/widgets/AppBarStaf.dart';
 import 'package:tim_apel/widgets/BottomNavbar.dart';
 import 'package:tim_apel/widgets/DrawerOwner.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
-import 'package:tim_apel/screens/Home.dart';
+import 'package:tim_apel/screens/dashboard/home.dart';
 import 'package:tim_apel/screens/Produk.dart';
 import 'package:tim_apel/screens/profile.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
@@ -29,8 +29,8 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
     var accountProvider = Provider.of<AccountProvider>(context);
+    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
 
     return DefaultTabController(
       length: bottomnavProvider.getSelectedIdx == 1 ? 5 : 2,
