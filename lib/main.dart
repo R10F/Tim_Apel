@@ -23,13 +23,7 @@ void main() {
         create: (_) => LoginProvider(),
       ),
       ChangeNotifierProvider(
-        create: (_) => DarkModeProvider(),
-      ),
-      ChangeNotifierProvider(
         create: (_) => RegistStafProvider(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => SecureStorageProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => ProdukProvider(),
@@ -48,11 +42,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
 
     return MaterialApp(
       title: 'Makmur App',
-      theme: darkModeSwitch.getTheme(),
+      theme: accountProvider.getTheme(),
       home: accountProvider.isLoggedIn ? const MainApp() : const Login(),
       debugShowCheckedModeBanner: false,
     );

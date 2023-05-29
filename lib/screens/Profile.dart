@@ -15,7 +15,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
 
     return ListView(children: [
       Padding(
@@ -128,7 +127,6 @@ class _ProfileState extends State<Profile> {
           trailing: Switch(
             value: accountProvider.getSetting('dark_mode'),
             onChanged: (value) {
-              darkModeSwitch.setdarkModeswitchValue = value;
               accountProvider.setSetting('dark_mode', value);
             },
           ),

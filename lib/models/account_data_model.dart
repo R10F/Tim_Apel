@@ -14,7 +14,7 @@ class AccountDataModel {
       'password': '1',
       'is_owner': false,
       'jadwal': 'Rabu\n10.00 - 13.30\n\nKamis\n15.00 - 17.00',
-      'settings': {'dark_mode': false, 'dashboard_minimal': true}
+      'settings': {'dark_mode': true, 'dashboard_minimal': true}
     }
   ];
 }

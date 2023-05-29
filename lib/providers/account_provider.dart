@@ -4,7 +4,6 @@ import 'package:tim_apel/models/account_data_model.dart';
 
 class AccountProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
-
   final List _userAccounts = AccountDataModel().userAccounts;
 
   int _currentLoggedInUserIndex = -1;
@@ -73,10 +72,33 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ======================
+  // | PREFERENCE SECTION |
+  // ======================
+
+  final ThemeData _darkTheme =
+      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+
+  final ThemeData _lightTheme = ThemeData(
+      appBarTheme: const AppBarTheme(
+        color: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+      primarySwatch: Colors.blue,
+      brightness: Brightness.light);
+
   getSetting(String key) => currentUser['settings'][key];
 
-  setSetting(String key, bool value) {
+  void setSetting(String key, bool value) {
     currentUser['settings'][key] = value;
     notifyListeners();
+  }
+
+  ThemeData getTheme() {
+    if (!isLoggedIn) {
+      return _lightTheme;
+    } else {
+      return getSetting('dark_mode') ? _darkTheme : _lightTheme;
+    }
   }
 }
