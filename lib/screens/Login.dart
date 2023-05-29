@@ -87,7 +87,7 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      if (authProvider.login(
+                      if (await authProvider.login(
                           loginProvider.usernameController.text,
                           loginProvider.passwordController.text)) {
                         storageProvider.setLoggedInStatus(true, 'Owner');

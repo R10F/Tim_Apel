@@ -49,11 +49,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     var SecureStorage = Provider.of<SecureStorageProvider>(context);
+    var authProvider = Provider.of<AuthProvider>(context);
 
     return MaterialApp(
       title: 'Flutter Demo',
       theme: darkModeSwitch.getTheme(),
-      home: SecureStorage.isLoggedIn ? const MainApp() : const Login(),
+      home: authProvider.isLoggedIn ? const MainApp() : const Login(),
+      // home: SecureStorage.isLoggedIn ? const MainApp() : const Login(),
       debugShowCheckedModeBanner: false,
     );
   }

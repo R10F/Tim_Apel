@@ -17,6 +17,9 @@ class _ListStafState extends State<ListStaf> {
   Widget build(BuildContext context) {
     var authProvider = Provider.of<AuthProvider>(context);
     var userAccounts = authProvider.userAccounts;
+    print(userAccounts);
+    print(authProvider.id);
+    print(authProvider.isOwner);
     // var regisStafProvider = Provider.of<RegistStafProvider>(context);
 
     return Scaffold(
@@ -39,7 +42,7 @@ class _ListStafState extends State<ListStaf> {
                   width: 45,
                 ),
                 title: Text(userAccounts[index]['nama']),
-                trailing: (authProvider.id == index || authProvider.isOwner)
+                trailing: (authProvider.id != index || !authProvider.isOwner)
                     ? IconButton(
                         onPressed: () {
                           authProvider.removeAccount(index);

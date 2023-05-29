@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthProvider extends ChangeNotifier {
+  final _storage = const FlutterSecureStorage();
+
   final List _userAccounts = [
     {
       'nama': 'Charles Makmur',
@@ -22,6 +25,22 @@ class AuthProvider extends ChangeNotifier {
 
   int _currentLoggedInUserIndex = -1;
 
+  AuthProvider() {
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    String? value = await _storage.read(key: 'makmurApp_LoginID');
+    print(value);
+    print(_currentLoggedInUserIndex);
+    if (value != null) {
+      _currentLoggedInUserIndex = int.parse(value, radix: 10);
+    }
+    print(_currentLoggedInUserIndex);
+    notifyListeners();
+  }
+
+  get isLoggedIn => _currentLoggedInUserIndex > -1;
   get userAccounts => _userAccounts;
   get currentUser => _userAccounts[_currentLoggedInUserIndex];
   get id => _currentLoggedInUserIndex;
@@ -40,18 +59,21 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool login(String username, String password) {
+  Future<bool> login(String username, String password) async {
     bool verified = false;
 
     for (int i = 0; i < _userAccounts.length; i++) {
       var user = _userAccounts[i];
 
       if ((user['username'] == username) && (user['password'] == password)) {
+        await _storage.write(key: 'makmurApp_LoginID', value: i.toString());
         _currentLoggedInUserIndex = i;
         verified = true;
         break;
       }
     }
+    String? value = await _storage.read(key: 'makmurApp_LoginID');
+    print(value);
     return verified;
   }
 
@@ -60,7 +82,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  logout() {
+  logout() async {
+    await _storage.delete(key: 'makmurApp_LoginID');
     _currentLoggedInUserIndex = -1;
+    notifyListeners();
   }
 }
