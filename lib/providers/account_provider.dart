@@ -1,31 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tim_apel/models/account_data_model.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AccountProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
 
-  final List _userAccounts = [
-    {
-      'nama': 'Charles Makmur',
-      'username': 'charles',
-      'password': '1',
-      'is_owner': true,
-      'jadwal': 'jadwal charles',
-      'settings': {'dark_mode': false, 'dashboard_minimal': false}
-    },
-    {
-      'nama': 'Frederic Davidsen',
-      'username': 'fred',
-      'password': '1',
-      'is_owner': false,
-      'jadwal': 'jadwal fred',
-      'settings': {'dark_mode': false, 'dashboard_minimal': true}
-    }
-  ];
+  final List _userAccounts = AccountDataModel().userAccounts;
 
   int _currentLoggedInUserIndex = -1;
 
-  AuthProvider() {
+  AccountProvider() {
     _checkLoginStatus();
   }
 
@@ -86,6 +70,13 @@ class AuthProvider extends ChangeNotifier {
   logout() async {
     await _storage.delete(key: 'makmurApp_LoginID');
     _currentLoggedInUserIndex = -1;
+    notifyListeners();
+  }
+
+  getSetting(String key) => currentUser['settings'][key];
+
+  setSetting(String key, bool value) {
+    currentUser['settings'][key] = value;
     notifyListeners();
   }
 }

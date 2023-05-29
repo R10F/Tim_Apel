@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/darkMode_provider.dart';
-
-import '../providers/SecureStorage_Provider.dart';
-import '../providers/auth_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -16,9 +14,9 @@ class _ProfileState extends State<Profile> {
   bool berandaMinimal = false;
   @override
   Widget build(BuildContext context) {
+    var accountProvider = Provider.of<AccountProvider>(context);
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
-    var authProvider = Provider.of<AuthProvider>(context);
-    var SecureProvider = Provider.of<SecureStorageProvider>(context);
+
     return ListView(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -37,11 +35,11 @@ class _ProfileState extends State<Profile> {
               fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(top: 5, left: 20),
+      Padding(
+        padding: const EdgeInsets.only(top: 5, left: 20),
         child: Text(
-          'Athalia',
-          style: TextStyle(
+          accountProvider.currentUser['nama'],
+          style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
           ),
@@ -55,11 +53,11 @@ class _ProfileState extends State<Profile> {
               fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(top: 5, left: 20),
+      Padding(
+        padding: const EdgeInsets.only(top: 5, left: 20),
         child: Text(
-          'Role',
-          style: TextStyle(
+          accountProvider.currentUser['username'],
+          style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
           ),
@@ -68,16 +66,16 @@ class _ProfileState extends State<Profile> {
       const Padding(
         padding: EdgeInsets.only(top: 20, left: 20),
         child: Text(
-          'Staf',
+          'Role',
           style: TextStyle(
               fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(top: 5, left: 20, bottom: 15),
+      Padding(
+        padding: const EdgeInsets.only(top: 5, left: 20, bottom: 20),
         child: Text(
-          'Athalia',
-          style: TextStyle(
+          accountProvider.isOwner ? 'Owner' : 'Staf',
+          style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
           ),
@@ -95,47 +93,11 @@ class _ProfileState extends State<Profile> {
               fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(
-          top: 5,
-          left: 20,
-        ),
+      Padding(
+        padding: const EdgeInsets.only(top: 5, left: 20, bottom: 20),
         child: Text(
-          'Senin',
-          style: TextStyle(
-            fontFamily: 'Figtree',
-            fontSize: 20,
-          ),
-        ),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(top: 5, left: 20, bottom: 15),
-        child: Text(
-          '08.00 - 12.30',
-          style: TextStyle(
-            fontFamily: 'Figtree',
-            fontSize: 20,
-          ),
-        ),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(
-          top: 5,
-          left: 20,
-        ),
-        child: Text(
-          'Selasa',
-          style: TextStyle(
-            fontFamily: 'Figtree',
-            fontSize: 20,
-          ),
-        ),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(top: 5, left: 20, bottom: 15),
-        child: Text(
-          '13.00 - 15.00',
-          style: TextStyle(
+          accountProvider.currentUser['jadwal'],
+          style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
           ),
@@ -164,9 +126,10 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           trailing: Switch(
-            value: darkModeSwitch.getdarkModeswitchvalue,
+            value: accountProvider.getSetting('dark_mode'),
             onChanged: (value) {
               darkModeSwitch.setdarkModeswitchValue = value;
+              accountProvider.setSetting('dark_mode', value);
             },
           ),
         ),
@@ -186,11 +149,9 @@ class _ProfileState extends State<Profile> {
             style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
           trailing: Switch(
-            value: berandaMinimal,
+            value: accountProvider.getSetting('dashboard_minimal'),
             onChanged: (value) {
-              setState(() {
-                berandaMinimal = value;
-              });
+              accountProvider.setSetting('dashboard_minimal', value);
             },
           ),
         ),
@@ -199,8 +160,7 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: ElevatedButton(
             onPressed: () async {
-              await SecureProvider.clearLoggedInStatus();
-              authProvider.logout();
+              accountProvider.logout();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
             child: const Text('Logout'),

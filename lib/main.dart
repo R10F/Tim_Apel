@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/login.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
-import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
 import 'package:tim_apel/providers/Login_provider.dart';
 import 'package:tim_apel/providers/RegistStaf_Provider.dart';
@@ -17,7 +17,7 @@ void main() {
         create: (_) => bottomNavbarProvider(),
       ),
       ChangeNotifierProvider(
-        create: (_) => AuthProvider(),
+        create: (_) => AccountProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
@@ -47,13 +47,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var authProvider = Provider.of<AuthProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
 
     return MaterialApp(
       title: 'Makmur App',
       theme: darkModeSwitch.getTheme(),
-      home: authProvider.isLoggedIn ? const MainApp() : const Login(),
+      home: accountProvider.isLoggedIn ? const MainApp() : const Login(),
       debugShowCheckedModeBanner: false,
     );
   }

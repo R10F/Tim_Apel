@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/Login_provider.dart';
 
 class Login extends StatefulWidget {
@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    var authProvider = Provider.of<AuthProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
     var loginProvider = Provider.of<LoginProvider>(context);
 
     return Scaffold(
@@ -85,7 +85,7 @@ class _LoginState extends State<Login> {
 
                     if (!loginProvider.isUsernameEmpty &&
                         !loginProvider.isPasswordEmpty) {
-                      bool status = await authProvider.login(
+                      bool status = await accountProvider.login(
                           loginProvider.usernameController.text,
                           loginProvider.passwordController.text);
                       if (!status) {

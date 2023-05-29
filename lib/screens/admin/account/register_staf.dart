@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_done.dart';
 import 'package:tim_apel/providers/RegistStaf_Provider.dart';
-import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/darkMode_provider.dart';
 
 class RegisterStaf extends StatefulWidget {
@@ -16,7 +16,7 @@ class _RegisterStafState extends State<RegisterStaf> {
   @override
   Widget build(BuildContext context) {
     var regisStafProvider = Provider.of<RegistStafProvider>(context);
-    var authProvider = Provider.of<AuthProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
     var darkModeSwitch = Provider.of<DarkModeProvider>(context);
     
     return Scaffold(
@@ -145,7 +145,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                       regisStafProvider.staf['jadwal'] =
                           regisStafProvider.jadwalController.text;
 
-                      authProvider.register = regisStafProvider.staf;
+                      accountProvider.register = regisStafProvider.staf;
                       // regisStafProvider.setListStaf = regisStafProvider.staf;
 
                       Navigator.pushReplacement(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
-import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 
 class ListStaf extends StatefulWidget {
   const ListStaf({super.key});
@@ -13,11 +13,11 @@ class ListStaf extends StatefulWidget {
 class _ListStafState extends State<ListStaf> {
   @override
   Widget build(BuildContext context) {
-    var authProvider = Provider.of<AuthProvider>(context);
-    var userAccounts = authProvider.userAccounts;
+    var accountProvider = Provider.of<AccountProvider>(context);
+    var userAccounts = accountProvider.userAccounts;
     print(userAccounts);
-    print(authProvider.id);
-    print(authProvider.isOwner);
+    print(accountProvider.id);
+    print(accountProvider.isOwner);
 
     return Scaffold(
       appBar: AppBar(
@@ -39,10 +39,10 @@ class _ListStafState extends State<ListStaf> {
                   width: 45,
                 ),
                 title: Text(userAccounts[index]['nama']),
-                trailing: (!authProvider.isOwner || authProvider.id != index)
+                trailing: (!accountProvider.isOwner || accountProvider.id != index)
                     ? IconButton(
                         onPressed: () {
-                          authProvider.removeAccount(index);
+                          accountProvider.removeAccount(index);
                         },
                         icon: const Icon(Icons.delete))
                     : null,

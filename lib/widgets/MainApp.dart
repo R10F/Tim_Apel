@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/auth_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/widgets/AppBarOwner.dart';
 import 'package:tim_apel/widgets/AppBarStaf.dart';
 import 'package:tim_apel/widgets/BottomNavbar.dart';
@@ -8,7 +8,7 @@ import 'package:tim_apel/widgets/DrawerOwner.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 import 'package:tim_apel/screens/Home.dart';
 import 'package:tim_apel/screens/Produk.dart';
-import 'package:tim_apel/screens/Profile.dart';
+import 'package:tim_apel/screens/profile.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
 import '../screens/Produk2.dart';
 
@@ -30,12 +30,12 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
-    var authProvider = Provider.of<AuthProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
 
     return DefaultTabController(
       length: bottomnavProvider.getSelectedIdx == 1 ? 5 : 2,
       child: Scaffold(
-        appBar: authProvider.isOwner
+        appBar: accountProvider.isOwner
             ? PreferredSize(
                 preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
                         bottomnavProvider.getSelectedIdx == 2
@@ -51,12 +51,12 @@ class _MainAppState extends State<MainApp> {
                 child: const AppBarStaf(),
               ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        drawer: authProvider.isOwner && bottomnavProvider.getSelectedIdx == 0
+        drawer: accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 0
             ? const DrawerOwner()
             : null,
         bottomNavigationBar: const BottomNavbar(),
         floatingActionButton:
-            authProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
+            accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
                 ? FloatingActionButton.extended(
                     onPressed: () {},
                     label: const Text("Tambah"),
