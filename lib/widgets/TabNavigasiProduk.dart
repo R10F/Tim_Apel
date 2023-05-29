@@ -1,14 +1,15 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/darkMode_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 
 class TabNavigasiProduk extends StatelessWidget {
   const TabNavigasiProduk({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
+
     return TabBar(
       isScrollable: true,
       tabs: const [
@@ -23,7 +24,7 @@ class TabNavigasiProduk extends StatelessWidget {
       indicatorColor: Colours.lightSalmon,
       labelColor: Colours.lightSalmon,
       unselectedLabelColor:
-          darkModeSwitch.getdarkModeswitchvalue ? Colors.white : Colors.black,
+          accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
     );
   }
 }

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/Login_provider.dart';
+import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,7 +16,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var loginProvider = Provider.of<LoginProvider>(context);
+    var loginFormProvider = Provider.of<LoginFormProvider>(context);
 
     return Scaffold(
       body: ListView(
@@ -34,9 +34,9 @@ class _LoginState extends State<Login> {
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 25),
             child: TextFormField(
-              controller: loginProvider.usernameController,
+              controller: loginFormProvider.usernameController,
               decoration: InputDecoration(
-                  errorText: loginProvider.isUsernameEmpty
+                  errorText: loginFormProvider.isUsernameEmpty
                       ? 'Username Tidak Boleh Kosong'
                       : null,
                   labelStyle: const TextStyle(color: Colors.black),
@@ -47,10 +47,10 @@ class _LoginState extends State<Login> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: TextFormField(
-              controller: loginProvider.passwordController,
-              obscureText: !loginProvider.getPasswordVisible,
+              controller: loginFormProvider.passwordController,
+              obscureText: !loginFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText: loginProvider.isPasswordEmpty
+                  errorText: loginFormProvider.isPasswordEmpty
                       ? 'Password Tidak Boleh Kosong'
                       : null,
                   labelStyle: const TextStyle(color: Colors.black),
@@ -59,14 +59,14 @@ class _LoginState extends State<Login> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       // Based on passwordVisible state choose the icon
-                      loginProvider.getPasswordVisible
+                      loginFormProvider.getPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
                       color: Theme.of(context).primaryColorDark,
                     ),
                     onPressed: () {
-                      loginProvider.setPasswordVisible =
-                          !loginProvider.getPasswordVisible;
+                      loginFormProvider.setPasswordVisible =
+                          !loginFormProvider.getPasswordVisible;
                     },
                   )),
             ),
@@ -78,16 +78,16 @@ class _LoginState extends State<Login> {
                 Expanded(
                     child: ElevatedButton(
                   onPressed: () async {
-                    loginProvider.setIsUsernameEmpty =
-                        loginProvider.usernameController.text.isEmpty;
-                    loginProvider.setIsPasswordEmpty =
-                        loginProvider.passwordController.text.isEmpty;
+                    loginFormProvider.setIsUsernameEmpty =
+                        loginFormProvider.usernameController.text.isEmpty;
+                    loginFormProvider.setIsPasswordEmpty =
+                        loginFormProvider.passwordController.text.isEmpty;
 
-                    if (!loginProvider.isUsernameEmpty &&
-                        !loginProvider.isPasswordEmpty) {
+                    if (!loginFormProvider.isUsernameEmpty &&
+                        !loginFormProvider.isPasswordEmpty) {
                       bool status = await accountProvider.login(
-                          loginProvider.usernameController.text,
-                          loginProvider.passwordController.text);
+                          loginFormProvider.usernameController.text,
+                          loginFormProvider.passwordController.text);
                       if (!status) {
                         showDialog(
                           context: context,
@@ -105,8 +105,8 @@ class _LoginState extends State<Login> {
                       }
                     }
 
-                    loginProvider.usernameController.clear();
-                    loginProvider.passwordController.clear();
+                    loginFormProvider.usernameController.clear();
+                    loginFormProvider.passwordController.clear();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal[700]),

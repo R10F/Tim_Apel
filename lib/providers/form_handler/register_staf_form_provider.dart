@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RegistStafProvider extends ChangeNotifier {
+class RegisterStafFormProvider extends ChangeNotifier {
   bool _passwordVisible = false;
   TextEditingController namaController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
@@ -12,24 +12,24 @@ class RegistStafProvider extends ChangeNotifier {
   bool isPasswordEmpty = false;
   bool isJadwalEmpty = false;
 
-  final List _listStaf = [];
-  var _staf = {};
+  // final List _listStaf = [];
+  // var _staf = {};
 
-  get staf => _staf;
+  // get staf => _staf;
 
-  List get getListStaf => _listStaf.toList();
+  // List get getListStaf => _listStaf.toList();
 
-  set setListStaf(value) {
-    _listStaf.add(value);
-    print(_listStaf);
-    notifyListeners();
-  }
+  // set setListStaf(value) {
+  //   _listStaf.add(value);
+  //   print(_listStaf);
+  //   notifyListeners();
+  // }
 
-  set setStaf(value) {
-    _staf = value;
-    print(_staf);
-    notifyListeners();
-  }
+  // set setStaf(value) {
+  //   _staf = value;
+  //   print(_staf);
+  //   notifyListeners();
+  // }
 
   set setIsNameEmpty(value) {
     isNameEmpty = value;
@@ -51,10 +51,10 @@ class RegistStafProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeStaf(int index) {
-    _listStaf.removeAt(index);
-    notifyListeners();
-  }
+  // void removeStaf(int index) {
+  //   _listStaf.removeAt(index);
+  //   notifyListeners();
+  // }
 
   get getPasswordVisible => _passwordVisible;
 

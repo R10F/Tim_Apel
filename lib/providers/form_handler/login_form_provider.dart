@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginProvider extends ChangeNotifier {
+class LoginFormProvider extends ChangeNotifier {
   bool _passwordVisible = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

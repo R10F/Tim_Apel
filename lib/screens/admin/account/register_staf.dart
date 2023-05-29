@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_done.dart';
-import 'package:tim_apel/providers/RegistStaf_Provider.dart';
+import 'package:tim_apel/providers/form_handler/register_staf_form_provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/darkMode_provider.dart';
 
 class RegisterStaf extends StatefulWidget {
   const RegisterStaf({super.key});
@@ -15,10 +14,9 @@ class RegisterStaf extends StatefulWidget {
 class _RegisterStafState extends State<RegisterStaf> {
   @override
   Widget build(BuildContext context) {
-    var regisStafProvider = Provider.of<RegistStafProvider>(context);
     var accountProvider = Provider.of<AccountProvider>(context);
-    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
-    
+    var registerFormProvider = Provider.of<RegisterStafFormProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrasi Staf'),
@@ -37,13 +35,13 @@ class _RegisterStafState extends State<RegisterStaf> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: TextFormField(
-              controller: regisStafProvider.namaController,
+              controller: registerFormProvider.namaController,
               decoration: InputDecoration(
-                  errorText: regisStafProvider.isNameEmpty
+                  errorText: registerFormProvider.isNameEmpty
                       ? 'Nama Tidak Boleh Kosong'
                       : null,
                   labelStyle: TextStyle(
-                      color: darkModeSwitch.getdarkModeswitchvalue
+                      color: accountProvider.getSetting('dark_mode')
                           ? Colors.white
                           : Colors.black),
                   labelText: 'Nama',
@@ -53,13 +51,13 @@ class _RegisterStafState extends State<RegisterStaf> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: TextFormField(
-              controller: regisStafProvider.usernameController,
+              controller: registerFormProvider.usernameController,
               decoration: InputDecoration(
-                  errorText: regisStafProvider.isUsernameEmpty
+                  errorText: registerFormProvider.isUsernameEmpty
                       ? 'Username Tidak Boleh Kosong'
                       : null,
                   labelStyle: TextStyle(
-                      color: darkModeSwitch.getdarkModeswitchvalue
+                      color: accountProvider.getSetting('dark_mode')
                           ? Colors.white
                           : Colors.black),
                   labelText: 'Username',
@@ -69,14 +67,14 @@ class _RegisterStafState extends State<RegisterStaf> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: TextFormField(
-              controller: regisStafProvider.passwordController,
-              obscureText: !regisStafProvider.getPasswordVisible,
+              controller: registerFormProvider.passwordController,
+              obscureText: !registerFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText: regisStafProvider.isPasswordEmpty
+                  errorText: registerFormProvider.isPasswordEmpty
                       ? 'Password Tidak Boleh Kosong'
                       : null,
                   labelStyle: TextStyle(
-                      color: darkModeSwitch.getdarkModeswitchvalue
+                      color: accountProvider.getSetting('dark_mode')
                           ? Colors.white
                           : Colors.black),
                   labelText: 'Password',
@@ -84,14 +82,14 @@ class _RegisterStafState extends State<RegisterStaf> {
                   suffixIcon: IconButton(
                     icon: Icon(
                       // Based on passwordVisible state choose the icon
-                      regisStafProvider.getPasswordVisible
+                      registerFormProvider.getPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off,
                       color: Theme.of(context).primaryColorDark,
                     ),
                     onPressed: () {
-                      regisStafProvider.setPasswordVisible =
-                          !regisStafProvider.getPasswordVisible;
+                      registerFormProvider.setPasswordVisible =
+                          !registerFormProvider.getPasswordVisible;
                     },
                   )),
             ),
@@ -100,13 +98,13 @@ class _RegisterStafState extends State<RegisterStaf> {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: TextFormField(
               maxLines: 2,
-              controller: regisStafProvider.jadwalController,
+              controller: registerFormProvider.jadwalController,
               decoration: InputDecoration(
-                  errorText: regisStafProvider.isJadwalEmpty
+                  errorText: registerFormProvider.isJadwalEmpty
                       ? 'Jadwal Tidak Boleh Kosong'
                       : null,
                   labelStyle: TextStyle(
-                      color: darkModeSwitch.getdarkModeswitchvalue
+                      color: accountProvider.getSetting('dark_mode')
                           ? Colors.white
                           : Colors.black),
                   labelText: 'Jadwal',
@@ -120,43 +118,37 @@ class _RegisterStafState extends State<RegisterStaf> {
                 Expanded(
                     child: ElevatedButton(
                   onPressed: () {
-                    regisStafProvider.setIsNameEmpty =
-                        regisStafProvider.namaController.text.isEmpty;
-                    regisStafProvider.setIsUsernameEmpty =
-                        regisStafProvider.usernameController.text.isEmpty;
-                    regisStafProvider.setIsPasswordEmpty =
-                        regisStafProvider.passwordController.text.isEmpty;
-                    regisStafProvider.setIsJadwalEmpty =
-                        regisStafProvider.jadwalController.text.isEmpty;
+                    registerFormProvider.setIsNameEmpty =
+                        registerFormProvider.namaController.text.isEmpty;
+                    registerFormProvider.setIsUsernameEmpty =
+                        registerFormProvider.usernameController.text.isEmpty;
+                    registerFormProvider.setIsPasswordEmpty =
+                        registerFormProvider.passwordController.text.isEmpty;
+                    registerFormProvider.setIsJadwalEmpty =
+                        registerFormProvider.jadwalController.text.isEmpty;
 
-                    if (!regisStafProvider.isNameEmpty &&
-                        !regisStafProvider.isUsernameEmpty &&
-                        !regisStafProvider.isPasswordEmpty &&
-                        !regisStafProvider.isJadwalEmpty) {
-                      regisStafProvider.staf['nama'] =
-                          regisStafProvider.namaController.text;
-
-                      regisStafProvider.staf['username'] =
-                          regisStafProvider.usernameController.text;
-
-                      regisStafProvider.staf['password'] =
-                          regisStafProvider.passwordController.text;
-
-                      regisStafProvider.staf['jadwal'] =
-                          regisStafProvider.jadwalController.text;
-
-                      accountProvider.register = regisStafProvider.staf;
-                      // regisStafProvider.setListStaf = regisStafProvider.staf;
+                    if (!registerFormProvider.isNameEmpty &&
+                        !registerFormProvider.isUsernameEmpty &&
+                        !registerFormProvider.isPasswordEmpty &&
+                        !registerFormProvider.isJadwalEmpty) {
+                      accountProvider.register = {
+                        'nama': registerFormProvider.namaController.text,
+                        'username':
+                            registerFormProvider.usernameController.text,
+                        'password':
+                            registerFormProvider.passwordController.text,
+                        'jadwal': registerFormProvider.jadwalController.text
+                      };
 
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (_) => const RegisterDone()));
 
-                      regisStafProvider.namaController.clear();
-                      regisStafProvider.usernameController.clear();
-                      regisStafProvider.passwordController.clear();
-                      regisStafProvider.jadwalController.clear();
+                      registerFormProvider.namaController.clear();
+                      registerFormProvider.usernameController.clear();
+                      registerFormProvider.passwordController.clear();
+                      registerFormProvider.jadwalController.clear();
                     }
                   },
                   style: ElevatedButton.styleFrom(

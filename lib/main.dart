@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/login.dart';
-import 'package:tim_apel/providers/produk_provider.dart';
-import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
-import 'package:tim_apel/providers/Login_provider.dart';
-import 'package:tim_apel/providers/RegistStaf_Provider.dart';
-import 'package:tim_apel/providers/SecureStorage_Provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
+import 'package:tim_apel/providers/form_handler/register_staf_form_provider.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
-import 'package:tim_apel/providers/darkMode_provider.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -20,10 +18,10 @@ void main() {
         create: (_) => AccountProvider(),
       ),
       ChangeNotifierProvider(
-        create: (_) => LoginProvider(),
+        create: (_) => LoginFormProvider(),
       ),
       ChangeNotifierProvider(
-        create: (_) => RegistStafProvider(),
+        create: (_) => RegisterStafFormProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => ProdukProvider(),

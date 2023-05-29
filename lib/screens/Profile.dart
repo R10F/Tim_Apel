@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/darkMode_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -11,7 +10,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  bool berandaMinimal = false;
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);

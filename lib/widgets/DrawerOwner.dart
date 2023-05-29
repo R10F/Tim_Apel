@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/screens/admin/account/register_staf.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
-import 'package:tim_apel/providers/darkMode_provider.dart';
+import 'package:tim_apel/screens/admin/account/register_staf.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var darkModeSwitch = Provider.of<DarkModeProvider>(context);
+    var accountProvider = Provider.of<AccountProvider>(context);
+    
     return Drawer(
       child: ListView(
         children: [
@@ -41,7 +42,7 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'Figtree',
                   fontSize: 16,
-                  color: darkModeSwitch.getdarkModeswitchvalue
+                  color: accountProvider.getSetting('dark_mode')
                       ? Colors.grey[300]
                       : Colors.grey[700]),
             ),
@@ -89,7 +90,7 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: darkModeSwitch.getdarkModeswitchvalue
+                color: accountProvider.getSetting('dark_mode')
                     ? Colors.grey[300]
                     : Colors.grey[700],
               ),
@@ -117,7 +118,7 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: darkModeSwitch.getdarkModeswitchvalue
+                color: accountProvider.getSetting('dark_mode')
                     ? Colors.grey[300]
                     : Colors.grey[700],
               ),
