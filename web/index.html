@@ -31,6 +31,7 @@
 
   <title>tim_apel</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -41,19 +42,33 @@
 </head>
 <body>
   <script>
+    const delay = (time) => new Promise(resolve => setTimeout(resolve,time));
+
     window.addEventListener('load', function(ev) {
+      var loadingContent = document.getElementById('loadingContent');
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
+          engineInitializer.initializeEngine().then(async function(appRunner) {
+            loadingContent.style.opacity = "0";
+            await delay(400);
+            await appRunner.runApp();
           });
         }
       });
     });
   </script>
+  <main id="loadingContent">
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <img src="logo.png" alt="App Logo">
+  </main>
 </body>
 </html>
