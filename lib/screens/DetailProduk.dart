@@ -93,7 +93,7 @@ class _DetailProdukState extends State<DetailProduk> {
                   children: [
                     const Text("Subtotal"),
                     Text(currency.format(widget.produk.hargaJual *
-                        qtyProvider.getQty)), //bakal dikali qty input
+                        qtyProvider.getQty)),
                   ],
                 ),
               ),
