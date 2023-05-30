@@ -45,8 +45,8 @@ class _DetailProdukState extends State<DetailProduk> {
                     alignment: Alignment.topLeft,
                     child: Text(
                       widget.produk.nama,
-                      style:
-                          const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -101,7 +101,10 @@ class _DetailProdukState extends State<DetailProduk> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text("Add to Cart")),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal[500]),
+                      onPressed: () {},
+                      child: const Text("Add to Cart")),
                 ),
               ),
             ],

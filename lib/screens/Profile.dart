@@ -157,6 +157,7 @@ class _ProfileState extends State<Profile> {
           child: ElevatedButton(
             onPressed: () async {
               accountProvider.logout();
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
             child: const Text('Logout'),
