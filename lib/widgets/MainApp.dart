@@ -7,7 +7,6 @@ import 'package:tim_apel/widgets/BottomNavbar.dart';
 import 'package:tim_apel/widgets/DrawerOwner.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 import 'package:tim_apel/screens/Home.dart';
-import 'package:tim_apel/screens/Produk.dart';
 import 'package:tim_apel/screens/profile.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
 import '../screens/Produk2.dart';

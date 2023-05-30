@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../models/produk_data_model.dart';
 
 class ProdukProvider extends ChangeNotifier{
-  List <String> _kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
+  final List <String> _kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
   get kategori => _kategori;
 
-  List <Produk> _semuaProduk = [
+  final List <Produk> _semuaProduk = [
     Produk(
       id: 1,
       nama: "Lem Kertas Kenko Uk. Besar",

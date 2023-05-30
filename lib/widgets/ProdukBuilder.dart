@@ -43,7 +43,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               widget.produk[i].nama,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: 'Figtree', fontSize: 16),
                             ),
                           )),

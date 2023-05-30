@@ -152,6 +152,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  input_quantity:
+    dependency: "direct main"
+    description:
+      name: input_quantity
+      sha256: "0504a034438a6847c925c14f539544b3224aef73ffccccb94a900a15ff71997b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.6"
   intl:
     dependency: "direct main"
     description:
@@ -281,10 +289,10 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: a70aa0b2608c5b11bfe549c13572e87d929553703f6987497589217d106b2ad7
+      sha256: bdb7cc5814ceb187793cea587f4a5946afcffd96726b219cee79df8460f44b7b
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.6"
+    version: "21.2.4"
   syncfusion_flutter_core:
     dependency: transitive
     description:

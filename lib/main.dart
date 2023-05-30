@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/qtyProduk_provider.dart';
 import 'package:tim_apel/screens/login.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -25,7 +26,10 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => ProdukProvider(),
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (_) => QtyProdukProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
