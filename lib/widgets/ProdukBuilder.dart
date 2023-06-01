@@ -19,7 +19,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
     return GridView.count(
         padding: const EdgeInsets.all(15),
         crossAxisCount: 2,
-        childAspectRatio: (156 / 250),
+        childAspectRatio: (156 / 260),
         children: [
           for (int i = 0; i < widget.produk.length; i++)
             Padding(
@@ -48,7 +48,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                             ),
                           )),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.topLeft,
                           child: Text(

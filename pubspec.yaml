@@ -48,7 +48,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#4DB6AC"
-  image: "assets/images/logo.png"
+  image: "assets/images/splash-02.png"
 
 flutter_launcher_icons:
   android: true
@@ -68,6 +68,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/profile.png
     - assets/images/register-done.png
+    - assets/images/splash-02.png
     - assets/product_images/produk_1.jpg
     - assets/product_images/produk_2.jpg
     - assets/product_images/produk_3.jpg

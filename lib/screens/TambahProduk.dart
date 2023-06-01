@@ -20,6 +20,7 @@ class _TambahProdukState extends State<TambahProduk> {
     ];
     return kategori;
   }
+
   List semuaKategori = [
     'ATK',
     'Craft Supply',
@@ -30,7 +31,9 @@ class _TambahProdukState extends State<TambahProduk> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Produk'),),
+      appBar: AppBar(
+        title: const Text('Tambah Produk'),
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -40,13 +43,13 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
-                    labelText: 'Nama Produk',
-                    border: const OutlineInputBorder()
-                  ),
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Nama Produk',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Nama Produk tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Nama Produk tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -56,12 +59,11 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
-                    labelText: 'Deskripsi',
-                    border: const OutlineInputBorder()
-                  ),
-                  maxLines: null, 
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Deskripsi',
+                      border: OutlineInputBorder()),
+                  maxLines: null,
                 ),
               ),
               Padding(
@@ -81,21 +83,21 @@ class _TambahProdukState extends State<TambahProduk> {
                       kategoriSelected = val as String;
                     });
                   },
-                ), 
+                ),
               ),
-              Divider(),
+              const Divider(),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
-                    labelText: 'Jumlah Stok',
-                    border: const OutlineInputBorder()
-                  ),
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Jumlah Stok',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Jumlah Stok tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Jumlah Stok tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -105,13 +107,13 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
-                    labelText: 'Harga Beli',
-                    border: const OutlineInputBorder()
-                  ),
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Harga Beli',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Harga Beli tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Harga Beli tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -121,37 +123,38 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
-                    labelText: 'Harga Jual',
-                    border: const OutlineInputBorder()
-                  ),
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Harga Jual',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Harga Jual tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Harga Jual tidak boleh kosong";
                     return null;
                   },
                 ),
               ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pop(context);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-                      child: const Text('Tambah'),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[700]),
+                        child: const Text('Tambah'),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
+                  ],
+                ),
+              )
             ],
           ),
         ),
