@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/form_handler/produk_form_provider.dart';
 import '../providers/produk_provider.dart';
 
 class TambahProduk extends StatefulWidget {
@@ -12,10 +13,9 @@ class TambahProduk extends StatefulWidget {
 
 class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
-  String kategoriSelected = "invalid";
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> kategori = [
-      DropdownMenuItem(child: Text("Pilih Kategori Produk"),value: "invalid"),
+      DropdownMenuItem(child: Text("Pilih Kategori Produk"),value: "none"),
       DropdownMenuItem(child: Text("ATK"),value: "ATK"),
       DropdownMenuItem(child: Text("Craft Supply"),value: "Craft Supply"),
       DropdownMenuItem(child: Text("Keperluan Jahit"),value: "Keperluan Jahit"),
@@ -34,11 +34,7 @@ class _TambahProdukState extends State<TambahProduk> {
   @override
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
-    TextEditingController namaProdukController = TextEditingController();
-    TextEditingController deskripsiController = TextEditingController();
-    TextEditingController stokController = TextEditingController();
-    TextEditingController hargaJualController = TextEditingController();
-    TextEditingController hargaBeliController = TextEditingController();
+    var formProv = Provider.of<ProdukFormProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +49,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  controller: namaProdukController,
+                  controller: formProv.namaProdukController,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Nama Produk',
@@ -63,19 +59,21 @@ class _TambahProdukState extends State<TambahProduk> {
                       return "Nama Produk tidak boleh kosong";
                     return null;
                   },
+                  onEditingComplete: formProv.updateNama,
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  controller: deskripsiController,
+                  controller: formProv.deskripsiController,
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Deskripsi',
                       border: OutlineInputBorder()),
                   maxLines: null,
+                  onEditingComplete: formProv.updateDeskripsi,
                 ),
               ),
               Padding(
@@ -83,17 +81,15 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
-                  value: kategoriSelected,
+                  value: formProv.getKategoriSelected,
                   decoration: const InputDecoration(
                     labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Kategori',
                     border: OutlineInputBorder()
                   ),
-                  validator: (value) => (value == null || value == "invalid") ? "Pilih kategori" : null,
+                  validator: (value) => (value == null || value == "none") ? "Pilih kategori" : null,
                   onChanged: (val){
-                    setState(() {
-                      kategoriSelected = val as String;
-                    });
+                    formProv.kategoriSelected = val as String;
                   },
                 ),
               ),
@@ -102,7 +98,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  controller: stokController,
+                  controller: formProv.stokController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -113,13 +109,14 @@ class _TambahProdukState extends State<TambahProduk> {
                       return "Jumlah Stok tidak boleh kosong";
                     return null;
                   },
+                  onEditingComplete: formProv.updateStok,
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  controller: hargaBeliController,
+                  controller: formProv.hargaBeliController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -130,13 +127,14 @@ class _TambahProdukState extends State<TambahProduk> {
                       return "Harga Beli tidak boleh kosong";
                     return null;
                   },
+                  onEditingComplete: formProv.updateHargaBeli,
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  controller: hargaJualController,
+                  controller: formProv.hargaJualController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -147,6 +145,7 @@ class _TambahProdukState extends State<TambahProduk> {
                       return "Harga Jual tidak boleh kosong";
                     return null;
                   },
+                  onEditingComplete: formProv.updateHargaJual,
                 ),
               ),
               Padding(
@@ -161,13 +160,13 @@ class _TambahProdukState extends State<TambahProduk> {
                           if (_formKey.currentState!.validate()) {
                             String nama, gambar, deskripsi, kategori;
                             int stok, hargaJual, hargaBeli;
-                            nama = namaProdukController.text;
+                            nama = formProv.getNama;
                             gambar = "assets/product_images/produk_2.jpg"; //temp
-                            deskripsi = deskripsiController.text;
-                            stok = int.parse(stokController.text); 
-                            hargaJual = int.parse(hargaJualController.text);
-                            hargaBeli = int.parse(hargaBeliController.text); 
-                            kategori = kategoriSelected;
+                            deskripsi = formProv.getDeskripsi;
+                            stok = int.parse(formProv.getStok); 
+                            hargaJual = int.parse(formProv.getHargaJual);
+                            hargaBeli = int.parse(formProv.getHargaBeli);
+                            kategori = formProv.kategoriSelected;
                             produkProv.addProduk(nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli);
 
                             Navigator.pop(context); 

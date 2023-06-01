@@ -90,7 +90,7 @@ class ProdukProvider extends ChangeNotifier{
   }
 
   addProduk(nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli){
-    int id = semuaProduk.length() + 1;
+    int id = semuaProduk.length + 1;
     Produk produkBaru = Produk(  
       id: id,
       nama: nama,
