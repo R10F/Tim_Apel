@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/screens/profile/personal_option.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  const Profile(
+      {super.key, this.asMyself = true, this.id = -1, this.data = const {}});
+
+  final int id;
+  final bool asMyself;
+  final Map<String, dynamic> data;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -14,12 +20,27 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
 
+    String nama = accountProvider.currentUser['nama'];
+    String username = accountProvider.currentUser['username'];
+    bool isOwner = accountProvider.currentUser['is_owner'];
+    String jadwal = accountProvider.currentUser['jadwal'];
+    String role;
+
+    if (!widget.asMyself) {
+      nama = widget.data['nama'];
+      username = widget.data['username'];
+      isOwner = widget.data['is_owner'];
+      jadwal = widget.data['jadwal'];
+    }
+
+    role = isOwner ? 'Owner' : 'Staf';
+
     return ListView(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Image.asset(
-            'assets/images/profile.png',
+            'assets/profile_pictures/picture-1.png',
             width: 100,
           ),
         ),
@@ -35,7 +56,7 @@ class _ProfileState extends State<Profile> {
       Padding(
         padding: const EdgeInsets.only(top: 5, left: 20),
         child: Text(
-          accountProvider.currentUser['nama'],
+          nama,
           style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
@@ -53,7 +74,7 @@ class _ProfileState extends State<Profile> {
       Padding(
         padding: const EdgeInsets.only(top: 5, left: 20),
         child: Text(
-          accountProvider.currentUser['username'],
+          username,
           style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
@@ -71,7 +92,7 @@ class _ProfileState extends State<Profile> {
       Padding(
         padding: const EdgeInsets.only(top: 5, left: 20, bottom: 20),
         child: Text(
-          accountProvider.isOwner ? 'Owner' : 'Staf',
+          role,
           style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
@@ -93,74 +114,16 @@ class _ProfileState extends State<Profile> {
       Padding(
         padding: const EdgeInsets.only(top: 5, left: 20, bottom: 20),
         child: Text(
-          accountProvider.currentUser['jadwal'],
+          jadwal,
           style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,
           ),
         ),
       ),
-      const Divider(
-        height: 15,
-        thickness: 2,
-      ),
-      const Padding(
-        padding: EdgeInsets.only(top: 20, left: 20),
-        child: Text(
-          'Preferensi',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 5, left: 5),
-        child: ListTile(
-          title: const Text(
-            'Dark Mode',
-            style: TextStyle(
-              fontFamily: 'Figtree',
-              fontSize: 20,
-            ),
-          ),
-          trailing: Switch(
-            value: accountProvider.getSetting('dark_mode'),
-            onChanged: (value) {
-              accountProvider.setSetting('dark_mode', value);
-            },
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 5, left: 5),
-        child: ListTile(
-          title: const Text(
-            'Beranda Minimal',
-            style: TextStyle(
-              fontFamily: 'Figtree',
-              fontSize: 20,
-            ),
-          ),
-          subtitle: const Text(
-            'Menyembunyikan info transaksi pada beranda',
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-          trailing: Switch(
-            value: accountProvider.getSetting('dashboard_minimal'),
-            onChanged: (value) {
-              accountProvider.setSetting('dashboard_minimal', value);
-            },
-          ),
-        ),
-      ),
-      Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: ElevatedButton(
-            onPressed: () async {
-              accountProvider.logout();
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-            child: const Text('Logout'),
-          )),
+      widget.asMyself || widget.id == accountProvider.id
+          ? PersonalOption()
+          : Container()
     ]);
   }
 }

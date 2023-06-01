@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/screens/profile/profile.dart';
 
 class ListStaf extends StatefulWidget {
   const ListStaf({super.key});
@@ -26,26 +27,41 @@ class _ListStafState extends State<ListStaf> {
       body: ListView(
           children: List.generate(
         userAccounts.length,
-        (index) => Container(
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.grey))),
-          child: Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: ListTile(
-                leading: Image.asset(
-                  'assets/images/profile.png',
-                  width: 45,
+        (index) => GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => Scaffold(
+                        appBar: AppBar(
+                          title: Text(userAccounts[index]['nama']),
+                        ),
+                        body: Profile(
+                            id: index,
+                            asMyself: false,
+                            data: userAccounts[index]))));
+          },
+          child: Container(
+            decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey))),
+            child: Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: ListTile(
+                  leading: Image.asset(
+                    'assets/profile_pictures/picture-1.png',
+                    width: 45,
+                  ),
+                  title: Text(userAccounts[index]['nama']),
+                  trailing: accountProvider.id != index
+                      ? IconButton(
+                          onPressed: () {
+                            accountProvider.removeAccount(index);
+                          },
+                          icon: const Icon(Icons.delete))
+                      : null,
                 ),
-                title: Text(userAccounts[index]['nama']),
-                trailing: (!accountProvider.isOwner || accountProvider.id != index)
-                    ? IconButton(
-                        onPressed: () {
-                          accountProvider.removeAccount(index);
-                        },
-                        icon: const Icon(Icons.delete))
-                    : null,
               ),
             ),
           ),
