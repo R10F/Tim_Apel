@@ -10,6 +10,17 @@ class TambahProduk extends StatefulWidget {
 class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
   String kategoriSelected = "";
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> kategori = [
+      DropdownMenuItem(child: Text("ATK"), value: "ATK"),
+      DropdownMenuItem(child: Text("Craft Supply"), value: "Craft Supply"),
+      DropdownMenuItem(
+          child: Text("Keperluan Jahit"), value: "Keperluan Jahit"),
+      DropdownMenuItem(child: Text("Dekorasi"), value: "Dekorasi"),
+    ];
+    return kategori;
+  }
+
   List semuaKategori = [
     'ATK',
     'Craft Supply',
@@ -20,7 +31,9 @@ class _TambahProdukState extends State<TambahProduk> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Produk'),),
+      appBar: AppBar(
+        title: const Text('Tambah Produk'),
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -31,12 +44,12 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Nama Produk',
-                    border: OutlineInputBorder()
-                  ),
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Nama Produk',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Nama Produk tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Nama Produk tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -47,39 +60,30 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Deskripsi',
-                    border: OutlineInputBorder()
-                  ),
-                  maxLines: null, 
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Deskripsi',
+                      border: OutlineInputBorder()),
+                  maxLines: null,
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
-                  items: semuaKategori.map((kategori){
-                    return DropdownMenuItem(value: kategori, child: Text(kategori));
-                  }).toList(),
+                  items: dropdownItems,
                   value: kategoriSelected,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Kategori',
-                    border: OutlineInputBorder()
-                  ),
-                  hint: const Text('Pilih Kategori Produk'),
-                  validator: (value) {
-                    if (kategoriSelected == "" || kategoriSelected.isEmpty){
-                      return "Pilih salah satu kategori";
-                    }
-                    return null;
-                  },
-                  onChanged: (val){
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Kategori',
+                      border: OutlineInputBorder()),
+                  hint: Text('Pilih Kategori Produk'),
+                  validator: (value) => value == null ? "Pilih kategori" : null,
+                  onChanged: (val) {
                     setState(() {
                       kategoriSelected = val as String;
                     });
                   },
-                ), 
+                ),
               ),
               const Divider(),
               Padding(
@@ -88,12 +92,12 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Jumlah Stok',
-                    border: OutlineInputBorder()
-                  ),
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Jumlah Stok',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Jumlah Stok tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Jumlah Stok tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -104,12 +108,12 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Harga Beli',
-                    border: OutlineInputBorder()
-                  ),
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Harga Beli',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Harga Beli tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Harga Beli tidak boleh kosong";
                     return null;
                   },
                 ),
@@ -120,36 +124,37 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Harga Jual',
-                    border: OutlineInputBorder()
-                  ),
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Harga Jual',
+                      border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty) return "Harga Jual tidak boleh kosong";
+                    if (value == null || value.isEmpty)
+                      return "Harga Jual tidak boleh kosong";
                     return null;
                   },
                 ),
               ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pop(context);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-                      child: const Text('Tambah'),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[700]),
+                        child: const Text('Tambah'),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
+                  ],
+                ),
+              )
             ],
           ),
         ),
