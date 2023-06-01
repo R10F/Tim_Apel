@@ -25,7 +25,6 @@ class _ProfileState extends State<Profile> {
     bool isOwner = accountProvider.currentUser['is_owner'];
     String jadwal = accountProvider.currentUser['jadwal'];
     String profilePicture = accountProvider.currentUser['profile_picture'];
-    String role;
 
     if (!widget.asMyself) {
       nama = widget.data['nama'];
@@ -34,8 +33,6 @@ class _ProfileState extends State<Profile> {
       jadwal = widget.data['jadwal'];
       profilePicture = widget.data['profile_picture'];
     }
-
-    role = isOwner ? 'Owner' : 'Staf';
 
     return ListView(children: [
       Padding(
@@ -94,7 +91,7 @@ class _ProfileState extends State<Profile> {
       Padding(
         padding: const EdgeInsets.only(top: 5, left: 20, bottom: 20),
         child: Text(
-          role,
+          isOwner ? 'Owner' : 'Staf',
           style: const TextStyle(
             fontFamily: 'Figtree',
             fontSize: 20,

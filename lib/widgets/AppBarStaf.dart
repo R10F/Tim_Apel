@@ -16,7 +16,7 @@ class CustomSearchDelegate extends SearchDelegate {
           onPressed: () {
             query = '';
           },
-          icon: Icon(Icons.clear))
+          icon: const Icon(Icons.clear))
     ];
   }
 
@@ -26,7 +26,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           close(context, null);
         },
-        icon: Icon(Icons.arrow_back));
+        icon: const Icon(Icons.arrow_back));
   }
 
   @override
@@ -78,7 +78,7 @@ class AppBarStaf extends StatelessWidget {
                   showSearch(
                       context: context, delegate: CustomSearchDelegate());
                 },
-                icon: Icon(Icons.search))
+                icon: const Icon(Icons.search))
         ],
         title: (bottomnavProvider.getSelectedIdx == 0)
             ? Row(

@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
         ),
         accountProvider.getSetting('dashboard_minimal')
             ? Container()
-            : HomeInsight(),
+            : const HomeInsight(),
         const Padding(
           padding: EdgeInsets.only(left: 15.0, top: 10.0),
           child: Text(

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 import 'package:tim_apel/screens/dashboard/home.dart';
-import 'package:tim_apel/screens/Produk2.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
+import 'package:tim_apel/screens/Produk.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
-
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});

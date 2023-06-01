@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../models/produk_data_model.dart';
+import '../providers/account_provider.dart';
 import '../screens/DetailProduk.dart';
+import 'PopupMenu.dart';
 
 class ProdukBuilder extends StatefulWidget {
   final List<Produk> produk;
@@ -16,10 +19,12 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    var accountProvider = Provider.of<AccountProvider>(context);
+
     return GridView.count(
         padding: const EdgeInsets.all(15),
         crossAxisCount: 2,
-        childAspectRatio: (156 / 250),
+        childAspectRatio: (156 / 260),
         children: [
           for (int i = 0; i < widget.produk.length; i++)
             Padding(
@@ -37,18 +42,42 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.asset(widget.produk[i].gambar!),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: accountProvider.isOwner ?
+                        <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  widget.produk[i].nama,
+                                  style: const TextStyle(
+                                      fontFamily: 'Figtree', fontSize: 16),
+                                ),
+                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PopupMenu(),
+                          ),
+                        ] :
+                        <Widget>[
+                          Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  widget.produk[i].nama,
+                                  style: const TextStyle(
+                                      fontFamily: 'Figtree', fontSize: 16),
+                                ),
+                              ),
+                          ),
+                        ]
+                      ),
                       Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              widget.produk[i].nama,
-                              style: TextStyle(
-                                  fontFamily: 'Figtree', fontSize: 16),
-                            ),
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.topLeft,
                           child: Text(

@@ -32,8 +32,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.0
   flutter_secure_storage: ^8.0.0
   flutter_segment: ^3.13.0
+  input_quantity: ^1.1.6
   intl: ^0.18.1
   provider: ^6.0.5
   syncfusion_flutter_charts: ^21.1.41
@@ -42,6 +45,15 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#4DB6AC"
+  image: "assets/images/splash-02.png"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -55,6 +67,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/register-done.png
+    - assets/images/splash-02.png
     - assets/product_images/produk_1.jpg
     - assets/product_images/produk_2.jpg
     - assets/product_images/produk_3.jpg

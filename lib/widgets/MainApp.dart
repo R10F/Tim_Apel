@@ -10,7 +10,7 @@ import 'package:tim_apel/screens/dashboard/home.dart';
 import 'package:tim_apel/screens/Produk.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
-import '../screens/Produk2.dart';
+import 'package:tim_apel/screens/TambahProduk.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -31,6 +31,19 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+
+    Future<void> addProdukAndShowMessage(BuildContext context) async {
+      final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const TambahProduk(), fullscreenDialog: true),
+      );
+      //temp dlu utk message setelah berhasil ditambahkan
+      // if (! mounted) return;
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text('Berhasil menambah produk')),
+      // );
+    }
 
     return DefaultTabController(
       length: bottomnavProvider.getSelectedIdx == 1 ? 5 : 2,
@@ -58,7 +71,10 @@ class _MainAppState extends State<MainApp> {
         floatingActionButton:
             accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
                 ? FloatingActionButton.extended(
-                    onPressed: () {},
+                    onPressed: () {
+                      addProdukAndShowMessage(context);
+                    },
+                    backgroundColor: Colors.teal[700],
                     label: const Text("Tambah"),
                     icon: const Icon(Icons.add),
                   )

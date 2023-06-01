@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../models/produk_data_model.dart';
 
 class ProdukProvider extends ChangeNotifier{
-  List <String> _kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
+  final List <String> _kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
   get kategori => _kategori;
 
-  List <Produk> _semuaProduk = [
+  final List <Produk> _semuaProduk = [
     Produk(
       id: 1,
       nama: "Lem Kertas Kenko Uk. Besar",
@@ -81,7 +81,7 @@ class ProdukProvider extends ChangeNotifier{
   ];
 
   get semuaProduk => _semuaProduk;
-
+  
   getProduk(idx){
     return _semuaProduk[idx];
   }
@@ -89,16 +89,18 @@ class ProdukProvider extends ChangeNotifier{
     return semuaProduk.where((produk) => produk.kategori == kategori).toList();
   }
 
-  set addProduk( produkBaru){
-    // Produk produkBaru = Produk(  
-    //   nama: nama,
-    //   gambar: gambar, 
-    //   deskripsi: deskripsi, 
-    //   stok: stok, 
-    //   hargaJual: hargaJual, 
-    //   hargaBeli: hargaBeli, 
-    //   kategori: kategori,
-    // );
+  addProduk(nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli){
+    int id = semuaProduk.length + 1;
+    Produk produkBaru = Produk(  
+      id: id,
+      nama: nama,
+      gambar: gambar, 
+      deskripsi: deskripsi, 
+      stok: stok, 
+      hargaJual: hargaJual, 
+      hargaBeli: hargaBeli, 
+      kategori: kategori,
+    );
     _semuaProduk.add(produkBaru);
     notifyListeners();
   }
