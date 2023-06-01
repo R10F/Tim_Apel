@@ -10,6 +10,15 @@ class TambahProduk extends StatefulWidget {
 class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
   String kategoriSelected = "";
+  List<DropdownMenuItem<String>> get dropdownItems{
+    List<DropdownMenuItem<String>> kategori = [
+      DropdownMenuItem(child: Text("ATK"),value: "ATK"),
+      DropdownMenuItem(child: Text("Craft Supply"),value: "Craft Supply"),
+      DropdownMenuItem(child: Text("Keperluan Jahit"),value: "Keperluan Jahit"),
+      DropdownMenuItem(child: Text("Dekorasi"),value: "Dekorasi"),
+    ];
+    return kategori;
+  }
   List semuaKategori = [
     'ATK',
     'Craft Supply',
@@ -58,9 +67,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
-                  items: semuaKategori.map((kategori){
-                    return DropdownMenuItem(child: Text(kategori), value: kategori);
-                  }).toList(),
+                  items: dropdownItems,
                   value: kategoriSelected,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: Colors.black),
@@ -68,12 +75,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     border: const OutlineInputBorder()
                   ),
                   hint: Text('Pilih Kategori Produk'),
-                  validator: (value) {
-                    if (kategoriSelected == "" || kategoriSelected.isEmpty){
-                      return "Pilih salah satu kategori";
-                    }
-                    return null;
-                  },
+                  validator: (value) => value == null ? "Pilih kategori" : null,
                   onChanged: (val){
                     setState(() {
                       kategoriSelected = val as String;
