@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/produk_provider.dart';
 
 class TambahProduk extends StatefulWidget {
   const TambahProduk({super.key});
@@ -30,6 +33,13 @@ class _TambahProdukState extends State<TambahProduk> {
 
   @override
   Widget build(BuildContext context) {
+    var produkProv = Provider.of<ProdukProvider>(context);
+    TextEditingController namaProdukController = TextEditingController();
+    TextEditingController deskripsiController = TextEditingController();
+    TextEditingController stokController = TextEditingController();
+    TextEditingController hargaJualController = TextEditingController();
+    TextEditingController hargaBeliController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tambah Produk'),
@@ -43,6 +53,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  controller: namaProdukController,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Nama Produk',
@@ -58,6 +69,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  controller: deskripsiController,
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -72,10 +84,10 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: DropdownButtonFormField(
                   items: dropdownItems,
                   value: kategoriSelected,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Kategori',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   validator: (value) => (value == null || value == "invalid") ? "Pilih kategori" : null,
                   onChanged: (val){
@@ -90,6 +102,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  controller: stokController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -106,6 +119,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  controller: hargaBeliController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -122,6 +136,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  controller: hargaJualController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -144,7 +159,18 @@ class _TambahProdukState extends State<TambahProduk> {
                         onPressed: () {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pop(context);
+                            String nama, gambar, deskripsi, kategori;
+                            int stok, hargaJual, hargaBeli;
+                            nama = namaProdukController.text;
+                            gambar = "assets/product_images/produk_2.jpg"; //temp
+                            deskripsi = deskripsiController.text;
+                            stok = int.parse(stokController.text); 
+                            hargaJual = int.parse(hargaJualController.text);
+                            hargaBeli = int.parse(hargaBeliController.text); 
+                            kategori = kategoriSelected;
+                            produkProv.addProduk(nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli);
+
+                            Navigator.pop(context); 
                           }
                         },
                         style: ElevatedButton.styleFrom(
