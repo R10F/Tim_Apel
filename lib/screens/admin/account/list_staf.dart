@@ -50,7 +50,7 @@ class _ListStafState extends State<ListStaf> {
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: ListTile(
                   leading: Image.asset(
-                    'assets/profile_pictures/picture-1.png',
+                    'assets/profile_pictures/${userAccounts[index]['profile_picture']}',
                     width: 45,
                   ),
                   title: Text(userAccounts[index]['nama']),

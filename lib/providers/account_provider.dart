@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tim_apel/models/account_data_model.dart';
@@ -5,6 +7,7 @@ import 'package:tim_apel/models/account_data_model.dart';
 class AccountProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
   final List _userAccounts = AccountDataModel().userAccounts;
+  final List _profilePictures = AccountDataModel().profilePictures;
 
   int _currentLoggedInUserIndex = -1;
 
@@ -19,12 +22,15 @@ class AccountProvider extends ChangeNotifier {
   get isOwner => currentUser['is_owner'];
 
   set register(data) {
+    int randomIndex = Random().nextInt(_profilePictures.length);
+    
     _userAccounts.add({
       'nama': data['nama'],
       'username': data['username'].toString().trim(),
       'password': data['password'],
       'is_owner': false,
       'jadwal': data['jadwal'],
+      'profile_picture': _profilePictures[randomIndex],
       'settings': {'dark_mode': false, 'dashboard_minimal': false}
     });
     print(_userAccounts);
@@ -32,7 +38,7 @@ class AccountProvider extends ChangeNotifier {
   }
 
   Future<void> _checkLoginStatus() async {
-    String? value = await _storage.read(key: 'makmurApp_LoginID');
+    String? value = await _storage.read(key: 'MakmurApp_LoginID');
     print(value);
     print(_currentLoggedInUserIndex);
     if (value != null) {
@@ -49,14 +55,14 @@ class AccountProvider extends ChangeNotifier {
       var user = _userAccounts[i];
 
       if (user['username'] == username.trim() && user['password'] == password) {
-        await _storage.write(key: 'makmurApp_LoginID', value: i.toString());
+        await _storage.write(key: 'MakmurApp_LoginID', value: i.toString());
         _currentLoggedInUserIndex = i;
         verified = true;
         break;
       }
     }
     notifyListeners();
-    String? value = await _storage.read(key: 'makmurApp_LoginID');
+    String? value = await _storage.read(key: 'MakmurApp_LoginID');
     print(value);
     return verified;
   }
@@ -67,7 +73,7 @@ class AccountProvider extends ChangeNotifier {
   }
 
   logout() async {
-    await _storage.delete(key: 'makmurApp_LoginID');
+    await _storage.delete(key: 'MakmurApp_LoginID');
     _currentLoggedInUserIndex = -1;
     notifyListeners();
   }

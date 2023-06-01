@@ -24,6 +24,7 @@ class _ProfileState extends State<Profile> {
     String username = accountProvider.currentUser['username'];
     bool isOwner = accountProvider.currentUser['is_owner'];
     String jadwal = accountProvider.currentUser['jadwal'];
+    String profilePicture = accountProvider.currentUser['profile_picture'];
     String role;
 
     if (!widget.asMyself) {
@@ -31,6 +32,7 @@ class _ProfileState extends State<Profile> {
       username = widget.data['username'];
       isOwner = widget.data['is_owner'];
       jadwal = widget.data['jadwal'];
+      profilePicture = widget.data['profile_picture'];
     }
 
     role = isOwner ? 'Owner' : 'Staf';
@@ -40,7 +42,7 @@ class _ProfileState extends State<Profile> {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Image.asset(
-            'assets/profile_pictures/picture-1.png',
+            'assets/profile_pictures/$profilePicture',
             width: 100,
           ),
         ),
