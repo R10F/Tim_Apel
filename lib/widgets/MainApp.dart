@@ -32,10 +32,11 @@ class _MainAppState extends State<MainApp> {
     var accountProvider = Provider.of<AccountProvider>(context);
     var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
 
-    Future <void> addProdukAndShowMessage(BuildContext context) async{
+    Future<void> addProdukAndShowMessage(BuildContext context) async {
       final result = await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const TambahProduk(), fullscreenDialog: true),
+        MaterialPageRoute(
+            builder: (context) => const TambahProduk(), fullscreenDialog: true),
       );
       //temp dlu utk message setelah berhasil ditambahkan
       // if (! mounted) return;

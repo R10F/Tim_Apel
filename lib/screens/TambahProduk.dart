@@ -30,10 +30,10 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Nama Produk',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return "Nama Produk tidak boleh kosong";
@@ -46,10 +46,10 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Deskripsi',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   maxLines: null, 
                 ),
@@ -59,15 +59,15 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: semuaKategori.map((kategori){
-                    return DropdownMenuItem(child: Text(kategori), value: kategori);
+                    return DropdownMenuItem(value: kategori, child: Text(kategori));
                   }).toList(),
                   value: kategoriSelected,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Kategori',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
-                  hint: Text('Pilih Kategori Produk'),
+                  hint: const Text('Pilih Kategori Produk'),
                   validator: (value) {
                     if (kategoriSelected == "" || kategoriSelected.isEmpty){
                       return "Pilih salah satu kategori";
@@ -81,16 +81,16 @@ class _TambahProdukState extends State<TambahProduk> {
                   },
                 ), 
               ),
-              Divider(),
+              const Divider(),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Jumlah Stok',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return "Jumlah Stok tidak boleh kosong";
@@ -103,10 +103,10 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Harga Beli',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return "Harga Beli tidak boleh kosong";
@@ -119,10 +119,10 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black),
                     labelText: 'Harga Jual',
-                    border: const OutlineInputBorder()
+                    border: OutlineInputBorder()
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) return "Harga Jual tidak boleh kosong";

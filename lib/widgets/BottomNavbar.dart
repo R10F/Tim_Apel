@@ -7,7 +7,6 @@ import 'package:tim_apel/screens/Produk2.dart';
 import 'package:tim_apel/screens/profile.dart';
 import 'package:tim_apel/screens/Transaksi.dart';
 
-
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
 
