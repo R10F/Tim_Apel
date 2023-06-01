@@ -9,9 +9,10 @@ class TambahProduk extends StatefulWidget {
 
 class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
-  String kategoriSelected = "";
+  String kategoriSelected = "invalid";
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> kategori = [
+      DropdownMenuItem(child: Text("Pilih Kategori Produk"),value: "invalid"),
       DropdownMenuItem(child: Text("ATK"),value: "ATK"),
       DropdownMenuItem(child: Text("Craft Supply"),value: "Craft Supply"),
       DropdownMenuItem(child: Text("Keperluan Jahit"),value: "Keperluan Jahit"),
@@ -74,8 +75,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     labelText: 'Kategori',
                     border: const OutlineInputBorder()
                   ),
-                  hint: Text('Pilih Kategori Produk'),
-                  validator: (value) => value == null ? "Pilih kategori" : null,
+                  validator: (value) => (value == null || value == "invalid") ? "Pilih kategori" : null,
                   onChanged: (val){
                     setState(() {
                       kategoriSelected = val as String;
