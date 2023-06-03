@@ -36,7 +36,7 @@ class _ProfileState extends State<Profile> {
 
     return ListView(children: [
       Padding(
-        padding: const EdgeInsets.only(top: 40, bottom: 15),
+        padding: const EdgeInsets.only(top: 40, bottom: 45),
         child: Center(
           child: Image.asset(
             'assets/profile_pictures/$profilePicture',
@@ -44,23 +44,38 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.only(top: 20, left: 20),
-        child: Text(
-          'Nama',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
-        ),
-      ),
       Padding(
-        padding: const EdgeInsets.only(top: 5, left: 20),
-        child: Text(
-          nama,
-          style: const TextStyle(
-            fontFamily: 'Figtree',
-            fontSize: 20,
-          ),
-        ),
+        padding: const EdgeInsets.only(right: 25, left: 20),
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Nama',
+                    style: TextStyle(
+                        fontFamily: 'Figtree',
+                        fontSize: 16,
+                        color: Colors.grey),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                    ),
+                    child: Text(
+                      nama,
+                      style: const TextStyle(
+                        fontFamily: 'Figtree',
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Icon(Icons.edit)
+            ]),
       ),
       const Padding(
         padding: EdgeInsets.only(top: 20, left: 20),
