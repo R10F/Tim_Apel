@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     return ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 15.0, top: 10.0),
+          padding: const EdgeInsets.only(left: 15.0, top: 30),
           child: Text(
             "Hai, ${accountProvider.currentUser['nama']}!\nmasih semangat jualan hari ini?",
             style: const TextStyle(

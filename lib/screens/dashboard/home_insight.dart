@@ -5,9 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class SalesData {
-  SalesData(this.year, this.sales);
-  final String year;
-  final int sales;
+  String? dateTime;
+  int sales;
+
+  SalesData(int year, int month, this.sales) {
+    dateTime = DateFormat.MMM().format(DateTime(year, month));
+  }
 }
 
 class HomeInsight extends StatefulWidget {
@@ -35,8 +38,8 @@ class _HomeInsightState extends State<HomeInsight> {
     int currentYear = DateTime.now().year;
     int currentMonth = DateTime.now().month;
 
-    if (currentMonth < 12) {
-      currentMonth = 12 - currentMonth - 1;
+    if (currentMonth <= 12) {
+      currentMonth = 12 - (12 - currentMonth) + 1;
       currentYear -= 1;
     }
 
@@ -47,14 +50,10 @@ class _HomeInsightState extends State<HomeInsight> {
       }
 
       return SalesData(
-          DateFormat.MMM().format(DateTime(currentYear, currentMonth++)),
-          (Random().nextInt(20) + 10) * 50000);
+          currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
     });
 
-    data.add(SalesData(
-        DateFormat.MMM()
-            .format(DateTime(DateTime.now().year, DateTime.now().month)),
-        500000));
+    data.add(SalesData(DateTime.now().year, DateTime.now().month, 500000));
 
     return data;
   }
@@ -97,7 +96,7 @@ class _HomeInsightState extends State<HomeInsight> {
                           name: 'Income',
                           dataSource: chartData,
                           markerSettings: const MarkerSettings(isVisible: true),
-                          xValueMapper: (SalesData sales, _) => sales.year,
+                          xValueMapper: (SalesData sales, _) => sales.dateTime,
                           yValueMapper: (SalesData sales, _) => sales.sales),
                     ]),
               )
