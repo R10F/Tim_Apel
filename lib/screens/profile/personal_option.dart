@@ -20,7 +20,7 @@ class _PersonalOptionState extends State<PersonalOption> {
         thickness: 2,
       ),
       const Padding(
-        padding: EdgeInsets.only(top: 20, left: 20),
+        padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Preferensi',
           style: TextStyle(
@@ -28,7 +28,7 @@ class _PersonalOptionState extends State<PersonalOption> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 5, left: 5),
+        padding: const EdgeInsets.only(left: 5),
         child: ListTile(
           title: const Text(
             'Dark Mode',
@@ -46,7 +46,7 @@ class _PersonalOptionState extends State<PersonalOption> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 5, left: 5),
+        padding: const EdgeInsets.only(left: 5),
         child: ListTile(
           title: const Text(
             'Beranda Minimal',
@@ -68,14 +68,20 @@ class _PersonalOptionState extends State<PersonalOption> {
         ),
       ),
       Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: ElevatedButton(
-            onPressed: () async {
-              accountProvider.logout();
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-            child: const Text('Logout'),
-          )),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+        child: Row(children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () async {
+                accountProvider.logout();
+              },
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+              child: const Text('Logout'),
+            ),
+          ),
+        ]),
+      ),
     ]);
   }
 }

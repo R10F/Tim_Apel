@@ -32,6 +32,7 @@ class _ListStafState extends State<ListStaf> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
+                    fullscreenDialog: true,
                     builder: (_) => Scaffold(
                         appBar: AppBar(
                           title: Text(userAccounts[index]['nama']),

@@ -36,11 +36,11 @@ class _ProfileState extends State<Profile> {
 
     return ListView(children: [
       Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 40, bottom: 15),
         child: Center(
           child: Image.asset(
             'assets/profile_pictures/$profilePicture',
-            width: 100,
+            width: 150,
           ),
         ),
       ),
@@ -121,8 +121,9 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       widget.asMyself || widget.id == accountProvider.id
-          ? PersonalOption()
-          : Container()
+          ? const PersonalOption()
+          : Container(),
+      const Padding(padding: EdgeInsets.only(bottom: 55))
     ]);
   }
 }
