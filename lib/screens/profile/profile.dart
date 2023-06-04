@@ -74,7 +74,10 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              Icon(Icons.edit)
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {},
+              )
             ]),
       ),
       const Padding(
