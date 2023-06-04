@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:tim_apel/screens/pembayaran/transaksi_berhasil.dart';
-import 'package:tim_apel/screens/pembayaran/tunai.dart';
+import 'package:tim_apel/screens/payment/payment_done.dart';
+import 'package:tim_apel/screens/payment/tunai.dart';
 
 class ItemPembayaran extends StatelessWidget {
   ItemPembayaran(
@@ -43,7 +43,7 @@ class ItemPembayaran extends StatelessWidget {
                         ),
                       ),
                       Image.asset(
-                        'assets/pembayaran/$iconName.png',
+                        'assets/payment/$iconName.png',
                         width: 100,
                       ),
                     ],
@@ -56,7 +56,7 @@ class ItemPembayaran extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const TransaksiBerhasil()));
+                                builder: (_) => const PaymentDone()));
                       },
                       child: const Text('Konfirmasi Pembayaran')),
                 ),

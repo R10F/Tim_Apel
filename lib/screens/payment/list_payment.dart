@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tim_apel/screens/pembayaran/item_pembayaran.dart';
+import 'package:tim_apel/screens/payment/item_pembayaran.dart';
 
-class ListPembayaran extends StatelessWidget {
-  const ListPembayaran({super.key});
+class ListPayment extends StatelessWidget {
+  const ListPayment({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ListPembayaran extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(
-                      "assets/pembayaran/${listMetodePembayaran[i]['icon_name']}.png",
+                      "assets/payment/${listMetodePembayaran[i]['icon_name']}.png",
                       width: 100,
                     ),
                     ElevatedButton(
