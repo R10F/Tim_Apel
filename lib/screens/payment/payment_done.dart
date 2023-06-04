@@ -8,29 +8,40 @@ class PaymentDone extends StatelessWidget {
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-          child: Column(
-            children: [
-              Image.asset('assets/payment/payment-done.png'),
-              const Text(
-                'Transaksi Berhasil!',
-                textAlign: TextAlign.center,
-              ),
-              const Text(
-                'Yeay! Order XXX telah selesai diproses.',
-                textAlign: TextAlign.center,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.popUntil(context, (route) => route.isFirst);
-                        },
-                        child: const Text('Kembali ke Beranda')),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset('assets/payment/payment-done.png'),
+                const Text(
+                  'Transaksi Berhasil!',
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const Text(
+                  'Yeay! Order XXX telah selesai diproses.',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Figtree',
                   ),
-                ],
-              )
-            ],
+                  textAlign: TextAlign.center,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal[700]),
+                          onPressed: () {
+                            Navigator.popUntil(
+                                context, (route) => route.isFirst);
+                          },
+                          child: const Text('Kembali ke Beranda')),
+                    ),
+                  ],
+                )
+              ],
+            ),
           )),
     );
   }

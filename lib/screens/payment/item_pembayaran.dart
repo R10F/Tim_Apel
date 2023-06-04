@@ -1,15 +1,20 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tim_apel/screens/payment/payment_done.dart';
 import 'package:tim_apel/screens/payment/tunai.dart';
 
 class ItemPembayaran extends StatelessWidget {
   ItemPembayaran(
-      {super.key, required this.metodePembayaran, required this.iconName});
+      {super.key,
+      required this.metodePembayaran,
+      required this.iconName,
+      required this.logoName});
 
   final String metodePembayaran;
   final String iconName;
+  final String logoName;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,11 @@ class ItemPembayaran extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.only(bottom: 5),
-              child: Text('Total Pembayaran', textAlign: TextAlign.center),
+              child: Text(
+                'Total Pembayaran',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 23),
+              ),
             ),
             const Padding(
               padding: EdgeInsets.only(bottom: 30),
@@ -40,11 +49,17 @@ class ItemPembayaran extends StatelessWidget {
                         child: Text(
                           'Silahkan Scan Kode QR di bawah ini',
                           textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
-                      Image.asset(
-                        'assets/payment/$iconName.png',
-                        width: 100,
+                      QrImageView(
+                        data: 'Pembayaran $metodePembayaran',
+                        version: QrVersions.auto,
+                        size: 250,
+                        embeddedImage:
+                            AssetImage("assets/payment/$logoName.png"),
+                        embeddedImageStyle:
+                            QrEmbeddedImageStyle(size: Size(60, 60)),
                       ),
                     ],
                   ),
@@ -52,13 +67,19 @@ class ItemPembayaran extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.teal[700]),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
+                                fullscreenDialog: true,
                                 builder: (_) => const PaymentDone()));
                       },
-                      child: const Text('Konfirmasi Pembayaran')),
+                      child: const Text(
+                        'Konfirmasi Pembayaran',
+                        style: TextStyle(fontFamily: 'Figtree', fontSize: 16),
+                      )),
                 ),
               ],
             )

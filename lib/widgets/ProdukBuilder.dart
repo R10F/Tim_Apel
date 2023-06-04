@@ -43,39 +43,44 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     children: [
                       Image.asset(widget.produk[i].gambar!),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: accountProvider.isOwner ?
-                        <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  widget.produk[i].nama,
-                                  style: const TextStyle(
-                                      fontFamily: 'Figtree', fontSize: 16),
-                                ),
-                              ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: PopupMenu(),
-                          ),
-                        ] :
-                        <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  widget.produk[i].nama,
-                                  style: const TextStyle(
-                                      fontFamily: 'Figtree', fontSize: 16),
-                                ),
-                              ),
-                          ),
-                        ]
-                      ),
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: accountProvider.isOwner
+                              ? <Widget>[
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.produk[i].nama,
+                                          style: const TextStyle(
+                                              fontFamily: 'Figtree',
+                                              fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: PopupMenu(),
+                                  ),
+                                ]
+                              : <Widget>[
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.produk[i].nama,
+                                          style: const TextStyle(
+                                              fontFamily: 'Figtree',
+                                              fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
