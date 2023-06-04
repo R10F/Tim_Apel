@@ -10,7 +10,7 @@ class PaymentDone extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
           child: Column(
             children: [
-              Image.asset('assets/pembayaran/transaksi-selesai.png'),
+              Image.asset('assets/payment/payment-done.png'),
               const Text(
                 'Transaksi Berhasil!',
                 textAlign: TextAlign.center,
