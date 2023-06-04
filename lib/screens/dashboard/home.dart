@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
+import 'package:tim_apel/screens/pembayaran/list_pembayaran.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -62,7 +63,10 @@ class _HomeState extends State<Home> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colours.lightSalmon,
                       minimumSize: const Size(30, 30)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => ListPembayaran()));
+                  },
                   child: const Text(
                     "Buat Order Baru",
                     style: TextStyle(color: Colors.black),

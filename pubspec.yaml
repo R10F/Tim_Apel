@@ -78,6 +78,12 @@ flutter:
     - assets/profile_pictures/picture-2.png
     - assets/profile_pictures/picture-3.png
     - assets/profile_pictures/picture-4.png
+    - assets/pembayaran/tunai.png
+    - assets/pembayaran/ovo.png
+    - assets/pembayaran/gopay.png
+    - assets/pembayaran/shopee-pay.png
+    - assets/pembayaran/dana.png
+    - assets/pembayaran/transaksi-selesai.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
