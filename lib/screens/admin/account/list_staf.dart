@@ -37,14 +37,10 @@ class _ListStafState extends State<ListStaf> {
                         appBar: AppBar(
                           title: Text(userAccounts[index]['nama']),
                         ),
-                        body: Profile(
-                            id: index,
-                            asMyself: false,
-                            data: userAccounts[index]))));
+                        body: Profile(id: index, asMyself: false, data: userAccounts[index]))));
           },
           child: Container(
-            decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.grey))),
+            decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
             child: Align(
               alignment: Alignment.center,
               child: Padding(
@@ -73,8 +69,7 @@ class _ListStafState extends State<ListStaf> {
         icon: const Icon(Icons.add),
         label: const Text('Tambah'),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
         },
       ),
     );

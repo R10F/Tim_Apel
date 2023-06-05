@@ -11,13 +11,13 @@ class RegisterDone extends StatelessWidget {
         child: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 100, bottom: 25),
+              padding: const EdgeInsets.only(top: 50, bottom: 15, left: 50, right: 50),
               child: Image.asset('assets/images/register-done.png'),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: EdgeInsets.only(bottom: 40),
               child: Text(
-                'Berhasil \nMendaftar Staf Baru',
+                'Berhasil\nMendaftar Staf Baru',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 26,
@@ -26,7 +26,7 @@ class RegisterDone extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+              padding: const EdgeInsets.only(bottom: 15, left: 20, right: 20),
               child: Row(
                 children: [
                   Expanded(
@@ -37,30 +37,23 @@ class RegisterDone extends StatelessWidget {
                         child: Text(
                           'Kembali Ke Beranda',
                           style: TextStyle(
-                              color: Colors.teal[500],
-                              fontFamily: 'Figtree',
-                              fontSize: 16),
+                              color: Colors.teal[500], fontFamily: 'Figtree', fontSize: 16),
                         )),
                   )
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 25,
-              ),
+              padding: const EdgeInsets.only(bottom: 75, left: 20, right: 20),
               child: Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const RegisterStaf()));
+                              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
                         },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[700]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                         child: const Text(
                           'Tambah Staf Lagi',
                           style: TextStyle(fontFamily: 'Figtree', fontSize: 16),

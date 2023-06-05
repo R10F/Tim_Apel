@@ -37,13 +37,9 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.namaController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isNameEmpty
-                      ? 'Nama Tidak Boleh Kosong'
-                      : null,
+                  errorText: registerFormProvider.isNameEmpty ? 'Nama Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Nama',
                   border: const OutlineInputBorder()),
             ),
@@ -53,13 +49,10 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.usernameController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isUsernameEmpty
-                      ? 'Username Tidak Boleh Kosong'
-                      : null,
+                  errorText:
+                      registerFormProvider.isUsernameEmpty ? 'Username Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Username',
                   border: const OutlineInputBorder()),
             ),
@@ -70,13 +63,10 @@ class _RegisterStafState extends State<RegisterStaf> {
               controller: registerFormProvider.passwordController,
               obscureText: !registerFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isPasswordEmpty
-                      ? 'Password Tidak Boleh Kosong'
-                      : null,
+                  errorText:
+                      registerFormProvider.isPasswordEmpty ? 'Password Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -100,13 +90,10 @@ class _RegisterStafState extends State<RegisterStaf> {
               maxLines: 2,
               controller: registerFormProvider.jadwalController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isJadwalEmpty
-                      ? 'Jadwal Tidak Boleh Kosong'
-                      : null,
+                  errorText:
+                      registerFormProvider.isJadwalEmpty ? 'Jadwal Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Jadwal',
                   border: const OutlineInputBorder()),
             ),
@@ -133,17 +120,13 @@ class _RegisterStafState extends State<RegisterStaf> {
                         !registerFormProvider.isJadwalEmpty) {
                       accountProvider.register = {
                         'nama': registerFormProvider.namaController.text,
-                        'username':
-                            registerFormProvider.usernameController.text,
-                        'password':
-                            registerFormProvider.passwordController.text,
+                        'username': registerFormProvider.usernameController.text,
+                        'password': registerFormProvider.passwordController.text,
                         'jadwal': registerFormProvider.jadwalController.text
                       };
 
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const RegisterDone()));
+                          context, MaterialPageRoute(builder: (_) => const RegisterDone()));
 
                       registerFormProvider.namaController.clear();
                       registerFormProvider.usernameController.clear();
@@ -151,8 +134,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                       registerFormProvider.jadwalController.clear();
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal[700]),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                   child: const Text('Simpan'),
                 )),
               ],

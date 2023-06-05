@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tim_apel/screens/payment/item_pembayaran.dart';
+import 'package:tim_apel/screens/payment/item_metode_pembayaran.dart';
 
-class ListPayment extends StatelessWidget {
-  const ListPayment({super.key});
+class PaymentList extends StatelessWidget {
+  const PaymentList({super.key});
 
   @override
   Widget build(BuildContext context) {
     List listMetodePembayaran = [
-      {'icon_name': 'tunai', 'appbar_title': 'Tunai', 'logo_name': ""},
-      {'icon_name': 'ovo', 'appbar_title': 'OVO', 'logo_name': 'logo_ovo'},
-      {
-        'icon_name': 'gopay',
-        'appbar_title': 'GoPay',
-        'logo_name': 'logo_gopay'
-      },
-      {
-        'icon_name': 'shopee-pay',
-        'appbar_title': 'ShopeePay',
-        'logo_name': 'logo_shopee'
-      },
-      {'icon_name': 'dana', 'appbar_title': 'DANA', 'logo_name': 'logo_dana'},
+      {'icon_name': 'tunai', 'appbar_title': 'Tunai'},
+      {'icon_name': 'ovo', 'appbar_title': 'OVO'},
+      {'icon_name': 'gopay', 'appbar_title': 'GoPay'},
+      {'icon_name': 'shopeepay', 'appbar_title': 'ShopeePay'},
+      {'icon_name': 'dana', 'appbar_title': 'DANA'},
     ];
 
     return Scaffold(
@@ -47,24 +39,18 @@ class ListPayment extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(
-                      "assets/payment/${listMetodePembayaran[i]['icon_name']}.png",
+                      "assets/payment/${listMetodePembayaran[i]['icon_name']}-logo_text.png",
                       width: 100,
                     ),
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[300]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[300]),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => ItemPembayaran(
-                                        metodePembayaran:
-                                            listMetodePembayaran[i]
-                                                ['appbar_title'],
-                                        iconName: listMetodePembayaran[i]
-                                            ['icon_name'],
-                                        logoName: listMetodePembayaran[i]
-                                            ['logo_name'],
+                                  builder: (_) => ItemMetodePembayaran(
+                                        metodePembayaran: listMetodePembayaran[i]['appbar_title'],
+                                        iconName: listMetodePembayaran[i]['icon_name'],
                                       )));
                         },
                         child: const Text('Pilih'))

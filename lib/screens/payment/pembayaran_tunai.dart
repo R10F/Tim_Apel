@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Tunai extends StatefulWidget {
-  const Tunai({super.key});
+class PembayaranTunai extends StatefulWidget {
+  const PembayaranTunai({super.key});
 
   @override
-  State<Tunai> createState() => _TunaiState();
+  State<PembayaranTunai> createState() => _PembayaranTunaiState();
 }
 
-class _TunaiState extends State<Tunai> {
+class _PembayaranTunaiState extends State<PembayaranTunai> {
   List<bool?> _choiceChipsStatus = [false, false, false, false, false];
 
   List _choiceChipsText = [
@@ -47,8 +47,7 @@ class _TunaiState extends State<Tunai> {
                 (index) => ChoiceChip(
                     onSelected: (value) {
                       setState(() {
-                        _choiceChipsStatus.fillRange(
-                            0, _choiceChipsStatus.length, false);
+                        _choiceChipsStatus.fillRange(0, _choiceChipsStatus.length, false);
                         _choiceChipsStatus[index] = true;
                       });
                     },

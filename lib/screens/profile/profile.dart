@@ -4,8 +4,7 @@ import 'package:tim_apel/screens/profile/personal_option.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
 class Profile extends StatefulWidget {
-  const Profile(
-      {super.key, this.asMyself = true, this.id = -1, this.data = const {}});
+  const Profile({super.key, this.asMyself = true, this.id = -1, this.data = const {}});
 
   final int id;
   final bool asMyself;
@@ -55,10 +54,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   const Text(
                     'Nama',
-                    style: TextStyle(
-                        fontFamily: 'Figtree',
-                        fontSize: 16,
-                        color: Colors.grey),
+                    style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -84,8 +80,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.only(top: 20, left: 20),
         child: Text(
           'Username',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
       Padding(
@@ -102,8 +97,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.only(top: 20, left: 20),
         child: Text(
           'Role',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
       Padding(
@@ -124,8 +118,7 @@ class _ProfileState extends State<Profile> {
         padding: EdgeInsets.only(top: 20, left: 20),
         child: Text(
           'Jadwal',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
       Padding(
@@ -138,9 +131,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      widget.asMyself || widget.id == accountProvider.id
-          ? const PersonalOption()
-          : Container(),
+      widget.asMyself || widget.id == accountProvider.id ? const PersonalOption() : Container(),
       const Padding(padding: EdgeInsets.only(bottom: 55))
     ]);
   }

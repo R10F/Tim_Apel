@@ -79,16 +79,16 @@ flutter:
     - assets/profile_pictures/picture-2.png
     - assets/profile_pictures/picture-3.png
     - assets/profile_pictures/picture-4.png
-    - assets/payment/tunai.png
-    - assets/payment/ovo.png
-    - assets/payment/gopay.png
-    - assets/payment/shopee-pay.png
-    - assets/payment/dana.png
+    - assets/payment/tunai-logo_text.png
+    - assets/payment/ovo-logo.png
+    - assets/payment/ovo-logo_text.png
+    - assets/payment/gopay-logo.png
+    - assets/payment/gopay-logo_text.png
+    - assets/payment/shopeepay-logo.png
+    - assets/payment/shopeepay-logo_text.png
+    - assets/payment/dana-logo.png
+    - assets/payment/dana-logo_text.png
     - assets/payment/payment-done.png
-    - assets/payment/logo_ovo.png
-    - assets/payment/logo_gopay.png
-    - assets/payment/logo_shopee.png
-    - assets/payment/logo_dana.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

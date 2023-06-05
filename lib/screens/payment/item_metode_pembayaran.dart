@@ -3,18 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tim_apel/screens/payment/payment_done.dart';
-import 'package:tim_apel/screens/payment/tunai.dart';
+import 'package:tim_apel/screens/payment/pembayaran_tunai.dart';
 
-class ItemPembayaran extends StatelessWidget {
-  ItemPembayaran(
-      {super.key,
-      required this.metodePembayaran,
-      required this.iconName,
-      required this.logoName});
+class ItemMetodePembayaran extends StatelessWidget {
+  ItemMetodePembayaran({super.key, required this.metodePembayaran, required this.iconName});
 
   final String metodePembayaran;
   final String iconName;
-  final String logoName;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +32,10 @@ class ItemPembayaran extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(bottom: 30),
               child: Text('Rp 20.500',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: Colors.green)),
+                  textAlign: TextAlign.center, style: TextStyle(fontSize: 30, color: Colors.green)),
             ),
             metodePembayaran == 'Tunai'
-                ? Tunai()
+                ? PembayaranTunai()
                 : Column(
                     children: [
                       const Padding(
@@ -53,13 +47,11 @@ class ItemPembayaran extends StatelessWidget {
                         ),
                       ),
                       QrImageView(
-                        data: 'Pembayaran $metodePembayaran',
+                        data: 'Pembayaran $metodePembayaran sebesar Rp 20.500',
                         version: QrVersions.auto,
                         size: 250,
-                        embeddedImage:
-                            AssetImage("assets/payment/$logoName.png"),
-                        embeddedImageStyle:
-                            QrEmbeddedImageStyle(size: Size(60, 60)),
+                        embeddedImage: AssetImage("assets/payment/$iconName-logo.png"),
+                        embeddedImageStyle: QrEmbeddedImageStyle(size: Size(60, 60)),
                       ),
                     ],
                   ),
@@ -67,14 +59,12 @@ class ItemPembayaran extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal[700]),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (_) => const PaymentDone()));
+                                fullscreenDialog: true, builder: (_) => const PaymentDone()));
                       },
                       child: const Text(
                         'Konfirmasi Pembayaran',

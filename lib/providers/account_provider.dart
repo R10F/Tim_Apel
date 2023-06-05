@@ -23,7 +23,7 @@ class AccountProvider extends ChangeNotifier {
 
   set register(data) {
     int randomIndex = Random().nextInt(_profilePictures.length);
-    
+
     _userAccounts.add({
       'nama': data['nama'],
       'username': data['username'].toString().trim(),
@@ -82,8 +82,7 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme =
-      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme = ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(

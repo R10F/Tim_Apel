@@ -10,14 +10,13 @@ class DrawerOwner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    
+
     return Drawer(
       child: ListView(
         children: [
           DrawerHeader(
               decoration: BoxDecoration(
-                  border: Border(
-                      bottom: Divider.createBorderSide(context, width: 2))),
+                  border: Border(bottom: Divider.createBorderSide(context, width: 2))),
               child: Column(
                 children: [
                   Image.asset(
@@ -58,8 +57,7 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ListStaf()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const ListStaf()));
             },
           ),
           ListTile(
@@ -75,8 +73,7 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const RegisterStaf()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
             },
           ),
           const Divider(
@@ -90,9 +87,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),
@@ -118,9 +114,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),

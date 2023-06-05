@@ -12,25 +12,6 @@ class RegisterStafFormProvider extends ChangeNotifier {
   bool isPasswordEmpty = false;
   bool isJadwalEmpty = false;
 
-  // final List _listStaf = [];
-  // var _staf = {};
-
-  // get staf => _staf;
-
-  // List get getListStaf => _listStaf.toList();
-
-  // set setListStaf(value) {
-  //   _listStaf.add(value);
-  //   print(_listStaf);
-  //   notifyListeners();
-  // }
-
-  // set setStaf(value) {
-  //   _staf = value;
-  //   print(_staf);
-  //   notifyListeners();
-  // }
-
   set setIsNameEmpty(value) {
     isNameEmpty = value;
     notifyListeners();
@@ -50,11 +31,6 @@ class RegisterStafFormProvider extends ChangeNotifier {
     isJadwalEmpty = value;
     notifyListeners();
   }
-
-  // void removeStaf(int index) {
-  //   _listStaf.removeAt(index);
-  //   notifyListeners();
-  // }
 
   get getPasswordVisible => _passwordVisible;
 

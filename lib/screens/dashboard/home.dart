@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
-import 'package:tim_apel/screens/payment/list_payment.dart';
+import 'package:tim_apel/screens/payment/payment_list.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,10 +26,8 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.only(left: 15.0, top: 30),
           child: Text(
             "Hai, ${accountProvider.currentUser['nama']}!\nmasih semangat jualan hari ini?",
-            style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Figtree',
-                fontSize: 20),
+            style:
+                const TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 20),
             textAlign: TextAlign.start,
           ),
         ),
@@ -38,19 +36,15 @@ class _HomeState extends State<Home> {
           child: Text(
             "Penjualan",
             style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: 26),
+                fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Text(
             "Kamu telah menjual 1 pesanan. Total ${currency.format(125000)} telah kamu kantongi! Lanjuut! ",
-            style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Figtree',
-                fontSize: 16),
+            style:
+                const TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
             textAlign: TextAlign.start,
           ),
         ),
@@ -61,11 +55,9 @@ class _HomeState extends State<Home> {
             children: [
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colours.lightSalmon,
-                      minimumSize: const Size(30, 30)),
+                      backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const ListPayment()));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PaymentList()));
                   },
                   child: const Text(
                     "Buat Order Baru",
@@ -74,17 +66,13 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        accountProvider.getSetting('dashboard_minimal')
-            ? Container()
-            : const HomeInsight(),
+        accountProvider.getSetting('dashboard_minimal') ? Container() : const HomeInsight(),
         const Padding(
           padding: EdgeInsets.only(left: 15.0, top: 10.0),
           child: Text(
             "Sedang Berlangsung",
             style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: 26),
+                fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
           ),
         ),
         const Padding(
@@ -104,9 +92,7 @@ class _HomeState extends State<Home> {
           child: Text(
             "Baru Diselesaikan",
             style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Plus Jakarta Sans',
-                fontSize: 26),
+                fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
           ),
         ),
         const Padding(
