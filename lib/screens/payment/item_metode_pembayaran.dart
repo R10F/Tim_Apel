@@ -39,7 +39,7 @@ class ItemMetodePembayaran extends StatelessWidget {
                 : Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.only(bottom: 30),
+                        padding: EdgeInsets.only(bottom: 40),
                         child: Text(
                           'Silahkan Scan Kode QR di bawah ini',
                           textAlign: TextAlign.center,
