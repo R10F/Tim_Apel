@@ -3,6 +3,7 @@ import 'package:colours/colours.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
 import 'package:tim_apel/screens/payment/payment_list.dart';
 
@@ -19,6 +20,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
     return ListView(
       children: [
@@ -57,7 +59,8 @@ class _HomeState extends State<Home> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PaymentList()));
+                    transaksiProvider.createNewOrder();
+                    // Navigator.push(context, MaterialPageRoute(builder: (_) => const PaymentList()));
                   },
                   child: const Text(
                     "Buat Order Baru",

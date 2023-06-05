@@ -5,7 +5,7 @@ import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 import 'package:tim_apel/screens/dashboard/home.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
 import 'package:tim_apel/screens/Produk.dart';
-import 'package:tim_apel/screens/Transaksi.dart';
+import 'package:tim_apel/screens/transaksi/list_transaksi.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -15,12 +15,7 @@ class BottomNavbar extends StatefulWidget {
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
-  List halamanBottomNav = [
-    const Home(),
-    const Produk(),
-    const Transaksi(),
-    const Profile()
-  ];
+  List halamanBottomNav = [const Home(), const Produk(), const ListTransaksi(), const Profile()];
 
   @override
   Widget build(BuildContext context) {

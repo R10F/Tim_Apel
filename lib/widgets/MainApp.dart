@@ -9,7 +9,7 @@ import 'package:tim_apel/providers/bottomNavbar_provider.dart';
 import 'package:tim_apel/screens/dashboard/home.dart';
 import 'package:tim_apel/screens/Produk.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
-import 'package:tim_apel/screens/Transaksi.dart';
+import 'package:tim_apel/screens/transaksi/list_transaksi.dart';
 import 'package:tim_apel/screens/TambahProduk.dart';
 
 class MainApp extends StatefulWidget {
@@ -20,12 +20,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  List halamanBottomNav = [
-    const Home(),
-    const Produk(),
-    const Transaksi(),
-    const Profile()
-  ];
+  List halamanBottomNav = [const Home(), const Produk(), const ListTransaksi(), const Profile()];
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +30,7 @@ class _MainAppState extends State<MainApp> {
     Future<void> addProdukAndShowMessage(BuildContext context) async {
       final result = await Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => const TambahProduk(), fullscreenDialog: true),
+        MaterialPageRoute(builder: (context) => const TambahProduk(), fullscreenDialog: true),
       );
       //temp dlu utk message setelah berhasil ditambahkan
       // if (! mounted) return;
@@ -50,17 +44,17 @@ class _MainAppState extends State<MainApp> {
       child: Scaffold(
         appBar: accountProvider.isOwner
             ? PreferredSize(
-                preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
-                        bottomnavProvider.getSelectedIdx == 2
-                    ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
-                    : const Size.fromHeight(kToolbarHeight),
+                preferredSize:
+                    bottomnavProvider.getSelectedIdx == 1 || bottomnavProvider.getSelectedIdx == 2
+                        ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
+                        : const Size.fromHeight(kToolbarHeight),
                 child: const AppBarOwner(),
               )
             : PreferredSize(
-                preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
-                        bottomnavProvider.getSelectedIdx == 2
-                    ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
-                    : const Size.fromHeight(kToolbarHeight),
+                preferredSize:
+                    bottomnavProvider.getSelectedIdx == 1 || bottomnavProvider.getSelectedIdx == 2
+                        ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
+                        : const Size.fromHeight(kToolbarHeight),
                 child: const AppBarStaf(),
               ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
@@ -68,17 +62,16 @@ class _MainAppState extends State<MainApp> {
             ? const DrawerOwner()
             : null,
         bottomNavigationBar: const BottomNavbar(),
-        floatingActionButton:
-            accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
-                ? FloatingActionButton.extended(
-                    onPressed: () {
-                      addProdukAndShowMessage(context);
-                    },
-                    backgroundColor: Colors.teal[700],
-                    label: const Text("Tambah"),
-                    icon: const Icon(Icons.add),
-                  )
-                : null,
+        floatingActionButton: accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  addProdukAndShowMessage(context);
+                },
+                backgroundColor: Colors.teal[700],
+                label: const Text("Tambah"),
+                icon: const Icon(Icons.add),
+              )
+            : null,
       ),
     );
   }
