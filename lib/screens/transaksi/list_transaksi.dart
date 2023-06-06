@@ -19,10 +19,12 @@ class _ListTransaksiState extends State<ListTransaksi> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: TabBarView(children: [
-        Column(
-            children: List.generate(
-                listTransaksi.length, (index) => CardTransaksi(transaksi: listTransaksi[index]))),
-        Text('Konten ListTransaksi Sudah Selesai'),
+        SingleChildScrollView(
+          child: Column(
+              children: List.generate(listTransaksi.length,
+                  (index) => CardTransaksi(transaksi: listTransaksi[index]))),
+        ),
+        const Text('Konten ListTransaksi Sudah Selesai'),
       ]),
     );
   }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
 
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -19,112 +20,114 @@ class _LoginState extends State<Login> {
     var loginFormProvider = Provider.of<LoginFormProvider>(context);
 
     return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 75),
-            child: Center(
-              child: Image.asset(
-                'assets/images/logo.png',
-                width: 200,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 75),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 200,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 25),
-            child: TextFormField(
-              controller: loginFormProvider.usernameController,
-              decoration: InputDecoration(
-                  errorText: loginFormProvider.isUsernameEmpty
-                      ? 'Username Tidak Boleh Kosong'
-                      : null,
-                  labelStyle: const TextStyle(color: Colors.black),
-                  labelText: 'Username',
-                  border: const OutlineInputBorder()),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 25, right: 25, top: 50, bottom: 25),
+              child: TextFormField(
+                controller: loginFormProvider.usernameController,
+                decoration: InputDecoration(
+                    errorText: loginFormProvider.isUsernameEmpty
+                        ? 'Username Tidak Boleh Kosong'
+                        : null,
+                    labelStyle: const TextStyle(color: Colors.black),
+                    labelText: 'Username',
+                    border: const OutlineInputBorder()),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-            child: TextFormField(
-              controller: loginFormProvider.passwordController,
-              obscureText: !loginFormProvider.getPasswordVisible,
-              decoration: InputDecoration(
-                  errorText: loginFormProvider.isPasswordEmpty
-                      ? 'Password Tidak Boleh Kosong'
-                      : null,
-                  labelStyle: const TextStyle(color: Colors.black),
-                  labelText: 'Password',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      // Based on passwordVisible state choose the icon
-                      loginFormProvider.getPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                    onPressed: () {
-                      loginFormProvider.setPasswordVisible =
-                          !loginFormProvider.getPasswordVisible;
-                    },
-                  )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              child: TextFormField(
+                controller: loginFormProvider.passwordController,
+                obscureText: !loginFormProvider.getPasswordVisible,
+                decoration: InputDecoration(
+                    errorText: loginFormProvider.isPasswordEmpty
+                        ? 'Password Tidak Boleh Kosong'
+                        : null,
+                    labelStyle: const TextStyle(color: Colors.black),
+                    labelText: 'Password',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        loginFormProvider.getPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        loginFormProvider.setPasswordVisible =
+                            !loginFormProvider.getPasswordVisible;
+                      },
+                    )),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
-            child: Row(
-              children: [
-                Expanded(
-                    child: ElevatedButton(
-                  onPressed: () async {
-                    loginFormProvider.setIsUsernameEmpty =
-                        loginFormProvider.usernameController.text.isEmpty;
-                    loginFormProvider.setIsPasswordEmpty =
-                        loginFormProvider.passwordController.text.isEmpty;
+            Padding(
+              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: ElevatedButton(
+                    onPressed: () async {
+                      loginFormProvider.setIsUsernameEmpty =
+                          loginFormProvider.usernameController.text.isEmpty;
+                      loginFormProvider.setIsPasswordEmpty =
+                          loginFormProvider.passwordController.text.isEmpty;
 
-                    if (!loginFormProvider.isUsernameEmpty &&
-                        !loginFormProvider.isPasswordEmpty) {
-                      bool status = await accountProvider.login(
-                          loginFormProvider.usernameController.text,
-                          loginFormProvider.passwordController.text);
-                      if (!status) {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: const Text("Login Gagal"),
-                            content: const Text(
-                              'Username atau Password Anda Salah Silahkan Coba Lagi ',
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
+                      if (!loginFormProvider.isUsernameEmpty &&
+                          !loginFormProvider.isPasswordEmpty) {
+                        bool status = await accountProvider.login(
+                            loginFormProvider.usernameController.text,
+                            loginFormProvider.passwordController.text);
+                        if (!status) {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("Login Gagal"),
+                              content: const Text(
+                                'Username atau Password Anda Salah Silahkan Coba Lagi ',
                               ),
-                            ],
-                          ),
-                        );
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       }
-                    }
 
-                    loginFormProvider.usernameController.clear();
-                    loginFormProvider.passwordController.clear();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal[700]),
-                  child: const Text('Log In'),
-                )),
-              ],
+                      loginFormProvider.usernameController.clear();
+                      loginFormProvider.passwordController.clear();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal[700]),
+                    child: const Text('Log In'),
+                  )),
+                ],
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'Reset Password',
-              style: TextStyle(color: Colors.teal[500]),
-            ),
-          )
-        ],
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                'Reset Password',
+                style: TextStyle(color: Colors.teal[500]),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

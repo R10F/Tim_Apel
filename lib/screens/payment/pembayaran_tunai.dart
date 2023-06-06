@@ -9,9 +9,9 @@ class PembayaranTunai extends StatefulWidget {
 }
 
 class _PembayaranTunaiState extends State<PembayaranTunai> {
-  List<bool?> _choiceChipsStatus = [false, false, false, false, false];
+  final List<bool?> _choiceChipsStatus = [false, false, false, false, false];
 
-  List _choiceChipsText = [
+  final List _choiceChipsText = [
     'Uang Pas',
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(5000),
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(10000),
@@ -24,7 +24,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextField(
+        const TextField(
           decoration: InputDecoration(
             labelText: 'Jumlah Uang',
             hintText: '',
@@ -32,7 +32,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
             border: OutlineInputBorder(),
           ),
         ),
-        Text(
+        const Text(
           'Kembalian',
           style: TextStyle(
             fontWeight: FontWeight.bold,

@@ -15,11 +15,11 @@ class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> get dropdownItems{
     List<DropdownMenuItem<String>> kategori = [
-      DropdownMenuItem(child: Text("Pilih Kategori Produk"),value: "none"),
-      DropdownMenuItem(child: Text("ATK"),value: "ATK"),
-      DropdownMenuItem(child: Text("Craft Supply"),value: "Craft Supply"),
-      DropdownMenuItem(child: Text("Keperluan Jahit"),value: "Keperluan Jahit"),
-      DropdownMenuItem(child: Text("Dekorasi"),value: "Dekorasi"),
+      const DropdownMenuItem(value: "none", child: Text("Pilih Kategori Produk")),
+      const DropdownMenuItem(value: "ATK", child: Text("ATK")),
+      const DropdownMenuItem(value: "Craft Supply", child: Text("Craft Supply")),
+      const DropdownMenuItem(value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
+      const DropdownMenuItem(value: "Dekorasi", child: Text("Dekorasi")),
     ];
     return kategori;
   }
@@ -55,8 +55,9 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelText: 'Nama Produk',
                       border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return "Nama Produk tidak boleh kosong";
+                    }
                     return null;
                   },
                   onEditingComplete: formProv.updateNama,
@@ -105,8 +106,9 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelText: 'Jumlah Stok',
                       border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return "Jumlah Stok tidak boleh kosong";
+                    }
                     return null;
                   },
                   onEditingComplete: formProv.updateStok,
@@ -123,8 +125,9 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelText: 'Harga Beli',
                       border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return "Harga Beli tidak boleh kosong";
+                    }
                     return null;
                   },
                   onEditingComplete: formProv.updateHargaBeli,
@@ -141,8 +144,9 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelText: 'Harga Jual',
                       border: OutlineInputBorder()),
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return "Harga Jual tidak boleh kosong";
+                    }
                     return null;
                   },
                   onEditingComplete: formProv.updateHargaJual,

@@ -30,86 +30,89 @@ class _DetailProdukState extends State<DetailProduk> {
             },
             icon: const Icon(Icons.arrow_back)),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 80),
-            child: Column(
-              children: [
-                Image.asset(
-                  widget.produk.gambar!,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      widget.produk.nama,
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 80),
+              child: Column(
+                children: [
+                  Image.asset(
+                    widget.produk.gambar!,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "@${widget.produk.hargaJual}",
-                        style: TextStyle(color: Colors.teal[500], fontSize: 22),
-                      )),
+                        widget.produk.nama,
+                        style: const TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "@${widget.produk.hargaJual}",
+                          style:
+                              TextStyle(color: Colors.teal[500], fontSize: 22),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Jumlah"),
+                      InputQty(
+                        minVal: 1,
+                        showMessageLimit: false,
+                        initVal: qtyProvider.getQty,
+                        borderShape: BorderShapeBtn.none,
+                        onQtyChanged: (val) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            qtyProvider.setQty = val;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Subtotal"),
+                      Text(currency.format(
+                          widget.produk.hargaJual * qtyProvider.getQty)),
+                    ],
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[500]),
+                        onPressed: () {},
+                        child: const Text("Add to Cart")),
+                  ),
                 ),
               ],
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Jumlah"),
-                    InputQty(
-                      minVal: 1,
-                      showMessageLimit: false,
-                      initVal: qtyProvider.getQty,
-                      borderShape: BorderShapeBtn.none,
-                      onQtyChanged: (val) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          qtyProvider.setQty = val;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Subtotal"),
-                    Text(currency.format(widget.produk.hargaJual *
-                        qtyProvider.getQty)),
-                  ],
-                ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal[500]),
-                      onPressed: () {},
-                      child: const Text("Add to Cart")),
-                ),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

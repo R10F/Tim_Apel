@@ -48,7 +48,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter_native_splash:
-  color: "#4DB6AC"
+  color: "#B2DFDB"
   image: "assets/images/splash-02.png"
 
 flutter_launcher_icons:

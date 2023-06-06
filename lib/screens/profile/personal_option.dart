@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
+import '../../providers/bottomNavbar_provider.dart';
+
 class PersonalOption extends StatefulWidget {
   const PersonalOption({super.key});
 
@@ -13,7 +15,7 @@ class _PersonalOptionState extends State<PersonalOption> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-
+    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
     return Column(children: [
       const Divider(
         height: 15,
@@ -68,12 +70,13 @@ class _PersonalOptionState extends State<PersonalOption> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
         child: Row(children: [
           Expanded(
             child: ElevatedButton(
               onPressed: () async {
                 accountProvider.logout();
+                bottomnavProvider.setSelectedIdx = 0;
               },
               style:
                   ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),

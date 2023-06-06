@@ -35,7 +35,7 @@ class ItemMetodePembayaran extends StatelessWidget {
                   textAlign: TextAlign.center, style: TextStyle(fontSize: 30, color: Colors.green)),
             ),
             metodePembayaran == 'Tunai'
-                ? PembayaranTunai()
+                ? const PembayaranTunai()
                 : Column(
                     children: [
                       const Padding(
@@ -51,7 +51,7 @@ class ItemMetodePembayaran extends StatelessWidget {
                         version: QrVersions.auto,
                         size: 250,
                         embeddedImage: AssetImage("assets/payment/$iconName-logo.png"),
-                        embeddedImageStyle: QrEmbeddedImageStyle(size: Size(60, 60)),
+                        embeddedImageStyle: const QrEmbeddedImageStyle(size: Size(60, 60)),
                       ),
                     ],
                   ),
