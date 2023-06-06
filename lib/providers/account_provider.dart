@@ -37,6 +37,11 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  set changeNama(value) {
+    currentUser['nama'] = value;
+    notifyListeners();
+  }
+
   Future<void> _checkLoginStatus() async {
     String? value = await _storage.read(key: 'MakmurApp_LoginID');
     print(value);

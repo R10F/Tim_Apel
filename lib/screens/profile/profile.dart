@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/form_handler/edit_nama_form_provider.dart';
+import 'package:tim_apel/screens/profile/bottom_sheet.dart';
 import 'package:tim_apel/screens/profile/personal_option.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
 class Profile extends StatefulWidget {
-  const Profile(
-      {super.key, this.asMyself = true, this.id = -1, this.data = const {}});
+  const Profile({super.key, this.asMyself = true, this.id = -1, this.data = const {}});
 
   final int id;
   final bool asMyself;
@@ -19,6 +20,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
+    var editNamaFormProvider = Provider.of<EditNamaFormProvider>(context);
+    var bottomSheetEditNama = BottomSheetEditNama();
 
     String nama = accountProvider.currentUser['nama'];
     String username = accountProvider.currentUser['username'];
@@ -56,10 +59,7 @@ class _ProfileState extends State<Profile> {
                   children: [
                     const Text(
                       'Nama',
-                      style: TextStyle(
-                          fontFamily: 'Figtree',
-                          fontSize: 16,
-                          color: Colors.grey),
+                      style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -77,7 +77,10 @@ class _ProfileState extends State<Profile> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.edit),
-                  onPressed: () {},
+                  onPressed: () {
+                    bottomSheetEditNama.showBottomSheet(
+                        context, accountProvider, editNamaFormProvider);
+                  },
                 )
               ]),
         ),
@@ -87,8 +90,7 @@ class _ProfileState extends State<Profile> {
             alignment: Alignment.topLeft,
             child: const Text(
               'Username',
-              style: TextStyle(
-                  fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+              style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
             ),
           ),
         ),
@@ -111,8 +113,7 @@ class _ProfileState extends State<Profile> {
             alignment: Alignment.topLeft,
             child: const Text(
               'Role',
-              style: TextStyle(
-                  fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+              style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
             ),
           ),
         ),
@@ -139,8 +140,7 @@ class _ProfileState extends State<Profile> {
             alignment: Alignment.topLeft,
             child: const Text(
               'Jadwal',
-              style: TextStyle(
-                  fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+              style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
             ),
           ),
         ),
@@ -157,9 +157,7 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ),
-        widget.asMyself || widget.id == accountProvider.id
-            ? const PersonalOption()
-            : Container(),
+        widget.asMyself || widget.id == accountProvider.id ? const PersonalOption() : Container(),
         const Padding(padding: EdgeInsets.only(bottom: 40))
       ]),
     );
