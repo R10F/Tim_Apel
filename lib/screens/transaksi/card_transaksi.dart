@@ -79,7 +79,7 @@ class _CardTransaksiState extends State<CardTransaksi> {
                                 borderRadius: BorderRadius.circular(4), // Rounded corner radius
                               ),
                             ),
-                            child: const Text('Hapus',
+                            child: const Text('Batal',
                                 style: TextStyle(
                                   color: Colors.red, // Text color
                                 ))),
