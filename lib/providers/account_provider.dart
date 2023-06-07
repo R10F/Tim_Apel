@@ -11,15 +11,15 @@ class AccountProvider extends ChangeNotifier {
 
   int _currentLoggedInUserIndex = -1;
 
-  AccountProvider() {
-    _checkLoginStatus();
-  }
-
   get isLoggedIn => _currentLoggedInUserIndex > -1;
   get userAccounts => _userAccounts;
   get currentUser => _userAccounts[_currentLoggedInUserIndex];
   get id => _currentLoggedInUserIndex;
   get isOwner => currentUser['is_owner'];
+
+  AccountProvider() {
+    _checkLoginStatus();
+  }
 
   set register(data) {
     int randomIndex = Random().nextInt(_profilePictures.length);
@@ -36,6 +36,8 @@ class AccountProvider extends ChangeNotifier {
     print(_userAccounts);
     notifyListeners();
   }
+
+  get newName => currentUser['nama'];
 
   set changeNama(value) {
     currentUser['nama'] = value;
@@ -87,7 +89,8 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme = ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme =
+      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(

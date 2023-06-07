@@ -10,10 +10,12 @@ class EditNamaFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set isEmpty(value) {
+  set setisEmpty(value) {
     _isEmpty = value;
     notifyListeners();
   }
 
   get isEmpty => _isEmpty;
+
+  get newName => namaController.text;
 }
