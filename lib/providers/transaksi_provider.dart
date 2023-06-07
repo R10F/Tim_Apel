@@ -2,27 +2,36 @@ import 'package:flutter/material.dart';
 
 class TransaksiModel {
   int? nomorAntrean;
+  int idKasir;
   bool inProcess = true;
+  String metodePembayaran = '';
   List listProduk = [];
 
-  TransaksiModel({required this.nomorAntrean});
+  TransaksiModel({required this.nomorAntrean, required this.idKasir});
 
   get totalBelanja => 100;
 }
 
 class TransaksiProvider extends ChangeNotifier {
-  final List<TransaksiModel> _listTransaksi = [TransaksiModel(nomorAntrean: 1)];
+  int _currentAntrean = 1;
+
+  final List<TransaksiModel> _listTransaksi = [];
+
+  TransaksiProvider() {
+    createNewOrder(0);
+  }
 
   List<TransaksiModel> get listTransaksi => _listTransaksi;
 
-  // set setSelectedIdx(value) {
-  //   _selectedIndex = value;
-  //   notifyListeners();
-  // }
+  get currentAntrean => _currentAntrean;
 
-  void createNewOrder() {
-    int currentNumber = _listTransaksi.length + 1;
-    _listTransaksi.add(TransaksiModel(nomorAntrean: currentNumber));
+  void createNewOrder(int idKasir) {
+    _listTransaksi.add(TransaksiModel(nomorAntrean: _currentAntrean++, idKasir: idKasir));
+    notifyListeners();
+  }
+
+  void deleteOrder(int index) {
+    _listTransaksi.removeAt(index);
     notifyListeners();
   }
 }
