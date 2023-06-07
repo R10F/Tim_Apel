@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BottomSheetEditNama {
   showBottomSheet(BuildContext context, var prov, var formProv) {
@@ -28,9 +29,7 @@ class BottomSheetEditNama {
                     child: Text(
                       'Edit Nama',
                       style: TextStyle(
-                          fontFamily: 'Figtree',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+                          fontFamily: 'Figtree', fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
@@ -38,9 +37,7 @@ class BottomSheetEditNama {
                     child: TextFormField(
                       controller: formProv.namaController,
                       decoration: InputDecoration(
-                          errorText: formProv.isEmpty
-                              ? 'Nama tidak boleh kosong'
-                              : null,
+                          errorText: formProv.isEmpty ? 'Nama tidak boleh kosong' : null,
                           border: const OutlineInputBorder(),
                           suffixIcon: IconButton(
                             icon: const Icon(Icons.close),
@@ -55,19 +52,23 @@ class BottomSheetEditNama {
                     child: FractionallySizedBox(
                       widthFactor: 0.75,
                       child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal[300]),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[300]),
                           onPressed: () {
-                            formProv.setisEmpty =
-                                formProv.namaController.text.isEmpty;
-                            // showBottomSheet(context, prov, formProv);
-                            print(formProv.isEmpty);
+                            formProv.setisEmpty = formProv.namaController.text.isEmpty;
 
                             if (!formProv.isEmpty) {
                               prov.changeNama = formProv.namaController.text;
-
-                              print(formProv.newName);
                               Navigator.pop(context);
+
+                              Fluttertoast.showToast(
+                                msg: 'Nama berhasil diperbarui',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.TOP,
+                                // timeInSecForIosWeb: 10,
+                                backgroundColor: Colors.teal[300],
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
                             }
                             FocusScope.of(context).unfocus();
                           },
