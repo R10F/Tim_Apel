@@ -118,12 +118,17 @@ class _RegisterStafState extends State<RegisterStaf> {
                         !registerFormProvider.isUsernameEmpty &&
                         !registerFormProvider.isPasswordEmpty &&
                         !registerFormProvider.isJadwalEmpty) {
-                      accountProvider.register = {
+                      var result = accountProvider.register({
                         'nama': registerFormProvider.namaController.text,
                         'username': registerFormProvider.usernameController.text,
                         'password': registerFormProvider.passwordController.text,
                         'jadwal': registerFormProvider.jadwalController.text
-                      };
+                      });
+
+                      if (result['status'] != 'success') {
+                        print(result['message']);
+                        return;
+                      }
 
                       Navigator.pushReplacement(
                           context, MaterialPageRoute(builder: (_) => const RegisterDone()));

@@ -6,8 +6,17 @@ import 'package:tim_apel/models/account_data_model.dart';
 
 class AccountProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
-  final List _userAccounts = AccountDataModel().userAccounts;
-  final List _profilePictures = AccountDataModel().profilePictures;
+  final accountData = AccountData();
+
+  late List<AccountModel> _userAccounts;
+  late List<String> _profilePictures;
+
+  AccountProvider() {
+    _userAccounts = accountData.userAccounts;
+    _profilePictures = accountData.profilePictures;
+
+    _checkLoginStatus();
+  }
 
   int _currentLoggedInUserIndex = -1;
 
@@ -15,32 +24,33 @@ class AccountProvider extends ChangeNotifier {
   get userAccounts => _userAccounts;
   get currentUser => _userAccounts[_currentLoggedInUserIndex];
   get id => _currentLoggedInUserIndex;
-  get isOwner => currentUser['is_owner'];
+  get isOwner => currentUser.isOwner;
 
-  AccountProvider() {
-    _checkLoginStatus();
-  }
+  Map<String, String> register(data) {
+    String username = data['username'].toString().trim();
 
-  set register(data) {
-    int randomIndex = Random().nextInt(_profilePictures.length);
+    for (int i = 0; i < _userAccounts.length; i++) {
+      if (_userAccounts[i].username == username) {
+        return {'status': 'failed', 'message': 'Username sudah digunakan'};
+      }
+    }
 
-    _userAccounts.add({
-      'nama': data['nama'],
-      'username': data['username'].toString().trim(),
-      'password': data['password'],
-      'is_owner': false,
-      'jadwal': data['jadwal'],
-      'profile_picture': _profilePictures[randomIndex],
-      'settings': {'dark_mode': false, 'dashboard_minimal': false}
-    });
+    _userAccounts.add(AccountModel(
+        nama: data['nama'],
+        username: username,
+        password: data['password'],
+        profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
+        jadwal: data['jadwal']));
     print(_userAccounts);
     notifyListeners();
+
+    return {'status': 'success', 'message': 'Staf berhasil didaftarkan'};
   }
 
   get newName => currentUser['nama'];
 
-  set changeNama(value) {
-    currentUser['nama'] = value;
+  void changeNama(index, newName) {
+    _userAccounts[index].nama = newName;
     notifyListeners();
   }
 
@@ -61,7 +71,7 @@ class AccountProvider extends ChangeNotifier {
     for (int i = 0; i < _userAccounts.length; i++) {
       var user = _userAccounts[i];
 
-      if (user['username'] == username.trim() && user['password'] == password) {
+      if (user.username == username.trim() && user.password == password) {
         await _storage.write(key: 'MakmurApp_LoginID', value: i.toString());
         _currentLoggedInUserIndex = i;
         verified = true;
@@ -89,8 +99,7 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme =
-      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme = ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(
@@ -100,10 +109,10 @@ class AccountProvider extends ChangeNotifier {
       primarySwatch: Colors.blue,
       brightness: Brightness.light);
 
-  getSetting(String key) => currentUser['settings'][key];
+  getSetting(String key) => currentUser.settings[key];
 
   void setSetting(String key, bool value) {
-    currentUser['settings'][key] = value;
+    currentUser.settings[key] = value;
     notifyListeners();
   }
 

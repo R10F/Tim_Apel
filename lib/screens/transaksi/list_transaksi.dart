@@ -28,7 +28,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
                   (index) => CardTransaksi(
                       index: index,
                       transaksi: listTransaksi[index],
-                      namaKasir: accountProvider.userAccounts[listTransaksi[index].idKasir]['nama'],
+                      namaKasir: accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
                       prov: transaksiProvider))),
         ),
         const Text('Konten ListTransaksi Sudah Selesai'),

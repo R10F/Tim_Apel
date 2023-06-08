@@ -35,7 +35,7 @@ class _ListStafState extends State<ListStaf> {
                     fullscreenDialog: true,
                     builder: (_) => Scaffold(
                         appBar: AppBar(
-                          title: Text(userAccounts[index]['nama']),
+                          title: Text(userAccounts[index].nama),
                         ),
                         body: Profile(id: index, asMyself: false, data: userAccounts[index]))));
           },
@@ -47,10 +47,10 @@ class _ListStafState extends State<ListStaf> {
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: ListTile(
                   leading: Image.asset(
-                    'assets/profile_pictures/${userAccounts[index]['profile_picture']}',
+                    'assets/profile_pictures/${userAccounts[index].profilePicture}',
                     width: 45,
                   ),
-                  title: Text(userAccounts[index]['nama']),
+                  title: Text(userAccounts[index].nama),
                   trailing: accountProvider.id != index
                       ? IconButton(
                           onPressed: () {

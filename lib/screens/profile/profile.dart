@@ -6,11 +6,11 @@ import 'package:tim_apel/screens/profile/personal_option.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key, this.asMyself = true, this.id = -1, this.data = const {}});
+  const Profile({super.key, this.asMyself = true, this.id = -1, this.data});
 
   final int id;
   final bool asMyself;
-  final Map<String, dynamic> data;
+  final dynamic data;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -23,18 +23,18 @@ class _ProfileState extends State<Profile> {
     var editNamaFormProvider = Provider.of<EditNamaFormProvider>(context);
     var bottomSheetEditNama = BottomSheetEditNama();
 
-    String nama = accountProvider.currentUser['nama'];
-    String username = accountProvider.currentUser['username'];
-    bool isOwner = accountProvider.currentUser['is_owner'];
-    String jadwal = accountProvider.currentUser['jadwal'];
-    String profilePicture = accountProvider.currentUser['profile_picture'];
+    String nama = accountProvider.currentUser.nama;
+    String username = accountProvider.currentUser.username;
+    bool isOwner = accountProvider.currentUser.isOwner;
+    String jadwal = accountProvider.currentUser.jadwal;
+    String profilePicture = accountProvider.currentUser.profilePicture;
 
     if (!widget.asMyself) {
-      nama = widget.data['nama'];
-      username = widget.data['username'];
-      isOwner = widget.data['is_owner'];
-      jadwal = widget.data['jadwal'];
-      profilePicture = widget.data['profile_picture'];
+      nama = widget.data.nama;
+      username = widget.data.username;
+      isOwner = widget.data.isOwner;
+      jadwal = widget.data.jadwal;
+      profilePicture = widget.data.profilePicture;
     }
 
     return SingleChildScrollView(
@@ -78,8 +78,9 @@ class _ProfileState extends State<Profile> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
+                    int id = widget.id > -1 ? widget.id : accountProvider.id;
                     bottomSheetEditNama.showBottomSheet(
-                        context, accountProvider, editNamaFormProvider);
+                        context, accountProvider, editNamaFormProvider, id, nama);
                   },
                 )
               ]),

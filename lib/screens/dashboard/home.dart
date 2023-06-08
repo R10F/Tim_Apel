@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
             child: Container(
               alignment: Alignment.topLeft,
               child: Text(
-                "Hai, ${accountProvider.currentUser['nama']}!\nmasih semangat jualan hari ini?",
+                'Hai, ${accountProvider.currentUser.nama}!\nmasih semangat jualan hari ini?',
                 style: const TextStyle(
                     fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 20),
                 textAlign: TextAlign.start,
@@ -66,7 +66,6 @@ class _HomeState extends State<Home> {
                         backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
                     onPressed: () {
                       transaksiProvider.createNewOrder(accountProvider.id);
-                      // Navigator.push(context, MaterialPageRoute(builder: (_) => const PaymentList()));
                     },
                     child: const Text(
                       "Buat Order Baru",

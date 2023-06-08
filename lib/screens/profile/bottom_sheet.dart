@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class BottomSheetEditNama {
-  showBottomSheet(BuildContext context, var prov, var formProv) {
-    formProv.nama = prov.currentUser['nama'];
+  showBottomSheet(BuildContext context, var prov, var formProv, int index, String nama) {
+    formProv.nama = nama;
 
     showModalBottomSheet(
       context: context,
@@ -57,7 +57,7 @@ class BottomSheetEditNama {
                             formProv.setisEmpty = formProv.namaController.text.isEmpty;
 
                             if (!formProv.isEmpty) {
-                              prov.changeNama = formProv.namaController.text;
+                              prov.changeNama(index, formProv.namaController.text);
                               Navigator.pop(context);
 
                               Fluttertoast.showToast(
