@@ -32,11 +32,8 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                 child: Card(
                     child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) =>
-                                DetailProduk(produk: widget.produk[i])));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => DetailProduk(produk: widget.produk[i])));
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -53,15 +50,13 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           widget.produk[i].nama,
-                                          style: const TextStyle(
-                                              fontFamily: 'Figtree',
-                                              fontSize: 16),
+                                          style:
+                                              const TextStyle(fontFamily: 'Figtree', fontSize: 16),
                                         ),
                                       ),
                                     ),
                                     Transform.translate(
-                                        offset: const Offset(12.5, 0),
-                                        child: const PopupMenu()),
+                                        offset: const Offset(12.5, 0), child: const PopupMenu()),
                                   ]
                                 : [
                                     Flexible(
@@ -72,8 +67,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                           child: Text(
                                             widget.produk[i].nama,
                                             style: const TextStyle(
-                                                fontFamily: 'Figtree',
-                                                fontSize: 16),
+                                                fontFamily: 'Figtree', fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -87,9 +81,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                           child: Text(
                             currency.format(widget.produk[i].hargaJual),
                             style: TextStyle(
-                                fontFamily: 'Figtree',
-                                fontSize: 14,
-                                color: Colors.teal[500]),
+                                fontFamily: 'Figtree', fontSize: 14, color: Colors.teal[500]),
                           ),
                         ),
                       ),

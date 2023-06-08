@@ -8,7 +8,7 @@ class AccountProvider extends ChangeNotifier {
   final _storage = const FlutterSecureStorage();
   final accountData = AccountData();
 
-  late List<AccountModel> _userAccounts;
+  late List<Account> _userAccounts;
   late List<String> _profilePictures;
 
   AccountProvider() {
@@ -35,7 +35,7 @@ class AccountProvider extends ChangeNotifier {
       }
     }
 
-    _userAccounts.add(AccountModel(
+    _userAccounts.add(Account(
         nama: data['nama'],
         username: username,
         password: data['password'],

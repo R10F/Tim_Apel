@@ -3,8 +3,7 @@ import 'package:input_quantity/input_quantity.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/qtyProduk_provider.dart';
-
-import '../models/produk_data_model.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
 
 class DetailProduk extends StatefulWidget {
   final Produk produk;
@@ -38,7 +37,7 @@ class _DetailProdukState extends State<DetailProduk> {
               child: Column(
                 children: [
                   Image.asset(
-                    widget.produk.gambar!,
+                    widget.produk.gambar,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -46,8 +45,7 @@ class _DetailProdukState extends State<DetailProduk> {
                       alignment: Alignment.topLeft,
                       child: Text(
                         widget.produk.nama,
-                        style: const TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -57,8 +55,7 @@ class _DetailProdukState extends State<DetailProduk> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           "@${widget.produk.hargaJual}",
-                          style:
-                              TextStyle(color: Colors.teal[500], fontSize: 22),
+                          style: TextStyle(color: Colors.teal[500], fontSize: 22),
                         )),
                   ),
                 ],
@@ -94,8 +91,7 @@ class _DetailProdukState extends State<DetailProduk> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("Subtotal"),
-                      Text(currency.format(
-                          widget.produk.hargaJual * qtyProvider.getQty)),
+                      Text(currency.format(widget.produk.hargaJual * qtyProvider.getQty)),
                     ],
                   ),
                 ),
@@ -103,8 +99,7 @@ class _DetailProdukState extends State<DetailProduk> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[500]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[500]),
                         onPressed: () {},
                         child: const Text("Add to Cart")),
                   ),

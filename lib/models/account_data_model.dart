@@ -1,4 +1,4 @@
-class AccountModel {
+class Account {
   String nama;
   String username;
   String password;
@@ -7,7 +7,7 @@ class AccountModel {
   String profilePicture;
   Map<String, dynamic> settings;
 
-  AccountModel(
+  Account(
       {required this.nama,
       required this.username,
       required this.password,
@@ -19,15 +19,15 @@ class AccountModel {
 }
 
 class AccountData {
-  List<AccountModel> userAccounts = [
-    AccountModel(
+  List<Account> userAccounts = [
+    Account(
         nama: 'Charles Makmur',
         username: 'charles',
         password: '1',
         isOwner: true,
         profilePicture: 'picture-1.png',
         jadwal: 'Senin\n08.00 - 12.30\n\nSelasa\n13.00 - 15.00'),
-    AccountModel(
+    Account(
         nama: 'Frederic Davidsen',
         username: 'fred',
         password: '1',

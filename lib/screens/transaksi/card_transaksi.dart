@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/screens/transaksi/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -11,7 +11,7 @@ class CardTransaksi extends StatefulWidget {
       required this.index,
       required this.prov});
 
-  final TransaksiModel transaksi;
+  final Transaksi transaksi;
   final String namaKasir;
   final int index;
   final prov;

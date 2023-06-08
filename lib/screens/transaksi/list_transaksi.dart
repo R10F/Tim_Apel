@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/transaksi/card_transaksi.dart';
@@ -16,7 +17,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-    List<TransaksiModel> listTransaksi = transaksiProvider.listTransaksi;
+    List<Transaksi> listTransaksi = transaksiProvider.listTransaksi;
 
     return Padding(
       padding: const EdgeInsets.all(20),

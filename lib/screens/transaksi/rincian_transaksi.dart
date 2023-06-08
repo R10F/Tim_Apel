@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
   const RincianTransaksi({super.key, required this.transaksi, required this.namaKasir});
 
-  final TransaksiModel transaksi;
+  final Transaksi transaksi;
   final String namaKasir;
 
   @override
@@ -15,6 +15,8 @@ class RincianTransaksi extends StatefulWidget {
 class _RincianTransaksiState extends State<RincianTransaksi> {
   @override
   Widget build(BuildContext context) {
+    var keranjang = widget.transaksi.keranjang;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Rincian Transaksi')),
       body: Padding(
@@ -55,6 +57,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                     ],
                   )
                 : Container(),
+            Column(
+                children: List.generate(keranjang.length, (index) => Text(keranjang[index].nama)))
           ],
         ),
       ),

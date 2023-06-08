@@ -36,10 +36,7 @@ class CustomSearchDelegate extends SearchDelegate {
     List<Produk> matchQuery = [];
 
     for (var i = 0; i < produkProv.semuaProduk.length; i++) {
-      if (produkProv.semuaProduk[i].nama
-          .toString()
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
+      if (produkProv.semuaProduk[i].nama.toString().toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(produkProv.semuaProduk[i].nama);
       }
     }
@@ -53,10 +50,7 @@ class CustomSearchDelegate extends SearchDelegate {
     List<Produk> matchQuery = [];
 
     for (var i = 0; i < produkProv.semuaProduk.length; i++) {
-      if (produkProv.semuaProduk[i].nama
-          .toString()
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
+      if (produkProv.semuaProduk[i].nama.toString().toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(produkProv.semuaProduk[i]);
       }
     }
@@ -75,8 +69,7 @@ class AppBarOwner extends StatelessWidget {
           if (bottomnavProvider.getSelectedIdx == 1)
             IconButton(
                 onPressed: () {
-                  showSearch(
-                      context: context, delegate: CustomSearchDelegate());
+                  showSearch(context: context, delegate: CustomSearchDelegate());
                 },
                 icon: const Icon(Icons.search))
         ],
@@ -97,8 +90,7 @@ class AppBarOwner extends StatelessWidget {
                       ),
         bottom: bottomnavProvider.getSelectedIdx == 1
             ? const PreferredSize(
-                preferredSize: Size.fromHeight(kTextTabBarHeight),
-                child: TabNavigasiProduk())
+                preferredSize: Size.fromHeight(kTextTabBarHeight), child: TabNavigasiProduk())
             : bottomnavProvider.getSelectedIdx == 2
                 ? const PreferredSize(
                     preferredSize: Size.fromHeight(kTextTabBarHeight),
