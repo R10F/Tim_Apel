@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
-import 'package:tim_apel/screens/transaksi/card_transaksi.dart';
+import 'package:tim_apel/screens/transaksi/dalam_proses/card_transaksi_dalam_proses.dart';
+import 'package:tim_apel/screens/transaksi/selesai/card_transaksi_selesai.dart';
 
 class ListTransaksi extends StatefulWidget {
   const ListTransaksi({super.key});
@@ -26,13 +27,28 @@ class _ListTransaksiState extends State<ListTransaksi> {
           child: Column(
               children: List.generate(
                   listTransaksi.length,
-                  (index) => CardTransaksi(
-                      index: index,
-                      transaksi: listTransaksi[index],
-                      namaKasir: accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
-                      prov: transaksiProvider))),
+                  (index) => listTransaksi[index].inProcess
+                      ? CardTransaksiDalamProses(
+                          index: index,
+                          transaksi: listTransaksi[index],
+                          namaKasir:
+                              accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
+                          prov: transaksiProvider)
+                      : Container())),
         ),
-        const Text('Konten ListTransaksi Sudah Selesai'),
+        SingleChildScrollView(
+          child: Column(
+              children: List.generate(
+                  listTransaksi.length,
+                  (index) => !listTransaksi[index].inProcess
+                      ? CardTransaksiSelesai(
+                          index: index,
+                          transaksi: listTransaksi[index],
+                          namaKasir:
+                              accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
+                          prov: transaksiProvider)
+                      : Container())),
+        )
       ]),
     );
   }

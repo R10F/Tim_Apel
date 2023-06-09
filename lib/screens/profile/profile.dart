@@ -76,7 +76,7 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
                 IconButton(
-                  icon: const Icon(Icons.edit),
+                  icon: const Icon(Icons.edit, color: Colors.grey),
                   onPressed: () {
                     int id = widget.id > -1 ? widget.id : accountProvider.id;
                     bottomSheetEditNama.showBottomSheet(

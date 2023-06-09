@@ -7,7 +7,7 @@ class TransaksiProvider extends ChangeNotifier {
   late int _currentAntrean;
 
   TransaksiProvider() {
-    _currentAntrean = _listTransaksi.length;
+    _currentAntrean = _listTransaksi.length + 1;
   }
 
   List<Transaksi> get listTransaksi => _listTransaksi;
