@@ -1,3 +1,5 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
@@ -37,10 +39,14 @@ class _ListStafState extends State<ListStaf> {
                         appBar: AppBar(
                           title: Text(userAccounts[index].nama),
                         ),
-                        body: Profile(id: index, asMyself: false, data: userAccounts[index]))));
+                        body: Profile(
+                            id: index,
+                            asMyself: false,
+                            data: userAccounts[index]))));
           },
           child: Container(
-            decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
+            decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey))),
             child: Align(
               alignment: Alignment.center,
               child: Padding(
@@ -54,9 +60,18 @@ class _ListStafState extends State<ListStaf> {
                   trailing: accountProvider.id != index
                       ? IconButton(
                           onPressed: () {
+                            accountProvider
+                                .archieveAccounts(userAccounts[index]);
+
                             accountProvider.removeAccount(index);
+                            CherryToast.success(
+                              title: Text("Staf Berhasil Diarsipkan"),
+                              toastPosition: Position.top,
+                              animationDuration: Duration(milliseconds: 500),
+                              autoDismiss: true,
+                            ).show(context);
                           },
-                          icon: const Icon(Icons.delete))
+                          icon: const Icon(Icons.archive))
                       : null,
                 ),
               ),
@@ -69,7 +84,8 @@ class _ListStafState extends State<ListStaf> {
         icon: const Icon(Icons.add),
         label: const Text('Tambah'),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
         },
       ),
     );

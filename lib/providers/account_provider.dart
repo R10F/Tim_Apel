@@ -10,6 +10,7 @@ class AccountProvider extends ChangeNotifier {
 
   late List<Account> _userAccounts;
   late List<String> _profilePictures;
+  final List _archieveAccounts = [];
 
   AccountProvider() {
     _userAccounts = accountData.userAccounts;
@@ -25,6 +26,7 @@ class AccountProvider extends ChangeNotifier {
   get currentUser => _userAccounts[_currentLoggedInUserIndex];
   get id => _currentLoggedInUserIndex;
   get isOwner => currentUser.isOwner;
+  get getArchieveAccount => _archieveAccounts.toList();
 
   Map<String, String> register(data) {
     String username = data['username'].toString().trim();
@@ -39,7 +41,8 @@ class AccountProvider extends ChangeNotifier {
         nama: data['nama'],
         username: username,
         password: data['password'],
-        profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
+        profilePicture:
+            _profilePictures[Random().nextInt(_profilePictures.length)],
         jadwal: data['jadwal']));
     print(_userAccounts);
     notifyListeners();
@@ -84,6 +87,11 @@ class AccountProvider extends ChangeNotifier {
     return verified;
   }
 
+  void archieveAccounts(account) {
+    _archieveAccounts.add(account);
+    notifyListeners();
+  }
+
   void removeAccount(int index) {
     _userAccounts.removeAt(index);
     notifyListeners();
@@ -99,7 +107,8 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme = ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme =
+      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(

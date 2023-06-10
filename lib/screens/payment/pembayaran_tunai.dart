@@ -44,16 +44,19 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
           child: Row(
             children: List.generate(
                 _choiceChipsStatus.length,
-                (index) => ChoiceChip(
-                    onSelected: (value) {
-                      setState(() {
-                        _choiceChipsStatus.fillRange(0, _choiceChipsStatus.length, false);
-                        _choiceChipsStatus[index] = true;
-                      });
-                    },
-                    label: Text(_choiceChipsText[index]),
-                    selectedColor: Colors.teal[100],
-                    selected: _choiceChipsStatus[index]!)),
+                (index) => Container(
+                      child: ChoiceChip(
+                          onSelected: (value) {
+                            setState(() {
+                              _choiceChipsStatus.fillRange(
+                                  0, _choiceChipsStatus.length, false);
+                              _choiceChipsStatus[index] = true;
+                            });
+                          },
+                          label: Text(_choiceChipsText[index]),
+                          selectedColor: Colors.teal[100],
+                          selected: _choiceChipsStatus[index]!),
+                    )),
           ),
         )
       ],
