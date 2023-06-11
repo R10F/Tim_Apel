@@ -65,9 +65,9 @@ class _ListStafState extends State<ListStaf> {
 
                             accountProvider.removeAccount(index);
                             CherryToast.success(
-                              title: Text("Staf Berhasil Diarsipkan"),
+                              title: const Text("Staf Berhasil Diarsipkan"),
                               toastPosition: Position.top,
-                              animationDuration: Duration(milliseconds: 500),
+                              animationDuration: const Duration(milliseconds: 500),
                               autoDismiss: true,
                             ).show(context);
                           },

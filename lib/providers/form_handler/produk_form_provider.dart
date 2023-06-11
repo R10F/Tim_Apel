@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProdukFormProvider extends ChangeNotifier{
+class ProdukFormProvider extends ChangeNotifier {
   TextEditingController namaProdukController = TextEditingController();
   TextEditingController deskripsiController = TextEditingController();
   TextEditingController stokController = TextEditingController();
@@ -9,47 +9,53 @@ class ProdukFormProvider extends ChangeNotifier{
 
   String kategoriSelected = "none";
   get getKategoriSelected => kategoriSelected;
-  set updateKategori(String kategori){
+
+  set updateKategori(String kategori) {
     kategoriSelected = kategori;
   }
 
-  String ? nama;
-  void updateNama(){
-    nama = namaProdukController.text;
-  }
-  get getNama => nama;
-  
-  String ? deskripsi;
-  void updateDeskripsi(){
-    deskripsi = deskripsiController.text;
-  }
-  get getDeskripsi => deskripsi;
+  // String? nama;
+  // void updateNama() {
+  //   nama = namaProdukController.text;
+  //   print(nama);
+  // }
 
-  String ? stok;
-  void updateStok(){
-    stok = stokController.text;
-  }
-  get getStok => stok;
+  get getNama => namaProdukController.text;
 
-  String ? hargaJual;
-  void updateHargaJual(){
-    hargaJual = hargaJualController.text;
-  }
-  get getHargaJual => hargaJual;
+  // String? deskripsi;
+  // void updateDeskripsi() {
+  //   deskripsi = deskripsiController.text;
+  // }
 
-  String ? hargaBeli;
-  void updateHargaBeli(){
-    hargaBeli = hargaBeliController.text;
-  }
-  get getHargaBeli => hargaBeli;
+  get getDeskripsi => deskripsiController.text;
 
-  void submitted(){
-    nama = null;
-    deskripsi = null;
-    stok = null;
-    hargaJual = null;
-    hargaBeli = null;
-    kategoriSelected = "none";
-  }
+  // String? stok;
+  // void updateStok() {
+  //   stok = stokController.text;
+  // }
 
+  get getStok => stokController.text;
+
+  // String? hargaJual;
+  // void updateHargaJual() {
+  //   hargaJual = hargaJualController.text;
+  // }
+
+  get getHargaJual => hargaJualController.text;
+
+  // String? hargaBeli;
+  // void updateHargaBeli() {
+  //   hargaBeli = hargaBeliController.text;
+  // }
+
+  get getHargaBeli => hargaBeliController.text;
+
+  // void submitted() {
+  //   nama = null;
+  //   deskripsi = null;
+  //   stok = null;
+  //   hargaJual = null;
+  //   hargaBeli = null;
+  //   kategoriSelected = "none";
+  // }
 }

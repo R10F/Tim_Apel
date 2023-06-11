@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
-import 'package:tim_apel/screens/payment/payment_list.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -61,7 +60,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
               padding: EdgeInsets.only(top: 25, bottom: 20),
               child: Text('Rincian Belanja'),
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(child: Text('TODO: TABEL')),
               ],

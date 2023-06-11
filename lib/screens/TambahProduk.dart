@@ -1,3 +1,4 @@
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +14,15 @@ class TambahProduk extends StatefulWidget {
 
 class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
-  List<DropdownMenuItem<String>> get dropdownItems{
+  List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> kategori = [
-      const DropdownMenuItem(value: "none", child: Text("Pilih Kategori Produk")),
+      const DropdownMenuItem(
+          value: "none", child: Text("Pilih Kategori Produk")),
       const DropdownMenuItem(value: "ATK", child: Text("ATK")),
-      const DropdownMenuItem(value: "Craft Supply", child: Text("Craft Supply")),
-      const DropdownMenuItem(value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
+      const DropdownMenuItem(
+          value: "Craft Supply", child: Text("Craft Supply")),
+      const DropdownMenuItem(
+          value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
       const DropdownMenuItem(value: "Dekorasi", child: Text("Dekorasi")),
     ];
     return kategori;
@@ -60,7 +64,6 @@ class _TambahProdukState extends State<TambahProduk> {
                     }
                     return null;
                   },
-                  onEditingComplete: formProv.updateNama,
                 ),
               ),
               Padding(
@@ -74,7 +77,6 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelText: 'Deskripsi',
                       border: OutlineInputBorder()),
                   maxLines: null,
-                  onEditingComplete: formProv.updateDeskripsi,
                 ),
               ),
               Padding(
@@ -84,12 +86,13 @@ class _TambahProdukState extends State<TambahProduk> {
                   items: dropdownItems,
                   value: formProv.getKategoriSelected,
                   decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Kategori',
-                    border: OutlineInputBorder()
-                  ),
-                  validator: (value) => (value == null || value == "none") ? "Pilih kategori" : null,
-                  onChanged: (val){
+                      labelStyle: TextStyle(color: Colors.black),
+                      labelText: 'Kategori',
+                      border: OutlineInputBorder()),
+                  validator: (value) => (value == null || value == "none")
+                      ? "Pilih kategori"
+                      : null,
+                  onChanged: (val) {
                     formProv.kategoriSelected = val as String;
                   },
                 ),
@@ -111,7 +114,6 @@ class _TambahProdukState extends State<TambahProduk> {
                     }
                     return null;
                   },
-                  onEditingComplete: formProv.updateStok,
                 ),
               ),
               Padding(
@@ -130,7 +132,6 @@ class _TambahProdukState extends State<TambahProduk> {
                     }
                     return null;
                   },
-                  onEditingComplete: formProv.updateHargaBeli,
                 ),
               ),
               Padding(
@@ -149,7 +150,6 @@ class _TambahProdukState extends State<TambahProduk> {
                     }
                     return null;
                   },
-                  onEditingComplete: formProv.updateHargaJual,
                 ),
               ),
               Padding(
@@ -164,16 +164,30 @@ class _TambahProdukState extends State<TambahProduk> {
                           if (_formKey.currentState!.validate()) {
                             String nama, gambar, deskripsi, kategori;
                             int stok, hargaJual, hargaBeli;
+
                             nama = formProv.getNama;
-                            gambar = "assets/product_images/produk_2.jpg"; //temp
+                            gambar =
+                                "assets/product_images/produk_2.jpg"; //temp
                             deskripsi = formProv.getDeskripsi;
-                            stok = int.parse(formProv.getStok); 
+                            stok = int.parse(formProv.getStok);
                             hargaJual = int.parse(formProv.getHargaJual);
                             hargaBeli = int.parse(formProv.getHargaBeli);
                             kategori = formProv.kategoriSelected;
-                            produkProv.addProduk(nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli);
+                            produkProv.addProduk(nama, gambar, deskripsi,
+                                kategori, stok, hargaJual, hargaBeli);
 
-                            Navigator.pop(context); 
+                            Navigator.pop(context);
+                            CherryToast.info(
+                                    animationDuration:
+                                        const Duration(milliseconds: 500),
+                                    autoDismiss: true,
+                                    title: const Text("Produk Berhasil Ditambahkan"))
+                                .show(context);
+                            formProv.namaProdukController.clear();
+                            formProv.deskripsiController.clear();
+                            formProv.hargaJualController.clear();
+                            formProv.stokController.clear();
+                            formProv.hargaBeliController.clear();
                           }
                         },
                         style: ElevatedButton.styleFrom(
