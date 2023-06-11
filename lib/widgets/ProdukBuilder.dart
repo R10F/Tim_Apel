@@ -56,7 +56,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                       ),
                                     ),
                                     Transform.translate(
-                                        offset: const Offset(12.5, 0), child: const PopupMenu()),
+                                        offset: const Offset(12.5, 0), child: PopupMenu(idxProduk: widget.produk[i].id)),
                                   ]
                                 : [
                                     Flexible(

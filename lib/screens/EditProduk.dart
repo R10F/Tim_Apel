@@ -5,14 +5,15 @@ import 'package:provider/provider.dart';
 import '../providers/form_handler/produk_form_provider.dart';
 import '../providers/produk_provider.dart';
 
-class TambahProduk extends StatefulWidget {
-  const TambahProduk({super.key});
-
+class EditProduk extends StatefulWidget {
+  final int idxProduk;
+  const EditProduk({super.key, required this.idxProduk});
+  
   @override
-  State<TambahProduk> createState() => _TambahProdukState();
+  State<EditProduk> createState() => _EditProdukState();
 }
 
-class _TambahProdukState extends State<TambahProduk> {
+class _EditProdukState extends State<EditProduk> {
   final _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> kategori = [
@@ -39,10 +40,11 @@ class _TambahProdukState extends State<TambahProduk> {
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
     var formProv = Provider.of<ProdukFormProvider>(context);
-
+    var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tambah Produk'),
+        title: const Text('Edit Produk'),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -53,7 +55,9 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  initialValue: toBeEdited.nama,
                   controller: formProv.namaProdukController,
+                  onChanged: (_) => formProv.isEdited = (formProv.namaProdukController.text != toBeEdited.nama),
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Nama Produk',
@@ -70,7 +74,9 @@ class _TambahProdukState extends State<TambahProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
+                  initialValue: toBeEdited.deskripsi,
                   controller: formProv.deskripsiController,
+                  onChanged: (_) => formProv.isEdited = (formProv.deskripsiController.text != toBeEdited.deskripsi),
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -84,7 +90,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
-                  value: formProv.getKategoriSelected,
+                  value: formProv.firstLoad ? toBeEdited.kategori : formProv.getKategoriSelected,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Kategori',
@@ -93,6 +99,8 @@ class _TambahProdukState extends State<TambahProduk> {
                       ? "Pilih kategori"
                       : null,
                   onChanged: (val) {
+                    formProv.isEdited = (val != toBeEdited.kategori);
+                    formProv.isFirstLoad = false;
                     formProv.kategoriSelected = val as String;
                   },
                 ),
@@ -103,6 +111,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.stokController,
+                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.stok as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -121,6 +130,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaBeliController,
+                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.hargaBeli as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -139,6 +149,7 @@ class _TambahProdukState extends State<TambahProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaJualController,
+                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.hargaJual as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -160,40 +171,46 @@ class _TambahProdukState extends State<TambahProduk> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
-                            String nama, gambar, deskripsi, kategori;
-                            int stok, hargaJual, hargaBeli;
+                          if (formProv.edited){
+                            // Validate returns true if the form is valid, or false otherwise.
+                            if (_formKey.currentState!.validate()) {
+                              String nama, gambar, deskripsi, kategori;
+                              int stok, hargaJual, hargaBeli;
 
-                            nama = formProv.getNama;
-                            gambar =
-                                "assets/product_images/produk_2.jpg"; //temp
-                            deskripsi = formProv.getDeskripsi;
-                            stok = int.parse(formProv.getStok);
-                            hargaJual = int.parse(formProv.getHargaJual);
-                            hargaBeli = int.parse(formProv.getHargaBeli);
-                            kategori = formProv.kategoriSelected;
-                            produkProv.addProduk(nama, gambar, deskripsi,
-                                kategori, stok, hargaJual, hargaBeli);
+                              nama = formProv.getNama;
+                              gambar =
+                                  "assets/product_images/produk_2.jpg"; //temp
+                              deskripsi = formProv.getDeskripsi;
+                              stok = int.parse(formProv.getStok);
+                              hargaJual = int.parse(formProv.getHargaJual);
+                              hargaBeli = int.parse(formProv.getHargaBeli);
+                              kategori = formProv.kategoriSelected;
+                              produkProv.addProduk(nama, gambar, deskripsi,
+                                  kategori, stok, hargaJual, hargaBeli);
 
-                            Navigator.pop(context);
-                            CherryToast.info(
-                                    animationDuration:
-                                        const Duration(milliseconds: 500),
-                                    autoDismiss: true,
-                                    title: const Text("Produk Berhasil Ditambahkan"))
-                                .show(context);
-                            formProv.namaProdukController.clear();
-                            formProv.deskripsiController.clear();
-                            formProv.hargaJualController.clear();
-                            formProv.stokController.clear();
-                            formProv.hargaBeliController.clear();
-                            formProv.updateKategori = "none";
+                              Navigator.pop(context);
+                              CherryToast.info(
+                                      animationDuration:
+                                          const Duration(milliseconds: 500),
+                                      autoDismiss: true,
+                                      title: const Text("Produk Berhasil Diedit"))
+                                  .show(context);
+                              formProv.namaProdukController.clear();
+                              formProv.deskripsiController.clear();
+                              formProv.hargaJualController.clear();
+                              formProv.stokController.clear();
+                              formProv.hargaBeliController.clear();
+                              formProv.updateKategori = "none";
+                            }
+                          }
+                          else{
+                            null;
                           }
                         },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[700]),
-                        child: const Text('Tambah'),
+                        style: formProv.edited ? ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[700]) : ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey),
+                        child: const Text('Simpan'),
                       ),
                     ),
                   ],

@@ -7,6 +7,24 @@ class ProdukFormProvider extends ChangeNotifier {
   TextEditingController hargaJualController = TextEditingController();
   TextEditingController hargaBeliController = TextEditingController();
 
+  int _editIdx = 0;
+  get editIdx => _editIdx;
+  set updateEditIdx(int newIdx){
+    _editIdx = newIdx;
+  }
+  
+  bool _firstLoad = true;
+  get firstLoad => _firstLoad;
+  set isFirstLoad(val){
+    _firstLoad = val;
+  }
+
+  bool _edited = false;
+  get edited => _edited;
+  set isEdited(val){
+    _edited = _edited || val;
+  }
+
   String kategoriSelected = "none";
   get getKategoriSelected => kategoriSelected;
 
