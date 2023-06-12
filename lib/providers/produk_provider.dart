@@ -38,4 +38,19 @@ class ProdukProvider extends ChangeNotifier {
     _semuaProduk.add(produkBaru);
     notifyListeners();
   }
+
+  updateProduk(id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
+    Produk edited = Produk(
+      id: id,
+      nama: nama,
+      gambar: gambar,
+      deskripsi: deskripsi,
+      stok: stok,
+      hargaJual: hargaJual,
+      hargaBeli: hargaBeli,
+      kategori: kategori,
+    );
+    _semuaProduk[id-1] = edited;
+    notifyListeners();
+  }
 }

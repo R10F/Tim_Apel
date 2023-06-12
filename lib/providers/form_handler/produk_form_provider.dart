@@ -13,11 +13,6 @@ class ProdukFormProvider extends ChangeNotifier {
     _editIdx = newIdx;
   }
   
-  bool _firstLoad = true;
-  get firstLoad => _firstLoad;
-  set isFirstLoad(val){
-    _firstLoad = val;
-  }
 
   bool _edited = false;
   get edited => _edited;

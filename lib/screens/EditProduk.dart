@@ -55,9 +55,7 @@ class _EditProdukState extends State<EditProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  initialValue: toBeEdited.nama,
                   controller: formProv.namaProdukController,
-                  onChanged: (_) => formProv.isEdited = (formProv.namaProdukController.text != toBeEdited.nama),
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Nama Produk',
@@ -74,9 +72,7 @@ class _EditProdukState extends State<EditProduk> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
-                  initialValue: toBeEdited.deskripsi,
                   controller: formProv.deskripsiController,
-                  onChanged: (_) => formProv.isEdited = (formProv.deskripsiController.text != toBeEdited.deskripsi),
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -90,7 +86,7 @@ class _EditProdukState extends State<EditProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
-                  value: formProv.firstLoad ? toBeEdited.kategori : formProv.getKategoriSelected,
+                  value: formProv.getKategoriSelected,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Kategori',
@@ -99,8 +95,6 @@ class _EditProdukState extends State<EditProduk> {
                       ? "Pilih kategori"
                       : null,
                   onChanged: (val) {
-                    formProv.isEdited = (val != toBeEdited.kategori);
-                    formProv.isFirstLoad = false;
                     formProv.kategoriSelected = val as String;
                   },
                 ),
@@ -111,7 +105,6 @@ class _EditProdukState extends State<EditProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.stokController,
-                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.stok as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -130,7 +123,6 @@ class _EditProdukState extends State<EditProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaBeliController,
-                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.hargaBeli as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -149,7 +141,6 @@ class _EditProdukState extends State<EditProduk> {
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaJualController,
-                  onChanged: (_) => formProv.isEdited = (formProv.stokController.text != toBeEdited.hargaJual as String),
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
@@ -185,7 +176,7 @@ class _EditProdukState extends State<EditProduk> {
                               hargaJual = int.parse(formProv.getHargaJual);
                               hargaBeli = int.parse(formProv.getHargaBeli);
                               kategori = formProv.kategoriSelected;
-                              produkProv.addProduk(nama, gambar, deskripsi,
+                              produkProv.updateProduk(toBeEdited.id, nama, gambar, deskripsi,
                                   kategori, stok, hargaJual, hargaBeli);
 
                               Navigator.pop(context);
@@ -207,9 +198,8 @@ class _EditProdukState extends State<EditProduk> {
                             null;
                           }
                         },
-                        style: formProv.edited ? ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[700]) : ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[700]),
                         child: const Text('Simpan'),
                       ),
                     ),
