@@ -14,7 +14,7 @@ class ProdukFormProvider extends ChangeNotifier {
   }
   
 
-  bool _edited = false;
+  bool _edited = true;
   get edited => _edited;
   set isEdited(val){
     _edited = _edited || val;
