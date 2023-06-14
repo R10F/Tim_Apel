@@ -42,8 +42,28 @@ class _EditProdukState extends State<EditProduk> {
     var formProv = Provider.of<ProdukFormProvider>(context);
     var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
     
+    void _clearController(){
+      formProv.namaProdukController.clear();
+      formProv.deskripsiController.clear();
+      formProv.hargaJualController.clear();
+      formProv.stokController.clear();
+      formProv.hargaBeliController.clear();
+      formProv.updateKategori = "none";
+    }
+
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.chevron_left),
+              onPressed: (){
+                _clearController();
+                Navigator.pop(context);
+              },
+            );
+          },
+        ),
         title: const Text('Edit Produk'),
       ),
       body: SingleChildScrollView(
@@ -77,6 +97,7 @@ class _EditProdukState extends State<EditProduk> {
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Deskripsi',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
                       border: OutlineInputBorder()),
                   maxLines: null,
                 ),
@@ -186,12 +207,7 @@ class _EditProdukState extends State<EditProduk> {
                                       autoDismiss: true,
                                       title: const Text("Produk Berhasil Diedit"))
                                   .show(context);
-                              formProv.namaProdukController.clear();
-                              formProv.deskripsiController.clear();
-                              formProv.hargaJualController.clear();
-                              formProv.stokController.clear();
-                              formProv.hargaBeliController.clear();
-                              formProv.updateKategori = "none";
+                              _clearController();
                             }
                           }
                           else{

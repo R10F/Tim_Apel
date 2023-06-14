@@ -9,6 +9,7 @@ class PembayaranTunai extends StatefulWidget {
 }
 
 class _PembayaranTunaiState extends State<PembayaranTunai> {
+  final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
   final List<bool?> _choiceChipsStatus = [
     false,
     false,
@@ -17,7 +18,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
     false,
     false
   ];
-
+  final List<int> _choiceChipsValue = [0, 5000, 10000, 20000, 50000, 100000]; //20500 diganti dengan harga asli
   final List _choiceChipsText = [
     'Uang Pas',
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(5000),
@@ -26,6 +27,8 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(50000),
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(100000),
   ];
+  TextEditingController kembalianController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,13 +42,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
             border: OutlineInputBorder(),
           ),
         ),
-        const Text(
-          'Kembalian',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.0,
-          ),
-        ),
+      
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -58,6 +55,9 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                               _choiceChipsStatus.fillRange(
                                   0, _choiceChipsStatus.length, false);
                               _choiceChipsStatus[index] = true;
+                              (index == 0) ? kembalianController.text = "0" :
+                              kembalianController.text = currency.format(_choiceChipsValue[index] - 20500);
+                              // !! 20500 diganti dgn harga asli !!
                             });
                           },
                           label: Text(_choiceChipsText[index]),
@@ -65,7 +65,18 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                           selected: _choiceChipsStatus[index]!),
                     )),
           ),
-        )
+        ),
+        const Text(
+          'Kembalian',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
+        ),
+        TextField(
+          enabled: false,
+          controller: kembalianController,
+        ),
       ],
     );
   }
