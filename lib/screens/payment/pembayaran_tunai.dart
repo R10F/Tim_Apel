@@ -18,7 +18,14 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
     false,
     false
   ];
-  final List<int> _choiceChipsValue = [0, 5000, 10000, 20000, 50000, 100000]; //20500 diganti dengan harga asli
+  final List<int> _choiceChipsValue = [
+    0,
+    5000,
+    10000,
+    20000,
+    50000,
+    100000
+  ]; //20500 diganti dengan harga asli
   final List _choiceChipsText = [
     'Uang Pas',
     NumberFormat.currency(locale: 'ID', symbol: 'Rp').format(5000),
@@ -35,6 +42,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const TextField(
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
             labelText: 'Jumlah Uang',
             hintText: '',
@@ -42,7 +50,6 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
             border: OutlineInputBorder(),
           ),
         ),
-      
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -55,8 +62,10 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                               _choiceChipsStatus.fillRange(
                                   0, _choiceChipsStatus.length, false);
                               _choiceChipsStatus[index] = true;
-                              (index == 0) ? kembalianController.text = "0" :
-                              kembalianController.text = currency.format(_choiceChipsValue[index] - 20500);
+                              (index == 0)
+                                  ? kembalianController.text = "0"
+                                  : kembalianController.text = currency
+                                      .format(_choiceChipsValue[index] - 20500);
                               // !! 20500 diganti dgn harga asli !!
                             });
                           },
