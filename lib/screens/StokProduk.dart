@@ -16,7 +16,7 @@ class _StokProdukState extends State<StokProduk> {
     var filteredStokProduk = stokProdukProv.getStokProduk;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Segera Restock"),
+          title: Text("Segera Restock"),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -26,14 +26,14 @@ class _StokProdukState extends State<StokProduk> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   FilterChip(
-                    label: const Text("Segera Habis"),
+                    label: Text("Segera Habis"),
                     selected: stokProdukProv.getStatusSegeraHabis,
                     onSelected: (value) {
                       stokProdukProv.setStatusSegeraHabis = value;
                     },
                   ),
                   FilterChip(
-                    label: const Text("Habis"),
+                    label: Text("Habis"),
                     selected: stokProdukProv.getStatusHabis,
                     onSelected: (value) {
                       stokProdukProv.setStatusHabis = value;
@@ -55,10 +55,10 @@ class _StokProdukState extends State<StokProduk> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 stokProdukProv.getStokProduk[i]['nama'],
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 16, fontFamily: 'Figtree'),
                               ),
                             ),
@@ -91,7 +91,7 @@ class _StokProdukState extends State<StokProduk> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    const Text(
+                                    Text(
                                       "Sisa",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -99,7 +99,7 @@ class _StokProdukState extends State<StokProduk> {
                                     ),
                                     Text(
                                       "${stokProdukProv.getStokProduk[i]['sisa']}",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontSize: 35,
                                           fontWeight: FontWeight.bold),
                                     ),
