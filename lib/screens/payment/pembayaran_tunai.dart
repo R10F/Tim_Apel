@@ -9,7 +9,14 @@ class PembayaranTunai extends StatefulWidget {
 }
 
 class _PembayaranTunaiState extends State<PembayaranTunai> {
-  final List<bool?> _choiceChipsStatus = [false, false, false, false, false];
+  final List<bool?> _choiceChipsStatus = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   final List _choiceChipsText = [
     'Uang Pas',

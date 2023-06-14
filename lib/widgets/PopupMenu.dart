@@ -52,14 +52,14 @@ class _PopupMenuState extends State<PopupMenu> {
           const PopupMenuItem(
               value: 'edit',
               child: ListTile(
-                leading: const Icon(Icons.edit),
-                title: const Text('Edit'),
+                leading: Icon(Icons.edit),
+                title: Text('Edit'),
           )),
           const PopupMenuItem(
             value: 'hapus',
             child: ListTile(
-              leading: const Icon(Icons.delete),
-              title: const Text('Hapus'),
+              leading: Icon(Icons.delete),
+              title: Text('Hapus'),
           )),
         ];
       },

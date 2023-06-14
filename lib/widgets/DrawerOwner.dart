@@ -4,6 +4,7 @@ import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/admin/account/archieve_staf.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
+import 'package:tim_apel/widgets/mainStock.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});
@@ -124,7 +125,10 @@ class DrawerOwner extends StatelessWidget {
                   ),
                 ),
               ),
-              onTap: () {}),
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => const MainStock()));
+              }),
           const Divider(
             height: 15,
             thickness: 2,
