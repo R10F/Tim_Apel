@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/form_handler/edit_nama_form_provider.dart';
 import 'package:tim_apel/providers/qtyProduk_provider.dart';
+import 'package:tim_apel/providers/stokProduk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/login.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
@@ -41,6 +42,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => TransaksiProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => StokProdukProvider(),
       ),
     ],
     child: const MyApp(),
