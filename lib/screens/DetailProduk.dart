@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/qtyProduk_provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
+
+import '../utilities/formatting.dart';
 
 class DetailProduk extends StatefulWidget {
   final Produk produk;
@@ -14,10 +17,10 @@ class DetailProduk extends StatefulWidget {
 }
 
 class _DetailProdukState extends State<DetailProduk> {
-  final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-
   @override
   Widget build(BuildContext context) {
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
+
     var qtyProvider = Provider.of<QtyProdukProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -91,7 +94,7 @@ class _DetailProdukState extends State<DetailProduk> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("Subtotal"),
-                      Text(currency.format(widget.produk.hargaJual * qtyProvider.getQty)),
+                      Text(currency(widget.produk.hargaJual * qtyProvider.getQty)),
                     ],
                   ),
                 ),
@@ -101,7 +104,8 @@ class _DetailProdukState extends State<DetailProduk> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[500]),
                         onPressed: () {},
-                        child: const Text("Add to Cart")),
+                        child: Text(
+                            "Add to Cart ${transaksiProvider.selectedAntrean > -1 ? '(Antrean ${transaksiProvider.selectedAntrean})' : ''}")),
                   ),
                 ),
               ],

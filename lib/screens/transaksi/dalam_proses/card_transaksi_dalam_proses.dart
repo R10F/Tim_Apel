@@ -2,7 +2,9 @@
 
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -24,14 +26,14 @@ class CardTransaksiDalamProses extends StatefulWidget {
 }
 
 class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
-  bool isActive = false;
   @override
   Widget build(BuildContext context) {
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
+    bool isActive = widget.transaksi.nomorAntrean == transaksiProvider.selectedAntrean;
+
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isActive = !isActive;
-        });
+        transaksiProvider.selectedAntrean = widget.transaksi.nomorAntrean;
       },
       child: Row(
         children: [
@@ -42,7 +44,7 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                         ? Border.all(color: Colours.lightSalmon, width: 2)
                         : Border.all(color: Colors.teal[200]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Padding(
@@ -71,51 +73,70 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                     ]),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      OutlinedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => RincianTransaksi(
-                                          namaKasir: widget.namaKasir,
-                                          transaksi: widget.transaksi,
-                                        )));
-                          },
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(
-                              color: Colors.teal[300]!, // Outline border color
-                              width: 2.0, // Outline border width
+                      Transform.translate(
+                          offset: const Offset(-8, 2),
+                          child: Row(children: [
+                            Radio(
+                              value: widget.transaksi.nomorAntrean,
+                              groupValue: transaksiProvider.selectedAntrean,
+                              onChanged: (value) {
+                                transaksiProvider.selectedAntrean = value;
+                              },
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4), // Rounded corner radius
-                            ),
-                          ),
-                          child: const Text('Rincian',
-                              style: TextStyle(
-                                color: Color(0xFF00796B), // Text color
-                              ))),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: OutlinedButton(
+                            isActive
+                                ? const Text('Sedang aktif',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                                : Container(),
+                          ])),
+                      Row(children: [
+                        OutlinedButton(
                             onPressed: () {
-                              widget.prov.deleteOrder(widget.index);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => RincianTransaksi(
+                                            namaKasir: widget.namaKasir,
+                                            transaksi: widget.transaksi,
+                                          )));
                             },
                             style: OutlinedButton.styleFrom(
-                              side: const BorderSide(
-                                color: Color.fromARGB(150, 244, 67, 54), // Outline border color
-                                width: 2.0, // Outline border width
+                              side: BorderSide(
+                                color: Colors.teal[300]!,
+                                width: 2,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4), // Rounded corner radius
+                                borderRadius: BorderRadius.circular(4),
                               ),
                             ),
-                            child: const Text('Batal',
+                            child: const Text('Rincian',
                                 style: TextStyle(
-                                  color: Colors.red, // Text color
+                                  color: Color(0xFF00796B),
                                 ))),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: OutlinedButton(
+                              onPressed: () {
+                                widget.prov.deleteOrder(widget.index);
+                              },
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(
+                                  color: Color.fromARGB(150, 244, 67, 54),
+                                  width: 2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              child: const Text('Batal',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ))),
+                        ),
+                      ])
                     ],
                   )
                 ])),
