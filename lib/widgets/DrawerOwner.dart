@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/screens/admin/account/archieve_staf.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/screens/StokProduk.dart';
@@ -18,8 +17,7 @@ class DrawerOwner extends StatelessWidget {
         children: [
           DrawerHeader(
               decoration: BoxDecoration(
-                  border: Border(
-                      bottom: Divider.createBorderSide(context, width: 2))),
+                  border: Border(bottom: Divider.createBorderSide(context, width: 2))),
               child: Column(
                 children: [
                   Image.asset(
@@ -60,8 +58,8 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ListStaf()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: true)));
             },
           ),
           ListTile(
@@ -77,8 +75,7 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const RegisterStaf()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
             },
           ),
           ListTile(
@@ -87,7 +84,7 @@ class DrawerOwner extends StatelessWidget {
                 horizontal: 8,
               ),
               child: Text(
-                'List Arsip Staf',
+                'Staf Nonaktif',
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -95,7 +92,7 @@ class DrawerOwner extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const archieveAccount()));
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: false)));
             },
           ),
           const Divider(
@@ -109,9 +106,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),
@@ -126,8 +122,7 @@ class DrawerOwner extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => const StokProduk()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const StokProduk()));
               }),
           const Divider(
             height: 15,
@@ -140,9 +135,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),

@@ -35,10 +35,11 @@ class Transaksi {
 class TransaksiData {
   List<Transaksi> listTransaksi = [
     Transaksi(nomorAntrean: 1, idKasir: 0, listIdProduk: [1, 3, 7]),
-    Transaksi(nomorAntrean: 3, idKasir: 1, listIdProduk: [3, 5]),
+    Transaksi(nomorAntrean: 3, idKasir: 2, listIdProduk: [3, 5]),
+    Transaksi(nomorAntrean: 4, idKasir: 3, listIdProduk: [5, 6]),
     Transaksi(
         nomorAntrean: 2,
-        idKasir: 1,
+        idKasir: 4,
         listIdProduk: [2, 4, 6],
         inProcess: false,
         metodePembayaran: 'Tunai'),

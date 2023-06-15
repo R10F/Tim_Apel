@@ -94,7 +94,7 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                           ),
                           child: const Text('Rincian',
                               style: TextStyle(
-                                color: Color.fromARGB(255, 0, 150, 136), // Text color
+                                color: Color(0xFF00796B), // Text color
                               ))),
                       Padding(
                         padding: const EdgeInsets.only(left: 12),

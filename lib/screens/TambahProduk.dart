@@ -1,5 +1,6 @@
-import 'package:cherry_toast/cherry_toast.dart';
+// import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/form_handler/produk_form_provider.dart';
@@ -16,13 +17,10 @@ class _TambahProdukState extends State<TambahProduk> {
   final _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> kategori = [
-      const DropdownMenuItem(
-          value: "none", child: Text("Pilih Kategori Produk")),
+      const DropdownMenuItem(value: "none", child: Text("Pilih Kategori Produk")),
       const DropdownMenuItem(value: "ATK", child: Text("ATK")),
-      const DropdownMenuItem(
-          value: "Craft Supply", child: Text("Craft Supply")),
-      const DropdownMenuItem(
-          value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
+      const DropdownMenuItem(value: "Craft Supply", child: Text("Craft Supply")),
+      const DropdownMenuItem(value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
       const DropdownMenuItem(value: "Dekorasi", child: Text("Dekorasi")),
     ];
     return kategori;
@@ -50,8 +48,7 @@ class _TambahProdukState extends State<TambahProduk> {
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.namaProdukController,
                   decoration: const InputDecoration(
@@ -67,8 +64,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.deskripsiController,
                   keyboardType: TextInputType.multiline,
@@ -80,8 +76,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
                   value: formProv.getKategoriSelected,
@@ -89,9 +84,8 @@ class _TambahProdukState extends State<TambahProduk> {
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Kategori',
                       border: OutlineInputBorder()),
-                  validator: (value) => (value == null || value == "none")
-                      ? "Pilih kategori"
-                      : null,
+                  validator: (value) =>
+                      (value == null || value == "none") ? "Pilih kategori" : null,
                   onChanged: (val) {
                     formProv.kategoriSelected = val as String;
                   },
@@ -99,8 +93,7 @@ class _TambahProdukState extends State<TambahProduk> {
               ),
               const Divider(),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.stokController,
                   keyboardType: TextInputType.number,
@@ -117,8 +110,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaBeliController,
                   keyboardType: TextInputType.number,
@@ -135,8 +127,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaJualController,
                   keyboardType: TextInputType.number,
@@ -153,8 +144,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -166,23 +156,31 @@ class _TambahProdukState extends State<TambahProduk> {
                             int stok, hargaJual, hargaBeli;
 
                             nama = formProv.getNama;
-                            gambar =
-                                "assets/product_images/produk_2.jpg"; //temp
+                            gambar = "assets/product_images/produk_2.jpg"; //temp
                             deskripsi = formProv.getDeskripsi;
                             stok = int.parse(formProv.getStok);
                             hargaJual = int.parse(formProv.getHargaJual);
                             hargaBeli = int.parse(formProv.getHargaBeli);
                             kategori = formProv.kategoriSelected;
-                            produkProv.addProduk(nama, gambar, deskripsi,
-                                kategori, stok, hargaJual, hargaBeli);
+                            produkProv.addProduk(
+                                nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli);
 
                             Navigator.pop(context);
-                            CherryToast.info(
-                                    animationDuration:
-                                        const Duration(milliseconds: 500),
-                                    autoDismiss: true,
-                                    title: const Text("Produk Berhasil Ditambahkan"))
-                                .show(context);
+                            // CherryToast.info(
+                            //         animationDuration:
+                            //             const Duration(milliseconds: 500),
+                            //         autoDismiss: true,
+                            //         title: const Text("Produk Berhasil Ditambahkan"))
+                            //     .show(context);
+                            Fluttertoast.showToast(
+                              msg: 'Produk Berhasil Ditambahkan',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              // timeInSecForIosWeb: 10,
+                              backgroundColor: Colors.teal[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
                             formProv.namaProdukController.clear();
                             formProv.deskripsiController.clear();
                             formProv.hargaJualController.clear();
@@ -191,8 +189,7 @@ class _TambahProdukState extends State<TambahProduk> {
                             formProv.updateKategori = "none";
                           }
                         },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[700]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                         child: const Text('Tambah'),
                       ),
                     ),
