@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/qtyProduk_provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
-
-import '../utilities/formatting.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class DetailProduk extends StatefulWidget {
   final Produk produk;
