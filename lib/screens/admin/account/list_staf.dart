@@ -1,6 +1,5 @@
-import 'package:cherry_toast/cherry_toast.dart';
-import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -60,16 +59,20 @@ class _ListStafState extends State<ListStaf> {
                   trailing: accountProvider.id != index
                       ? IconButton(
                           onPressed: () {
+                            print(userAccounts[index]);
                             accountProvider
                                 .archieveAccounts(userAccounts[index]);
 
                             accountProvider.removeAccount(index);
-                            CherryToast.success(
-                              title: const Text("Staf Berhasil Diarsipkan"),
-                              toastPosition: Position.top,
-                              animationDuration: const Duration(milliseconds: 500),
-                              autoDismiss: true,
-                            ).show(context);
+                            Fluttertoast.showToast(
+                              msg: 'Staf Berhasil Diarsipkan',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              // timeInSecForIosWeb: 10,
+                              backgroundColor: Colors.teal[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
                           },
                           icon: const Icon(Icons.archive))
                       : null,

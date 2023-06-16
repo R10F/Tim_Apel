@@ -55,7 +55,8 @@ class _StokProdukState extends State<StokProduk> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 stokProdukProv.getStokProduk[i]['nama'],
                                 style: const TextStyle(
@@ -78,32 +79,34 @@ class _StokProdukState extends State<StokProduk> {
                           ],
                         ),
                         if (stokProdukProv.getStokProduk[i].containsKey('sisa'))
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 75,
-                              height: 100,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                    color: Colors.yellow[500],
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Text(
-                                      "Sisa",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Text(
-                                      "${stokProdukProv.getStokProduk[i]['sisa']}",
-                                      style: const TextStyle(
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 75,
+                                height: 100,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      color: Colors.yellow[500],
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const Text(
+                                        "Sisa",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Text(
+                                        "${stokProdukProv.getStokProduk[i]['sisa']}",
+                                        style: const TextStyle(
+                                            fontSize: 35,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

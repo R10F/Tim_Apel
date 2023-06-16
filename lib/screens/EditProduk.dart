@@ -1,5 +1,5 @@
-import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/form_handler/produk_form_provider.dart';
@@ -8,7 +8,7 @@ import '../providers/produk_provider.dart';
 class EditProduk extends StatefulWidget {
   final int idxProduk;
   const EditProduk({super.key, required this.idxProduk});
-  
+
   @override
   State<EditProduk> createState() => _EditProdukState();
 }
@@ -41,8 +41,8 @@ class _EditProdukState extends State<EditProduk> {
     var produkProv = Provider.of<ProdukProvider>(context);
     var formProv = Provider.of<ProdukFormProvider>(context);
     var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
-    
-    void _clearController(){
+
+    void _clearController() {
       formProv.namaProdukController.clear();
       formProv.deskripsiController.clear();
       formProv.hargaJualController.clear();
@@ -57,7 +57,7 @@ class _EditProdukState extends State<EditProduk> {
           builder: (context) {
             return IconButton(
               icon: const Icon(Icons.chevron_left),
-              onPressed: (){
+              onPressed: () {
                 _clearController();
                 Navigator.pop(context);
               },
@@ -183,7 +183,7 @@ class _EditProdukState extends State<EditProduk> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          if (formProv.edited){
+                          if (formProv.edited) {
                             // Validate returns true if the form is valid, or false otherwise.
                             if (_formKey.currentState!.validate()) {
                               String nama, gambar, deskripsi, kategori;
@@ -197,20 +197,29 @@ class _EditProdukState extends State<EditProduk> {
                               hargaJual = int.parse(formProv.getHargaJual);
                               hargaBeli = int.parse(formProv.getHargaBeli);
                               kategori = formProv.kategoriSelected;
-                              produkProv.updateProduk(toBeEdited.id, nama, gambar, deskripsi,
-                                  kategori, stok, hargaJual, hargaBeli);
+                              produkProv.updateProduk(
+                                  toBeEdited.id,
+                                  nama,
+                                  gambar,
+                                  deskripsi,
+                                  kategori,
+                                  stok,
+                                  hargaJual,
+                                  hargaBeli);
 
                               Navigator.pop(context);
-                              CherryToast.info(
-                                      animationDuration:
-                                          const Duration(milliseconds: 500),
-                                      autoDismiss: true,
-                                      title: const Text("Produk Berhasil Diedit"))
-                                  .show(context);
+                              Fluttertoast.showToast(
+                                msg: 'Produk Berhasil Di Edit',
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.TOP,
+                                // timeInSecForIosWeb: 10,
+                                backgroundColor: Colors.teal[300],
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
                               _clearController();
                             }
-                          }
-                          else{
+                          } else {
                             null;
                           }
                         },

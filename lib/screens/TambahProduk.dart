@@ -1,5 +1,5 @@
-import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/form_handler/produk_form_provider.dart';
@@ -177,12 +177,15 @@ class _TambahProdukState extends State<TambahProduk> {
                                 kategori, stok, hargaJual, hargaBeli);
 
                             Navigator.pop(context);
-                            CherryToast.info(
-                                    animationDuration:
-                                        const Duration(milliseconds: 500),
-                                    autoDismiss: true,
-                                    title: const Text("Produk Berhasil Ditambahkan"))
-                                .show(context);
+                            Fluttertoast.showToast(
+                              msg: 'Produk Berhasil Ditambahkan',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              // timeInSecForIosWeb: 10,
+                              backgroundColor: Colors.teal[300],
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
                             formProv.namaProdukController.clear();
                             formProv.deskripsiController.clear();
                             formProv.hargaJualController.clear();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/screens/ProdukTerlaris.dart';
+import 'package:tim_apel/screens/ProdukTidakLaris.dart';
 import 'package:tim_apel/screens/admin/account/archieve_staf.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
@@ -126,8 +128,8 @@ class DrawerOwner extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => const StokProduk()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const StokProduk()));
               }),
           const Divider(
             height: 15,
@@ -156,7 +158,10 @@ class DrawerOwner extends StatelessWidget {
                   ),
                 ),
               ),
-              onTap: () {}),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const ProdukTerlaris()));
+              }),
           ListTile(
               title: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
@@ -167,7 +172,10 @@ class DrawerOwner extends StatelessWidget {
                   ),
                 ),
               ),
-              onTap: () {}),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const ProdukTidakLaris()));
+              }),
         ],
       ),
     );
