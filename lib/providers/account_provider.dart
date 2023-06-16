@@ -39,7 +39,8 @@ class AccountProvider extends ChangeNotifier {
         nama: data['nama'],
         username: username,
         password: data['password'],
-        profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
+        profilePicture:
+            _profilePictures[Random().nextInt(_profilePictures.length)],
         jadwal: data['jadwal']));
     print(_userAccounts);
     notifyListeners();
@@ -104,7 +105,8 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme = ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme =
+      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   final ThemeData _lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(
