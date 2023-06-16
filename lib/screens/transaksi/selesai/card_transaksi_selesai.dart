@@ -42,7 +42,7 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.teal[200]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 margin: const EdgeInsets.only(bottom: 20),
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                   Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -56,7 +56,7 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                   Column(children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(currency(widget.transaksi.totalBelanja),
+                      child: Text(currency(widget.transaksi.totalHargaBelanja),
                           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                     ),
                     Text(widget.transaksi.metodePembayaran,

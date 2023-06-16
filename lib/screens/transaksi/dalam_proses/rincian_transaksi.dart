@@ -47,7 +47,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalBelanja)}'))
+                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalHargaBelanja)}'))
               ],
             ),
             const Padding(
@@ -57,13 +57,13 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Expanded(
               child: Column(
                   children: List.generate(
-                      keranjang.length, (index) => ItemRincianBelanja(produk: keranjang[index]))),
+                      keranjang.length, (index) => ItemRincianBelanja(data: keranjang[index]))),
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 25),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text('Total', style: TextStyle(fontSize: 18)),
-                Text(currency(widget.transaksi.totalBelanja),
+                Text(currency(widget.transaksi.totalHargaBelanja),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
               ]),
             ),

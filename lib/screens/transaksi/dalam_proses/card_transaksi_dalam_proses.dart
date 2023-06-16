@@ -29,11 +29,11 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
   @override
   Widget build(BuildContext context) {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-    bool isActive = widget.transaksi.nomorAntrean == transaksiProvider.selectedAntrean;
+    bool isActive = widget.index == transaksiProvider.selectedAntrean;
 
     return GestureDetector(
       onTap: () {
-        transaksiProvider.selectedAntrean = widget.transaksi.nomorAntrean;
+        transaksiProvider.selectedAntrean = widget.index;
       },
       child: Row(
         children: [
@@ -61,13 +61,13 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                       Column(children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4),
-                          child: Text('${widget.transaksi.nomorAntrean} item',
+                          child: Text('${widget.transaksi.itemCount} item',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.teal[500])),
                         ),
-                        Text(currency(widget.transaksi.totalBelanja),
+                        Text(currency(widget.transaksi.totalHargaBelanja),
                             style: TextStyle(color: Colors.teal[500])),
                       ]),
                     ]),
@@ -79,7 +79,7 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                           offset: const Offset(-8, 2),
                           child: Row(children: [
                             Radio(
-                              value: widget.transaksi.nomorAntrean,
+                              value: widget.index,
                               groupValue: transaksiProvider.selectedAntrean,
                               onChanged: (value) {
                                 transaksiProvider.selectedAntrean = value;

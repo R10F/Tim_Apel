@@ -1,12 +1,12 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/screens/DetailProduk.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class ItemRincianBelanja extends StatefulWidget {
-  const ItemRincianBelanja({super.key, required this.produk});
+  const ItemRincianBelanja({super.key, required this.data});
 
-  final produk;
+  final dynamic data;
 
   @override
   State<ItemRincianBelanja> createState() => _ItemRincianBelanjaState();
@@ -15,7 +15,8 @@ class ItemRincianBelanja extends StatefulWidget {
 class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
   @override
   Widget build(BuildContext context) {
-    var produk = widget.produk;
+    Produk produk = widget.data['produk'];
+    int qty = widget.data['qty'];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -23,7 +24,7 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
         Row(children: [
           Expanded(
               flex: 1,
-              child: Text('3x',
+              child: Text('${qty}x',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.teal[500], fontSize: 24))),
           Expanded(
@@ -33,7 +34,10 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
                 Row(
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => DetailProduk(produk: produk)));
+                        },
                         style: ButtonStyle(
                           padding:
                               MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(top: 16)),
@@ -66,7 +70,7 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(currency(produk.hargaJual * 5),
+                      child: Text(currency(produk.hargaJual * qty),
                           style: const TextStyle(fontSize: 16)),
                     ),
                     Text('@ ${currency(produk.hargaJual)}',

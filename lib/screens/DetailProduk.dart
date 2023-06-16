@@ -7,8 +7,9 @@ import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class DetailProduk extends StatefulWidget {
-  final Produk produk;
   const DetailProduk({super.key, required this.produk});
+
+  final Produk produk;
 
   @override
   State<DetailProduk> createState() => _DetailProdukState();
@@ -101,11 +102,21 @@ class _DetailProdukState extends State<DetailProduk> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[500]),
-                        onPressed: () {},
-                        child: Text(
-                            "Add to Cart ${transaksiProvider.selectedAntrean > -1 ? '(Antrean ${transaksiProvider.selectedAntrean})' : ''}")),
+                        onPressed: transaksiProvider.selectedAntrean > -1
+                            ? () {
+                                transaksiProvider.addToCart(widget.produk.id, qtyProvider.getQty);
+                              }
+                            : null,
+                        child: transaksiProvider.selectedAntrean > -1
+                            ? Text(
+                                "Add to Cart (Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean})")
+                            : const Text('Add to Cart')),
                   ),
                 ),
+                transaksiProvider.selectedAntrean == -1
+                    ? const Text('Tidak ada transaksi yang sedang aktif/dipilih.',
+                        style: TextStyle(color: Colors.red))
+                    : Container()
               ],
             ),
           ],

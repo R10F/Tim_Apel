@@ -47,7 +47,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalBelanja)}'))
+                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalHargaBelanja)}'))
               ],
             ),
             Row(
@@ -68,7 +68,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Expanded(
               child: Column(
                   children: List.generate(
-                      keranjang.length, (index) => ItemRincianBelanja(produk: keranjang[index]))),
+                      keranjang.length, (index) => ItemRincianBelanja(data: keranjang[index]))),
             ),
             Row(
               children: [
