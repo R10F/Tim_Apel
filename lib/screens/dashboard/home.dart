@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:colours/colours.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,8 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
@@ -50,7 +48,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              "Kamu telah menjual 1 pesanan. Total ${currency.format(125000)} telah kamu kantongi! Lanjuut! ",
+              "Kamu telah menjual 1 pesanan. Total ${currency(125000)} telah kamu kantongi! Lanjuut! ",
               style:
                   const TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
               textAlign: TextAlign.start,

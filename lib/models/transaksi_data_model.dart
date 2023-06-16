@@ -5,22 +5,22 @@ class Transaksi {
   int idKasir;
   bool inProcess;
   String metodePembayaran;
-  List<int> listIdProduk;
+  List listProduk;
 
   Transaksi(
       {required this.nomorAntrean,
       required this.idKasir,
       this.inProcess = true,
       this.metodePembayaran = '',
-      this.listIdProduk = const []});
+      this.listProduk = const []});
 
   get keranjang {
     List<Produk> result = [];
     var produkData = ProdukData();
 
-    for (int id in listIdProduk) {
+    for (var p in listProduk) {
       for (Produk produk in produkData.listProduk) {
-        if (id == produk.id) {
+        if (p['id'] == produk.id) {
           result.add(produk);
         }
       }
@@ -30,16 +30,35 @@ class Transaksi {
   }
 
   get totalBelanja => 100;
+
+  void addToCart(int idProduk, int qty) {
+    listProduk.add({'id': idProduk, 'qty': qty});
+  }
 }
 
 class TransaksiData {
   List<Transaksi> listTransaksi = [
-    Transaksi(nomorAntrean: 1, idKasir: 0, listIdProduk: [1, 3, 7]),
-    Transaksi(nomorAntrean: 3, idKasir: 1, listIdProduk: [3, 5]),
+    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: [
+      {'id': 1, 'qty': 3},
+      {'id': 3, 'qty': 5},
+      {'id': 7, 'qty': 1},
+    ]),
+    Transaksi(nomorAntrean: 3, idKasir: 2, listProduk: [
+      {'id': 4, 'qty': 2},
+      {'id': 6, 'qty': 4},
+    ]),
+    Transaksi(nomorAntrean: 4, idKasir: 3, listProduk: [
+      {'id': 2, 'qty': 1},
+      {'id': 5, 'qty': 3},
+    ]),
     Transaksi(
         nomorAntrean: 2,
-        idKasir: 1,
-        listIdProduk: [2, 4, 6],
+        idKasir: 4,
+        listProduk: [
+          {'id': 2, 'qty': 5},
+          {'id': 4, 'qty': 4},
+          {'id': 6, 'qty': 5},
+        ],
         inProcess: false,
         metodePembayaran: 'Tunai'),
   ];

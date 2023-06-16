@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class SalesData {
   String? dateTime;
@@ -21,8 +21,6 @@ class HomeInsight extends StatefulWidget {
 }
 
 class _HomeInsightState extends State<HomeInsight> {
-  final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-
   String date = DateFormat.d().format(DateTime.now());
   String month = DateFormat.MMM().format(DateTime.now());
   String year = DateFormat.y().format(DateTime.now());
@@ -49,8 +47,7 @@ class _HomeInsightState extends State<HomeInsight> {
         currentYear += 1;
       }
 
-      return SalesData(
-          currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
+      return SalesData(currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
     });
 
     data.add(SalesData(DateTime.now().year, DateTime.now().month, 500000));
@@ -87,8 +84,7 @@ class _HomeInsightState extends State<HomeInsight> {
                 padding: const EdgeInsets.all(8.0),
                 child: SfCartesianChart(
                     primaryXAxis: CategoryAxis(),
-                    primaryYAxis: NumericAxis(
-                        labelFormat: "{value}", numberFormat: currency),
+                    primaryYAxis: NumericAxis(labelFormat: "{value}", numberFormat: currencyFormat),
                     tooltipBehavior: _tooltipBehavior,
                     series: <ChartSeries>[
                       // Renders line chart
@@ -108,9 +104,7 @@ class _HomeInsightState extends State<HomeInsight> {
           child: Text(
             "Insight Harian - $date $month $year",
             style: const TextStyle(
-                fontSize: 20,
-                fontFamily: 'Plus Jakarta Sans',
-                fontWeight: FontWeight.w500),
+                fontSize: 20, fontFamily: 'Plus Jakarta Sans', fontWeight: FontWeight.w500),
           ),
         ),
         Padding(
@@ -128,9 +122,8 @@ class _HomeInsightState extends State<HomeInsight> {
                         children: [
                           Center(
                             child: Text(
-                              currency.format(125000),
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              currency(125000),
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
                           const Center(
@@ -153,9 +146,8 @@ class _HomeInsightState extends State<HomeInsight> {
                         children: [
                           Center(
                             child: Text(
-                              currency.format(75000),
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              currency(75000),
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
                           const Center(
@@ -187,8 +179,7 @@ class _HomeInsightState extends State<HomeInsight> {
                           Center(
                             child: Text(
                               '25',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
                           Center(
@@ -212,8 +203,7 @@ class _HomeInsightState extends State<HomeInsight> {
                           Center(
                             child: Text(
                               '1',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
                           Center(

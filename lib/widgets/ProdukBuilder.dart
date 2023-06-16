@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../models/produk_data_model.dart';
-import '../providers/account_provider.dart';
-import '../screens/DetailProduk.dart';
+import 'package:tim_apel/utilities/formatting.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/screens/DetailProduk.dart';
 import 'PopupMenu.dart';
 
 class ProdukBuilder extends StatefulWidget {
@@ -15,8 +15,6 @@ class ProdukBuilder extends StatefulWidget {
 }
 
 class _ProdukBuilderState extends State<ProdukBuilder> {
-  final currency = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
@@ -86,7 +84,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                         child: Container(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            currency.format(widget.produk[i].hargaJual),
+                            currency(widget.produk[i].hargaJual),
                             style: TextStyle(
                                 fontFamily: 'Figtree',
                                 fontSize: 14,

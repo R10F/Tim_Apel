@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
+var currencyFormat = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
+
 String currency(var number) {
-  var numberFormat = NumberFormat.currency(locale: 'ID', symbol: 'Rp');
-  return numberFormat.format(number);
+  return currencyFormat.format(number);
 }

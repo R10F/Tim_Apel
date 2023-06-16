@@ -26,6 +26,7 @@ class _ProfileState extends State<Profile> {
     String nama = accountProvider.currentUser.nama;
     String username = accountProvider.currentUser.username;
     bool isOwner = accountProvider.currentUser.isOwner;
+    bool isActive = accountProvider.currentUser.isActive;
     String jadwal = accountProvider.currentUser.jadwal;
     String profilePicture = accountProvider.currentUser.profilePicture;
 
@@ -33,6 +34,7 @@ class _ProfileState extends State<Profile> {
       nama = widget.data.nama;
       username = widget.data.username;
       isOwner = widget.data.isOwner;
+      isActive = widget.data.isActive;
       jadwal = widget.data.jadwal;
       profilePicture = widget.data.profilePicture;
     }
@@ -75,14 +77,16 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.grey),
-                  onPressed: () {
-                    int id = widget.id > -1 ? widget.id : accountProvider.id;
-                    bottomSheetEditNama.showBottomSheet(
-                        context, accountProvider, editNamaFormProvider, id, nama);
-                  },
-                )
+                isActive
+                    ? IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.grey),
+                        onPressed: () {
+                          int id = widget.id > -1 ? widget.id : accountProvider.id;
+                          bottomSheetEditNama.showBottomSheet(
+                              context, accountProvider, editNamaFormProvider, id, nama);
+                        },
+                      )
+                    : Container()
               ]),
         ),
         Padding(
@@ -123,7 +127,11 @@ class _ProfileState extends State<Profile> {
           child: Container(
             alignment: Alignment.topLeft,
             child: Text(
-              isOwner ? 'Owner' : 'Staf',
+              !isActive
+                  ? 'Sudah Tidak Aktif'
+                  : isOwner
+                      ? 'Owner'
+                      : 'Staf',
               style: const TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 20,

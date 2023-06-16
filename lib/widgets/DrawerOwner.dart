@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/screens/ProdukTerlaris.dart';
-import 'package:tim_apel/screens/ProdukTidakLaris.dart';
-import 'package:tim_apel/screens/admin/account/archieve_staf.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/screens/StokProduk.dart';
+
+import '../screens/ProdukTerlaris.dart';
+import '../screens/ProdukTidakLaris.dart';
 
 class DrawerOwner extends StatelessWidget {
   const DrawerOwner({super.key});
@@ -63,7 +63,9 @@ class DrawerOwner extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ListStaf()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const ListStaf(isActiveAccounts: true)));
             },
           ),
           ListTile(
@@ -89,15 +91,17 @@ class DrawerOwner extends StatelessWidget {
                 horizontal: 8,
               ),
               child: Text(
-                'List Arsip Staf',
+                'Staf Nonaktif',
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const archieveAccount()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const ListStaf(isActiveAccounts: false)));
             },
           ),
           const Divider(
@@ -173,8 +177,10 @@ class DrawerOwner extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const ProdukTidakLaris()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const ProdukTidakLaris()));
               }),
         ],
       ),

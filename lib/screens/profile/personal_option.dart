@@ -25,8 +25,7 @@ class _PersonalOptionState extends State<PersonalOption> {
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Preferensi',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
       Padding(
@@ -70,18 +69,30 @@ class _PersonalOptionState extends State<PersonalOption> {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
         child: Row(children: [
           Expanded(
-            child: ElevatedButton(
-              onPressed: () async {
-                accountProvider.logout();
-                bottomnavProvider.setSelectedIdx = 0;
-              },
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-              child: const Text('Logout'),
-            ),
+            child: OutlinedButton(
+                onPressed: () async {
+                  accountProvider.logout();
+                  bottomnavProvider.setSelectedIdx = 0;
+                },
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    color: Colors.teal[700]!,
+                    width: 1,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Text('Logout',
+                      style: TextStyle(
+                        color: Color(0xFF00796B),
+                      )),
+                )),
           ),
         ]),
       ),

@@ -1,3 +1,4 @@
+// import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -208,8 +209,14 @@ class _EditProdukState extends State<EditProduk> {
                                   hargaBeli);
 
                               Navigator.pop(context);
+                              // CherryToast.info(
+                              //         animationDuration:
+                              //             const Duration(milliseconds: 500),
+                              //         autoDismiss: true,
+                              //         title: const Text("Produk Berhasil Diedit"))
+                              //     .show(context);
                               Fluttertoast.showToast(
-                                msg: 'Produk Berhasil Di Edit',
+                                msg: 'Produk Berhasil Diedit',
                                 toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.TOP,
                                 // timeInSecForIosWeb: 10,
