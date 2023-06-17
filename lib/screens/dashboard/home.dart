@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
+import 'package:tim_apel/screens/transaksi/dalam_proses/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class Home extends StatefulWidget {
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
+    var listTransaksi = transaksiProvider.listTransaksi;
 
     return SingleChildScrollView(
       child: Column(
@@ -85,7 +87,7 @@ class _HomeState extends State<Home> {
           // ),
           accountProvider.getSetting('dashboard_minimal') ? Container() : const HomeInsight(),
           Container(
-            padding: const EdgeInsets.only(top: 4, bottom: 16, left: 4, right: 4),
+            padding: const EdgeInsets.only(top: 20, bottom: 28, left: 4, right: 4),
             margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 30),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -102,7 +104,7 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 10),
+                  padding: const EdgeInsets.only(left: 15, bottom: 8),
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: const Text(
@@ -114,25 +116,58 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    child: const Text(
-                      "Tidak ada pesanan yang sedang berlangsung",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey,
-                          fontFamily: 'Figtree',
-                          fontSize: 16),
-                      textAlign: TextAlign.start,
+                for (int i = 0; i < listTransaksi.length; i++)
+                  if (listTransaksi[i].inProcess)
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => RincianTransaksi(
+                                      namaKasir: accountProvider
+                                          .userAccounts[listTransaksi[i].idKasir].nama,
+                                      transaksi: listTransaksi[i],
+                                    )));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(
+                              'Antrean ${listTransaksi[i].nomorAntrean}',
+                              style: const TextStyle(fontFamily: 'Figtree', fontSize: 18),
+                            ),
+                            Text(
+                              accountProvider.userAccounts[listTransaksi[i].idKasir].nama,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey,
+                                  fontFamily: 'Figtree',
+                                  fontSize: 16),
+                            ),
+                          ]),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                //   child: Container(
+                //     alignment: Alignment.topLeft,
+                //     child: const Text(
+                //       "Tidak ada pesanan yang sedang berlangsung",
+                //       style: TextStyle(
+                //           fontWeight: FontWeight.w500,
+                //           color: Colors.grey,
+                //           fontFamily: 'Figtree',
+                //           fontSize: 16),
+                //       textAlign: TextAlign.start,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 20.0),
             child: Container(
