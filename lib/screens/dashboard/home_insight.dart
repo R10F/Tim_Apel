@@ -189,7 +189,7 @@ class _HomeInsightState extends State<HomeInsight> {
         ]),
         Container(
           padding: const EdgeInsets.only(top: 20, bottom: 4, left: 4, right: 4),
-          margin: const EdgeInsets.only(left: 20, right: 25, top: 30),
+          margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 15),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -216,7 +216,6 @@ class _HomeInsightState extends State<HomeInsight> {
                           fontFamily: 'Figtree',
                           fontSize: 20,
                         ),
-                        textAlign: TextAlign.start,
                       ),
                     ),
                   ],

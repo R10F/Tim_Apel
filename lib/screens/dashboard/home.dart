@@ -23,30 +23,41 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            padding: const EdgeInsets.only(left: 20, top: 25),
             child: Container(
               alignment: Alignment.topLeft,
               child: Text(
-                'Hai, ${accountProvider.currentUser.nama}!\nmasih semangat jualan hari ini?',
+                'Hai, ${accountProvider.currentUser.nama}!',
                 style: const TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 20),
+                    fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 24),
                 textAlign: TextAlign.start,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: Container(
               alignment: Alignment.topLeft,
               child: const Text(
-                "Penjualan",
-                style: TextStyle(
-                    fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
+                'masih semangat jualan hari ini?',
+                style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
+                textAlign: TextAlign.start,
               ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Container(
+          //     alignment: Alignment.topLeft,
+          //     child: const Text(
+          //       "Penjualan",
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
+          //     ),
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
             child: Text(
               "Kamu telah menjual 1 pesanan. Total ${currency(125000)} telah kamu kantongi! Lanjuut! ",
               style:
@@ -54,51 +65,74 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.start,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.start,
+          //     children: [
+          //       ElevatedButton(
+          //           style: ElevatedButton.styleFrom(
+          //               backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
+          //           onPressed: () {
+          //             transaksiProvider.createNewOrder(accountProvider.id);
+          //           },
+          //           child: const Text(
+          //             "Buat Order Baru",
+          //             style: TextStyle(color: Colors.black),
+          //           )),
+          //     ],
+          //   ),
+          // ),
+          accountProvider.getSetting('dashboard_minimal') ? Container() : const HomeInsight(),
+          Container(
+            padding: const EdgeInsets.only(top: 4, bottom: 16, left: 4, right: 4),
+            margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 30),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
               children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
-                    onPressed: () {
-                      transaksiProvider.createNewOrder(accountProvider.id);
-                    },
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, top: 10),
+                  child: Container(
+                    alignment: Alignment.topLeft,
                     child: const Text(
-                      "Buat Order Baru",
-                      style: TextStyle(color: Colors.black),
-                    )),
+                      "Sedang Berlangsung",
+                      style: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "Tidak ada pesanan yang sedang berlangsung",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                          fontFamily: 'Figtree',
+                          fontSize: 16),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          accountProvider.getSetting('dashboard_minimal') ? Container() : const HomeInsight(),
-          Padding(
-            padding: const EdgeInsets.only(left: 15.0, top: 10.0),
-            child: Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "Sedang Berlangsung",
-                style: TextStyle(
-                    fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "Tidak ada pesanan yang sedang berlangsung",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                    fontFamily: 'Figtree',
-                    fontSize: 16),
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 20.0),
             child: Container(
