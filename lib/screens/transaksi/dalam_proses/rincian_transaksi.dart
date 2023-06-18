@@ -5,8 +5,10 @@ import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dar
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
-  const RincianTransaksi({super.key, required this.transaksi, required this.namaKasir});
+  const RincianTransaksi(
+      {super.key, required this.idTransaksi, required this.transaksi, required this.namaKasir});
 
+  final int idTransaksi;
   final Transaksi transaksi;
   final String namaKasir;
 
@@ -55,12 +57,17 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
               child: Text('Rincian Belanja'),
             ),
             Expanded(
-              child: Column(
-                  children: List.generate(
-                      keranjang.length, (index) => ItemRincianBelanja(data: keranjang[index]))),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                    children: List.generate(
+                        keranjang.length,
+                        (index) => ItemRincianBelanja(
+                            idTransaksi: widget.idTransaksi, data: keranjang[index]))),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 25),
+              padding: const EdgeInsets.only(top: 20, bottom: 25),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text('Total', style: TextStyle(fontSize: 18)),
                 Text(currency(widget.transaksi.totalHargaBelanja),

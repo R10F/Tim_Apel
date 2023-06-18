@@ -67,8 +67,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             ),
             Expanded(
               child: Column(
-                  children: List.generate(
-                      keranjang.length, (index) => ItemRincianBelanja(data: keranjang[index]))),
+                  children: List.generate(keranjang.length,
+                      (index) => ItemRincianBelanja(idTransaksi: -1, data: keranjang[index]))),
             ),
             Row(
               children: [

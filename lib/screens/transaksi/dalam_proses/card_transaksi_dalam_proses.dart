@@ -99,6 +99,7 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => RincianTransaksi(
+                                            idTransaksi: widget.index,
                                             namaKasir: widget.namaKasir,
                                             transaksi: widget.transaksi,
                                           )));

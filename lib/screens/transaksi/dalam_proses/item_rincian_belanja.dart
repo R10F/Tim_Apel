@@ -4,8 +4,9 @@ import 'package:tim_apel/screens/DetailProduk.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class ItemRincianBelanja extends StatefulWidget {
-  const ItemRincianBelanja({super.key, required this.data});
+  const ItemRincianBelanja({super.key, required this.idTransaksi, required this.data});
 
+  final int idTransaksi;
   final dynamic data;
 
   @override
@@ -35,8 +36,11 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => DetailProduk(produk: produk)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => DetailProduk(
+                                      idTransaksi: widget.idTransaksi, produk: produk)));
                         },
                         style: ButtonStyle(
                           padding:

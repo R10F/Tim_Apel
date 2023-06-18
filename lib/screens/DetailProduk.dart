@@ -7,8 +7,9 @@ import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class DetailProduk extends StatefulWidget {
-  const DetailProduk({super.key, required this.produk});
+  const DetailProduk({super.key, required this.idTransaksi, required this.produk});
 
+  final int idTransaksi;
   final Produk produk;
 
   @override
@@ -19,8 +20,10 @@ class _DetailProdukState extends State<DetailProduk> {
   @override
   Widget build(BuildContext context) {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-
     var qtyProvider = Provider.of<QtyProdukProvider>(context);
+    print(widget.idTransaksi);
+    print(widget.produk.id);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detail Produk"),
@@ -42,7 +45,7 @@ class _DetailProdukState extends State<DetailProduk> {
                     widget.produk.gambar,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 30, left: 20, right: 25, bottom: 16),
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -52,12 +55,12 @@ class _DetailProdukState extends State<DetailProduk> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 20, right: 25),
                     child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "@${widget.produk.hargaJual}",
-                          style: TextStyle(color: Colors.teal[500], fontSize: 22),
+                          "@ ${currency(widget.produk.hargaJual)}",
+                          style: TextStyle(color: Colors.teal[500], fontSize: 20),
                         )),
                   ),
                 ],
@@ -67,7 +70,7 @@ class _DetailProdukState extends State<DetailProduk> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 20, right: 25, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -75,7 +78,13 @@ class _DetailProdukState extends State<DetailProduk> {
                       InputQty(
                         minVal: 1,
                         showMessageLimit: false,
-                        initVal: qtyProvider.getQty,
+                        initVal: transaksiProvider.selectedAntrean > -1
+                            ? transaksiProvider.listTransaksi[widget.idTransaksi].listProduk
+                                    .containsKey(widget.produk.id)
+                                ? transaksiProvider
+                                    .listTransaksi[widget.idTransaksi].listProduk[widget.produk.id]
+                                : 1
+                            : 1,
                         borderShape: BorderShapeBtn.none,
                         onQtyChanged: (val) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -88,7 +97,7 @@ class _DetailProdukState extends State<DetailProduk> {
                 ),
                 const Divider(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 20, right: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -99,24 +108,34 @@ class _DetailProdukState extends State<DetailProduk> {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[500]),
-                        onPressed: transaksiProvider.selectedAntrean > -1
-                            ? () {
-                                transaksiProvider.addToCart(widget.produk.id, qtyProvider.getQty);
-                              }
-                            : null,
-                        child: transaksiProvider.selectedAntrean > -1
-                            ? Text(
-                                "Add to Cart (Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean})")
-                            : const Text('Add to Cart')),
+                    padding: const EdgeInsets.only(top: 40, bottom: 50),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal[500],
+                                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30)),
+                            onPressed: transaksiProvider.selectedAntrean > -1
+                                ? () {
+                                    transaksiProvider.addToCart(
+                                        widget.idTransaksi, widget.produk.id, qtyProvider.getQty);
+                                  }
+                                : null,
+                            child: transaksiProvider.selectedAntrean > -1
+                                ? Text(
+                                    "${transaksiProvider.listTransaksi[widget.idTransaksi].listProduk.containsKey(widget.produk.id) ? 'Update Cart' : 'Add to Cart'} (Antrean ${transaksiProvider.listTransaksi[widget.idTransaksi].nomorAntrean})")
+                                : const Text('Add to Cart')),
+                        transaksiProvider.selectedAntrean == -1
+                            ? const Padding(
+                                padding: EdgeInsets.only(top: 12),
+                                child: Text('Tidak ada transaksi yang sedang aktif/dipilih.',
+                                    style: TextStyle(color: Colors.red)),
+                              )
+                            : Container()
+                      ],
+                    ),
                   ),
                 ),
-                transaksiProvider.selectedAntrean == -1
-                    ? const Text('Tidak ada transaksi yang sedang aktif/dipilih.',
-                        style: TextStyle(color: Colors.red))
-                    : Container()
               ],
             ),
           ],

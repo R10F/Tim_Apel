@@ -20,7 +20,7 @@ class Transaksi {
 
     List result = [];
     listProduk.forEach((idProduk, qty) {
-      result.add({'produk': produkData.listProduk[idProduk], 'qty': qty});
+      result.add({'produk': produkData.listProduk[idProduk - 1], 'qty': qty});
     });
     return result;
   }
@@ -38,24 +38,19 @@ class Transaksi {
 
     int harga = 0;
     listProduk.forEach((idProduk, qty) {
-      harga += produkData.listProduk[idProduk].hargaJual * qty;
+      harga += produkData.listProduk[idProduk - 1].hargaJual * qty;
     });
     return harga;
   }
 
   void addToCart(int idProduk, int qty) {
-    if (!listProduk.containsKey(idProduk)) {
-      listProduk[idProduk] = qty;
-    } else {
-      int temp = listProduk[idProduk]! + qty;
-      listProduk[idProduk] = temp;
-    }
+    listProduk[idProduk] = qty;
   }
 }
 
 class TransaksiData {
   List<Transaksi> listTransaksi = [
-    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: {1: 3, 3: 5, 7: 1}),
+    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
     Transaksi(nomorAntrean: 3, idKasir: 2, listProduk: {
       4: 2,
       6: 4,

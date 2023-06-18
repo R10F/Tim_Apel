@@ -37,8 +37,8 @@ class TransaksiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addToCart(int idProduk, int qty) {
-    _listTransaksi[_selectedAntrean].addToCart(idProduk, qty);
+  void addToCart(int idTransaksi, int idProduk, int qty) {
+    _listTransaksi[idTransaksi].addToCart(idProduk, qty);
     notifyListeners();
   }
 

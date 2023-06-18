@@ -120,14 +120,15 @@ class _HomeState extends State<Home> {
                   if (listTransaksi[i].inProcess)
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => RincianTransaksi(
-                                      namaKasir: accountProvider
-                                          .userAccounts[listTransaksi[i].idKasir].nama,
-                                      transaksi: listTransaksi[i],
-                                    )));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) => RincianTransaksi(
+                        //               idTransaksi: i,
+                        //               namaKasir: accountProvider
+                        //                   .userAccounts[listTransaksi[i].idKasir].nama,
+                        //               transaksi: listTransaksi[i],
+                        //             )));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
