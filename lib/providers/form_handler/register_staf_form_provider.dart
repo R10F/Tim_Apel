@@ -5,12 +5,15 @@ class RegisterStafFormProvider extends ChangeNotifier {
   TextEditingController namaController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController jadwalController = TextEditingController();
+  // TextEditingController jadwalController = TextEditingController();
 
+  String _hari = "none";
+
+  get getHari => _hari;
   bool isNameEmpty = false;
   bool isUsernameEmpty = false;
   bool isPasswordEmpty = false;
-  bool isJadwalEmpty = false;
+  // bool isJadwalEmpty = false;
 
   set setIsNameEmpty(value) {
     isNameEmpty = value;
@@ -27,10 +30,15 @@ class RegisterStafFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set setIsJadwalEmpty(value) {
-    isJadwalEmpty = value;
+  set setHari(value) {
+    _hari = value;
     notifyListeners();
   }
+
+  // set setIsJadwalEmpty(value) {
+  //   isJadwalEmpty = value;
+  //   notifyListeners();
+  // }
 
   get getPasswordVisible => _passwordVisible;
 
