@@ -87,7 +87,10 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                   child: const Text('Pilih metode pembayaran'),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const PaymentList()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            fullscreenDialog: true, builder: (_) => const PaymentList()));
                   },
                 ))
               ],

@@ -84,10 +84,9 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                       msg: 'Pencetakan bon sedang diproses',
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.TOP,
-                      // timeInSecForIosWeb: 10,
                       backgroundColor: Colors.teal[300],
                       textColor: Colors.white,
-                      fontSize: 16.0,
+                      fontSize: 16,
                     );
                   },
                 ))

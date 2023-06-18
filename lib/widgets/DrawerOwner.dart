@@ -20,8 +20,7 @@ class DrawerOwner extends StatelessWidget {
         children: [
           DrawerHeader(
               decoration: BoxDecoration(
-                  border: Border(
-                      bottom: Divider.createBorderSide(context, width: 2))),
+                  border: Border(bottom: Divider.createBorderSide(context, width: 2))),
               child: Column(
                 children: [
                   Image.asset(
@@ -62,10 +61,8 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => const ListStaf(isActiveAccounts: true)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: true)));
             },
           ),
           ListTile(
@@ -81,8 +78,7 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const RegisterStaf()));
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
             },
           ),
           ListTile(
@@ -98,10 +94,8 @@ class DrawerOwner extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => const ListStaf(isActiveAccounts: false)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: false)));
             },
           ),
           const Divider(
@@ -115,9 +109,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),
@@ -132,8 +125,7 @@ class DrawerOwner extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const StokProduk()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const StokProduk()));
               }),
           const Divider(
             height: 15,
@@ -146,9 +138,8 @@ class DrawerOwner extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Figtree',
                 fontSize: 16,
-                color: accountProvider.getSetting('dark_mode')
-                    ? Colors.grey[300]
-                    : Colors.grey[700],
+                color:
+                    accountProvider.getSetting('dark_mode') ? Colors.grey[300] : Colors.grey[700],
               ),
             ),
           ),
@@ -163,8 +154,7 @@ class DrawerOwner extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const ProdukTerlaris()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ProdukTerlaris()));
               }),
           ListTile(
               title: const Padding(
@@ -178,9 +168,7 @@ class DrawerOwner extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => const ProdukTidakLaris()));
+                    context, MaterialPageRoute(builder: (_) => const ProdukTidakLaris()));
               }),
         ],
       ),

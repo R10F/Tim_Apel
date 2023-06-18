@@ -41,14 +41,11 @@ class _ListStafState extends State<ListStaf> {
                                       title: Text(userAccounts[index].nama),
                                     ),
                                     body: Profile(
-                                        id: index,
-                                        asMyself: false,
-                                        data: userAccounts[index]))));
+                                        id: index, asMyself: false, data: userAccounts[index]))));
                       },
                       child: Container(
                         decoration: const BoxDecoration(
-                            border:
-                                Border(bottom: BorderSide(color: Colors.grey))),
+                            border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -59,27 +56,18 @@ class _ListStafState extends State<ListStaf> {
                                 width: 45,
                               ),
                               title: Text(userAccounts[index].nama),
-                              trailing: accountProvider.id != index &&
-                                      userAccounts[index].isActive
+                              trailing: accountProvider.id != index && userAccounts[index].isActive
                                   ? IconButton(
                                       onPressed: () {
                                         accountProvider.archieveAccounts(index);
 
-                                        // accountProvider.removeAccount(index);
-                                        // CherryToast.success(
-                                        //   title: const Text("Staf Berhasil Diarsipkan"),
-                                        //   toastPosition: Position.top,
-                                        //   animationDuration: const Duration(milliseconds: 500),
-                                        //   autoDismiss: true,
-                                        // ).show(context);
                                         Fluttertoast.showToast(
                                           msg: 'Staf Berhasil Diarsipkan',
                                           toastLength: Toast.LENGTH_LONG,
                                           gravity: ToastGravity.TOP,
-                                          // timeInSecForIosWeb: 10,
                                           backgroundColor: Colors.teal[300],
                                           textColor: Colors.white,
-                                          fontSize: 16.0,
+                                          fontSize: 16,
                                         );
                                       },
                                       icon: const Icon(Icons.archive))
@@ -95,8 +83,7 @@ class _ListStafState extends State<ListStaf> {
         icon: const Icon(Icons.add),
         label: const Text('Tambah'),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
         },
       ),
     );
