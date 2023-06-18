@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/transaksi/selesai/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -25,6 +27,8 @@ class CardTransaksiSelesai extends StatefulWidget {
 class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
   @override
   Widget build(BuildContext context) {
+    var produkProvider = Provider.of<ProdukProvider>(context);
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -56,7 +60,8 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                   Column(children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(currency(widget.transaksi.totalHargaBelanja),
+                      child: Text(
+                          currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk)),
                           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                     ),
                     Text(widget.transaksi.metodePembayaran,

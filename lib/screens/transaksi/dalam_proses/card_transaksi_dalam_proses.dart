@@ -4,6 +4,7 @@ import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
@@ -28,6 +29,7 @@ class CardTransaksiDalamProses extends StatefulWidget {
 class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
   @override
   Widget build(BuildContext context) {
+    var produkProvider = Provider.of<ProdukProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     bool isActive = widget.index == transaksiProvider.selectedAntrean;
 
@@ -67,7 +69,9 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                                   fontWeight: FontWeight.w300,
                                   color: Colors.teal[500])),
                         ),
-                        Text(currency(widget.transaksi.totalHargaBelanja),
+                        Text(
+                            currency(
+                                widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk)),
                             style: TextStyle(color: Colors.teal[500])),
                       ]),
                     ]),

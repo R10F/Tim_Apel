@@ -1,5 +1,3 @@
-import 'package:tim_apel/models/produk_data_model.dart';
-
 class Transaksi {
   int nomorAntrean;
   int idKasir;
@@ -31,12 +29,11 @@ class Transaksi {
     return result;
   }
 
-  get totalHargaBelanja {
-    var produkData = ProdukData();
-
+  int totalHargaBelanja(List produkData) {
     int harga = 0;
     listProduk.forEach((idProduk, qty) {
-      harga += produkData.listProduk[idProduk - 1].hargaJual * qty;
+      int temp = produkData[idProduk - 1].hargaJual;
+      harga += temp * qty;
     });
     return harga;
   }
