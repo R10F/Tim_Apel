@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
-
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -91,21 +91,12 @@ class _LoginState extends State<Login> {
                             loginFormProvider.usernameController.text,
                             loginFormProvider.passwordController.text);
                         if (!status) {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text("Login Gagal"),
-                              content: const Text(
-                                'Username atau Password Anda Salah Silahkan Coba Lagi ',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                          );
+                          QuickAlert.show(
+                              context: context,
+                              type: QuickAlertType.warning,
+                              title: 'Login Gagal',
+                              text:
+                                  'Username atau Password Anda Salah Silahkan Coba Lagi ');
                         }
                       }
 
