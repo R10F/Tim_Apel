@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -17,7 +19,8 @@ class RincianTransaksi extends StatefulWidget {
 class _RincianTransaksiState extends State<RincianTransaksi> {
   @override
   Widget build(BuildContext context) {
-    var keranjang = widget.transaksi.keranjang;
+    var produkProvider = Provider.of<ProdukProvider>(context);
+    var keranjang = widget.transaksi.keranjang(produkProvider.semuaProduk);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Bon Faktur')),
@@ -65,11 +68,11 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 Expanded(child: Text('TODO: TABEL')),
               ],
             ),
-            // Expanded(
-            //   child: Column(
-            //       children: List.generate(keranjang.length,
-            //           (index) => ItemRincianBelanja(idTransaksi: 3, data: keranjang[index]))),
-            // ),
+            Expanded(
+              child: Column(
+                  children: List.generate(keranjang.length,
+                      (index) => ItemRincianBelanja(idTransaksi: 3, data: keranjang[index]))),
+            ),
             Row(
               children: [
                 Expanded(
