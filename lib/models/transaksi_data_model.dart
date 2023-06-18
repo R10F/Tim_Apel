@@ -15,22 +15,20 @@ class Transaksi {
     Map<int, int>? listProduk,
   }) : listProduk = listProduk ?? {};
 
-  get keranjang {
-    var produkData = ProdukData();
-
-    List result = [];
-    listProduk.forEach((idProduk, qty) {
-      result.add({'produk': produkData.listProduk[idProduk - 1], 'qty': qty});
-    });
-    return result;
-  }
-
   get itemCount {
     int count = 0;
     listProduk.forEach((idProduk, qty) {
       count += qty;
     });
     return count;
+  }
+
+  List keranjang(List produkData) {
+    List result = [];
+    listProduk.forEach((idProduk, qty) {
+      result.add({'produk': produkData[idProduk - 1], 'qty': qty});
+    });
+    return result;
   }
 
   get totalHargaBelanja {

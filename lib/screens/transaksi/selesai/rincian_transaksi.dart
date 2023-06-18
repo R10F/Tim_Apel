@@ -65,11 +65,11 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 Expanded(child: Text('TODO: TABEL')),
               ],
             ),
-            Expanded(
-              child: Column(
-                  children: List.generate(keranjang.length,
-                      (index) => ItemRincianBelanja(idTransaksi: -1, data: keranjang[index]))),
-            ),
+            // Expanded(
+            //   child: Column(
+            //       children: List.generate(keranjang.length,
+            //           (index) => ItemRincianBelanja(idTransaksi: 3, data: keranjang[index]))),
+            // ),
             Row(
               children: [
                 Expanded(

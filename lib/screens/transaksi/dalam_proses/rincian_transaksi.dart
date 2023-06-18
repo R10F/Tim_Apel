@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/payment/payment_list.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dart';
@@ -21,8 +22,10 @@ class RincianTransaksi extends StatefulWidget {
 class _RincianTransaksiState extends State<RincianTransaksi> {
   @override
   Widget build(BuildContext context) {
+    var produkProvider = Provider.of<ProdukProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-    var keranjang = transaksiProvider.listTransaksi[widget.idTransaksi].keranjang;
+    List keranjang =
+        transaksiProvider.listTransaksi[widget.idTransaksi].keranjang(produkProvider.semuaProduk);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Rincian Transaksi')),
