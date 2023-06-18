@@ -5,60 +5,72 @@ class Transaksi {
   int idKasir;
   bool inProcess;
   String metodePembayaran;
-  List listProduk;
+  Map<int, int> listProduk; // key: idProduk, value: qty
 
-  Transaksi(
-      {required this.nomorAntrean,
-      required this.idKasir,
-      this.inProcess = true,
-      this.metodePembayaran = '',
-      this.listProduk = const []});
+  Transaksi({
+    required this.nomorAntrean,
+    required this.idKasir,
+    this.inProcess = true,
+    this.metodePembayaran = '',
+    Map<int, int>? listProduk,
+  }) : listProduk = listProduk ?? {};
 
   get keranjang {
-    List<Produk> result = [];
     var produkData = ProdukData();
 
-    for (var p in listProduk) {
-      for (Produk produk in produkData.listProduk) {
-        if (p['id'] == produk.id) {
-          result.add(produk);
-        }
-      }
-    }
-
+    List result = [];
+    listProduk.forEach((idProduk, qty) {
+      result.add({'produk': produkData.listProduk[idProduk - 1], 'qty': qty});
+    });
     return result;
   }
 
-  get totalBelanja => 100;
+  get itemCount {
+    int count = 0;
+    listProduk.forEach((idProduk, qty) {
+      count += qty;
+    });
+    return count;
+  }
+
+  get totalHargaBelanja {
+    var produkData = ProdukData();
+
+    int harga = 0;
+    listProduk.forEach((idProduk, qty) {
+      harga += produkData.listProduk[idProduk - 1].hargaJual * qty;
+    });
+    return harga;
+  }
 
   void addToCart(int idProduk, int qty) {
-    listProduk.add({'id': idProduk, 'qty': qty});
+    listProduk[idProduk] = qty;
+  }
+
+  void cancelCartItem(int idProduk) {
+    listProduk.remove(idProduk);
   }
 }
 
 class TransaksiData {
   List<Transaksi> listTransaksi = [
-    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: [
-      {'id': 1, 'qty': 3},
-      {'id': 3, 'qty': 5},
-      {'id': 7, 'qty': 1},
-    ]),
-    Transaksi(nomorAntrean: 3, idKasir: 2, listProduk: [
-      {'id': 4, 'qty': 2},
-      {'id': 6, 'qty': 4},
-    ]),
-    Transaksi(nomorAntrean: 4, idKasir: 3, listProduk: [
-      {'id': 2, 'qty': 1},
-      {'id': 5, 'qty': 3},
-    ]),
+    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
+    Transaksi(nomorAntrean: 3, idKasir: 2, listProduk: {
+      4: 2,
+      6: 4,
+    }),
+    Transaksi(nomorAntrean: 4, idKasir: 3, listProduk: {
+      2: 1,
+      5: 3,
+    }),
     Transaksi(
         nomorAntrean: 2,
         idKasir: 4,
-        listProduk: [
-          {'id': 2, 'qty': 5},
-          {'id': 4, 'qty': 4},
-          {'id': 6, 'qty': 5},
-        ],
+        listProduk: {
+          2: 5,
+          4: 4,
+          6: 5,
+        },
         inProcess: false,
         metodePembayaran: 'Tunai'),
   ];

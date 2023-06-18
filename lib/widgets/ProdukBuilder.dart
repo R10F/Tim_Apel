@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -18,6 +19,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
     return GridView.count(
         padding: const EdgeInsets.all(15),
@@ -33,8 +35,9 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) =>
-                                DetailProduk(produk: widget.produk[i])));
+                            builder: (_) => DetailProduk(
+                                idTransaksi: transaksiProvider.selectedAntrean,
+                                produk: widget.produk[i])));
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -51,16 +54,14 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           widget.produk[i].nama,
-                                          style: const TextStyle(
-                                              fontFamily: 'Figtree',
-                                              fontSize: 16),
+                                          style:
+                                              const TextStyle(fontFamily: 'Figtree', fontSize: 16),
                                         ),
                                       ),
                                     ),
                                     Transform.translate(
                                         offset: const Offset(12.5, 0),
-                                        child: PopupMenu(
-                                            idxProduk: widget.produk[i].id)),
+                                        child: PopupMenu(idxProduk: widget.produk[i].id)),
                                   ]
                                 : [
                                     Flexible(
@@ -71,8 +72,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                           child: Text(
                                             widget.produk[i].nama,
                                             style: const TextStyle(
-                                                fontFamily: 'Figtree',
-                                                fontSize: 16),
+                                                fontFamily: 'Figtree', fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -86,9 +86,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                           child: Text(
                             currency(widget.produk[i].hargaJual),
                             style: TextStyle(
-                                fontFamily: 'Figtree',
-                                fontSize: 14,
-                                color: Colors.teal[500]),
+                                fontFamily: 'Figtree', fontSize: 14, color: Colors.teal[500]),
                           ),
                         ),
                       ),

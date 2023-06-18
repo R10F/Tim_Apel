@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/payment/payment_list.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
-  const RincianTransaksi({super.key, required this.transaksi, required this.namaKasir});
+  const RincianTransaksi(
+      {super.key, required this.idTransaksi, required this.transaksi, required this.namaKasir});
 
+  final int idTransaksi;
   final Transaksi transaksi;
   final String namaKasir;
 
@@ -17,7 +21,8 @@ class RincianTransaksi extends StatefulWidget {
 class _RincianTransaksiState extends State<RincianTransaksi> {
   @override
   Widget build(BuildContext context) {
-    var keranjang = widget.transaksi.keranjang;
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
+    var keranjang = transaksiProvider.listTransaksi[widget.idTransaksi].keranjang;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Rincian Transaksi')),
@@ -47,7 +52,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalBelanja)}'))
+                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalHargaBelanja)}'))
               ],
             ),
             const Padding(
@@ -55,15 +60,20 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
               child: Text('Rincian Belanja'),
             ),
             Expanded(
-              child: Column(
-                  children: List.generate(
-                      keranjang.length, (index) => ItemRincianBelanja(produk: keranjang[index]))),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                    children: List.generate(
+                        keranjang.length,
+                        (index) => ItemRincianBelanja(
+                            idTransaksi: widget.idTransaksi, data: keranjang[index]))),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 25),
+              padding: const EdgeInsets.only(top: 20, bottom: 25),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text('Total', style: TextStyle(fontSize: 18)),
-                Text(currency(widget.transaksi.totalBelanja),
+                Text(currency(widget.transaksi.totalHargaBelanja),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
               ]),
             ),
