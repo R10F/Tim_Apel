@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/DetailProduk.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -16,8 +18,9 @@ class ItemRincianBelanja extends StatefulWidget {
 class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
   @override
   Widget build(BuildContext context) {
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
     Produk produk = widget.data['produk'];
-    int qty = widget.data['qty'];
+    int qty = transaksiProvider.listTransaksi[widget.idTransaksi].listProduk[produk.id];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
