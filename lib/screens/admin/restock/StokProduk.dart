@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/stokProduk_provider.dart';
+import 'package:tim_apel/providers/stok_produk_provider.dart';
 
 class StokProduk extends StatefulWidget {
   const StokProduk({super.key});
@@ -14,6 +14,7 @@ class _StokProdukState extends State<StokProduk> {
   Widget build(BuildContext context) {
     var stokProdukProv = Provider.of<StokProdukProvider>(context);
     var filteredStokProduk = stokProdukProv.getStokProduk;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Segera Restock"),
@@ -55,12 +56,10 @@ class _StokProdukState extends State<StokProduk> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 stokProdukProv.getStokProduk[i]['nama'],
-                                style: const TextStyle(
-                                    fontSize: 16, fontFamily: 'Figtree'),
+                                style: const TextStyle(fontSize: 16, fontFamily: 'Figtree'),
                               ),
                             ),
                             Padding(
@@ -69,8 +68,7 @@ class _StokProdukState extends State<StokProduk> {
                                   onPressed: () {},
                                   style: OutlinedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
+                                          borderRadius: BorderRadius.circular(10))),
                                   child: Text(
                                     "Restock",
                                     style: TextStyle(color: Colors.teal[500]),
@@ -90,20 +88,16 @@ class _StokProdukState extends State<StokProduk> {
                                       color: Colors.yellow[500],
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       const Text(
                                         "Sisa",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
+                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                                       ),
                                       Text(
                                         "${stokProdukProv.getStokProduk[i]['sisa']}",
                                         style: const TextStyle(
-                                            fontSize: 35,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 35, fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),

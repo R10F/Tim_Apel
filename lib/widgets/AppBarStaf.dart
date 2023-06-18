@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/bottomNavbar_provider.dart';
-
-import '../models/produk_data_model.dart';
-import '../providers/produk_provider.dart';
-import 'ProdukBuilder.dart';
-import 'TabNavigasiProduk.dart';
-import 'TabNavigasiTransaksi.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/bottom_navbar_provider.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/screens/produk/produk_builder.dart';
+import 'package:tim_apel/widgets/TabNavigasiProduk.dart';
+import 'package:tim_apel/widgets/TabNavigasiTransaksi.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   @override
@@ -63,7 +62,8 @@ class AppBarStaf extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+    var bottomnavProvider = Provider.of<BottomNavbarProvider>(context);
+
     return AppBar(
         actions: [
           if (bottomnavProvider.getSelectedIdx == 1)

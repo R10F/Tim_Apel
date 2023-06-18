@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
-import 'package:tim_apel/screens/DetailProduk.dart';
+import 'package:tim_apel/screens/produk/detail_produk.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class ItemRincianBelanja extends StatefulWidget {

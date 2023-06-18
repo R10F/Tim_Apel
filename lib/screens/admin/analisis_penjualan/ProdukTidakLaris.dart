@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/account_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 
 class ProdukTidakLaris extends StatefulWidget {
   const ProdukTidakLaris({super.key});
@@ -26,8 +25,7 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
               child: TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
                     labelText: 'Nama Produk',
                     suffixIcon: const Icon(Icons.search)),
               ),
@@ -51,8 +49,7 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
                       height: 75,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                            color: Colors.red[800],
-                            borderRadius: BorderRadius.circular(5)),
+                            color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
                         child: Center(
                           child: Text(
                             "1",
@@ -82,16 +79,14 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             "terjual: 0/bulan",
-                            style:
-                                TextStyle(fontSize: 15, color: Colors.red[600]),
+                            style: TextStyle(fontSize: 15, color: Colors.red[600]),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             "total terjual : 10",
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.red[600]),
+                            style: TextStyle(fontSize: 14, color: Colors.red[600]),
                           ),
                         ),
                       ],

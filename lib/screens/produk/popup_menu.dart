@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
-
-import '../providers/produk_provider.dart';
-import '../screens/EditProduk.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/screens/produk/edit_produk.dart';
 
 class PopupMenu extends StatefulWidget {
   final int idxProduk;
@@ -21,7 +20,7 @@ class _PopupMenuState extends State<PopupMenu> {
     var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
     var nama = toBeEdited.stok;
 
-    void _updateFormProvider(){
+    void _updateFormProvider() {
       formProv.namaProdukController.text = toBeEdited.nama;
       formProv.deskripsiController.text = toBeEdited.deskripsi;
       formProv.stokController.text = toBeEdited.stok.toString();
@@ -34,18 +33,18 @@ class _PopupMenuState extends State<PopupMenu> {
     return PopupMenuButton(
       icon: const Icon(Icons.more_vert),
       onSelected: (value) {
-        if (value == 'edit'){
+        if (value == 'edit') {
           _updateFormProvider();
-          
+
           Navigator.push(
-            context, 
-            MaterialPageRoute(builder: (context) => EditProduk(idxProduk: widget.idxProduk,), 
-            fullscreenDialog: true),
+            context,
+            MaterialPageRoute(
+                builder: (context) => EditProduk(
+                      idxProduk: widget.idxProduk,
+                    ),
+                fullscreenDialog: true),
           );
-        }
-        else if (value == 'hapus'){
-          
-        }
+        } else if (value == 'hapus') {}
       },
       itemBuilder: (context) {
         return <PopupMenuEntry>[
@@ -54,13 +53,13 @@ class _PopupMenuState extends State<PopupMenu> {
               child: ListTile(
                 leading: Icon(Icons.edit),
                 title: Text('Edit'),
-          )),
+              )),
           const PopupMenuItem(
-            value: 'hapus',
-            child: ListTile(
-              leading: Icon(Icons.delete),
-              title: Text('Hapus'),
-          )),
+              value: 'hapus',
+              child: ListTile(
+                leading: Icon(Icons.delete),
+                title: Text('Hapus'),
+              )),
         ];
       },
     );

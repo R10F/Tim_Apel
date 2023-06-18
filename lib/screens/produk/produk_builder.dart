@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
-import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/screens/DetailProduk.dart';
-import 'PopupMenu.dart';
+import 'package:tim_apel/screens/produk/detail_produk.dart';
+import 'package:tim_apel/screens/produk/popup_menu.dart';
 
 class ProdukBuilder extends StatefulWidget {
   final List<Produk> produk;

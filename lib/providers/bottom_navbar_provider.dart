@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class bottomNavbarProvider extends ChangeNotifier {
+class BottomNavbarProvider extends ChangeNotifier {
   int _selectedIndex = 0;
 
   int get getSelectedIdx => _selectedIndex;

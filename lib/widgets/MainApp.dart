@@ -5,12 +5,12 @@ import 'package:tim_apel/widgets/AppBarOwner.dart';
 import 'package:tim_apel/widgets/AppBarStaf.dart';
 import 'package:tim_apel/widgets/BottomNavbar.dart';
 import 'package:tim_apel/widgets/DrawerOwner.dart';
-import 'package:tim_apel/providers/bottomNavbar_provider.dart';
+import 'package:tim_apel/providers/bottom_navbar_provider.dart';
 import 'package:tim_apel/screens/dashboard/home.dart';
-import 'package:tim_apel/screens/Produk.dart';
+import 'package:tim_apel/screens/produk/grid_produk.dart';
+import 'package:tim_apel/screens/produk/tambah_produk.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
 import 'package:tim_apel/screens/transaksi/list_transaksi.dart';
-import 'package:tim_apel/screens/TambahProduk.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -20,12 +20,17 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  List halamanBottomNav = [const Home(), const Produk(), const ListTransaksi(), const Profile()];
+  List halamanBottomNav = [
+    const Home(),
+    const GridProduk(),
+    const ListTransaksi(),
+    const Profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+    var bottomnavProvider = Provider.of<BottomNavbarProvider>(context);
 
     Future<void> addProdukAndShowMessage(BuildContext context) async {
       final result = await Navigator.push(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
-import '../../providers/bottomNavbar_provider.dart';
+import '../../providers/bottom_navbar_provider.dart';
 
 class PersonalOption extends StatefulWidget {
   const PersonalOption({super.key});
@@ -15,7 +15,8 @@ class _PersonalOptionState extends State<PersonalOption> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+    var bottomnavProvider = Provider.of<BottomNavbarProvider>(context);
+
     return Column(children: [
       const Divider(
         height: 15,

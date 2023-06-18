@@ -1,10 +1,10 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/bottomNavbar_provider.dart';
+import 'package:tim_apel/providers/bottom_navbar_provider.dart';
 import 'package:tim_apel/screens/dashboard/home.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
-import 'package:tim_apel/screens/Produk.dart';
+import 'package:tim_apel/screens/produk/grid_produk.dart';
 import 'package:tim_apel/screens/transaksi/list_transaksi.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -15,11 +15,16 @@ class BottomNavbar extends StatefulWidget {
 }
 
 class _BottomNavbarState extends State<BottomNavbar> {
-  List halamanBottomNav = [const Home(), const Produk(), const ListTransaksi(), const Profile()];
+  List halamanBottomNav = [
+    const Home(),
+    const GridProduk(),
+    const ListTransaksi(),
+    const Profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
-    var bottomnavProvider = Provider.of<bottomNavbarProvider>(context);
+    var bottomnavProvider = Provider.of<BottomNavbarProvider>(context);
 
     return BottomNavigationBar(
       items: const [

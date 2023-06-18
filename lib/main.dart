@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/form_handler/edit_nama_form_provider.dart';
-import 'package:tim_apel/providers/qtyProduk_provider.dart';
-import 'package:tim_apel/providers/stokProduk_provider.dart';
-import 'package:tim_apel/providers/transaksi_provider.dart';
-import 'package:tim_apel/screens/login.dart';
-import 'package:tim_apel/widgets/MainApp.dart';
-import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
 import 'package:tim_apel/providers/form_handler/register_staf_form_provider.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
-import 'package:tim_apel/providers/bottomNavbar_provider.dart';
+import 'package:tim_apel/providers/qty_produk_provider.dart';
+import 'package:tim_apel/providers/stok_produk_provider.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/providers/bottom_navbar_provider.dart';
+import 'package:tim_apel/screens/login.dart';
+import 'package:tim_apel/widgets/MainApp.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (_) => bottomNavbarProvider(),
+        create: (_) => BottomNavbarProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => AccountProvider(),
