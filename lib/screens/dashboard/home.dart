@@ -67,24 +67,24 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.start,
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.start,
-          //     children: [
-          //       ElevatedButton(
-          //           style: ElevatedButton.styleFrom(
-          //               backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
-          //           onPressed: () {
-          //             transaksiProvider.createNewOrder(accountProvider.id);
-          //           },
-          //           child: const Text(
-          //             "Buat Order Baru",
-          //             style: TextStyle(color: Colors.black),
-          //           )),
-          //     ],
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
+                    onPressed: () {
+                      transaksiProvider.createNewOrder(accountProvider.id);
+                    },
+                    child: const Text(
+                      "Buat Order Baru",
+                      style: TextStyle(color: Colors.black),
+                    )),
+              ],
+            ),
+          ),
           accountProvider.getSetting('dashboard_minimal') ? Container() : const HomeInsight(),
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 28, left: 4, right: 4),
