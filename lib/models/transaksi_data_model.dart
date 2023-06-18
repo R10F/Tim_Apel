@@ -46,6 +46,10 @@ class Transaksi {
   void addToCart(int idProduk, int qty) {
     listProduk[idProduk] = qty;
   }
+
+  void cancelCartItem(int idProduk) {
+    listProduk.remove(idProduk);
+  }
 }
 
 class TransaksiData {

@@ -55,7 +55,9 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
                                 color: Colors.teal, fontSize: 14, fontWeight: FontWeight.w500),
                             child: Text('EDIT'))),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          transaksiProvider.cancelCartItem(widget.idTransaksi, produk.id);
+                        },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               const EdgeInsets.only(top: 16, left: 25)),

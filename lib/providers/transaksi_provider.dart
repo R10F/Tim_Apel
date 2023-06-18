@@ -42,6 +42,11 @@ class TransaksiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void cancelCartItem(int idTransaksi, int idProduk) {
+    _listTransaksi[idTransaksi].cancelCartItem(idProduk);
+    notifyListeners();
+  }
+
   void deleteOrder(int index) {
     _listTransaksi.removeAt(index);
     _selectedAntrean = firstInProcessOrder();
