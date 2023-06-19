@@ -78,7 +78,7 @@ class _DetailProdukState extends State<DetailProduk> {
                       InputQty(
                         minVal: 1,
                         showMessageLimit: false,
-                        initVal: transaksiProvider.selectedAntrean > -1
+                        initVal: transaksiProvider.hasTransaksiActive
                             ? transaksiProvider.listTransaksi[widget.idTransaksi].listProduk
                                     .containsKey(widget.produk.id)
                                 ? transaksiProvider
@@ -115,13 +115,13 @@ class _DetailProdukState extends State<DetailProduk> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal[500],
                                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30)),
-                            onPressed: transaksiProvider.selectedAntrean > -1
+                            onPressed: transaksiProvider.hasTransaksiActive
                                 ? () {
                                     transaksiProvider.addToCart(
                                         widget.idTransaksi, widget.produk.id, qtyProvider.getQty);
                                   }
                                 : null,
-                            child: transaksiProvider.selectedAntrean > -1
+                            child: transaksiProvider.hasTransaksiActive
                                 ? Text(
                                     "${transaksiProvider.listTransaksi[widget.idTransaksi].listProduk.containsKey(widget.produk.id) ? 'Update Cart' : 'Add to Cart'} (Antrean ${transaksiProvider.listTransaksi[widget.idTransaksi].nomorAntrean})")
                                 : const Text('Add to Cart')),

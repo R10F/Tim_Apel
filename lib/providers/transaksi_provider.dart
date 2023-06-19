@@ -12,6 +12,7 @@ class TransaksiProvider extends ChangeNotifier {
     firstInProcessOrder();
   }
 
+  get hasTransaksiActive => selectedAntrean > -1;
   get listTransaksi => _listTransaksi;
   get currentAntrean => _currentNomorAntrean;
   get selectedAntrean => _selectedAntrean;
