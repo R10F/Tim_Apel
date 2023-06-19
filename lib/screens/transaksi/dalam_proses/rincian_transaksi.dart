@@ -26,6 +26,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     List keranjang =
         transaksiProvider.listTransaksi[widget.idTransaksi].keranjang(produkProvider.semuaProduk);
+    int totalHargaBelanja = widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Rincian Transaksi')),
@@ -55,10 +56,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(
-                    flex: 5,
-                    child: Text(
-                        ': ${currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk))}'))
+                Expanded(flex: 5, child: Text(': ${currency(totalHargaBelanja)}'))
               ],
             ),
             const Padding(
@@ -79,7 +77,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
               padding: const EdgeInsets.only(top: 20, bottom: 25),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 const Text('Total', style: TextStyle(fontSize: 18)),
-                Text(currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk)),
+                Text(currency(totalHargaBelanja),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
               ]),
             ),
@@ -93,7 +91,9 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            fullscreenDialog: true, builder: (_) => const PaymentList()));
+                            fullscreenDialog: true,
+                            builder: (_) => PaymentList(
+                                idTransaksi: widget.idTransaksi, totalHarga: totalHargaBelanja)));
                   },
                 ))
               ],

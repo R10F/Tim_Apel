@@ -1,19 +1,30 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/payment/payment_done.dart';
 import 'package:tim_apel/screens/payment/pembayaran_tunai.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class ItemMetodePembayaran extends StatelessWidget {
   ItemMetodePembayaran(
-      {super.key, required this.metodePembayaran, required this.iconName});
+      {super.key,
+      required this.idTransaksi,
+      required this.totalHarga,
+      required this.metodePembayaran,
+      required this.iconName});
 
+  final int idTransaksi;
+  final int totalHarga;
   final String metodePembayaran;
   final String iconName;
 
   @override
   Widget build(BuildContext context) {
+    var transaksiProvider = Provider.of<TransaksiProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(metodePembayaran),
@@ -30,11 +41,11 @@ class ItemMetodePembayaran extends StatelessWidget {
                 style: TextStyle(fontSize: 23),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 30),
-              child: Text('Rp 20.500',
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: Text(currency(totalHarga),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: Colors.green)),
+                  style: const TextStyle(fontSize: 30, color: Colors.green)),
             ),
             metodePembayaran == 'Tunai'
                 ? const PembayaranTunai()
@@ -49,13 +60,11 @@ class ItemMetodePembayaran extends StatelessWidget {
                         ),
                       ),
                       QrImageView(
-                        data: 'Pembayaran $metodePembayaran sebesar Rp 20.500',
+                        data: 'Pembayaran $metodePembayaran sebesar ${currency(totalHarga)}',
                         version: QrVersions.auto,
                         size: 250,
-                        embeddedImage:
-                            AssetImage("assets/payment/$iconName-logo.png"),
-                        embeddedImageStyle:
-                            const QrEmbeddedImageStyle(size: Size(50, 50)),
+                        embeddedImage: AssetImage("assets/payment/$iconName-logo.png"),
+                        embeddedImageStyle: const QrEmbeddedImageStyle(size: Size(50, 50)),
                       ),
                     ],
                   ),
@@ -63,14 +72,14 @@ class ItemMetodePembayaran extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.teal[700]),
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                       onPressed: () {
+                        transaksiProvider.transaksiSelesai(idTransaksi, metodePembayaran);
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (_) => const PaymentDone()));
+                                fullscreenDialog: true, builder: (_) => const PaymentDone()));
                       },
                       child: const Text(
                         'Konfirmasi Pembayaran',

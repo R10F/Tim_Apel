@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tim_apel/screens/payment/item_metode_pembayaran.dart';
 
 class PaymentList extends StatelessWidget {
-  const PaymentList({super.key});
+  const PaymentList({super.key, required this.idTransaksi, required this.totalHarga});
+
+  final int idTransaksi;
+  final int totalHarga;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +46,8 @@ class PaymentList extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (_) => ItemMetodePembayaran(
+                                        idTransaksi: idTransaksi,
+                                        totalHarga: totalHarga,
                                         metodePembayaran: listMetodePembayaran[i],
                                         iconName: listMetodePembayaran[i].toLowerCase(),
                                       )));

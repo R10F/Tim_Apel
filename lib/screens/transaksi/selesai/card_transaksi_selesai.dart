@@ -35,6 +35,7 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
             context,
             MaterialPageRoute(
                 builder: (_) => RincianTransaksi(
+                      index: widget.index,
                       namaKasir: widget.namaKasir,
                       transaksi: widget.transaksi,
                     )));

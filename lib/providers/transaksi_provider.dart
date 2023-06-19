@@ -9,7 +9,7 @@ class TransaksiProvider extends ChangeNotifier {
 
   TransaksiProvider() {
     _currentNomorAntrean = _listTransaksi.length + 1;
-    _selectedAntrean = firstInProcessOrder();
+    firstInProcessOrder();
   }
 
   get listTransaksi => _listTransaksi;
@@ -21,7 +21,7 @@ class TransaksiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int firstInProcessOrder() {
+  void firstInProcessOrder() {
     int result = -1;
     for (int i = 0; i < _listTransaksi.length; i++) {
       if (_listTransaksi[i].inProcess) {
@@ -29,7 +29,7 @@ class TransaksiProvider extends ChangeNotifier {
         break;
       }
     }
-    return result;
+    _selectedAntrean = result;
   }
 
   void createNewOrder(int idKasir) {
@@ -49,7 +49,14 @@ class TransaksiProvider extends ChangeNotifier {
 
   void deleteOrder(int index) {
     _listTransaksi.removeAt(index);
-    _selectedAntrean = firstInProcessOrder();
+    firstInProcessOrder();
+    notifyListeners();
+  }
+
+  void transaksiSelesai(int idTransaksi, String metodePembayaran) {
+    _listTransaksi[idTransaksi].metodePembayaran = metodePembayaran;
+    _listTransaksi[idTransaksi].inProcess = false;
+    firstInProcessOrder();
     notifyListeners();
   }
 }

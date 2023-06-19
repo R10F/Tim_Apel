@@ -7,8 +7,10 @@ import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dar
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
-  const RincianTransaksi({super.key, required this.transaksi, required this.namaKasir});
+  const RincianTransaksi(
+      {super.key, required this.index, required this.transaksi, required this.namaKasir});
 
+  final int index;
   final Transaksi transaksi;
   final String namaKasir;
 
@@ -50,7 +52,10 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(flex: 5, child: Text(': ${currency(widget.transaksi.totalHargaBelanja)}'))
+                Expanded(
+                    flex: 5,
+                    child: Text(
+                        ': ${currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk))}'))
               ],
             ),
             Row(
@@ -69,28 +74,36 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
               ],
             ),
             Expanded(
-              child: Column(
-                  children: List.generate(keranjang.length,
-                      (index) => ItemRincianBelanja(idTransaksi: 3, data: keranjang[index]))),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                    children: List.generate(
+                        keranjang.length,
+                        (index) =>
+                            ItemRincianBelanja(idTransaksi: widget.index, data: keranjang[index]))),
+              ),
             ),
-            Row(
-              children: [
-                Expanded(
-                    child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-                  child: const Text('Cetak bon'),
-                  onPressed: () {
-                    Fluttertoast.showToast(
-                      msg: 'Pencetakan bon sedang diproses',
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.TOP,
-                      backgroundColor: Colors.teal[300],
-                      textColor: Colors.white,
-                      fontSize: 16,
-                    );
-                  },
-                ))
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                    child: const Text('Cetak bon'),
+                    onPressed: () {
+                      Fluttertoast.showToast(
+                        msg: 'Pencetakan bon sedang diproses',
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                        backgroundColor: Colors.teal[300],
+                        textColor: Colors.white,
+                        fontSize: 16,
+                      );
+                    },
+                  ))
+                ],
+              ),
             )
           ],
         ),
