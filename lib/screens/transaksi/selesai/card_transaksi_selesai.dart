@@ -58,7 +58,9 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                     ),
                     Text(widget.namaKasir, style: TextStyle(color: Colors.teal[500])),
                   ]),
-                  Column(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
                       child: Text(
