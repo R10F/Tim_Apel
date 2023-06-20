@@ -60,7 +60,9 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                         ),
                         Text(widget.namaKasir, style: TextStyle(color: Colors.teal[500])),
                       ]),
-                      Column(children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4),
                           child: Text('${widget.transaksi.itemCount} item',
@@ -83,6 +85,7 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                           offset: const Offset(-8, 2),
                           child: Row(children: [
                             Radio(
+                              activeColor: Colours.lightSalmon,
                               value: widget.index,
                               groupValue: transaksiProvider.selectedAntrean,
                               onChanged: (value) {
