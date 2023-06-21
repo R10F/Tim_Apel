@@ -14,12 +14,14 @@ class ItemMetodePembayaran extends StatelessWidget {
       required this.idTransaksi,
       required this.totalHarga,
       required this.metodePembayaran,
-      required this.iconName});
+      required this.iconName,
+      required this.nomorAntrean});
 
   final int idTransaksi;
   final int totalHarga;
   final String metodePembayaran;
   final String iconName;
+  final int nomorAntrean;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,8 @@ class ItemMetodePembayaran extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                fullscreenDialog: true, builder: (_) => const PaymentDone()));
+                                fullscreenDialog: true,
+                                builder: (_) => PaymentDone(nomorAntrean: nomorAntrean)));
                       },
                       child: const Text(
                         'Konfirmasi Pembayaran',

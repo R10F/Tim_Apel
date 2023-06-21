@@ -59,13 +59,9 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 Expanded(flex: 5, child: Text(': ${currency(totalHargaBelanja)}'))
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 25, bottom: 20),
-              child: Text('Rincian Belanja'),
-            ),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.only(top: 40, bottom: 20),
                 child: Column(
                     children: List.generate(
                         keranjang.length,
@@ -93,7 +89,9 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                         MaterialPageRoute(
                             fullscreenDialog: true,
                             builder: (_) => PaymentList(
-                                idTransaksi: widget.idTransaksi, totalHarga: totalHargaBelanja)));
+                                idTransaksi: widget.idTransaksi,
+                                totalHarga: totalHargaBelanja,
+                                nomorAntrean: widget.transaksi.nomorAntrean)));
                   },
                 ))
               ],

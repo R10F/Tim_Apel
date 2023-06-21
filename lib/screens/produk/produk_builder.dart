@@ -42,7 +42,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Image.asset(widget.produk[i].gambar),
+                      Image.asset('assets/product_images/${widget.produk[i].gambar}'),
                       Padding(
                         padding: const EdgeInsets.all(8),
                         child: Row(

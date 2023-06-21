@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tim_apel/screens/payment/item_metode_pembayaran.dart';
 
 class PaymentList extends StatelessWidget {
-  const PaymentList({super.key, required this.idTransaksi, required this.totalHarga});
+  const PaymentList(
+      {super.key, required this.idTransaksi, required this.totalHarga, required this.nomorAntrean});
 
   final int idTransaksi;
   final int totalHarga;
+  final int nomorAntrean;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class PaymentList extends StatelessWidget {
                                         totalHarga: totalHarga,
                                         metodePembayaran: listMetodePembayaran[i],
                                         iconName: listMetodePembayaran[i].toLowerCase(),
+                                        nomorAntrean: nomorAntrean,
                                       )));
                         },
                         child: const Text('Pilih'))

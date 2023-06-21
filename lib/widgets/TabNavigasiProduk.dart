@@ -23,8 +23,7 @@ class TabNavigasiProduk extends StatelessWidget {
       ],
       indicatorColor: Colours.lightSalmon,
       labelColor: Colours.lightSalmon,
-      unselectedLabelColor:
-          accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
+      unselectedLabelColor: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
-import 'package:tim_apel/screens/transaksi/dalam_proses/item_rincian_belanja.dart';
+import 'package:tim_apel/screens/transaksi/selesai/item_rincian_belanja.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
@@ -64,18 +64,16 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 Expanded(flex: 5, child: Text(": ${widget.transaksi.metodePembayaran}"))
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 25, bottom: 20),
-              child: Text('Rincian Belanja'),
-            ),
-            const Row(
+            Row(
               children: [
-                Expanded(child: Text('TODO: TABEL')),
+                const Expanded(flex: 3, child: Text('Tanggal')),
+                Expanded(
+                    flex: 5, child: Text(": 20-02-2015 10:41 ${widget.transaksi.metodePembayaran}"))
               ],
             ),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.only(top: 40, bottom: 20),
                 child: Column(
                     children: List.generate(
                         keranjang.length,

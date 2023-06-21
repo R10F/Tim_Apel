@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PaymentDone extends StatelessWidget {
-  const PaymentDone({super.key});
+  const PaymentDone({super.key, required this.nomorAntrean});
+
+  final int nomorAntrean;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +19,11 @@ class PaymentDone extends StatelessWidget {
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 15),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
                   child: Text(
-                    'Yeay! Order XXX telah selesai diproses.',
-                    style: TextStyle(
+                    'Yeay! Order pada antrean $nomorAntrean telah selesai diproses.',
+                    style: const TextStyle(
                       fontSize: 18,
                       fontFamily: 'Figtree',
                     ),
@@ -34,11 +36,9 @@ class PaymentDone extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.teal[700]),
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                             onPressed: () {
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
+                              Navigator.popUntil(context, (route) => route.isFirst);
                             },
                             child: const Text(
                               'Kembali ke Beranda',
