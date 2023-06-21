@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +16,9 @@ class SalesData {
 }
 
 class HomeInsight extends StatefulWidget {
-  const HomeInsight({super.key});
+  const HomeInsight({super.key, required this.prov});
+
+  final prov;
 
   @override
   State<HomeInsight> createState() => _HomeInsightState();
@@ -55,7 +59,37 @@ class _HomeInsightState extends State<HomeInsight> {
 
   @override
   Widget build(BuildContext context) {
-    // var accountProvider = Provider.of<AccountProvider>(context);
+    var transaksiProvider = widget.prov;
+
+    List listTransaksiSelesai = [];
+
+    for (int i = 0; i < transaksiProvider.listTransaksi.length; i++) {
+      if (!transaksiProvider.listTransaksi[i].inProcess) {
+        listTransaksiSelesai.add(transaksiProvider.listTransaksi[i]);
+      }
+    }
+
+    int omzet = 0;
+    int profit = 0;
+    int produkTerjual = 0;
+    int jumlahTransaksi = listTransaksiSelesai.length;
+
+    for (int i = 0; i < listTransaksiSelesai.length; i++) {
+      var currentTransaksi = listTransaksiSelesai[i];
+
+      int tempOmzet = currentTransaksi.totalHargaBelanjaAkhir();
+      omzet += tempOmzet;
+
+      int tempProdukTerjual = currentTransaksi.itemCount;
+      produkTerjual += tempProdukTerjual;
+
+      for (int i = 0; i < currentTransaksi.listProdukAkhir.length; i++) {
+        int temp = (currentTransaksi.listProdukAkhir[i][0].hargaJual -
+                currentTransaksi.listProdukAkhir[i][0].hargaBeli) *
+            currentTransaksi.listProdukAkhir[i][1];
+        profit += temp;
+      }
+    }
 
     return Column(
       children: [
@@ -88,7 +122,7 @@ class _HomeInsightState extends State<HomeInsight> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        currency(125000),
+                        currency(omzet),
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -117,7 +151,7 @@ class _HomeInsightState extends State<HomeInsight> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        currency(75000),
+                        currency(profit),
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -144,15 +178,15 @@ class _HomeInsightState extends State<HomeInsight> {
                     ],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(children: [
+                  child: Column(children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        '25',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        produkTerjual.toString(),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Produk Terjual',
                       style: TextStyle(color: Colors.teal),
                     ),
@@ -173,15 +207,15 @@ class _HomeInsightState extends State<HomeInsight> {
                     ],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(children: [
+                  child: Column(children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
-                        '1',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        jumlahTransaksi.toString(),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Jumlah Transaksi',
                       style: TextStyle(color: Colors.teal),
                     ),

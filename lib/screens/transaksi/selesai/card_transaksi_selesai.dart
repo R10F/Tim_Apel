@@ -25,14 +25,6 @@ class CardTransaksiSelesai extends StatefulWidget {
 class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
   @override
   Widget build(BuildContext context) {
-    var listProduk = widget.transaksi.listProdukAkhir;
-
-    int totalBelanja = 0;
-    for (int i = 0; i < listProduk.length; i++) {
-      int temp = listProduk[i][0].hargaJual * listProduk[i][1];
-      totalBelanja += temp;
-    }
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -42,7 +34,7 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                     index: widget.index,
                     namaKasir: widget.namaKasir,
                     transaksi: widget.transaksi,
-                    totalBelanja: totalBelanja)));
+                    totalBelanja: widget.transaksi.totalHargaBelanjaAkhir())));
       },
       child: Row(
         children: [
@@ -65,7 +57,7 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(currency(totalBelanja),
+                      child: Text(currency(widget.transaksi.totalHargaBelanjaAkhir()),
                           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                     ),
                     Text(widget.transaksi.metodePembayaran,

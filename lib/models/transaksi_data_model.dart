@@ -45,6 +45,15 @@ class Transaksi {
     return harga;
   }
 
+  int totalHargaBelanjaAkhir() {
+    int totalBelanja = 0;
+    for (int i = 0; i < listProdukAkhir.length; i++) {
+      int temp = listProdukAkhir[i][0].hargaJual * listProdukAkhir[i][1];
+      totalBelanja += temp;
+    }
+    return totalBelanja;
+  }
+
   void addToCart(int idProduk, int qty) {
     listProduk[idProduk] = qty;
   }
@@ -68,6 +77,7 @@ class TransaksiData {
     Transaksi(
         nomorAntrean: 2,
         idKasir: 4,
+        listProduk: {2: 5, 4: 4, 6: 3},
         listProdukAkhir: [
           [
             Produk(
