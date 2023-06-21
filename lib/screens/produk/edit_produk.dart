@@ -178,7 +178,7 @@ class _EditProdukState extends State<EditProduk> {
                               int stok, hargaJual, hargaBeli;
 
                               nama = formProv.getNama;
-                              gambar = "assets/product_images/produk_2.jpg"; //temp
+                              gambar = "produk_2.jpg"; //temp
                               deskripsi = formProv.getDeskripsi;
                               stok = int.parse(formProv.getStok);
                               hargaJual = int.parse(formProv.getHargaJual);

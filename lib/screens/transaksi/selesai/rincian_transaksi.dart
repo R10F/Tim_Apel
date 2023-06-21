@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
-import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/transaksi/selesai/item_rincian_belanja.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
   const RincianTransaksi(
-      {super.key, required this.index, required this.transaksi, required this.namaKasir});
+      {super.key,
+      required this.index,
+      required this.transaksi,
+      required this.namaKasir,
+      required this.totalBelanja});
 
   final int index;
   final Transaksi transaksi;
   final String namaKasir;
+  final int totalBelanja;
 
   @override
   State<RincianTransaksi> createState() => _RincianTransaksiState();
@@ -21,8 +24,7 @@ class RincianTransaksi extends StatefulWidget {
 class _RincianTransaksiState extends State<RincianTransaksi> {
   @override
   Widget build(BuildContext context) {
-    var produkProvider = Provider.of<ProdukProvider>(context);
-    var keranjang = widget.transaksi.keranjang(produkProvider.semuaProduk);
+    var listProduk = widget.transaksi.listProdukAkhir;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Bon Faktur')),
@@ -52,10 +54,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(
-                    flex: 5,
-                    child: Text(
-                        ': ${currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk))}'))
+                Expanded(flex: 5, child: Text(': ${currency(widget.totalBelanja)}'))
               ],
             ),
             Row(
@@ -67,8 +66,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Tanggal')),
-                Expanded(
-                    flex: 5, child: Text(": 20-02-2015 10:41 ${widget.transaksi.metodePembayaran}"))
+                Expanded(flex: 5, child: Text(": ${widget.transaksi.datetime}"))
               ],
             ),
             Expanded(
@@ -76,9 +74,9 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 padding: const EdgeInsets.only(top: 40, bottom: 20),
                 child: Column(
                     children: List.generate(
-                        keranjang.length,
-                        (index) =>
-                            ItemRincianBelanja(idTransaksi: widget.index, data: keranjang[index]))),
+                        listProduk.length,
+                        (index) => ItemRincianBelanja(
+                            idTransaksi: widget.index, data: listProduk[index]))),
               ),
             ),
             Padding(

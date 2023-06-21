@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
-import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/transaksi/selesai/rincian_transaksi.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
@@ -27,7 +25,13 @@ class CardTransaksiSelesai extends StatefulWidget {
 class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
   @override
   Widget build(BuildContext context) {
-    var produkProvider = Provider.of<ProdukProvider>(context);
+    var listProduk = widget.transaksi.listProdukAkhir;
+
+    int totalBelanja = 0;
+    for (int i = 0; i < listProduk.length; i++) {
+      int temp = listProduk[i][0].hargaJual * listProduk[i][1];
+      totalBelanja += temp;
+    }
 
     return GestureDetector(
       onTap: () {
@@ -35,10 +39,10 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
             context,
             MaterialPageRoute(
                 builder: (_) => RincianTransaksi(
-                      index: widget.index,
-                      namaKasir: widget.namaKasir,
-                      transaksi: widget.transaksi,
-                    )));
+                    index: widget.index,
+                    namaKasir: widget.namaKasir,
+                    transaksi: widget.transaksi,
+                    totalBelanja: totalBelanja)));
       },
       child: Row(
         children: [
@@ -58,13 +62,10 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                     ),
                     Text(widget.namaKasir, style: TextStyle(color: Colors.teal[500])),
                   ]),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
+                  Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                          currency(widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk)),
+                      child: Text(currency(totalBelanja),
                           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
                     ),
                     Text(widget.transaksi.metodePembayaran,

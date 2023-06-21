@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/payment/payment_done.dart';
 import 'package:tim_apel/screens/payment/pembayaran_tunai.dart';
@@ -25,6 +26,7 @@ class ItemMetodePembayaran extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var produkProvider = Provider.of<ProdukProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
     return Scaffold(
@@ -76,7 +78,8 @@ class ItemMetodePembayaran extends StatelessWidget {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                       onPressed: () {
-                        transaksiProvider.transaksiSelesai(idTransaksi, metodePembayaran);
+                        transaksiProvider.transaksiSelesai(
+                            idTransaksi, metodePembayaran, produkProvider.semuaProduk);
 
                         Navigator.push(
                             context,

@@ -9,7 +9,7 @@ class TransaksiProvider extends ChangeNotifier {
 
   TransaksiProvider() {
     _currentNomorAntrean = _listTransaksi.length + 1;
-    firstInProcessOrder();
+    setFirstInProcessOrder();
   }
 
   get hasTransaksiActive => selectedAntrean > -1;
@@ -22,7 +22,7 @@ class TransaksiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void firstInProcessOrder() {
+  void setFirstInProcessOrder() {
     int result = -1;
     for (int i = 0; i < _listTransaksi.length; i++) {
       if (_listTransaksi[i].inProcess) {
@@ -50,14 +50,22 @@ class TransaksiProvider extends ChangeNotifier {
 
   void deleteOrder(int index) {
     _listTransaksi.removeAt(index);
-    firstInProcessOrder();
+    setFirstInProcessOrder();
     notifyListeners();
   }
 
-  void transaksiSelesai(int idTransaksi, String metodePembayaran) {
-    _listTransaksi[idTransaksi].metodePembayaran = metodePembayaran;
-    _listTransaksi[idTransaksi].inProcess = false;
-    firstInProcessOrder();
+  void transaksiSelesai(int idTransaksi, String metodePembayaran, List produkData) {
+    var currentTransaksi = _listTransaksi[idTransaksi];
+
+    currentTransaksi.metodePembayaran = metodePembayaran;
+    currentTransaksi.inProcess = false;
+    currentTransaksi.datetime = '20-06-2023 10:30';
+
+    currentTransaksi.listProduk.forEach((idProduk, qty) {
+      currentTransaksi.listProdukAkhir.add([produkData[idProduk - 1], qty]);
+    });
+
+    setFirstInProcessOrder();
     notifyListeners();
   }
 }
