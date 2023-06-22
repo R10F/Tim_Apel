@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/stok_produk_provider.dart';
 
 class StokProduk extends StatefulWidget {
@@ -13,8 +15,16 @@ class _StokProdukState extends State<StokProduk> {
   @override
   Widget build(BuildContext context) {
     var stokProdukProv = Provider.of<StokProdukProvider>(context);
-    var filteredStokProduk = stokProdukProv.getStokProduk;
+    var produkProv = Provider.of<ProdukProvider>(context);
+    // var filteredStokProduk = stokProdukProv.getStokProduk;
 
+    List <Produk> stokProduk  =
+      !(stokProdukProv.statusSegeraHabis ^ stokProdukProv.statusHabis) ?
+      // Return all products if no filter is selected OR if both filters are selected
+      produkProv.getProdukHampirHabis().addAll(produkProv.getProdukHabis()) :
+      (stokProdukProv.statusSegeraHabis) ? produkProv.getProdukHampirHabis() : 
+      (stokProdukProv.statusHabis) ? produkProv.getProdukHabis() : null; 
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text("Segera Restock"),
@@ -28,28 +38,28 @@ class _StokProdukState extends State<StokProduk> {
                 children: [
                   FilterChip(
                     label: const Text("Segera Habis"),
-                    selected: stokProdukProv.getStatusSegeraHabis,
+                    selected: stokProdukProv.statusSegeraHabis,
                     onSelected: (value) {
                       stokProdukProv.setStatusSegeraHabis = value;
                     },
                   ),
                   FilterChip(
                     label: const Text("Habis"),
-                    selected: stokProdukProv.getStatusHabis,
+                    selected: stokProdukProv.statusHabis,
                     onSelected: (value) {
                       stokProdukProv.setStatusHabis = value;
                     },
                   ),
                 ],
               ),
-              for (var i = 0; i < stokProdukProv.getStokProduk.length; i++)
+              for (var i = 0; i < stokProduk.length; i++)
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Card(
                     child: Row(
                       children: [
                         Image.asset(
-                          stokProdukProv.getStokProduk[i]['img'],
+                          stokProduk[i].gambar,
                           width: 125,
                         ),
                         Column(
@@ -58,7 +68,7 @@ class _StokProdukState extends State<StokProduk> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
-                                stokProdukProv.getStokProduk[i]['nama'],
+                                stokProduk[i].nama,
                                 style: const TextStyle(fontSize: 16, fontFamily: 'Figtree'),
                               ),
                             ),
@@ -76,7 +86,7 @@ class _StokProdukState extends State<StokProduk> {
                             ),
                           ],
                         ),
-                        if (stokProdukProv.getStokProduk[i].containsKey('sisa'))
+                        if (stokProdukProv.statusSegeraHabis)
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -95,7 +105,7 @@ class _StokProdukState extends State<StokProduk> {
                                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                                       ),
                                       Text(
-                                        "${stokProdukProv.getStokProduk[i]['sisa']}",
+                                        "${stokProduk[i].stok}",
                                         style: const TextStyle(
                                             fontSize: 35, fontWeight: FontWeight.bold),
                                       ),

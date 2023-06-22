@@ -53,4 +53,12 @@ class ProdukProvider extends ChangeNotifier {
     _semuaProduk[id-1] = edited;
     notifyListeners();
   }
+
+  getProdukHampirHabis(){
+    return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
+  }
+
+  getProdukHabis(){
+    return semuaProduk.where((produk) => produk.stok == 0).toList();
+  }
 }
