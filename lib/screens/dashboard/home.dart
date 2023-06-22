@@ -20,7 +20,17 @@ class _HomeState extends State<Home> {
     var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     var listTransaksi = transaksiProvider.listTransaksi;
+    var listTransaksiSelesai = transaksiProvider.listTransaksiSelesaiHariIni;
 
+    int totalPesanan = 0;
+    int totalDikantongi = 0;
+    for (int i = 0; i < listTransaksiSelesai.length; i++) {
+      if (listTransaksiSelesai[i].idKasir == accountProvider.id) {
+        int temp = listTransaksiSelesai[i].totalHargaBelanjaAkhir();
+        totalDikantongi += temp;
+        totalPesanan++;
+      }
+    }
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -61,7 +71,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
             child: Text(
-              "Kamu telah menjual 1 pesanan. Total ${currency(125000)} telah kamu kantongi! Lanjuut! ",
+              "Kamu telah menjual $totalPesanan pesanan. Total ${currency(totalDikantongi)} telah kamu kantongi! Lanjuut! ",
               style:
                   const TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
               textAlign: TextAlign.start,

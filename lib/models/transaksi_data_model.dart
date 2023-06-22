@@ -1,11 +1,13 @@
 import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/utilities/datetime.dart';
 
 class Transaksi {
   int nomorAntrean;
   int idKasir;
   bool inProcess;
   String metodePembayaran;
-  String datetime;
+  String date;
+  String time;
   Map<int, int> listProduk; // key: idProduk, value: qty
   List<List> listProdukAkhir; // index of inner list => 0: Produk, 1: qty
 
@@ -13,7 +15,8 @@ class Transaksi {
     required this.nomorAntrean,
     required this.idKasir,
     this.inProcess = true,
-    this.datetime = '',
+    this.date = '',
+    this.time = '',
     this.metodePembayaran = '',
     List<List>? listProdukAkhir,
     Map<int, int>? listProduk,
@@ -65,18 +68,94 @@ class Transaksi {
 
 class TransaksiData {
   List<Transaksi> listTransaksi = [
-    Transaksi(nomorAntrean: 1, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
-    Transaksi(nomorAntrean: 3, idKasir: 2, listProduk: {
+    Transaksi(nomorAntrean: 4, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
+    Transaksi(nomorAntrean: 5, idKasir: 2, listProduk: {
       4: 2,
       6: 4,
     }),
-    Transaksi(nomorAntrean: 4, idKasir: 3, listProduk: {
+    Transaksi(nomorAntrean: 6, idKasir: 3, listProduk: {
       2: 1,
       5: 3,
     }),
     Transaksi(
         nomorAntrean: 2,
         idKasir: 4,
+        listProduk: {3: 1, 7: 4},
+        listProdukAkhir: [
+          [
+            Produk(
+                id: 3,
+                nama: "Lem Lilin Uk. Kecil",
+                gambar: "produk_2.jpg",
+                stok: 100,
+                hargaJual: 1000,
+                hargaBeli: 700,
+                kategori: "Craft Supply"),
+            1
+          ],
+          [
+            Produk(
+                id: 7,
+                nama: "Pita Satin Meteran 0.5 cm Merah",
+                gambar: "produk_5.jpg",
+                stok: 100,
+                hargaJual: 500,
+                hargaBeli: 400,
+                kategori: "Dekorasi"),
+            4
+          ],
+        ],
+        date: getTodayDate(),
+        time: getCurrentTime(),
+        inProcess: false,
+        metodePembayaran: 'Tunai'),
+    Transaksi(
+        nomorAntrean: 3,
+        idKasir: 0,
+        listProduk: {1: 2, 3: 3, 5: 4},
+        listProdukAkhir: [
+          [
+            Produk(
+              id: 1,
+              nama: "Lem Kertas Kenko Uk. Besar",
+              gambar: "produk_1.jpg",
+              stok: 10,
+              hargaJual: 10000,
+              hargaBeli: 9000,
+              kategori: "ATK",
+            ),
+            2
+          ],
+          [
+            Produk(
+                id: 3,
+                nama: "Lem Lilin Uk. Kecil",
+                gambar: "produk_2.jpg",
+                stok: 100,
+                hargaJual: 1000,
+                hargaBeli: 700,
+                kategori: "Craft Supply"),
+            3
+          ],
+          [
+            Produk(
+                id: 5,
+                nama: "Set Jarum Jahit",
+                gambar: "produk_3.jpg",
+                stok: 10,
+                hargaJual: 8000,
+                hargaBeli: 7000,
+                kategori: "Keperluan Jahit"),
+            4
+          ],
+        ],
+        date: getTodayDate(),
+        time: getCurrentTime(),
+        inProcess: false,
+        metodePembayaran: 'Tunai'),
+    Transaksi(
+        nomorAntrean: 1,
+        idKasir: 3,
         listProduk: {2: 5, 4: 4, 6: 3},
         listProdukAkhir: [
           [
@@ -114,7 +193,8 @@ class TransaksiData {
             3
           ],
         ],
-        datetime: '20-06-2023 10:30',
+        date: getYesterdayDate(),
+        time: getCurrentTime(),
         inProcess: false,
         metodePembayaran: 'Tunai'),
   ];

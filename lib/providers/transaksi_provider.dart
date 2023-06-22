@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
+import 'package:tim_apel/utilities/datetime.dart';
 
 class TransaksiProvider extends ChangeNotifier {
   final List<Transaksi> _listTransaksi = TransaksiData().listTransaksi;
@@ -16,6 +17,16 @@ class TransaksiProvider extends ChangeNotifier {
   get listTransaksi => _listTransaksi;
   get currentAntrean => _currentNomorAntrean;
   get selectedAntrean => _selectedAntrean;
+
+  get listTransaksiSelesaiHariIni {
+    List result = [];
+    for (int i = 0; i < _listTransaksi.length; i++) {
+      if (!_listTransaksi[i].inProcess && _listTransaksi[i].date == getTodayDate()) {
+        result.add(_listTransaksi[i]);
+      }
+    }
+    return result;
+  }
 
   set selectedAntrean(value) {
     _selectedAntrean = value;
@@ -59,7 +70,8 @@ class TransaksiProvider extends ChangeNotifier {
 
     currentTransaksi.metodePembayaran = metodePembayaran;
     currentTransaksi.inProcess = false;
-    currentTransaksi.datetime = '20-06-2023 10:30';
+    currentTransaksi.date = getTodayDate();
+    currentTransaksi.time = getCurrentTime();
 
     currentTransaksi.listProduk.forEach((idProduk, qty) {
       currentTransaksi.listProdukAkhir.add([produkData[idProduk - 1], qty]);

@@ -66,7 +66,13 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Tanggal')),
-                Expanded(flex: 5, child: Text(": ${widget.transaksi.datetime}"))
+                Expanded(flex: 5, child: Text(": ${widget.transaksi.date}"))
+              ],
+            ),
+            Row(
+              children: [
+                const Expanded(flex: 3, child: Text('Waktu')),
+                Expanded(flex: 5, child: Text(": ${widget.transaksi.time}"))
               ],
             ),
             Expanded(

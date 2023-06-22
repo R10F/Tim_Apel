@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tim_apel/utilities/datetime.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class SalesData {
@@ -25,49 +26,16 @@ class HomeInsight extends StatefulWidget {
 }
 
 class _HomeInsightState extends State<HomeInsight> {
-  String date = DateFormat.d().format(DateTime.now());
-  String month = DateFormat.MMM().format(DateTime.now());
-  String year = DateFormat.y().format(DateTime.now());
-
   final _tooltipBehavior = TooltipBehavior(
     enable: true,
     activationMode: ActivationMode.singleTap,
   );
 
-  late List<SalesData> chartData = generateSalesData();
-
-  List<SalesData> generateSalesData() {
-    int currentYear = DateTime.now().year;
-    int currentMonth = DateTime.now().month;
-
-    if (currentMonth <= 12) {
-      currentMonth = 12 - (12 - currentMonth) + 1;
-      currentYear -= 1;
-    }
-
-    List<SalesData> data = List<SalesData>.generate(11, (index) {
-      if (currentMonth > 12) {
-        currentMonth = 1;
-        currentYear += 1;
-      }
-      return SalesData(currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
-    });
-    data.add(SalesData(DateTime.now().year, DateTime.now().month, 500000));
-
-    return data;
-  }
-
   @override
   Widget build(BuildContext context) {
     var transaksiProvider = widget.prov;
 
-    List listTransaksiSelesai = [];
-
-    for (int i = 0; i < transaksiProvider.listTransaksi.length; i++) {
-      if (!transaksiProvider.listTransaksi[i].inProcess) {
-        listTransaksiSelesai.add(transaksiProvider.listTransaksi[i]);
-      }
-    }
+    List listTransaksiSelesai = transaksiProvider.listTransaksiSelesaiHariIni;
 
     int omzet = 0;
     int profit = 0;
@@ -91,12 +59,29 @@ class _HomeInsightState extends State<HomeInsight> {
       }
     }
 
+    int currentYear = DateTime.now().year;
+    int currentMonth = DateTime.now().month;
+
+    if (currentMonth <= 12) {
+      currentMonth = 12 - (12 - currentMonth) + 1;
+      currentYear -= 1;
+    }
+
+    List<SalesData> chartData = List<SalesData>.generate(11, (index) {
+      if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear += 1;
+      }
+      return SalesData(currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
+    });
+    chartData.add(SalesData(DateTime.now().year, DateTime.now().month, 500000 + omzet));
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 15, top: 10, bottom: 20),
           child: Text(
-            "Insight Harian - $date $month $year",
+            "Insight Harian - ${getTodayDate()}",
             style: const TextStyle(
                 fontSize: 20, fontFamily: 'Plus Jakarta Sans', fontWeight: FontWeight.w500),
           ),
@@ -127,7 +112,7 @@ class _HomeInsightState extends State<HomeInsight> {
                       ),
                     ),
                     const Text(
-                      'Omzet (Rp)',
+                      'Omzet',
                       style: TextStyle(color: Colors.teal),
                     ),
                   ]))),
