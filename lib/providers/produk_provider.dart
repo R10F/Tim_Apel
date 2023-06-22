@@ -54,11 +54,11 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getProdukHampirHabis(){
+  List <Produk> getProdukHampirHabis(){
     return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
   }
 
-  getProdukHabis(){
+  List <Produk> getProdukHabis(){
     return semuaProduk.where((produk) => produk.stok == 0).toList();
   }
 }

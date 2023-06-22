@@ -18,12 +18,19 @@ class _StokProdukState extends State<StokProduk> {
     var produkProv = Provider.of<ProdukProvider>(context);
     // var filteredStokProduk = stokProdukProv.getStokProduk;
 
-    List <Produk> stokProduk  =
-      !(stokProdukProv.statusSegeraHabis ^ stokProdukProv.statusHabis) ?
+    List <Produk> stokProduk  = [];
+
+    if (!(stokProdukProv.statusSegeraHabis ^ stokProdukProv.statusHabis)){
       // Return all products if no filter is selected OR if both filters are selected
-      produkProv.getProdukHampirHabis().addAll(produkProv.getProdukHabis()) :
-      (stokProdukProv.statusSegeraHabis) ? produkProv.getProdukHampirHabis() : 
-      (stokProdukProv.statusHabis) ? produkProv.getProdukHabis() : null; 
+      stokProduk = produkProv.getProdukHampirHabis();
+      stokProduk.addAll(produkProv.getProdukHabis());
+    }
+    else if  (stokProdukProv.statusSegeraHabis){
+      stokProduk = produkProv.getProdukHampirHabis();
+    }
+    else {
+      stokProduk = produkProv.getProdukHabis();
+    }
     
     return Scaffold(
         appBar: AppBar(
