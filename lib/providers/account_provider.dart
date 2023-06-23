@@ -105,26 +105,56 @@ class AccountProvider extends ChangeNotifier {
   // | PREFERENCE SECTION |
   // ======================
 
-  final ThemeData _darkTheme =
-      ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark);
+  final ThemeData _darkTheme = ThemeData(
+    primarySwatch: Colors.blue,
+    brightness: Brightness.dark,
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 26),
+      displayMedium: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 23),
+      displaySmall: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 20),
+      bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
+      bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
+      bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
+      labelLarge: TextStyle(fontFamily: 'Figtree', fontSize: 10),
+      labelMedium: TextStyle(fontFamily: 'Figtree', fontSize: 8),
+    ),
+  );
 
   final ThemeData _lightTheme = ThemeData(
-      appBarTheme: const AppBarTheme(
-        color: Colors.white,
-        foregroundColor: Colors.black,
-      ),
-      primarySwatch: Colors.teal,
-      brightness: Brightness.light,
-      textTheme: TextTheme(
-        displayLarge: TextStyle(fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
-        displayMedium: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 23),
-        displaySmall: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 20),
-        bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
-        bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
-        bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
-        labelLarge: TextStyle(fontFamily: 'Figtree', fontSize: 10),
-        labelMedium: TextStyle(fontFamily: 'Figtree', fontSize: 8),
-      ),
+    appBarTheme: const AppBarTheme(
+      color: Colors.white,
+      foregroundColor: Colors.black,
+    ),
+    primarySwatch: Colors.teal,
+    brightness: Brightness.light,
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 26),
+      displayMedium: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 23),
+      displaySmall: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 20),
+      bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
+      bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
+      bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
+      labelLarge: TextStyle(fontFamily: 'Figtree', fontSize: 10),
+      labelMedium: TextStyle(fontFamily: 'Figtree', fontSize: 8),
+    ),
   );
 
   getSetting(String key) => currentUser.settings[key];

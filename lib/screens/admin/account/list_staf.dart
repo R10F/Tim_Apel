@@ -41,11 +41,15 @@ class _ListStafState extends State<ListStaf> {
                                       title: Text(userAccounts[index].nama),
                                     ),
                                     body: Profile(
-                                        id: index, asMyself: false, data: userAccounts[index]))));
+                                        id: index,
+                                        asMyself: false,
+                                        data: userAccounts[index]))));
                       },
                       child: Container(
                         decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 0.5, color: Colors.grey))),
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -56,7 +60,8 @@ class _ListStafState extends State<ListStaf> {
                                 width: 45,
                               ),
                               title: Text(userAccounts[index].nama),
-                              trailing: accountProvider.id != index && userAccounts[index].isActive
+                              trailing: accountProvider.id != index &&
+                                      userAccounts[index].isActive
                                   ? IconButton(
                                       onPressed: () {
                                         accountProvider.archieveAccounts(index);
@@ -81,9 +86,15 @@ class _ListStafState extends State<ListStaf> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.teal[700],
         icon: const Icon(Icons.add),
-        label: const Text('Tambah'),
+        label: Text(
+          'Tambah',
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+          ),
+        ),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
         },
       ),
     );

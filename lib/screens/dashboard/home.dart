@@ -41,7 +41,9 @@ class _HomeState extends State<Home> {
               child: Text(
                 'Hai, ${accountProvider.currentUser.nama}!',
                 style: const TextStyle(
-                    fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 24),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Figtree',
+                    fontSize: 24),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -52,7 +54,10 @@ class _HomeState extends State<Home> {
               alignment: Alignment.topLeft,
               child: const Text(
                 'masih semangat jualan hari ini?',
-                style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Figtree',
+                    fontSize: 16),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -72,8 +77,10 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
             child: Text(
               "Kamu telah menjual $totalPesanan pesanan. Total ${currency(totalDikantongi)} telah kamu kantongi! Lanjuut! ",
-              style:
-                  const TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 16),
+              style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Figtree',
+                  fontSize: 16),
               textAlign: TextAlign.start,
             ),
           ),
@@ -84,13 +91,17 @@ class _HomeState extends State<Home> {
               children: [
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
+                        backgroundColor: Colours.lightSalmon,
+                        minimumSize: const Size(30, 30)),
                     onPressed: () {
                       transaksiProvider.createNewOrder(accountProvider.id);
                     },
-                    child: const Text(
+                    child: Text(
                       "Buat Order Baru",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyMedium?.fontSize,
+                          color: Colors.black),
                     )),
               ],
             ),
@@ -99,10 +110,14 @@ class _HomeState extends State<Home> {
               ? Container()
               : HomeInsight(prov: transaksiProvider),
           Container(
-            padding: const EdgeInsets.only(top: 20, bottom: 28, left: 4, right: 4),
-            margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 30),
+            padding:
+                const EdgeInsets.only(top: 20, bottom: 28, left: 4, right: 4),
+            margin:
+                const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 30),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: accountProvider.getSetting('dark_mode')
+                  ? Colors.black54
+                  : Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -138,28 +153,36 @@ class _HomeState extends State<Home> {
                                 builder: (_) => RincianTransaksi(
                                       idTransaksi: i,
                                       namaKasir: accountProvider
-                                          .userAccounts[listTransaksi[i].idKasir].nama,
+                                          .userAccounts[
+                                              listTransaksi[i].idKasir]
+                                          .nama,
                                       transaksi: listTransaksi[i],
                                     )));
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 15, right: 15),
                         child: Container(
                           alignment: Alignment.topLeft,
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Text(
-                              'Antrean ${listTransaksi[i].nomorAntrean}',
-                              style: const TextStyle(fontFamily: 'Figtree', fontSize: 18),
-                            ),
-                            Text(
-                              accountProvider.userAccounts[listTransaksi[i].idKasir].nama,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey,
-                                  fontFamily: 'Figtree',
-                                  fontSize: 16),
-                            ),
-                          ]),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Antrean ${listTransaksi[i].nomorAntrean}',
+                                  style: const TextStyle(
+                                      fontFamily: 'Figtree', fontSize: 18),
+                                ),
+                                Text(
+                                  accountProvider
+                                      .userAccounts[listTransaksi[i].idKasir]
+                                      .nama,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey,
+                                      fontFamily: 'Figtree',
+                                      fontSize: 16),
+                                ),
+                              ]),
                         ),
                       ),
                     ),
@@ -188,7 +211,9 @@ class _HomeState extends State<Home> {
               child: const Text(
                 "Baru Diselesaikan",
                 style: TextStyle(
-                    fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontSize: 26),
               ),
             ),
           ),

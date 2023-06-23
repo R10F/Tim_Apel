@@ -3,9 +3,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tim_apel/utilities/datetime.dart';
 import 'package:tim_apel/utilities/formatting.dart';
+
+import '../../providers/account_provider.dart';
 
 class SalesData {
   String? dateTime;
@@ -34,6 +37,7 @@ class _HomeInsightState extends State<HomeInsight> {
   @override
   Widget build(BuildContext context) {
     var transaksiProvider = widget.prov;
+    var accountProvider = Provider.of<AccountProvider>(context);
 
     List listTransaksiSelesai = transaksiProvider.listTransaksiSelesaiHariIni;
 
@@ -72,9 +76,11 @@ class _HomeInsightState extends State<HomeInsight> {
         currentMonth = 1;
         currentYear += 1;
       }
-      return SalesData(currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
+      return SalesData(
+          currentYear, currentMonth++, (Random().nextInt(20) + 10) * 50000);
     });
-    chartData.add(SalesData(DateTime.now().year, DateTime.now().month, 500000 + omzet));
+    chartData.add(
+        SalesData(DateTime.now().year, DateTime.now().month, 500000 + omzet));
 
     return Column(
       children: [
@@ -83,7 +89,9 @@ class _HomeInsightState extends State<HomeInsight> {
           child: Text(
             "Insight Harian - ${getTodayDate()}",
             style: const TextStyle(
-                fontSize: 20, fontFamily: 'Plus Jakarta Sans', fontWeight: FontWeight.w500),
+                fontSize: 20,
+                fontFamily: 'Plus Jakarta Sans',
+                fontWeight: FontWeight.w500),
           ),
         ),
         Row(children: [
@@ -92,7 +100,9 @@ class _HomeInsightState extends State<HomeInsight> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   margin: const EdgeInsets.only(left: 20, right: 8, bottom: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: accountProvider.getSetting('dark_mode')
+                        ? Colors.black54
+                        : Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -108,7 +118,8 @@ class _HomeInsightState extends State<HomeInsight> {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
                         currency(omzet),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const Text(
@@ -121,7 +132,9 @@ class _HomeInsightState extends State<HomeInsight> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   margin: const EdgeInsets.only(left: 8, right: 25, bottom: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: accountProvider.getSetting('dark_mode')
+                        ? Colors.black54
+                        : Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -137,7 +150,8 @@ class _HomeInsightState extends State<HomeInsight> {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
                         currency(profit),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const Text(
@@ -152,7 +166,9 @@ class _HomeInsightState extends State<HomeInsight> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   margin: const EdgeInsets.only(left: 20, right: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: accountProvider.getSetting('dark_mode')
+                        ? Colors.black54
+                        : Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -168,7 +184,8 @@ class _HomeInsightState extends State<HomeInsight> {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
                         produkTerjual.toString(),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const Text(
@@ -181,7 +198,9 @@ class _HomeInsightState extends State<HomeInsight> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   margin: const EdgeInsets.only(left: 8, right: 25),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: accountProvider.getSetting('dark_mode')
+                        ? Colors.black54
+                        : Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -197,7 +216,8 @@ class _HomeInsightState extends State<HomeInsight> {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Text(
                         jumlahTransaksi.toString(),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const Text(
@@ -208,9 +228,12 @@ class _HomeInsightState extends State<HomeInsight> {
         ]),
         Container(
           padding: const EdgeInsets.only(top: 20, bottom: 4, left: 4, right: 4),
-          margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 15),
+          margin:
+              const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 15),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: accountProvider.getSetting('dark_mode')
+                ? Colors.black54
+                : Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -244,7 +267,8 @@ class _HomeInsightState extends State<HomeInsight> {
                 padding: const EdgeInsets.all(8.0),
                 child: SfCartesianChart(
                     primaryXAxis: CategoryAxis(),
-                    primaryYAxis: NumericAxis(labelFormat: "{value}", numberFormat: currencyFormat),
+                    primaryYAxis: NumericAxis(
+                        labelFormat: "{value}", numberFormat: currencyFormat),
                     tooltipBehavior: _tooltipBehavior,
                     series: <ChartSeries>[
                       // Renders line chart

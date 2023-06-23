@@ -23,7 +23,8 @@ class CardTransaksiDalamProses extends StatefulWidget {
   final prov;
 
   @override
-  State<CardTransaksiDalamProses> createState() => _CardTransaksiDalamProsesState();
+  State<CardTransaksiDalamProses> createState() =>
+      _CardTransaksiDalamProsesState();
 }
 
 class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
@@ -46,108 +47,131 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                         ? Border.all(color: Colours.lightSalmon, width: 2)
                         : Border.all(color: Colors.teal[200]!),
                     borderRadius: const BorderRadius.all(Radius.circular(10))),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 margin: const EdgeInsets.only(bottom: 20),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: Text('Antrean ${widget.transaksi.nomorAntrean}',
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                        ),
-                        Text(widget.namaKasir, style: TextStyle(color: Colors.teal[500])),
-                      ]),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: Text('${widget.transaksi.itemCount} item',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.teal[500])),
-                        ),
-                        Text(
-                            currency(
-                                widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk)),
-                            style: TextStyle(color: Colors.teal[500])),
-                      ]),
-                    ]),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Transform.translate(
-                          offset: const Offset(-8, 2),
-                          child: Row(children: [
-                            Radio(
-                              activeColor: Colours.lightSalmon,
-                              value: widget.index,
-                              groupValue: transaksiProvider.selectedAntrean,
-                              onChanged: (value) {
-                                transaksiProvider.selectedAntrean = value;
-                              },
-                            ),
-                            isActive
-                                ? const Text('Sedang aktif',
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4),
+                                      child: Text(
+                                          'Antrean ${widget.transaksi.nomorAntrean}',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600)),
+                                    ),
+                                    Text(widget.namaKasir,
+                                        style:
+                                            TextStyle(color: Colors.teal[500])),
+                                  ]),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4),
+                                      child: Text(
+                                          '${widget.transaksi.itemCount} item',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w300,
+                                              color: Colors.teal[500])),
+                                    ),
+                                    Text(
+                                        currency(widget.transaksi
+                                            .totalHargaBelanja(
+                                                produkProvider.semuaProduk)),
+                                        style:
+                                            TextStyle(color: Colors.teal[500])),
+                                  ]),
+                            ]),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Transform.translate(
+                              offset: const Offset(-8, 2),
+                              child: Row(children: [
+                                Radio(
+                                  activeColor: Colours.lightSalmon,
+                                  value: widget.index,
+                                  groupValue: transaksiProvider.selectedAntrean,
+                                  onChanged: (value) {
+                                    transaksiProvider.selectedAntrean = value;
+                                  },
+                                ),
+                                isActive
+                                    ? const Text('Sedang aktif',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ))
+                                    : Container(),
+                              ])),
+                          Row(children: [
+                            OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => RincianTransaksi(
+                                                idTransaksi: widget.index,
+                                                namaKasir: widget.namaKasir,
+                                                transaksi: widget.transaksi,
+                                              )));
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  side: BorderSide(
+                                    color: Colors.teal[300]!,
+                                    width: 2,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                                child: Text('Rincian',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ))
-                                : Container(),
-                          ])),
-                      Row(children: [
-                        OutlinedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => RincianTransaksi(
-                                            idTransaksi: widget.index,
-                                            namaKasir: widget.namaKasir,
-                                            transaksi: widget.transaksi,
-                                          )));
-                            },
-                            style: OutlinedButton.styleFrom(
-                              side: BorderSide(
-                                color: Colors.teal[300]!,
-                                width: 2,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.fontSize,
+                                      color: const Color(0xFF00796B),
+                                    ))),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12),
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    widget.prov.deleteOrder(widget.index);
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                      color: Color.fromARGB(150, 244, 67, 54),
+                                      width: 2,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  child: Text('Batal',
+                                      style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.fontSize,
+                                        color: Colors.red,
+                                      ))),
                             ),
-                            child: const Text('Rincian',
-                                style: TextStyle(
-                                  color: Color(0xFF00796B),
-                                ))),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12),
-                          child: OutlinedButton(
-                              onPressed: () {
-                                widget.prov.deleteOrder(widget.index);
-                              },
-                              style: OutlinedButton.styleFrom(
-                                side: const BorderSide(
-                                  color: Color.fromARGB(150, 244, 67, 54),
-                                  width: 2,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                              child: const Text('Batal',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ))),
-                        ),
-                      ])
-                    ],
-                  )
-                ])),
+                          ])
+                        ],
+                      )
+                    ])),
           ),
         ],
       ),
