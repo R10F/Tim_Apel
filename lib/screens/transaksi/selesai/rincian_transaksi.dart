@@ -36,7 +36,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Nomor Antrean')),
-                Expanded(flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
+                Expanded(
+                    flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
               ],
             ),
             Row(
@@ -54,13 +55,16 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(flex: 5, child: Text(': ${currency(widget.totalBelanja)}'))
+                Expanded(
+                    flex: 5, child: Text(': ${currency(widget.totalBelanja)}'))
               ],
             ),
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Metode Pembayaran')),
-                Expanded(flex: 5, child: Text(": ${widget.transaksi.metodePembayaran}"))
+                Expanded(
+                    flex: 5,
+                    child: Text(": ${widget.transaksi.metodePembayaran}"))
               ],
             ),
             Row(
@@ -82,7 +86,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                     children: List.generate(
                         listProduk.length,
                         (index) => ItemRincianBelanja(
-                            idTransaksi: widget.index, data: listProduk[index]))),
+                            idTransaksi: widget.index,
+                            data: listProduk[index]))),
               ),
             ),
             Padding(
@@ -91,8 +96,15 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-                    child: const Text('Cetak bon'),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal[700]),
+                    child: Text(
+                      'Cetak bon',
+                      style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyMedium?.fontSize,
+                      ),
+                    ),
                     onPressed: () {
                       Fluttertoast.showToast(
                         msg: 'Pencetakan bon sedang diproses',

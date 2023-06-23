@@ -197,7 +197,13 @@ class _RegisterStafState extends State<RegisterStaf> {
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal[700]),
-                  child: const Text('Simpan'),
+                  child: Text(
+                    'Simpan',
+                    style: TextStyle(
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium?.fontSize,
+                    ),
+                  ),
                 )),
               ],
             ),

@@ -40,9 +40,13 @@ class RegisterDone extends StatelessWidget {
                           child: Text(
                             'Kembali Ke Beranda',
                             style: TextStyle(
-                                color: Colors.teal[500],
-                                fontFamily: 'Figtree',
-                                fontSize: 16),
+                              color: Colors.teal[500],
+                              fontFamily: 'Figtree',
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.fontSize,
+                            ),
                           )),
                     )
                   ],
@@ -62,10 +66,15 @@ class RegisterDone extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal[700]),
-                          child: const Text(
+                          child: Text(
                             'Tambah Staf Lagi',
-                            style:
-                                TextStyle(fontFamily: 'Figtree', fontSize: 16),
+                            style: TextStyle(
+                              fontFamily: 'Figtree',
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.fontSize,
+                            ),
                           )),
                     )
                   ],
