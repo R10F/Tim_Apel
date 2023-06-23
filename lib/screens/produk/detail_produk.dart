@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/qty_produk_provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
@@ -19,6 +20,7 @@ class DetailProduk extends StatefulWidget {
 class _DetailProdukState extends State<DetailProduk> {
   @override
   Widget build(BuildContext context) {
+    var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     var qtyProvider = Provider.of<QtyProdukProvider>(context);
 
@@ -68,7 +70,11 @@ class _DetailProdukState extends State<DetailProduk> {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 widget.produk.deskripsi,
-                                style: const TextStyle(color: Colors.black54, fontSize: 16),
+                                style: TextStyle(
+                                    color: accountProvider.getSetting('dark_mode')
+                                        ? Colors.white
+                                        : Colors.black54,
+                                    fontSize: 16),
                               )),
                         )
                       : Container(),
