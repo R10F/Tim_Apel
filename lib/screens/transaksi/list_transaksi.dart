@@ -52,19 +52,23 @@ class _ListTransaksiState extends State<ListTransaksi> {
             child: Text('Klik untuk melihat detail transaksi.'),
           ),
           ...groupbyDatetime.entries.map((entry) {
-            String key = entry.key;
-            List value = entry.value;
+            String date = entry.key;
+            List listTransaksi = entry.value;
 
-            return Column(children: [
+            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
-                child: Text(key),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child:
+                      Text(date, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                ),
               ),
-              for (int i = 0; i < value.length; i++)
+              for (int i = 0; i < listTransaksi.length; i++)
                 CardTransaksiSelesai(
                     index: i,
-                    transaksi: value[i],
-                    namaKasir: accountProvider.userAccounts[value[i].idKasir].nama,
+                    transaksi: listTransaksi[i],
+                    namaKasir: accountProvider.userAccounts[listTransaksi[i].idKasir].nama,
                     prov: transaksiProvider)
             ]);
           })

@@ -67,6 +67,8 @@ class Transaksi {
 }
 
 class TransaksiData {
+  List<String> listMetodePembayaran = ['Tunai', 'OVO', 'GoPay', 'ShopeePay', 'DANA'];
+
   List<Transaksi> listTransaksi = [
     Transaksi(nomorAntrean: 4, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
     Transaksi(nomorAntrean: 5, idKasir: 2, listProduk: {
@@ -108,7 +110,7 @@ class TransaksiData {
         date: getTodayDate(),
         time: getCurrentTime(),
         inProcess: false,
-        metodePembayaran: 'Tunai'),
+        metodePembayaran: 'GoPay'),
     Transaksi(
         nomorAntrean: 3,
         idKasir: 0,
@@ -152,7 +154,7 @@ class TransaksiData {
         date: getTodayDate(),
         time: getCurrentTime(),
         inProcess: false,
-        metodePembayaran: 'Tunai'),
+        metodePembayaran: 'DANA'),
     Transaksi(
         nomorAntrean: 1,
         idKasir: 3,

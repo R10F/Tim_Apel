@@ -31,29 +31,12 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
               flex: 5,
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(produk.nama, style: const TextStyle(fontSize: 18)),
-                // Row(
-                //   children: [
-                //     TextButton(
-                //         onPressed: () {
-                //           Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (_) => DetailProduk(
-                //                       idTransaksi: widget.idTransaksi,
-                //                       produk: produk,
-                //                       canEdit: false)));
-                //         },
-                //         style: ButtonStyle(
-                //           padding:
-                //               MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(top: 16)),
-                //           minimumSize: MaterialStateProperty.all<Size>(Size.zero),
-                //         ),
-                //         child: const DefaultTextStyle(
-                //             style: TextStyle(
-                //                 color: Colors.teal, fontSize: 14, fontWeight: FontWeight.w500),
-                //             child: Text('DETAIL'))),
-                //   ],
-                // )
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(produk.kategori,
+                      style: const TextStyle(
+                          color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500)),
+                )
               ])),
           Expanded(
               flex: 2,
@@ -74,7 +57,7 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
               ))
         ]),
         const Padding(
-          padding: EdgeInsets.only(top: 8),
+          padding: EdgeInsets.only(top: 4),
           child: Divider(height: 15, thickness: 2),
         )
       ]),

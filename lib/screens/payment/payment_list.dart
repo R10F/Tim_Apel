@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/screens/payment/item_metode_pembayaran.dart';
 
 class PaymentList extends StatelessWidget {
@@ -11,7 +12,7 @@ class PaymentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> listMetodePembayaran = ['Tunai', 'OVO', 'GoPay', 'ShopeePay', 'DANA'];
+    List<String> listMetodePembayaran = TransaksiData().listMetodePembayaran;
 
     return Scaffold(
       appBar: AppBar(
