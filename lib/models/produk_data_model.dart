@@ -1,12 +1,12 @@
 class Produk {
-  final int id;
-  final String nama;
+  int id;
+  String nama;
   String deskripsi;
-  final String gambar;
-  final int stok;
-  final int hargaJual;
-  final int hargaBeli;
-  final String kategori;
+  String gambar;
+  int stok;
+  int hargaJual;
+  int hargaBeli;
+  String kategori;
 
   Produk({
     required this.id,

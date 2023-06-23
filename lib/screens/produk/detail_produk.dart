@@ -21,8 +21,6 @@ class _DetailProdukState extends State<DetailProduk> {
   Widget build(BuildContext context) {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     var qtyProvider = Provider.of<QtyProdukProvider>(context);
-    print(widget.idTransaksi);
-    print(widget.produk.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -99,6 +97,7 @@ class _DetailProdukState extends State<DetailProduk> {
                       const Text("Jumlah"),
                       InputQty(
                         minVal: 1,
+                        maxVal: widget.produk.stok,
                         showMessageLimit: false,
                         initVal: transaksiProvider.hasTransaksiActive
                             ? transaksiProvider.listTransaksi[widget.idTransaksi].listProduk

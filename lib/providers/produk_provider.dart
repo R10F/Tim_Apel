@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/produk_data_model.dart';
+import 'package:tim_apel/models/produk_data_model.dart';
 
 class ProdukProvider extends ChangeNotifier {
   var produkData = ProdukData();
@@ -50,15 +50,15 @@ class ProdukProvider extends ChangeNotifier {
       hargaBeli: hargaBeli,
       kategori: kategori,
     );
-    _semuaProduk[id-1] = edited;
+    _semuaProduk[id - 1] = edited;
     notifyListeners();
   }
 
-  List <Produk> getProdukHampirHabis(){
+  List<Produk> getProdukHampirHabis() {
     return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
   }
 
-  List <Produk> getProdukHabis(){
+  List<Produk> getProdukHabis() {
     return semuaProduk.where((produk) => produk.stok == 0).toList();
   }
 }
