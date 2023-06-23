@@ -80,13 +80,23 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                   ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 4, left: 8),
                         child: Container(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            currency(widget.produk[i].hargaJual),
+                            '@ ${currency(widget.produk[i].hargaJual)}',
                             style: TextStyle(
                                 fontFamily: 'Figtree', fontSize: 14, color: Colors.teal[500]),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16, left: 8),
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Stok: ${widget.produk[i].stok} item',
+                            style: const TextStyle(fontFamily: 'Figtree', fontSize: 14),
                           ),
                         ),
                       ),

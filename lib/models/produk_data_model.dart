@@ -23,23 +23,25 @@ class Produk {
 class ProdukData {
   List<Produk> listProduk = [
     Produk(
-      id: 1,
-      nama: "Lem Kertas Kenko Uk. Besar",
-      gambar: "produk_1.jpg",
-      stok: 10,
-      hargaJual: 10000,
-      hargaBeli: 9000,
-      kategori: "ATK",
-    ),
+        id: 1,
+        nama: "Lem Kertas Kenko Uk. Besar",
+        gambar: "produk_1.jpg",
+        stok: 10,
+        hargaJual: 10000,
+        hargaBeli: 9000,
+        kategori: "ATK",
+        deskripsi:
+            'Lem Kertas Kenko Uk. Besar memiliki berat 25 gram.\n\nLem ini terbuat dari formula berbasis air yang aman dan tidak beracun untuk anak-anak.\n\nLem ini cocok untuk menempelkan kertas, foto, dan bahan lainnya tanpa merusaknya'),
     Produk(
-      id: 2,
-      nama: "Lem Kertas Kenko Uk. Kecil",
-      gambar: "produk_1.jpg",
-      stok: 10,
-      hargaJual: 5000,
-      hargaBeli: 4000,
-      kategori: "ATK",
-    ),
+        id: 2,
+        nama: "Lem Kertas Kenko Uk. Kecil",
+        gambar: "produk_1.jpg",
+        stok: 10,
+        hargaJual: 5000,
+        hargaBeli: 4000,
+        kategori: "ATK",
+        deskripsi:
+            'Lem Kertas Kenko Uk. Kecil memiliki berat 10 gram.\n\nLem ini terbuat dari formula berbasis air yang aman dan tidak beracun untuk anak-anak.\n\nLem ini cocok untuk menempelkan kertas, foto, dan bahan lainnya tanpa merusaknya'),
     Produk(
         id: 3,
         nama: "Lem Lilin Uk. Kecil",
@@ -47,7 +49,9 @@ class ProdukData {
         stok: 100,
         hargaJual: 1000,
         hargaBeli: 700,
-        kategori: "Craft Supply"),
+        kategori: "Craft Supply",
+        deskripsi:
+            'Lem Lilin Uk. Kecil memiliki berat 20 gram.\n\nLem lilin adalah lem serbaguna yang dapat digunakan untuk menempelkan berbagai jenis bahan, termasuk kertas, karton, kain, dan kayu. Lem ini juga tahan air, sehingga cocok digunakan untuk proyek-proyek yang akan terkena kelembapan.'),
     Produk(
         id: 4,
         nama: "Lem Lilin Uk. Besar",
@@ -55,7 +59,9 @@ class ProdukData {
         stok: 80,
         hargaJual: 3000,
         hargaBeli: 2500,
-        kategori: "Craft Supply"),
+        kategori: "Craft Supply",
+        deskripsi:
+            'Lem Lilin Uk. Besar memiliki berat 50 gram.\n\nLem lilin adalah lem serbaguna yang dapat digunakan untuk menempelkan berbagai jenis bahan, termasuk kertas, karton, kain, dan kayu. Lem ini juga tahan air, sehingga cocok digunakan untuk proyek-proyek yang akan terkena kelembapan.'),
     Produk(
         id: 5,
         nama: "Set Jarum Jahit",

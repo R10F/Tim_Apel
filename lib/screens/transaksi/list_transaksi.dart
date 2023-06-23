@@ -49,7 +49,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
             child: Column(children: [
           const Padding(
             padding: EdgeInsets.only(bottom: 20),
-            child: Text('Klik untuk melihat detail transaksi.'),
+            child: Text('Klik untuk melihat rincian transaksi.'),
           ),
           ...groupbyDatetime.entries.map((entry) {
             String date = entry.key;
