@@ -9,20 +9,17 @@ class TabNavigasiTransaksi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    
+
     return TabBar(
       labelPadding: const EdgeInsets.symmetric(horizontal: 12),
       labelStyle: const TextStyle(fontSize: 15),
       tabs: const [
-        Tab(
-          text: "Dalam Proses",
-        ),
+        Tab(text: "Dalam Proses"),
         Tab(text: "Selesai"),
       ],
       indicatorColor: Colours.lightSalmon,
       labelColor: Colours.lightSalmon[500],
-      unselectedLabelColor:
-          accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
+      unselectedLabelColor: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
     );
   }
 }
