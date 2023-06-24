@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tim_apel/providers/filter_transaksi_provider.dart';
 import 'package:tim_apel/providers/form_handler/edit_nama_form_provider.dart';
 import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
 import 'package:tim_apel/providers/form_handler/register_staf_form_provider.dart';
@@ -42,6 +43,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => TransaksiProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => FilterTransaksiProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => StokProdukProvider(),
