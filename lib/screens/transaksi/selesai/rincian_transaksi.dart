@@ -36,8 +36,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Nomor Antrean')),
-                Expanded(
-                    flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
+                Expanded(flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
               ],
             ),
             Row(
@@ -55,16 +54,13 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total Belanja')),
-                Expanded(
-                    flex: 5, child: Text(': ${currency(widget.totalBelanja)}'))
+                Expanded(flex: 5, child: Text(': ${currency(widget.totalBelanja)}'))
               ],
             ),
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Metode Pembayaran')),
-                Expanded(
-                    flex: 5,
-                    child: Text(": ${widget.transaksi.metodePembayaran}"))
+                Expanded(flex: 5, child: Text(": ${widget.transaksi.metodePembayaran}"))
               ],
             ),
             Row(
@@ -86,23 +82,28 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                     children: List.generate(
                         listProduk.length,
                         (index) => ItemRincianBelanja(
-                            idTransaksi: widget.index,
-                            data: listProduk[index]))),
+                            idTransaksi: widget.index, data: listProduk[index]))),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.only(top: 20, bottom: 25),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Text('Total', style: TextStyle(fontSize: 18)),
+                Text(currency(widget.totalBelanja),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
+              ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
               child: Row(
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal[700]),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                     child: Text(
                       'Cetak bon',
                       style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                       ),
                     ),
                     onPressed: () {
