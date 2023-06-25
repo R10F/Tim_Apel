@@ -61,7 +61,7 @@ class DrawerOwner extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: true)));
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccountsPage: true)));
             },
           ),
           ListTile(
@@ -94,7 +94,7 @@ class DrawerOwner extends StatelessWidget {
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccounts: false)));
+                  MaterialPageRoute(builder: (_) => const ListStaf(isActiveAccountsPage: false)));
             },
           ),
           const Divider(

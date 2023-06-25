@@ -3,14 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
 
 class ListStaf extends StatefulWidget {
-  const ListStaf({super.key, required this.isActiveAccounts});
+  const ListStaf({super.key, required this.isActiveAccountsPage});
 
-  final bool isActiveAccounts;
+  final bool isActiveAccountsPage;
 
   @override
   State<ListStaf> createState() => _ListStafState();
@@ -24,12 +25,12 @@ class _ListStafState extends State<ListStaf> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isActiveAccounts ? 'List Staf' : 'Staf Nonaktif'),
+        title: Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
       ),
       body: ListView(
           children: List.generate(
               userAccounts.length,
-              (index) => userAccounts[index].isActive == widget.isActiveAccounts
+              (index) => userAccounts[index].isActive == widget.isActiveAccountsPage
                   ? GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -41,15 +42,11 @@ class _ListStafState extends State<ListStaf> {
                                       title: Text(userAccounts[index].nama),
                                     ),
                                     body: Profile(
-                                        id: index,
-                                        asMyself: false,
-                                        data: userAccounts[index]))));
+                                        id: index, asMyself: false, data: userAccounts[index]))));
                       },
                       child: Container(
                         decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    width: 0.5, color: Colors.grey))),
+                            border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -60,22 +57,36 @@ class _ListStafState extends State<ListStaf> {
                                 width: 45,
                               ),
                               title: Text(userAccounts[index].nama),
-                              trailing: accountProvider.id != index &&
-                                      userAccounts[index].isActive
-                                  ? IconButton(
-                                      onPressed: () {
-                                        accountProvider.archieveAccounts(index);
-
-                                        Fluttertoast.showToast(
-                                          msg: 'Staf Berhasil Diarsipkan',
-                                          toastLength: Toast.LENGTH_LONG,
-                                          gravity: ToastGravity.TOP,
-                                          backgroundColor: Colors.teal[300],
-                                          textColor: Colors.white,
-                                          fontSize: 16,
-                                        );
-                                      },
-                                      icon: const Icon(Icons.archive))
+                              trailing: accountProvider.id != index
+                                  ? widget.isActiveAccountsPage
+                                      ? IconButton(
+                                          onPressed: () {
+                                            QuickAlert.show(
+                                                context: context,
+                                                type: QuickAlertType.warning,
+                                                confirmBtnColor: Colors.teal[700]!,
+                                                title: 'Nonaktifkan staf ini?',
+                                                confirmBtnText: 'Nonaktifkan',
+                                                cancelBtnText: 'Tutup',
+                                                showCancelBtn: true,
+                                                onConfirmBtnTap: () {
+                                                  accountProvider.archieveAccounts(index);
+                                                  Navigator.pop(context);
+                                                });
+                                          },
+                                          icon: const Icon(Icons.archive))
+                                      : IconButton(
+                                          onPressed: () {
+                                            Fluttertoast.showToast(
+                                              msg: 'Staf sudah diaktifkan kembali',
+                                              toastLength: Toast.LENGTH_LONG,
+                                              gravity: ToastGravity.TOP,
+                                              backgroundColor: Colors.teal[300],
+                                              textColor: Colors.white,
+                                              fontSize: 16,
+                                            );
+                                          },
+                                          icon: const Icon(Icons.archive))
                                   : null,
                             ),
                           ),
@@ -93,8 +104,7 @@ class _ListStafState extends State<ListStaf> {
           ),
         ),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
         },
       ),
     );

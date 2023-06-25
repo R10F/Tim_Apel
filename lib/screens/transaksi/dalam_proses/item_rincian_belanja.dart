@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/produk/detail_produk.dart';
@@ -56,7 +57,18 @@ class _ItemRincianBelanjaState extends State<ItemRincianBelanja> {
                             child: Text('EDIT'))),
                     TextButton(
                         onPressed: () {
-                          transaksiProvider.cancelCartItem(widget.idTransaksi, produk.id);
+                          QuickAlert.show(
+                              context: context,
+                              type: QuickAlertType.warning,
+                              confirmBtnColor: Colors.teal[700]!,
+                              title: 'Batalkan barang ini?',
+                              confirmBtnText: 'Batal',
+                              cancelBtnText: 'Tutup',
+                              showCancelBtn: true,
+                              onConfirmBtnTap: () {
+                                transaksiProvider.cancelCartItem(widget.idTransaksi, produk.id);
+                                Navigator.pop(context);
+                              });
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(

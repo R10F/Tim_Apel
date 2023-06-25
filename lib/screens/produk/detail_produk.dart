@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -143,6 +144,19 @@ class _DetailProdukState extends State<DetailProduk> {
                                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30)),
                             onPressed: transaksiProvider.hasTransaksiActive
                                 ? () {
+                                    Fluttertoast.showToast(
+                                      msg: transaksiProvider
+                                              .listTransaksi[widget.idTransaksi].listProduk
+                                              .containsKey(widget.produk.id)
+                                          ? 'Jumlah produk sudah diperbarui'
+                                          : 'Produk sudah ditambahkan',
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.TOP,
+                                      backgroundColor: Colors.teal[300],
+                                      textColor: Colors.white,
+                                      fontSize: 16,
+                                    );
+
                                     transaksiProvider.addToCart(
                                         widget.idTransaksi, widget.produk.id, qtyProvider.getQty);
                                   }
