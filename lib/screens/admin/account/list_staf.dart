@@ -70,13 +70,16 @@ class _ListStafState extends State<ListStaf> {
                                                 cancelBtnText: 'Tutup',
                                                 showCancelBtn: true,
                                                 onConfirmBtnTap: () {
-                                                  accountProvider.archieveAccounts(index);
+                                                  accountProvider.deactivateAccount(index);
                                                   Navigator.pop(context);
                                                 });
                                           },
-                                          icon: const Icon(Icons.archive))
+                                          tooltip: 'Nonaktifkan staf ini',
+                                          icon: const Icon(Icons.block))
                                       : IconButton(
                                           onPressed: () {
+                                            accountProvider.activateAccount(index);
+
                                             Fluttertoast.showToast(
                                               msg: 'Staf sudah diaktifkan kembali',
                                               toastLength: Toast.LENGTH_LONG,
@@ -86,7 +89,8 @@ class _ListStafState extends State<ListStaf> {
                                               fontSize: 16,
                                             );
                                           },
-                                          icon: const Icon(Icons.archive))
+                                          tooltip: 'Aktifkan staf ini',
+                                          icon: const Icon(Icons.check))
                                   : null,
                             ),
                           ),
@@ -94,19 +98,21 @@ class _ListStafState extends State<ListStaf> {
                       ),
                     )
                   : Container())),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.teal[700],
-        icon: const Icon(Icons.add),
-        label: Text(
-          'Tambah',
-          style: TextStyle(
-            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
-          ),
-        ),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
-        },
-      ),
+      floatingActionButton: widget.isActiveAccountsPage
+          ? FloatingActionButton.extended(
+              backgroundColor: Colors.teal[700],
+              icon: const Icon(Icons.add),
+              label: Text(
+                'Tambah',
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+              },
+            )
+          : null,
     );
   }
 }
