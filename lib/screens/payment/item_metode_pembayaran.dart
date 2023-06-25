@@ -29,6 +29,15 @@ class ItemMetodePembayaran extends StatelessWidget {
     var produkProvider = Provider.of<ProdukProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
+    void konfirmasiPembayaran() {
+      transaksiProvider.transaksiSelesai(idTransaksi, metodePembayaran, produkProvider.semuaProduk);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              fullscreenDialog: true, builder: (_) => PaymentDone(nomorAntrean: nomorAntrean)));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(metodePembayaran),
@@ -46,17 +55,18 @@ class ItemMetodePembayaran extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 30),
+              padding: const EdgeInsets.only(bottom: 40),
               child: Text(currency(totalHarga),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 30, color: Colors.green)),
             ),
             metodePembayaran == 'Tunai'
-                ? const PembayaranTunai()
+                ? PembayaranTunai(
+                    totalHarga: totalHarga, konfirmasiPembayaran: konfirmasiPembayaran)
                 : Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.only(bottom: 40),
+                        padding: EdgeInsets.only(bottom: 30),
                         child: Text(
                           'Silahkan Scan Kode QR di bawah ini',
                           textAlign: TextAlign.center,
@@ -70,30 +80,27 @@ class ItemMetodePembayaran extends StatelessWidget {
                         embeddedImage: AssetImage("assets/payment/$iconName-logo.png"),
                         embeddedImageStyle: const QrEmbeddedImageStyle(size: Size(50, 50)),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                  style:
+                                      ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                                  onPressed: () {
+                                    konfirmasiPembayaran();
+                                  },
+                                  child: const Text(
+                                    'Konfirmasi Pembayaran',
+                                    style: TextStyle(fontFamily: 'Figtree', fontSize: 16),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
-                      onPressed: () {
-                        transaksiProvider.transaksiSelesai(
-                            idTransaksi, metodePembayaran, produkProvider.semuaProduk);
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (_) => PaymentDone(nomorAntrean: nomorAntrean)));
-                      },
-                      child: const Text(
-                        'Konfirmasi Pembayaran',
-                        style: TextStyle(fontFamily: 'Figtree', fontSize: 16),
-                      )),
-                ),
-              ],
-            )
           ],
         ),
       ),
