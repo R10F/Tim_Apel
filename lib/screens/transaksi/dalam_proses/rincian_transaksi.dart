@@ -55,7 +55,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             ),
             Row(
               children: [
-                const Expanded(flex: 3, child: Text('Total Belanja')),
+                const Expanded(flex: 3, child: Text('Total')),
                 Expanded(flex: 5, child: Text(': ${currency(totalHargaBelanja)}'))
               ],
             ),
