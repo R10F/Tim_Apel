@@ -88,7 +88,7 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 25),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Total', style: TextStyle(fontSize: 18)),
+                const Text('Total Belanja', style: TextStyle(fontSize: 18)),
                 Text(currency(widget.totalBelanja),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
               ]),
