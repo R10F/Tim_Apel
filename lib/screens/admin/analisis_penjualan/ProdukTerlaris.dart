@@ -58,10 +58,10 @@ class ProdukTerlaris extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Text(
                     "${produkProv.kategori[i]}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 23,
                     ),
                   ),
