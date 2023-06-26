@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/admin/account/list_staf.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
-import 'package:tim_apel/screens/admin/restock/StokProduk.dart';
+import 'package:tim_apel/screens/admin/restock/stok_produk.dart';
 import 'package:tim_apel/screens/admin/analisis_penjualan/ProdukTerlaris.dart';
 import 'package:tim_apel/screens/admin/analisis_penjualan/ProdukTidakLaris.dart';
 

@@ -73,7 +73,7 @@ class TransaksiData {
     Transaksi(nomorAntrean: 4, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
     Transaksi(nomorAntrean: 5, idKasir: 2, listProduk: {
       4: 2,
-      6: 4,
+      5: 4,
     }),
     Transaksi(nomorAntrean: 6, idKasir: 3, listProduk: {
       2: 1,
