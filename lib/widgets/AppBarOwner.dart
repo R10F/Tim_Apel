@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
@@ -45,7 +46,45 @@ class AppBarOwner extends StatelessWidget {
                                     )));
                       }
                     : null,
-                icon: const Icon(Icons.receipt_long))
+                icon: const Icon(Icons.receipt_long)),
+          PopupMenuButton(
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.black,
+                width: 1,
+              )),
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                  'Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean}'),
+            ),
+            onSelected: (value) {
+              transaksiProvider.selectedAntrean = value;
+
+              Fluttertoast.showToast(
+                msg: 'Transaksi aktif berhasil diubah',
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.TOP,
+                backgroundColor: Colors.teal[300],
+                textColor: Colors.white,
+                fontSize: 16,
+              );
+            },
+            itemBuilder: (BuildContext context) {
+              List listTransaksi = transaksiProvider.listTransaksi
+                  .where((transaksi) => transaksi.inProcess == true)
+                  .toList();
+
+              return List.generate(
+                  listTransaksi.length,
+                  (index) => PopupMenuItem(
+                        value: index,
+                        child: Text('Antrean ${listTransaksi[index].nomorAntrean}'),
+                      ));
+            },
+          ),
         ],
         title: (bottomNavProvider.getSelectedIdx == 0)
             ? const Text(
