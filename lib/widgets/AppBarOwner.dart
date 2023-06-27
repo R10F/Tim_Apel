@@ -80,9 +80,13 @@ class AppBarOwner extends StatelessWidget {
               return List.generate(
                   listTransaksi.length,
                   (index) => PopupMenuItem(
-                        value: index,
-                        child: Text('Antrean ${listTransaksi[index].nomorAntrean}'),
-                      ));
+                      value: index,
+                      child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text('Antrean ${listTransaksi[index].nomorAntrean}'),
+                          leading: index == transaksiProvider.selectedAntrean
+                              ? const Icon(Icons.check)
+                              : const SizedBox(width: 24))));
             },
           ),
         ],
