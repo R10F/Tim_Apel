@@ -48,18 +48,21 @@ class AppBarOwner extends StatelessWidget {
                     : null,
                 icon: const Icon(Icons.receipt_long)),
           PopupMenuButton(
+            tooltip: 'Pilih nomor antrean',
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
                   border: Border.all(
-                color: Colors.black,
-                width: 1,
-              )),
+                    color: Colors.black,
+                    width: 1,
+                  )),
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: transaksiProvider.selectedAntrean > -1
                   ? Text(
-                      'Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean}')
+                      'Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean}',
+                      style: const TextStyle(fontWeight: FontWeight.w500))
                   : const Text('Antrean Selesai'),
             ),
             onSelected: (value) {

@@ -67,7 +67,8 @@ class _MainAppState extends State<MainApp> {
                 child: const AppBarStaf(),
               ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
-        drawer: accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 0
+        drawer: accountProvider.isOwner &&
+                (bottomnavProvider.getSelectedIdx == 0 || bottomnavProvider.getSelectedIdx == 3)
             ? const DrawerOwner()
             : null,
         bottomNavigationBar: const BottomNavbar(),
