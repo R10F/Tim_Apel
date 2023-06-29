@@ -57,8 +57,10 @@ class AppBarOwner extends StatelessWidget {
               )),
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                  'Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean}'),
+              child: transaksiProvider.selectedAntrean > -1
+                  ? Text(
+                      'Antrean ${transaksiProvider.listTransaksi[transaksiProvider.selectedAntrean].nomorAntrean}')
+                  : const Text('Antrean Selesai'),
             ),
             onSelected: (value) {
               transaksiProvider.selectedAntrean = value;
@@ -73,20 +75,21 @@ class AppBarOwner extends StatelessWidget {
               );
             },
             itemBuilder: (BuildContext context) {
-              List listTransaksi = transaksiProvider.listTransaksi
-                  .where((transaksi) => transaksi.inProcess == true)
-                  .toList();
-
-              return List.generate(
-                  listTransaksi.length,
-                  (index) => PopupMenuItem(
+              List<PopupMenuItem> items = [];
+              for (int index = 0; index < transaksiProvider.listTransaksi.length; index++) {
+                if (transaksiProvider.listTransaksi[index].inProcess) {
+                  items.add(PopupMenuItem(
                       value: index,
                       child: ListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text('Antrean ${listTransaksi[index].nomorAntrean}'),
+                          title: Text(
+                              'Antrean ${transaksiProvider.listTransaksi[index].nomorAntrean}'),
                           leading: index == transaksiProvider.selectedAntrean
                               ? const Icon(Icons.check)
                               : const SizedBox(width: 24))));
+                }
+              }
+              return items;
             },
           ),
         ],
