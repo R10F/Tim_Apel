@@ -21,10 +21,11 @@ class _TransaksiSedangBerlangsungState extends State<TransaksiSedangBerlangsung>
   Widget build(BuildContext context) {
     var bottomnavProvider = Provider.of<BottomNavbarProvider>(context);
 
-    List listTansaksiInProcess = [];
-    for (int i = widget.listTransaksi.length - 1; i >= 0; i--) {
+    int indexCount = 0;
+    int listItemCount = 0;
+    for (int i = 0; i < widget.listTransaksi.length; i++) {
       if (widget.listTransaksi[i].inProcess) {
-        listTansaksiInProcess.add(widget.listTransaksi[i]);
+        listItemCount++;
       }
     }
 
@@ -81,105 +82,103 @@ class _TransaksiSedangBerlangsungState extends State<TransaksiSedangBerlangsung>
             ],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: listTansaksiInProcess.isNotEmpty
-              ? Column(
-                  children: List.generate(
-                      listTansaksiInProcess.length,
-                      (index) => GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => RincianTransaksi(
-                                            idTransaksi: index,
-                                            namaKasir: widget
-                                                .accountProvider
-                                                .userAccounts[widget.listTransaksi[index].idKasir]
-                                                .nama,
-                                            transaksi: widget.listTransaksi[index],
-                                          )));
-                            },
-                            child: Column(
+          child: listItemCount > 0
+              ? Column(children: [
+                  for (int index = 0; index < widget.listTransaksi.length; index++)
+                    if (widget.listTransaksi[index].inProcess)
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => RincianTransaksi(
+                                        idTransaksi: index,
+                                        namaKasir: widget.accountProvider
+                                            .userAccounts[widget.listTransaksi[index].idKasir].nama,
+                                        transaksi: widget.listTransaksi[index],
+                                      )));
+                        },
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                Column(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4, left: 15, right: 15),
-                                          child: Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Antrean ${widget.listTransaksi[index].nomorAntrean}',
-                                                    style: const TextStyle(
-                                                        fontFamily: 'Figtree', fontSize: 18),
-                                                  ),
-                                                  Text(
-                                                    widget
-                                                        .accountProvider
-                                                        .userAccounts[
-                                                            widget.listTransaksi[index].idKasir]
-                                                        .nama,
-                                                    style: const TextStyle(
-                                                        fontWeight: FontWeight.w500,
-                                                        color: Colors.grey,
-                                                        fontFamily: 'Figtree',
-                                                        fontSize: 16),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 15),
-                                      child: OutlinedButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) => RincianTransaksi(
-                                                          idTransaksi: index,
-                                                          namaKasir: widget
-                                                              .accountProvider
-                                                              .userAccounts[widget
-                                                                  .listTransaksi[index].idKasir]
-                                                              .nama,
-                                                          transaksi: widget.listTransaksi[index],
-                                                        )));
-                                          },
-                                          style: OutlinedButton.styleFrom(
-                                            side: BorderSide(
-                                              color: Colors.teal[300]!,
-                                              width: 2,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(4),
-                                            ),
-                                          ),
-                                          child: Text('Rincian',
-                                              style: TextStyle(
-                                                fontSize:
-                                                    Theme.of(context).textTheme.bodySmall?.fontSize,
-                                                color: const Color(0xFF00796B),
-                                              ))),
-                                    )
+                                      padding: const EdgeInsets.only(top: 4, left: 15, right: 15),
+                                      child: Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Antrean ${widget.listTransaksi[index].nomorAntrean}',
+                                                style: const TextStyle(
+                                                    fontFamily: 'Figtree', fontSize: 18),
+                                              ),
+                                              Text(
+                                                widget
+                                                    .accountProvider
+                                                    .userAccounts[
+                                                        widget.listTransaksi[index].idKasir]
+                                                    .nama,
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.grey,
+                                                    fontFamily: 'Figtree',
+                                                    fontSize: 16),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                index < listTansaksiInProcess.length - 1
-                                    ? const Padding(
-                                        padding: EdgeInsets.only(top: 4),
-                                        child: Divider(indent: 15, endIndent: 15, thickness: 2),
-                                      )
-                                    : Container()
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15),
+                                  child: OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => RincianTransaksi(
+                                                      idTransaksi: index,
+                                                      namaKasir: widget
+                                                          .accountProvider
+                                                          .userAccounts[
+                                                              widget.listTransaksi[index].idKasir]
+                                                          .nama,
+                                                      transaksi: widget.listTransaksi[index],
+                                                    )));
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                          color: Colors.teal[300]!,
+                                          width: 2,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                      ),
+                                      child: Text('Rincian',
+                                          style: TextStyle(
+                                            fontSize:
+                                                Theme.of(context).textTheme.bodySmall?.fontSize,
+                                            color: const Color(0xFF00796B),
+                                          ))),
+                                )
                               ],
                             ),
-                          )))
+                            indexCount++ < listItemCount - 1
+                                ? const Padding(
+                                    padding: EdgeInsets.only(top: 4),
+                                    child: Divider(indent: 15, endIndent: 15, thickness: 2),
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      )
+                ])
               : Padding(
                   padding: const EdgeInsets.only(top: 4, left: 15, right: 15),
                   child: Container(

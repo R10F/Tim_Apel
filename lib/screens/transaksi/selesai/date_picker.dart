@@ -24,6 +24,17 @@ class _DatePickerState extends State<DatePicker> {
         showActionButtons: true,
         minDate: widget.prov.startDate,
         maxDate: widget.prov.endDate,
+        initialSelectedDates: filterType == 'multi_date'
+            ? widget.prov.dateFilterItem['multi_date']['result'].cast<DateTime>().toList()
+            : null,
+        initialSelectedRange: filterType == 'date_range'
+            ? widget.prov.dateFilterItem['date_range']['result'].isEmpty
+                ? PickerDateRange(widget.prov.startDate, widget.prov.endDate)
+                : PickerDateRange(
+                    widget.prov.dateFilterItem['date_range']['result'][0],
+                    widget.prov.dateFilterItem['date_range']['result'][1],
+                  )
+            : null,
         selectionMode: filterType == 'date_range'
             ? DateRangePickerSelectionMode.range
             : DateRangePickerSelectionMode.multiple,

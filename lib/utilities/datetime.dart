@@ -21,7 +21,7 @@ String getTodayDate() {
   return DateFormat(dateFormat).format(now);
 }
 
-String getYesterdayDate() {
-  DateTime yesterday = now.subtract(const Duration(days: 1));
+String getPreviousDate(int ndays) {
+  DateTime yesterday = now.subtract(Duration(days: ndays));
   return DateFormat(dateFormat).format(yesterday);
 }

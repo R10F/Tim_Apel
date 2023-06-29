@@ -29,15 +29,15 @@ class _ListTransaksiStateSelesai extends State<ListTransaksiSelesai> {
     List activeFilterMultiDate = filterProvider.dateFilterItem['multi_date']['result'];
 
     Map<String, List> groupbyDatetime = {};
-    for (int i = 0; i < listTransaksi.length; i++) {
+    for (int i = listTransaksi.length - 1; i >= 0; i--) {
       if (!listTransaksi[i].inProcess) {
         DateTime dateTransaksi = parseDate(listTransaksi[i].date);
 
         // Filter date range
         if (filterProvider.dateFilterType == 'date_range' &&
             filterProvider.dateFilterItem['date_range']['result'].isNotEmpty &&
-            dateTransaksi.isAfter(filterProvider.dateFilterItem['date_range']['result'][0]) &&
-            dateTransaksi.isBefore(filterProvider.dateFilterItem['date_range']['result'][1])) {
+            (dateTransaksi.isAfter(filterProvider.dateFilterItem['date_range']['result'][1]) ||
+                dateTransaksi.isBefore(filterProvider.dateFilterItem['date_range']['result'][0]))) {
           continue;
         }
         // Filter multi date

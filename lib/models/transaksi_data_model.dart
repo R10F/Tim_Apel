@@ -70,17 +70,8 @@ class TransaksiData {
   List<String> listMetodePembayaran = ['Tunai', 'OVO', 'GoPay', 'ShopeePay', 'DANA'];
 
   List<Transaksi> listTransaksi = [
-    Transaksi(nomorAntrean: 4, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
-    Transaksi(nomorAntrean: 5, idKasir: 2, listProduk: {
-      4: 2,
-      5: 4,
-    }),
-    Transaksi(nomorAntrean: 6, idKasir: 3, listProduk: {
-      2: 1,
-      5: 3,
-    }),
     Transaksi(
-        nomorAntrean: 2,
+        nomorAntrean: 1,
         idKasir: 4,
         listProduk: {3: 1, 7: 4},
         listProdukAkhir: [
@@ -107,12 +98,12 @@ class TransaksiData {
             4
           ],
         ],
-        date: getTodayDate(),
+        date: getPreviousDate(2),
         time: getCurrentTime(),
         inProcess: false,
         metodePembayaran: 'GoPay'),
     Transaksi(
-        nomorAntrean: 3,
+        nomorAntrean: 2,
         idKasir: 0,
         listProduk: {1: 2, 3: 3, 5: 4},
         listProdukAkhir: [
@@ -151,12 +142,12 @@ class TransaksiData {
             4
           ],
         ],
-        date: getTodayDate(),
+        date: getPreviousDate(1),
         time: getCurrentTime(),
         inProcess: false,
         metodePembayaran: 'DANA'),
     Transaksi(
-        nomorAntrean: 1,
+        nomorAntrean: 3,
         idKasir: 3,
         listProduk: {2: 5, 4: 4, 6: 3},
         listProdukAkhir: [
@@ -195,9 +186,18 @@ class TransaksiData {
             3
           ],
         ],
-        date: getYesterdayDate(),
+        date: getTodayDate(),
         time: getCurrentTime(),
         inProcess: false,
         metodePembayaran: 'Tunai'),
+    Transaksi(nomorAntrean: 4, idKasir: 0, listProduk: {1: 3, 2: 2, 3: 5, 5: 2, 7: 1}),
+    Transaksi(nomorAntrean: 5, idKasir: 2, listProduk: {
+      4: 2,
+      5: 4,
+    }),
+    Transaksi(nomorAntrean: 6, idKasir: 3, listProduk: {
+      2: 1,
+      5: 3,
+    }),
   ];
 }
