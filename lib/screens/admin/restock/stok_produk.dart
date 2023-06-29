@@ -36,9 +36,11 @@ class _StokProdukState extends State<StokProduk> {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(kTextTabBarHeight),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                     child: FilterChip(
                       label: const Text("Segera Habis"),
                       selected: stokProdukProv.statusSegeraHabis,
@@ -102,7 +104,8 @@ class _StokProdukState extends State<StokProduk> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 12, right: 12, bottom: 16),
+                                padding: const EdgeInsets.only(
+                                    left: 12, right: 12, bottom: 16),
                                 child: Text(
                                   stokProduk[i].nama,
                                   style: const TextStyle(
@@ -117,12 +120,16 @@ class _StokProdukState extends State<StokProduk> {
                                     onPressed: () {},
                                     style: OutlinedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10))),
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
                                     child: Text(
                                       "Restock",
                                       style: TextStyle(
                                         color: Colors.teal[500],
-                                        fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.fontSize,
                                       ),
                                     )),
                               ),
@@ -136,7 +143,9 @@ class _StokProdukState extends State<StokProduk> {
                             height: 100,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
-                                  color: stokProduk[i].stok == 0 ? Colors.red : Colors.yellow[500],
+                                  color: stokProduk[i].stok == 0
+                                      ? Colors.red
+                                      : Colors.yellow[500],
                                   borderRadius: BorderRadius.circular(10)),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
