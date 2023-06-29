@@ -11,6 +11,7 @@ import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/bottom_navbar_provider.dart';
+import 'package:tim_apel/providers/tunai_provider.dart';
 import 'package:tim_apel/screens/login.dart';
 import 'package:tim_apel/widgets/MainApp.dart';
 
@@ -49,6 +50,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => StokProdukProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => TunaiProvider(),
       ),
     ],
     child: const MyApp(),

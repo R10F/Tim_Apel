@@ -30,6 +30,7 @@ environment:
 dependencies:
   colours: ^0.0.2
   cupertino_icons: ^1.0.2
+  currency_text_input_formatter: ^2.1.10
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1

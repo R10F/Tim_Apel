@@ -39,6 +39,7 @@ class _StokProdukState extends State<StokProduk> {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(kTextTabBarHeight),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
