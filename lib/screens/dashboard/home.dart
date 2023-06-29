@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:colours/colours.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
@@ -59,17 +58,6 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10),
-          //   child: Container(
-          //     alignment: Alignment.topLeft,
-          //     child: const Text(
-          //       "Penjualan",
-          //       style: TextStyle(
-          //           fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
             child: Text(
@@ -79,26 +67,26 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.start,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
-                    onPressed: () {
-                      transaksiProvider.createNewOrder(accountProvider.id);
-                    },
-                    child: Text(
-                      "Buat Order Baru",
-                      style: TextStyle(
-                          fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
-                          color: Colors.black),
-                    )),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.start,
+          //     children: [
+          //       ElevatedButton(
+          //           style: ElevatedButton.styleFrom(
+          //               backgroundColor: Colours.lightSalmon, minimumSize: const Size(30, 30)),
+          //           onPressed: () {
+          //             transaksiProvider.createNewOrder(accountProvider.id);
+          //           },
+          //           child: Text(
+          //             "Buat Order Baru",
+          //             style: TextStyle(
+          //                 fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+          //                 color: Colors.black),
+          //           )),
+          //     ],
+          //   ),
+          // ),
           accountProvider.getSetting('dashboard_minimal')
               ? Container()
               : HomeInsight(prov: transaksiProvider),
