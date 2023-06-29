@@ -95,57 +95,145 @@ class _RegisterStafState extends State<RegisterStaf> {
                   )),
             ),
           ),
+          // Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+          //     child: DropdownButtonFormField(
+          //       value: registerFormProvider.getHari,
+          //       decoration: const InputDecoration(
+          //           labelStyle: TextStyle(color: Colors.black),
+          //           labelText: 'Hari',
+          //           border: OutlineInputBorder()),
+          //       items: const [
+          //         DropdownMenuItem(
+          //           value: "none",
+          //           child: Text("Pilih Hari"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Senin",
+          //           child: Text("Senin"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Selasa",
+          //           child: Text("Selasa"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Rabu",
+          //           child: Text("Rabu"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Kamis",
+          //           child: Text("Kamis"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Jumat",
+          //           child: Text("Jumat"),
+          //         ),
+          //         DropdownMenuItem(
+          //           value: "Sabtu",
+          //           child: Text("Sabtu"),
+          //         ),
+          //       ],
+          //       onChanged: (value) {
+          //         registerFormProvider.setHari = value;
+          //       },
+          //     )),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: TextButton(
+          //       onPressed: () {},
+          //       child: Text(
+          //         "Pilih Jadwal",
+          //         style: TextStyle(color: Colors.teal[500], fontSize: 15),
+          //       )),
+          // ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              child: DropdownButtonFormField(
-                value: registerFormProvider.getHari,
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black),
-                    labelText: 'Hari',
-                    border: OutlineInputBorder()),
-                items: const [
-                  DropdownMenuItem(
-                    value: "none",
-                    child: Text("Pilih Hari"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Senin",
-                    child: Text("Senin"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Selasa",
-                    child: Text("Selasa"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Rabu",
-                    child: Text("Rabu"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Kamis",
-                    child: Text("Kamis"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Jumat",
-                    child: Text("Jumat"),
-                  ),
-                  DropdownMenuItem(
-                    value: "Sabtu",
-                    child: Text("Sabtu"),
-                  ),
-                ],
-                onChanged: (value) {
-                  registerFormProvider.setHari = value;
-                },
-              )),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Pilih Jam",
-                  style: TextStyle(color: Colors.teal[500], fontSize: 15),
-                )),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+            child: Text(
+              "Pilih Jadwal",
+              style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
+            ),
           ),
+
+          for (var i = 0; i < registerFormProvider.getListHari.length; i++)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Checkbox(
+                    value: registerFormProvider.getCheckboxValue(i),
+                    onChanged: (value) {
+                      registerFormProvider.setCheckboxValue(i, value);
+                    },
+                  ),
+                  Text(
+                    registerFormProvider.getListHari[i],
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyLarge?.fontSize),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () async {
+                      var res = await showTimePicker(
+                          context: context,
+                          initialTime: const TimeOfDay(hour: 09, minute: 00),
+                          initialEntryMode: TimePickerEntryMode.inputOnly);
+
+                      if (res != null) {
+                        var hasil = res.format(context);
+                        print(registerFormProvider.getListHari[i]);
+                        print(i);
+                        registerFormProvider.setStartTime(i, hasil);
+                      }
+                    },
+                    child: TextField(
+                      enabled: false,
+                      controller:
+                          registerFormProvider.getStartTimeController(i),
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(labelText: "Jam Mulai"),
+                    ),
+                  )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    ":",
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                      child: GestureDetector(
+                    onTap: () async {
+                      var res = await showTimePicker(
+                          context: context,
+                          initialTime: const TimeOfDay(hour: 15, minute: 00),
+                          initialEntryMode: TimePickerEntryMode.inputOnly);
+
+                      if (res != null) {
+                        var hasil = res.format(context);
+                        registerFormProvider.setEndTime(i, hasil);
+                      }
+                    },
+                    child: TextField(
+                      enabled: false,
+                      controller: registerFormProvider.getEndTimeController(i),
+                      keyboardType: TextInputType.number,
+                      decoration:
+                          const InputDecoration(labelText: "Jam Selesai"),
+                    ),
+                  )),
+                ],
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
             child: Row(
@@ -171,7 +259,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                             registerFormProvider.usernameController.text,
                         'password':
                             registerFormProvider.passwordController.text,
-                        'jadwal': registerFormProvider.getHari
+                        'jadwal': registerFormProvider.getJadwal()
                       });
 
                       if (result['status'] != 'success') {
@@ -179,7 +267,6 @@ class _RegisterStafState extends State<RegisterStaf> {
                             context: context,
                             type: QuickAlertType.warning,
                             text: result['message']);
-                        print(result['message']);
                         return;
                       }
 
@@ -188,10 +275,8 @@ class _RegisterStafState extends State<RegisterStaf> {
                           MaterialPageRoute(
                               builder: (_) => const RegisterDone()));
 
-                      registerFormProvider.namaController.clear();
-                      registerFormProvider.usernameController.clear();
-                      registerFormProvider.passwordController.clear();
-                      registerFormProvider.setHari = "none";
+                      registerFormProvider.setToDefault();
+                      //registerFormProvider.setHari = "none";
                       // registerFormProvider.jadwalController.clear();
                     }
                   },

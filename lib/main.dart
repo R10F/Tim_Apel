@@ -70,6 +70,13 @@ class MyApp extends StatelessWidget {
     var accountProvider = Provider.of<AccountProvider>(context);
 
     return MaterialApp(
+      builder: (context, child) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              alwaysUse24HourFormat: true,
+            ),
+            child: child!);
+      },
       title: 'Makmur App',
       theme: accountProvider.getTheme(),
       home: accountProvider.isLoggedIn ? const MainApp() : const Login(),

@@ -39,7 +39,8 @@ class AccountProvider extends ChangeNotifier {
         nama: data['nama'],
         username: username,
         password: data['password'],
-        profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
+        profilePicture:
+            _profilePictures[Random().nextInt(_profilePictures.length)],
         jadwal: data['jadwal']));
     print(_userAccounts);
     notifyListeners();
@@ -108,12 +109,18 @@ class AccountProvider extends ChangeNotifier {
     primarySwatch: Colors.blue,
     brightness: Brightness.dark,
     textTheme: const TextTheme(
-      displayLarge:
-          TextStyle(fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
-      displayMedium:
-          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 23),
-      displaySmall:
-          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 20),
+      displayLarge: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 26),
+      displayMedium: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 23),
+      displaySmall: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 20),
       bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
       bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
       bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
@@ -130,12 +137,18 @@ class AccountProvider extends ChangeNotifier {
     primarySwatch: Colors.teal,
     brightness: Brightness.light,
     textTheme: const TextTheme(
-      displayLarge:
-          TextStyle(fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
-      displayMedium:
-          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 23),
-      displaySmall:
-          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 20),
+      displayLarge: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 26),
+      displayMedium: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 23),
+      displaySmall: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Plus Jakarta Sans',
+          fontSize: 20),
       bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
       bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
       bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
