@@ -39,8 +39,7 @@ class AccountProvider extends ChangeNotifier {
         nama: data['nama'],
         username: username,
         password: data['password'],
-        profilePicture:
-            _profilePictures[Random().nextInt(_profilePictures.length)],
+        profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
         jadwal: data['jadwal']));
     print(_userAccounts);
     notifyListeners();
@@ -66,23 +65,29 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> login(String username, String password) async {
+  Future<Map> login(String username, String password) async {
     bool verified = false;
+    String message = '';
 
     for (int i = 0; i < _userAccounts.length; i++) {
       var user = _userAccounts[i];
 
       if (user.username == username.trim() && user.password == password) {
+        if (!user.isActive) {
+          message = 'Staf sudah dinonaktifkan';
+          break;
+        }
         await _storage.write(key: 'MakmurApp_LoginID', value: i.toString());
         _currentLoggedInUserIndex = i;
         verified = true;
         break;
+      } else {
+        message = 'Username atau password salah, silahkan coba lagi';
       }
     }
     notifyListeners();
     String? value = await _storage.read(key: 'MakmurApp_LoginID');
-    print(value);
-    return verified;
+    return {'status': verified, 'message': message};
   }
 
   void activateAccount(int index) {
@@ -109,18 +114,12 @@ class AccountProvider extends ChangeNotifier {
     primarySwatch: Colors.blue,
     brightness: Brightness.dark,
     textTheme: const TextTheme(
-      displayLarge: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 26),
-      displayMedium: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 23),
-      displaySmall: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 20),
+      displayLarge:
+          TextStyle(fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
+      displayMedium:
+          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 23),
+      displaySmall:
+          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 20),
       bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
       bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
       bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),
@@ -137,18 +136,12 @@ class AccountProvider extends ChangeNotifier {
     primarySwatch: Colors.teal,
     brightness: Brightness.light,
     textTheme: const TextTheme(
-      displayLarge: TextStyle(
-          fontWeight: FontWeight.w700,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 26),
-      displayMedium: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 23),
-      displaySmall: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 20),
+      displayLarge:
+          TextStyle(fontWeight: FontWeight.w700, fontFamily: 'Plus Jakarta Sans', fontSize: 26),
+      displayMedium:
+          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 23),
+      displaySmall:
+          TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Plus Jakarta Sans', fontSize: 20),
       bodyLarge: TextStyle(fontFamily: 'Figtree', fontSize: 16),
       bodyMedium: TextStyle(fontFamily: 'Figtree', fontSize: 14),
       bodySmall: TextStyle(fontFamily: 'Figtree', fontSize: 12),

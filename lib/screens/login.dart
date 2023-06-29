@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+              padding: const EdgeInsets.all(25),
               child: Row(
                 children: [
                   Expanded(
@@ -84,16 +84,16 @@ class _LoginState extends State<Login> {
 
                       if (!loginFormProvider.isUsernameEmpty &&
                           !loginFormProvider.isPasswordEmpty) {
-                        bool status = await accountProvider.login(
+                        Map response = await accountProvider.login(
                             loginFormProvider.usernameController.text,
                             loginFormProvider.passwordController.text);
-                        if (!status) {
+                        if (!response['status']) {
                           QuickAlert.show(
                               context: context,
                               type: QuickAlertType.warning,
                               confirmBtnColor: Colors.teal[700]!,
                               title: 'Login Gagal',
-                              text: 'Username atau Password Anda Salah Silahkan Coba Lagi ');
+                              text: response['message']);
                         }
                       }
 
