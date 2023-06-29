@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/stok_produk_provider.dart';
+import 'package:tim_apel/screens/produk/edit_produk.dart';
 
 class StokProduk extends StatefulWidget {
   const StokProduk({super.key});
@@ -15,6 +17,7 @@ class _StokProdukState extends State<StokProduk> {
   @override
   Widget build(BuildContext context) {
     var stokProdukProv = Provider.of<StokProdukProvider>(context);
+    var formProv = Provider.of<ProdukFormProvider>(context);
     var produkProv = Provider.of<ProdukProvider>(context);
     // var filteredStokProduk = stokProdukProv.getStokProduk;
 
@@ -114,7 +117,28 @@ class _StokProdukState extends State<StokProduk> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 12),
                                 child: OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      var toBeEdited = produkProv.getProduk(stokProduk[i].id - 1);
+
+                                      formProv.namaProdukController.text = toBeEdited.nama;
+                                      formProv.deskripsiController.text = toBeEdited.deskripsi;
+                                      formProv.stokController.text = toBeEdited.stok.toString();
+                                      formProv.hargaJualController.text =
+                                          toBeEdited.hargaJual.toString();
+                                      formProv.hargaBeliController.text =
+                                          toBeEdited.hargaBeli.toString();
+                                      formProv.updateKategori = toBeEdited.kategori;
+                                      formProv.updateEditIdx = 1;
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            fullscreenDialog: true,
+                                            builder: (context) => EditProduk(
+                                                  idxProduk: stokProduk[i].id,
+                                                )),
+                                      );
+                                    },
                                     style: OutlinedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(10))),

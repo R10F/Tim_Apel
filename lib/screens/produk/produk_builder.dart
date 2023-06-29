@@ -24,93 +24,87 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
     return GridView.count(
         padding: const EdgeInsets.all(15),
         crossAxisCount: 2,
-        childAspectRatio: (MediaQuery.of(context).size.width /
-            (MediaQuery.of(context).size.height / 1.1)),
+        childAspectRatio:
+            (MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 0.8)),
         children: [
           for (int i = 0; i < widget.produk.length; i++)
-            Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: Card(
-                    child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => DetailProduk(
-                                idTransaksi: transaksiProvider.selectedAntrean,
-                                produk: widget.produk[i])));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                          'assets/product_images/${widget.produk[i].gambar}'),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: accountProvider.isOwner
-                                ? [
-                                    Flexible(
-                                      child: Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          widget.produk[i].nama,
-                                          style: const TextStyle(
-                                              fontFamily: 'Figtree',
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                    ),
-                                    Transform.translate(
-                                        offset: const Offset(12.5, 0),
-                                        child: PopupMenu(
-                                            idxProduk: widget.produk[i].id)),
-                                  ]
-                                : [
-                                    Flexible(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+            if (widget.produk[i].stok > 0)
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Card(
+                      child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => DetailProduk(
+                                  idTransaksi: transaksiProvider.selectedAntrean,
+                                  produk: widget.produk[i])));
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset('assets/product_images/${widget.produk[i].gambar}'),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: accountProvider.isOwner
+                                  ? [
+                                      Flexible(
                                         child: Container(
                                           alignment: Alignment.topLeft,
                                           child: Text(
                                             widget.produk[i].nama,
                                             style: const TextStyle(
-                                                fontFamily: 'Figtree',
-                                                fontSize: 16),
+                                                fontFamily: 'Figtree', fontSize: 16),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4, left: 8),
-                        child: Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            '@ ${currency(widget.produk[i].hargaJual)}',
-                            style: TextStyle(
-                                fontFamily: 'Figtree',
-                                fontSize: 14,
-                                color: Colors.teal[500]),
+                                      Transform.translate(
+                                          offset: const Offset(12.5, 0),
+                                          child: PopupMenu(idxProduk: widget.produk[i].id)),
+                                    ]
+                                  : [
+                                      Flexible(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              widget.produk[i].nama,
+                                              style: const TextStyle(
+                                                  fontFamily: 'Figtree', fontSize: 16),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4, left: 8),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              '@ ${currency(widget.produk[i].hargaJual)}',
+                              style: TextStyle(
+                                  fontFamily: 'Figtree', fontSize: 14, color: Colors.teal[500]),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, left: 8),
-                        child: Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Stok: ${widget.produk[i].stok} item',
-                            style: const TextStyle(
-                                fontFamily: 'Figtree', fontSize: 14),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, left: 8),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'Stok: ${widget.produk[i].stok} item',
+                              style: const TextStyle(fontFamily: 'Figtree', fontSize: 14),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                )))
+                      ],
+                    ),
+                  )))
         ]);
   }
 }
