@@ -112,16 +112,20 @@ class _ListTransaksiStateSelesai extends State<ListTransaksiSelesai> {
                         onChanged: (value) {
                           filterProvider.dateFilterType = value!;
                         }),
-                    Text(filterValue['name']),
+                    Text('${filterValue['name']}: '),
                     if (filterType == 'date_range')
                       if (filterValue['result'].isEmpty)
                         Text(
-                            ': ${stringifyDate(filterProvider.startDate)}  -  ${stringifyDate(filterProvider.endDate)}')
+                            '${stringifyDate(filterProvider.startDate)}  -  ${stringifyDate(filterProvider.endDate)}')
                       else
                         Text(
-                            ': ${stringifyDate(filterValue['result'][0])}  -  ${stringifyDate(filterValue['result'][1])}')
+                            '${stringifyDate(filterValue['result'][0])}  -  ${stringifyDate(filterValue['result'][1])}')
                     else if (filterType == 'multi_date')
-                      if (filterValue['result'].isNotEmpty) Text(': ${multiDate.join(', ')}')
+                      if (filterValue['result'].isEmpty)
+                        Text(
+                            '${stringifyDate(filterProvider.startDate)}  -  ${stringifyDate(filterProvider.endDate)}')
+                      else
+                        Text(multiDate.join(', '))
                   ]),
                 );
               })
