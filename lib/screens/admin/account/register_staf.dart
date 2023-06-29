@@ -156,29 +156,29 @@ class _RegisterStafState extends State<RegisterStaf> {
           ),
 
           for (var i = 0; i < registerFormProvider.getListHari.length; i++)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: registerFormProvider.getCheckboxValue(i),
-                    onChanged: (value) {
-                      registerFormProvider.setCheckboxValue(i, value);
-                    },
-                  ),
-                  Text(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Checkbox(
+                  value: registerFormProvider.getCheckboxValue(i),
+                  onChanged: (value) {
+                    registerFormProvider.setCheckboxValue(i, value);
+                  },
+                ),
+                Flexible(
+                  child: Text(
                     registerFormProvider.getListHari[i],
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.bodyLarge?.fontSize),
+                            Theme.of(context).textTheme.bodyMedium?.fontSize),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                      child: GestureDetector(
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: GestureDetector(
                     onTap: () async {
                       var res = await showTimePicker(
                           context: context,
@@ -187,8 +187,6 @@ class _RegisterStafState extends State<RegisterStaf> {
 
                       if (res != null) {
                         var hasil = res.format(context);
-                        print(registerFormProvider.getListHari[i]);
-                        print(i);
                         registerFormProvider.setStartTime(i, hasil);
                       }
                     },
@@ -197,43 +195,47 @@ class _RegisterStafState extends State<RegisterStaf> {
                       controller:
                           registerFormProvider.getStartTimeController(i),
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(labelText: "Jam Mulai"),
+                      decoration: const InputDecoration(
+                        labelText: "Jam Mulai",
+                      ),
                     ),
-                  )),
-                  const SizedBox(
-                    width: 10,
                   ),
-                  const Text(
-                    ":",
-                    style: TextStyle(fontSize: 25),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                      child: GestureDetector(
-                    onTap: () async {
-                      var res = await showTimePicker(
-                          context: context,
-                          initialTime: const TimeOfDay(hour: 15, minute: 00),
-                          initialEntryMode: TimePickerEntryMode.inputOnly);
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                const Text(
+                  "-",
+                  style: TextStyle(fontSize: 25),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                    child: GestureDetector(
+                  onTap: () async {
+                    var res = await showTimePicker(
+                        context: context,
+                        initialTime: const TimeOfDay(hour: 15, minute: 00),
+                        initialEntryMode: TimePickerEntryMode.inputOnly);
 
-                      if (res != null) {
-                        var hasil = res.format(context);
-                        registerFormProvider.setEndTime(i, hasil);
-                      }
-                    },
-                    child: TextField(
-                      enabled: false,
-                      controller: registerFormProvider.getEndTimeController(i),
-                      keyboardType: TextInputType.number,
-                      decoration:
-                          const InputDecoration(labelText: "Jam Selesai"),
+                    if (res != null) {
+                      var hasil = res.format(context);
+                      registerFormProvider.setEndTime(i, hasil);
+                    }
+                  },
+                  child: TextField(
+                    enabled: false,
+                    controller: registerFormProvider.getEndTimeController(i),
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: "Jam Selesai",
                     ),
-                  )),
-                ],
-              ),
+                  ),
+                )),
+              ],
             ),
+
           Padding(
             padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
             child: Row(
@@ -247,12 +249,45 @@ class _RegisterStafState extends State<RegisterStaf> {
                         registerFormProvider.usernameController.text.isEmpty;
                     registerFormProvider.setIsPasswordEmpty =
                         registerFormProvider.passwordController.text.isEmpty;
-                    // registerFormProvider.setIsJadwalEmpty =
-                    //     registerFormProvider.jadwalController.text.isEmpty;
+
+                    bool timeIsEmpty = false;
+                    bool isChecked = false;
+
+                    for (var i = 0;
+                        i < registerFormProvider.getListHari.length;
+                        i++) {
+                      if (registerFormProvider.getCheckboxValue(i)) {
+                        isChecked = true;
+                        if (registerFormProvider
+                                .getStartTimeController(i)
+                                .text
+                                .isEmpty ||
+                            registerFormProvider
+                                .getEndTimeController(i)
+                                .text
+                                .isEmpty) {
+                          timeIsEmpty = true;
+                        }
+                      }
+                    }
+
+                    if (!isChecked) {
+                      QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.warning,
+                          text: 'Harap Memilih Jadwal');
+                    } else if (timeIsEmpty) {
+                      QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.warning,
+                          text: 'Harap Memilih Jam Mulai & Selesai');
+                    }
 
                     if (!registerFormProvider.isNameEmpty &&
                         !registerFormProvider.isUsernameEmpty &&
-                        !registerFormProvider.isPasswordEmpty) {
+                        !registerFormProvider.isPasswordEmpty &&
+                        isChecked &&
+                        !timeIsEmpty) {
                       var result = accountProvider.register({
                         'nama': registerFormProvider.namaController.text,
                         'username':

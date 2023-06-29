@@ -21,14 +21,16 @@ class RegisterStafFormProvider extends ChangeNotifier {
   List<TextEditingController> endTimeControllers =
       List<TextEditingController>.generate(7, (_) => TextEditingController());
 
+  bool isNameEmpty = false;
+  bool isUsernameEmpty = false;
+  bool isPasswordEmpty = false;
+
   // TextEditingController jadwalController = TextEditingController();
 
   // String _hari = "none";
 
   // get getHari => _hari;
-  bool isNameEmpty = false;
-  bool isUsernameEmpty = false;
-  bool isPasswordEmpty = false;
+
   // bool isJadwalEmpty = false;
 
   get getListHari => _day.toList();
