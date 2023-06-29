@@ -36,9 +36,11 @@ class PaymentDone extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal[700]),
                             onPressed: () {
-                              Navigator.popUntil(context, (route) => route.isFirst);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
                             },
                             child: const Text(
                               'Kembali ke Beranda',
