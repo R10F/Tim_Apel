@@ -21,83 +21,100 @@ class _ListStafState extends State<ListStaf> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    var userAccounts = accountProvider.userAccounts;
+    List userAccounts = accountProvider.userAccounts;
+
+    int itemCount = 0;
+    for (int i = 0; i < userAccounts.length; i++) {
+      if (userAccounts[i].isActive == widget.isActiveAccountsPage) {
+        itemCount++;
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
       ),
-      body: ListView(
-          children: List.generate(
-              userAccounts.length,
-              (index) => userAccounts[index].isActive == widget.isActiveAccountsPage
-                  ? GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                fullscreenDialog: true,
-                                builder: (_) => Scaffold(
-                                    appBar: AppBar(
-                                      title: Text(userAccounts[index].nama),
-                                    ),
-                                    body: Profile(
-                                        id: index, asMyself: false, data: userAccounts[index]))));
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: ListTile(
-                              leading: Image.asset(
-                                'assets/profile_pictures/${userAccounts[index].profilePicture}',
-                                width: 45,
-                              ),
-                              title: Text(userAccounts[index].nama),
-                              trailing: accountProvider.id != index
-                                  ? widget.isActiveAccountsPage
-                                      ? IconButton(
-                                          onPressed: () {
-                                            QuickAlert.show(
-                                                context: context,
-                                                type: QuickAlertType.warning,
-                                                confirmBtnColor: Colors.teal[700]!,
-                                                title: 'Nonaktifkan staf ini?',
-                                                confirmBtnText: 'Nonaktifkan',
-                                                cancelBtnText: 'Tutup',
-                                                showCancelBtn: true,
-                                                onConfirmBtnTap: () {
-                                                  accountProvider.deactivateAccount(index);
-                                                  Navigator.pop(context);
-                                                });
-                                          },
-                                          tooltip: 'Nonaktifkan staf ini',
-                                          icon: const Icon(Icons.block))
-                                      : IconButton(
-                                          onPressed: () {
-                                            accountProvider.activateAccount(index);
+      body: itemCount > 0
+          ? ListView(
+              children: List.generate(
+                  userAccounts.length,
+                  (index) => userAccounts[index].isActive == widget.isActiveAccountsPage
+                      ? GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    fullscreenDialog: true,
+                                    builder: (_) => Scaffold(
+                                        appBar: AppBar(
+                                          title: Text(userAccounts[index].nama),
+                                        ),
+                                        body: Profile(
+                                            id: index,
+                                            asMyself: false,
+                                            data: userAccounts[index]))));
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    'assets/profile_pictures/${userAccounts[index].profilePicture}',
+                                    width: 45,
+                                  ),
+                                  title: Text(userAccounts[index].nama),
+                                  trailing: accountProvider.id != index
+                                      ? widget.isActiveAccountsPage
+                                          ? TextButton(
+                                              onPressed: () {
+                                                QuickAlert.show(
+                                                    context: context,
+                                                    type: QuickAlertType.warning,
+                                                    confirmBtnColor: Colors.teal[700]!,
+                                                    title: 'Nonaktifkan staf ini?',
+                                                    confirmBtnText: 'Nonaktifkan',
+                                                    cancelBtnText: 'Tutup',
+                                                    showCancelBtn: true,
+                                                    onConfirmBtnTap: () {
+                                                      accountProvider.deactivateAccount(index);
+                                                      Navigator.pop(context);
+                                                    });
+                                              },
+                                              child: const Text('Nonaktifkan'))
+                                          : TextButton(
+                                              onPressed: () {
+                                                accountProvider.activateAccount(index);
 
-                                            Fluttertoast.showToast(
-                                              msg: 'Staf sudah diaktifkan kembali',
-                                              toastLength: Toast.LENGTH_LONG,
-                                              gravity: ToastGravity.TOP,
-                                              backgroundColor: Colors.teal[300],
-                                              textColor: Colors.white,
-                                              fontSize: 16,
-                                            );
-                                          },
-                                          tooltip: 'Aktifkan staf ini',
-                                          icon: const Icon(Icons.check))
-                                  : null,
+                                                Fluttertoast.showToast(
+                                                  msg: 'Staf sudah diaktifkan kembali',
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.TOP,
+                                                  backgroundColor: Colors.teal[300],
+                                                  textColor: Colors.white,
+                                                  fontSize: 16,
+                                                );
+                                              },
+                                              child: const Text('Aktifkan'))
+                                      : null,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    )
-                  : Container())),
+                        )
+                      : Container()))
+          : Center(
+              child: Container(
+                alignment: Alignment.center,
+                child: const Text(
+                  'Tidak ada staf nonaktif',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
       floatingActionButton: widget.isActiveAccountsPage
           ? FloatingActionButton.extended(
               backgroundColor: Colors.teal[700],

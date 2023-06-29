@@ -20,22 +20,39 @@ class _ListTransaksiState extends State<ListTransaksi> {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     List<Transaksi> listTransaksi = transaksiProvider.listTransaksi;
 
+    int transaksiDalamProsesCount = 0;
+    for (int i = 0; i < listTransaksi.length; i++) {
+      if (listTransaksi[i].inProcess) {
+        transaksiDalamProsesCount++;
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: TabBarView(children: [
-        SingleChildScrollView(
-          child: Column(
-              children: List.generate(
-                  listTransaksi.length,
-                  (index) => listTransaksi[index].inProcess
-                      ? CardTransaksiDalamProses(
-                          index: index,
-                          transaksi: listTransaksi[index],
-                          namaKasir:
-                              accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
-                          prov: transaksiProvider)
-                      : Container())),
-        ),
+        transaksiDalamProsesCount > 0
+            ? SingleChildScrollView(
+                child: Column(
+                    children: List.generate(
+                        listTransaksi.length,
+                        (index) => listTransaksi[index].inProcess
+                            ? CardTransaksiDalamProses(
+                                index: index,
+                                transaksi: listTransaksi[index],
+                                namaKasir:
+                                    accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
+                                prov: transaksiProvider)
+                            : Container())),
+              )
+            : Center(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'Tidak ada pesanan yang sedang berlangsung',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
         ListTransaksiSelesai(accountProvider: accountProvider, transaksiProvider: transaksiProvider)
       ]),
     );
