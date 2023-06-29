@@ -104,7 +104,7 @@ class TransaksiData {
         metodePembayaran: 'GoPay'),
     Transaksi(
         nomorAntrean: 2,
-        idKasir: 0,
+        idKasir: 3,
         listProduk: {1: 2, 3: 3, 5: 4},
         listProdukAkhir: [
           [
@@ -148,7 +148,7 @@ class TransaksiData {
         metodePembayaran: 'DANA'),
     Transaksi(
         nomorAntrean: 3,
-        idKasir: 3,
+        idKasir: 0,
         listProduk: {2: 5, 4: 4, 6: 3},
         listProdukAkhir: [
           [
