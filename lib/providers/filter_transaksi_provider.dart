@@ -18,8 +18,37 @@ class FilterTransaksiProvider extends ChangeNotifier {
     return result;
   }
 
-  void filterMetode(int index, bool status) {
+  void setStatusFilterMetodePembayaran(int index, bool status) {
     _filterMetodePembayaran[index] = status;
+    notifyListeners();
+  }
+
+  DateTime? _startDate;
+  DateTime? _endDate;
+
+  String _dateFilterType = 'date_range';
+  final Map _dateFilterItem = {
+    'date_range': {'name': 'Date Range', 'result': []},
+    'multi_date': {'name': 'Multi Date', 'result': []},
+  };
+
+  get startDate => _startDate;
+  get endDate => _endDate;
+  get dateFilterType => _dateFilterType;
+  get dateFilterItem => _dateFilterItem;
+
+  void setStartEndDate(DateTime startDate, DateTime endDate) {
+    _startDate = startDate;
+    _endDate = endDate;
+  }
+
+  set dateFilterType(value) {
+    _dateFilterType = value;
+    notifyListeners();
+  }
+
+  void setDateFilterItemResult(String type, List result) {
+    _dateFilterItem[type]['result'] = result;
     notifyListeners();
   }
 }

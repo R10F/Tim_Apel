@@ -5,6 +5,14 @@ String timeFormat = 'HH:mm';
 
 DateTime now = DateTime.now();
 
+String stringifyDate(DateTime date) {
+  return DateFormat(dateFormat).format(date);
+}
+
+DateTime parseDate(String date) {
+  return DateFormat(dateFormat).parse(date);
+}
+
 String getCurrentTime() {
   return DateFormat(timeFormat).format(now);
 }

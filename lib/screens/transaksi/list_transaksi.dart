@@ -1,12 +1,10 @@
-import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/filter_transaksi_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/transaksi/dalam_proses/card_transaksi_dalam_proses.dart';
-import 'package:tim_apel/screens/transaksi/selesai/card_transaksi_selesai.dart';
+import 'package:tim_apel/screens/transaksi/selesai/list_transaksi_selesai.dart';
 
 class ListTransaksi extends StatefulWidget {
   const ListTransaksi({super.key});
@@ -20,22 +18,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-    var filterProvider = Provider.of<FilterTransaksiProvider>(context);
     List<Transaksi> listTransaksi = transaksiProvider.listTransaksi;
-    List<String> activeFilter = filterProvider.activeFilterMetodePembayaran();
-
-    Map<String, List> groupbyDatetime = {};
-    for (int i = 0; i < listTransaksi.length; i++) {
-      if (!listTransaksi[i].inProcess) {
-        if (activeFilter.isNotEmpty && !activeFilter.contains(listTransaksi[i].metodePembayaran)) {
-          continue;
-        }
-
-        String key = listTransaksi[i].date;
-        groupbyDatetime.putIfAbsent(key, () => []);
-        groupbyDatetime[key]?.add(listTransaksi[i]);
-      }
-    }
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -53,51 +36,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
                           prov: transaksiProvider)
                       : Container())),
         ),
-        SingleChildScrollView(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 8),
-            child: Text('Filter berdasarkan metode pembayaran',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: List.generate(
-                  filterProvider.listMetodePembayaran.length,
-                  (index) => FilterChip(
-                      selected: filterProvider.filterMetodePembayaran[index],
-                      label: Text(filterProvider.listMetodePembayaran[index]),
-                      selectedColor: Colours.lightSalmon,
-                      onSelected: (bool selected) {
-                        filterProvider.filterMetode(index, selected);
-                      }),
-                )),
-          ),
-          ...groupbyDatetime.entries.map((entry) {
-            String date = entry.key;
-            List listTransaksi = entry.value;
-
-            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child:
-                      Text(date, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                ),
-              ),
-              for (int i = 0; i < listTransaksi.length; i++)
-                CardTransaksiSelesai(
-                    index: i,
-                    transaksi: listTransaksi[i],
-                    namaKasir: accountProvider.userAccounts[listTransaksi[i].idKasir].nama,
-                    prov: transaksiProvider)
-            ]);
-          })
-        ]))
+        ListTransaksiSelesai(accountProvider: accountProvider, transaksiProvider: transaksiProvider)
       ]),
     );
   }
