@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/form_handler/login_form_provider.dart';
+import 'package:tim_apel/screens/reset_password.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -84,10 +85,10 @@ class _LoginState extends State<Login> {
 
                       if (!loginFormProvider.isUsernameEmpty &&
                           !loginFormProvider.isPasswordEmpty) {
-                        Map response = await accountProvider.login(
+                        var response = await accountProvider.login(
                             loginFormProvider.usernameController.text,
                             loginFormProvider.passwordController.text);
-                        if (!response['status']) {
+                        if (!response['success']) {
                           QuickAlert.show(
                               context: context,
                               type: QuickAlertType.warning,
@@ -112,7 +113,9 @@ class _LoginState extends State<Login> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ResetPassword()));
+              },
               child: Text(
                 'Reset Password',
                 style: TextStyle(

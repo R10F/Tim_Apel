@@ -87,7 +87,7 @@ class AccountProvider extends ChangeNotifier {
     }
     notifyListeners();
     String? value = await _storage.read(key: 'MakmurApp_LoginID');
-    return {'status': verified, 'message': message};
+    return {'success': verified, 'message': message};
   }
 
   void activateAccount(int index) {
@@ -98,6 +98,29 @@ class AccountProvider extends ChangeNotifier {
   void deactivateAccount(int index) {
     _userAccounts[index].setIsActive(false);
     notifyListeners();
+  }
+
+  Map resetPassword(String username) {
+    String defaultPassword = 'makmuraman';
+    bool success = false;
+    String message = '';
+
+    for (int i = 0; i < _userAccounts.length; i++) {
+      if (_userAccounts[i].username == username.trim()) {
+        if (!_userAccounts[i].isActive) {
+          message = 'Staf sudah dinonaktifkan';
+          break;
+        }
+        _userAccounts[i].password = defaultPassword;
+        message =
+            'Password untuk username `${username.trim()}` berhasil direset, silahkan login dengan password `$defaultPassword`';
+        success = true;
+        break;
+      } else {
+        message = 'Username tidak ditemukan';
+      }
+    }
+    return {'success': success, 'message': message};
   }
 
   logout() async {
