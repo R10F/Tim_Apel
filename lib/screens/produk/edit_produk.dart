@@ -16,13 +16,10 @@ class _EditProdukState extends State<EditProduk> {
   final _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> kategori = [
-      const DropdownMenuItem(
-          value: "none", child: Text("Pilih Kategori Produk")),
+      const DropdownMenuItem(value: "none", child: Text("Pilih Kategori Produk")),
       const DropdownMenuItem(value: "ATK", child: Text("ATK")),
-      const DropdownMenuItem(
-          value: "Craft Supply", child: Text("Craft Supply")),
-      const DropdownMenuItem(
-          value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
+      const DropdownMenuItem(value: "Craft Supply", child: Text("Craft Supply")),
+      const DropdownMenuItem(value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
       const DropdownMenuItem(value: "Dekorasi", child: Text("Dekorasi")),
     ];
     return kategori;
@@ -71,8 +68,7 @@ class _EditProdukState extends State<EditProduk> {
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 35, bottom: 15),
                 child: TextFormField(
                   controller: formProv.namaProdukController,
                   decoration: const InputDecoration(
@@ -88,8 +84,7 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.deskripsiController,
                   keyboardType: TextInputType.multiline,
@@ -102,8 +97,7 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
                   value: formProv.getKategoriSelected,
@@ -111,9 +105,8 @@ class _EditProdukState extends State<EditProduk> {
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Kategori',
                       border: OutlineInputBorder()),
-                  validator: (value) => (value == null || value == "none")
-                      ? "Pilih kategori"
-                      : null,
+                  validator: (value) =>
+                      (value == null || value == "none") ? "Pilih kategori" : null,
                   onChanged: (val) {
                     formProv.kategoriSelected = val as String;
                   },
@@ -121,8 +114,7 @@ class _EditProdukState extends State<EditProduk> {
               ),
               const Divider(),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.stokController,
                   keyboardType: TextInputType.number,
@@ -139,8 +131,7 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaBeliController,
                   keyboardType: TextInputType.number,
@@ -157,8 +148,7 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaJualController,
                   keyboardType: TextInputType.number,
@@ -175,8 +165,7 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 50),
                 child: Row(
                   children: [
                     Expanded(
@@ -195,28 +184,15 @@ class _EditProdukState extends State<EditProduk> {
                               hargaJual = int.parse(formProv.getHargaJual);
                               hargaBeli = int.parse(formProv.getHargaBeli);
                               kategori = formProv.kategoriSelected;
-                              produkProv.updateProduk(
-                                  toBeEdited.id,
-                                  nama,
-                                  gambar,
-                                  deskripsi,
-                                  kategori,
-                                  stok,
-                                  hargaJual,
-                                  hargaBeli);
+                              produkProv.updateProduk(toBeEdited.id, nama, gambar, deskripsi,
+                                  kategori, stok, hargaJual, hargaBeli);
 
                               Navigator.pop(context);
-                              // CherryToast.info(
-                              //         animationDuration:
-                              //             const Duration(milliseconds: 500),
-                              //         autoDismiss: true,
-                              //         title: const Text("Produk Berhasil Diedit"))
-                              //     .show(context);
+
                               Fluttertoast.showToast(
                                 msg: 'Produk Berhasil Diedit',
                                 toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.TOP,
-                                // timeInSecForIosWeb: 10,
                                 backgroundColor: Colors.teal[300],
                                 textColor: Colors.white,
                                 fontSize: 16.0,
@@ -227,15 +203,11 @@ class _EditProdukState extends State<EditProduk> {
                             null;
                           }
                         },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[700]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                         child: Text(
                           'Simpan',
                           style: TextStyle(
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.fontSize,
+                            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                           ),
                         ),
                       ),

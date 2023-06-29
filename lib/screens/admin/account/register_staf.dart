@@ -25,11 +25,11 @@ class _RegisterStafState extends State<RegisterStaf> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+            padding: const EdgeInsets.symmetric(vertical: 25),
             child: Center(
               child: Image.asset(
                 'assets/images/logo.png',
-                width: 200,
+                width: 100,
               ),
             ),
           ),
@@ -38,13 +38,9 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.namaController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isNameEmpty
-                      ? 'Nama Tidak Boleh Kosong'
-                      : null,
+                  errorText: registerFormProvider.isNameEmpty ? 'Nama Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Nama',
                   border: const OutlineInputBorder()),
             ),
@@ -54,13 +50,10 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.usernameController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isUsernameEmpty
-                      ? 'Username Tidak Boleh Kosong'
-                      : null,
+                  errorText:
+                      registerFormProvider.isUsernameEmpty ? 'Username Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Username',
                   border: const OutlineInputBorder()),
             ),
@@ -71,13 +64,10 @@ class _RegisterStafState extends State<RegisterStaf> {
               controller: registerFormProvider.passwordController,
               obscureText: !registerFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isPasswordEmpty
-                      ? 'Password Tidak Boleh Kosong'
-                      : null,
+                  errorText:
+                      registerFormProvider.isPasswordEmpty ? 'Password Tidak Boleh Kosong' : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
+                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -150,8 +140,7 @@ class _RegisterStafState extends State<RegisterStaf> {
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
             child: Text(
               "Pilih Jadwal",
-              style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
+              style: TextStyle(fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
             ),
           ),
 
@@ -170,9 +159,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                   ),
                   Text(
                     registerFormProvider.getListHari[i],
-                    style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.bodyLarge?.fontSize),
+                    style: TextStyle(fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
                   ),
                   const SizedBox(
                     width: 10,
@@ -194,8 +181,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                     },
                     child: TextField(
                       enabled: false,
-                      controller:
-                          registerFormProvider.getStartTimeController(i),
+                      controller: registerFormProvider.getStartTimeController(i),
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(labelText: "Jam Mulai"),
                     ),
@@ -227,15 +213,14 @@ class _RegisterStafState extends State<RegisterStaf> {
                       enabled: false,
                       controller: registerFormProvider.getEndTimeController(i),
                       keyboardType: TextInputType.number,
-                      decoration:
-                          const InputDecoration(labelText: "Jam Selesai"),
+                      decoration: const InputDecoration(labelText: "Jam Selesai"),
                     ),
                   )),
                 ],
               ),
             ),
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+            padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 50),
             child: Row(
               children: [
                 Expanded(
@@ -255,10 +240,8 @@ class _RegisterStafState extends State<RegisterStaf> {
                         !registerFormProvider.isPasswordEmpty) {
                       var result = accountProvider.register({
                         'nama': registerFormProvider.namaController.text,
-                        'username':
-                            registerFormProvider.usernameController.text,
-                        'password':
-                            registerFormProvider.passwordController.text,
+                        'username': registerFormProvider.usernameController.text,
+                        'password': registerFormProvider.passwordController.text,
                         'jadwal': registerFormProvider.getJadwal()
                       });
 
@@ -271,22 +254,18 @@ class _RegisterStafState extends State<RegisterStaf> {
                       }
 
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const RegisterDone()));
+                          context, MaterialPageRoute(builder: (_) => const RegisterDone()));
 
                       registerFormProvider.setToDefault();
                       //registerFormProvider.setHari = "none";
                       // registerFormProvider.jadwalController.clear();
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal[700]),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                   child: Text(
                     'Simpan',
                     style: TextStyle(
-                      fontSize:
-                          Theme.of(context).textTheme.bodyMedium?.fontSize,
+                      fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                     ),
                   ),
                 )),
