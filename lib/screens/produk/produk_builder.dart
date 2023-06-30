@@ -22,7 +22,7 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
     return GridView.count(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 40),
         crossAxisCount: 2,
         childAspectRatio:
             (MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 0.8)),

@@ -35,7 +35,7 @@ class _TransaksiBaruDiselesaikanState extends State<TransaksiBaruDiselesaikan> {
       ),
       Container(
           padding: const EdgeInsets.only(top: 20, bottom: 24, left: 4, right: 4),
-          margin: const EdgeInsets.only(left: 20, right: 25, bottom: 30),
+          margin: const EdgeInsets.only(left: 20, right: 25, bottom: 60),
           decoration: BoxDecoration(
             color: widget.accountProvider.getSetting('dark_mode') ? Colors.black54 : Colors.white,
             boxShadow: [
@@ -161,7 +161,7 @@ class _TransaksiBaruDiselesaikanState extends State<TransaksiBaruDiselesaikan> {
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: const Text(
-                      "Tidak ada pesanan yang sedang berlangsung",
+                      "Tidak ada transaksi yang baru diselesaikan",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,

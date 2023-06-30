@@ -28,7 +28,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
       child: TabBarView(children: [
         transaksiDalamProsesCount > 0
             ? SingleChildScrollView(

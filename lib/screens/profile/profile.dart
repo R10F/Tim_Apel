@@ -167,7 +167,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
         widget.asMyself || widget.id == accountProvider.id ? const PersonalOption() : Container(),
-        const Padding(padding: EdgeInsets.only(bottom: 40))
+        const Padding(padding: EdgeInsets.only(bottom: 60))
       ]),
     );
   }

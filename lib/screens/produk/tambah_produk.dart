@@ -46,7 +46,7 @@ class _TambahProdukState extends State<TambahProduk> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 35, bottom: 15),
                 child: TextFormField(
                   controller: formProv.namaProdukController,
                   decoration: const InputDecoration(
@@ -142,7 +142,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 50),
                 child: Row(
                   children: [
                     Expanded(

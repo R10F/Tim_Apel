@@ -174,7 +174,11 @@ class _ListTransaksiStateSelesai extends State<ListTransaksiSelesai> {
           ]);
         })
       else
-        const Center(child: Text('Tidak ada transaksi yang sesuai filter'))
+        Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 50),
+            child: const Text('Tidak ada transaksi yang sesuai filter',
+                style: TextStyle(fontSize: 16)))
     ]));
   }
 }
