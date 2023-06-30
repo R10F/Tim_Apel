@@ -7,6 +7,7 @@ class Produk {
   int hargaJual;
   int hargaBeli;
   String kategori;
+  bool isDeleted = false;
 
   Produk({
     required this.id,
@@ -96,10 +97,5 @@ class ProdukData {
         kategori: "Dekorasi"),
   ];
 
-  List<String> kategori = [
-    "ATK",
-    "Craft Supply",
-    "Keperluan Jahit",
-    "Dekorasi"
-  ];
+  List<String> kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
 }

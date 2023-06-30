@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/utilities/datetime.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -30,8 +31,9 @@ class HomeInsight extends StatefulWidget {
 class _HomeInsightState extends State<HomeInsight> {
   @override
   Widget build(BuildContext context) {
-    var transaksiProvider = widget.prov;
+    var produkProvider = Provider.of<ProdukProvider>(context);
     var accountProvider = Provider.of<AccountProvider>(context);
+    var transaksiProvider = widget.prov;
 
     List listTransaksiSelesai = transaksiProvider.listTransaksiSelesaiHariIni;
 
@@ -46,7 +48,7 @@ class _HomeInsightState extends State<HomeInsight> {
       int tempOmzet = currentTransaksi.totalHargaBelanjaAkhir();
       omzet += tempOmzet;
 
-      int tempProdukTerjual = currentTransaksi.itemCount;
+      int tempProdukTerjual = currentTransaksi.keranjangItemCount(produkProvider.semuaProduk);
       produkTerjual += tempProdukTerjual;
 
       for (int i = 0; i < currentTransaksi.listProdukAkhir.length; i++) {

@@ -64,7 +64,8 @@ class _CardTransaksiDalamProsesState extends State<CardTransaksiDalamProses> {
                       Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 4),
-                          child: Text('${widget.transaksi.itemCount} item',
+                          child: Text(
+                              '${widget.transaksi.keranjangItemCount(produkProvider.semuaProduk)} item',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,

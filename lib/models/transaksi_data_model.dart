@@ -23,10 +23,12 @@ class Transaksi {
   })  : listProduk = listProduk ?? {},
         listProdukAkhir = listProdukAkhir ?? [];
 
-  get itemCount {
+  int keranjangItemCount(List produkData) {
     int count = 0;
     listProduk.forEach((idProduk, qty) {
-      count += qty;
+      if (!produkData[idProduk - 1].isDeleted) {
+        count += qty;
+      }
     });
     return count;
   }
@@ -34,7 +36,9 @@ class Transaksi {
   List keranjang(List produkData) {
     List result = [];
     listProduk.forEach((idProduk, qty) {
-      result.add({'produk': produkData[idProduk - 1], 'qty': qty});
+      if (!produkData[idProduk - 1].isDeleted) {
+        result.add({'produk': produkData[idProduk - 1], 'qty': qty});
+      }
     });
     return result;
   }
@@ -42,8 +46,10 @@ class Transaksi {
   int totalHargaBelanja(List produkData) {
     int harga = 0;
     listProduk.forEach((idProduk, qty) {
-      int temp = produkData[idProduk - 1].hargaJual;
-      harga += temp * qty;
+      if (!produkData[idProduk - 1].isDeleted) {
+        int temp = produkData[idProduk - 1].hargaJual;
+        harga += temp * qty;
+      }
     });
     return harga;
   }

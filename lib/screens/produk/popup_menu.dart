@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/produk/edit_produk.dart';
@@ -44,7 +45,20 @@ class _PopupMenuState extends State<PopupMenu> {
                     ),
                 fullscreenDialog: true),
           );
-        } else if (value == 'hapus') {}
+        } else if (value == 'hapus') {
+          QuickAlert.show(
+              context: context,
+              type: QuickAlertType.warning,
+              confirmBtnColor: Colors.teal[700]!,
+              title: 'Hapus ${toBeEdited.nama}?',
+              confirmBtnText: 'Hapus',
+              cancelBtnText: 'Tutup',
+              showCancelBtn: true,
+              onConfirmBtnTap: () {
+                produkProv.hapusProduk(widget.idxProduk);
+                Navigator.pop(context);
+              });
+        }
       },
       itemBuilder: (context) {
         return <PopupMenuEntry>[

@@ -74,8 +74,10 @@ class TransaksiProvider extends ChangeNotifier {
     currentTransaksi.time = getCurrentTime();
 
     currentTransaksi.listProduk.forEach((idProduk, qty) {
-      currentTransaksi.listProdukAkhir.add([produkData[idProduk - 1], qty]);
-      produkData[idProduk - 1].stok -= qty;
+      if (!produkData[idProduk - 1].isDeleted) {
+        currentTransaksi.listProdukAkhir.add([produkData[idProduk - 1], qty]);
+        produkData[idProduk - 1].stok -= qty;
+      }
     });
 
     setFirstInProcessOrder();

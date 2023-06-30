@@ -43,8 +43,7 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateProduk(
-      id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
+  updateProduk(id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
     Produk edited = Produk(
       id: id,
       nama: nama,
@@ -60,13 +59,16 @@ class ProdukProvider extends ChangeNotifier {
   }
 
   List<Produk> getProdukHampirHabis() {
-    return semuaProduk
-        .where((produk) => produk.stok <= 5 && produk.stok != 0)
-        .toList();
+    return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
   }
 
   List<Produk> getProdukHabis() {
     return semuaProduk.where((produk) => produk.stok == 0).toList();
+  }
+
+  void hapusProduk(int idProduk) {
+    semuaProduk[idProduk - 1].isDeleted = true;
+    notifyListeners();
   }
 
   Future<File> getImageFileFromAssets(String assetPath) async {
