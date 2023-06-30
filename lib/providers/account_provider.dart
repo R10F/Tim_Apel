@@ -41,7 +41,6 @@ class AccountProvider extends ChangeNotifier {
         password: data['password'],
         profilePicture: _profilePictures[Random().nextInt(_profilePictures.length)],
         jadwal: data['jadwal']));
-    print(_userAccounts);
     notifyListeners();
 
     return {'status': 'success', 'message': 'Staf berhasil didaftarkan'};
@@ -56,12 +55,9 @@ class AccountProvider extends ChangeNotifier {
 
   Future<void> _checkLoginStatus() async {
     String? value = await _storage.read(key: 'MakmurApp_LoginID');
-    print(value);
-    print(_currentLoggedInUserIndex);
     if (value != null) {
       _currentLoggedInUserIndex = int.parse(value, radix: 10);
     }
-    print(_currentLoggedInUserIndex);
     notifyListeners();
   }
 
@@ -85,8 +81,8 @@ class AccountProvider extends ChangeNotifier {
         message = 'Username atau password salah, silahkan coba lagi';
       }
     }
+    // String? value = await _storage.read(key: 'MakmurApp_LoginID');
     notifyListeners();
-    String? value = await _storage.read(key: 'MakmurApp_LoginID');
     return {'success': verified, 'message': message};
   }
 

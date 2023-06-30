@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class BottomSheetEditNama {
-  showBottomSheet(
-      BuildContext context, var prov, var formProv, int index, String nama) {
+  showBottomSheet(BuildContext context, var prov, var formProv, int index, String nama) {
     formProv.nama = nama;
 
     showModalBottomSheet(
@@ -17,8 +16,7 @@ class BottomSheetEditNama {
       ),
       builder: (BuildContext context) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: SizedBox(
             height: 300,
             child: Padding(
@@ -33,9 +31,7 @@ class BottomSheetEditNama {
                       child: Text(
                         'Edit Nama',
                         style: TextStyle(
-                            fontFamily: 'Figtree',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: 'Figtree', fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
@@ -43,9 +39,7 @@ class BottomSheetEditNama {
                       child: TextFormField(
                         controller: formProv.namaController,
                         decoration: InputDecoration(
-                            errorText: formProv.isEmpty
-                                ? 'Nama tidak boleh kosong'
-                                : null,
+                            errorText: formProv.isEmpty ? 'Nama tidak boleh kosong' : null,
                             border: const OutlineInputBorder(),
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.close),
@@ -60,22 +54,18 @@ class BottomSheetEditNama {
                       child: FractionallySizedBox(
                         widthFactor: 0.75,
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.teal[700]),
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                             onPressed: () {
-                              formProv.setisEmpty =
-                                  formProv.namaController.text.isEmpty;
+                              formProv.setisEmpty = formProv.namaController.text.isEmpty;
 
                               if (!formProv.isEmpty) {
-                                prov.changeNama(
-                                    index, formProv.namaController.text);
+                                prov.changeNama(index, formProv.namaController.text);
                                 Navigator.pop(context);
 
                                 Fluttertoast.showToast(
                                   msg: 'Nama berhasil diperbarui',
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.TOP,
-                                  // timeInSecForIosWeb: 10,
                                   backgroundColor: Colors.teal[300],
                                   textColor: Colors.white,
                                   fontSize: 16.0,
