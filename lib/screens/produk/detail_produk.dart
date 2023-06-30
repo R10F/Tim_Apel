@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:input_quantity/input_quantity.dart';
@@ -43,9 +45,9 @@ class _DetailProdukState extends State<DetailProduk> {
               padding: const EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  Image.asset(
-                    'assets/product_images/${widget.produk.gambar}',
-                  ),
+                  widget.produk.gambar.contains('assets')
+                      ? Image.asset(widget.produk.gambar)
+                      : Image.file(File(widget.produk.gambar)),
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 30, left: 20, right: 25, bottom: 16),

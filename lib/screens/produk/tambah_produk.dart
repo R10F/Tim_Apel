@@ -133,14 +133,16 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: Row(
                   children: [
                     Text(
-                      'Selected Image Path :',
+                      'Image Path :',
                       style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodyLarge?.fontSize),
                     ),
                     Flexible(
                       child: Text(
-                        basename('${imgProv.imagePath}'),
+                        imgProv.imagePath != null
+                            ? basename('${imgProv.imagePath}')
+                            : 'No Selected Image',
                         style: TextStyle(
                             fontSize: Theme.of(context)
                                 .textTheme
