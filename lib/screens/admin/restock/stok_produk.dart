@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -106,15 +108,19 @@ class _StokProdukState extends State<StokProduk> {
                           child: Row(
                             children: [
                               ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                ),
-                                child: Image.asset(
-                                  "assets/product_images/${stokProduk[i].gambar}",
-                                  width: 125,
-                                ),
-                              ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                  ),
+                                  child: stokProduk[i].gambar.contains('assets')
+                                      ? Image.asset(
+                                          stokProduk[i].gambar,
+                                          width: 125,
+                                        )
+                                      : Image.file(
+                                          File(stokProduk[i].gambar),
+                                          width: 125,
+                                        )),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
