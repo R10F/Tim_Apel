@@ -111,54 +111,57 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
           //               });
           //             }))),
           tunaiProv.getKembalian > -1
-              ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20, bottom: 8),
-                    child: Text(
-                      'Kembalian',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 8),
+                      child: Text(
+                        'Kembalian',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
                       ),
                     ),
-                  ),
-                  TextField(
-                    enabled: false,
-                    controller: tunaiProv.kembalianController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                    TextField(
+                      enabled: false,
+                      controller: tunaiProv.kembalianController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.teal[700]),
-                              onPressed: () {
-                                widget.konfirmasiPembayaran();
-                                tunaiProv.jumlahUangController.clear();
-                                tunaiProv.kembalianController.clear();
-                                tunaiProv.setKembalianHarga = -1;
-                                FocusScope.of(context).unfocus();
-                              },
-                              child: Text(
-                                'Konfirmasi Pembayaran',
-                                style: TextStyle(
-                                  fontFamily: 'Figtree',
-                                  fontSize: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.fontSize,
-                                ),
-                              )),
-                        ),
-                      ],
-                    ),
-                  )
-                ])
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.teal[700]),
+                                onPressed: () {
+                                  widget.konfirmasiPembayaran();
+                                  tunaiProv.jumlahUangController.clear();
+                                  tunaiProv.kembalianController.clear();
+                                  tunaiProv.setKembalianHarga = -1;
+                                  FocusScope.of(context).unfocus();
+                                },
+                                child: Text(
+                                  'Konfirmasi Pembayaran',
+                                  style: TextStyle(
+                                    fontFamily: 'Figtree',
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.fontSize,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
               : Container()
         ],
       ),

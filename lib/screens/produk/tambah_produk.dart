@@ -133,7 +133,7 @@ class _TambahProdukState extends State<TambahProduk> {
                 child: Row(
                   children: [
                     Text(
-                      'Image Path :',
+                      'Image :',
                       style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodyLarge?.fontSize),
