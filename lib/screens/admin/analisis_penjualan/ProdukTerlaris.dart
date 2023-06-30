@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/LarisWidget.dart';
 
 class ProdukTerlaris extends StatelessWidget {
   const ProdukTerlaris({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProv = Provider.of<TransaksiProvider>(context);
     var produkProv = Provider.of<ProdukProvider>(context);
 
-    List<int> getProdukLaris(String kategori){
+    List<List<int>> getProdukLaris(String kategori){
       List<int> ids = produkProv.semuaProduk.where((produk) => produk.kategori == kategori).toList().map((e) => e.id,).toList();
 
-      List<Map<int,int>> transaksi = transaksiProv.listTransaksi.map((e) => e.listProduk,).toList();
+      List<Transaksi> last30day = transaksiProv.listTransaksi.where((transaksi) => transaksi.inProcess == false && DateTime.now().difference(transaksi.date).inDays <= 30).toList();
+      List<Map<int,int>> transaksi = last30day.map((e) => e.listProduk,).toList();
       Map<int,int> terjual = {};
 
       for (Map<int,int> listProduk in transaksi) {
@@ -29,10 +30,10 @@ class ProdukTerlaris extends StatelessWidget {
 
       var temp = terjual.entries.toList()..sort((a,b) => a.value.compareTo(b.value));
       terjual = Map<int,int>.fromEntries(temp);
-      List<int> sliced = terjual.keys.toList();
+      List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
+      List<int> slicedQty =  List<int>.from(terjual.values.toList().take(3));
 
-      sliced.take(3);
-      return sliced;
+      return [slicedKey, slicedQty];
     }
     
     return Scaffold(
@@ -64,11 +65,9 @@ class ProdukTerlaris extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 23,
                     ),
-                  ),
+                  ),  
                 ),
-                //call new widget utk render semua isi
-                //LarisWidget(ids: getProdukLaris(kategori[i]))
-                //ids = id dari produk yang terlaris tsb ygy
+                LarisBuilder(idAndQty: getProdukLaris(produkProv.kategori[i])),
               ],
             ),
           ]

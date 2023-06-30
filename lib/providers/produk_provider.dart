@@ -23,6 +23,10 @@ class ProdukProvider extends ChangeNotifier {
     return _semuaProduk[idx];
   }
 
+  getProdukById(id){
+    return semuaProduk.where((produk) => produk.id == id);
+  }
+  
   getProdukPerKategori(kategori) {
     return semuaProduk.where((produk) => produk.kategori == kategori).toList();
   }
