@@ -39,8 +39,11 @@ dependencies:
   flutter_segment: ^3.13.0
   flutter_speed_dial: ^7.0.0
   fluttertoast: ^8.2.2
+  image_picker: ^1.0.0
   input_quantity: ^1.1.6
   intl: ^0.18.1
+
+  path_provider: ^2.0.15
   provider: ^6.0.5
   qr_flutter: ^4.1.0
   quickalert: ^1.0.1

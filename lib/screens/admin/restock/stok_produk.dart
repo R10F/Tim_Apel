@@ -1,3 +1,4 @@
+import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
@@ -42,10 +43,12 @@ class _StokProdukState extends State<StokProduk> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                     child: FilterChip(
                       label: const Text("Segera Habis"),
                       selected: stokProdukProv.statusSegeraHabis,
+                      selectedColor: Colours.lightSalmon,
                       onSelected: (value) {
                         stokProdukProv.setStatusSegeraHabis = value;
                       },
@@ -54,6 +57,7 @@ class _StokProdukState extends State<StokProduk> {
                   FilterChip(
                     label: const Text("Habis"),
                     selected: stokProdukProv.statusHabis,
+                    selectedColor: Colours.lightSalmon,
                     onSelected: (value) {
                       stokProdukProv.setStatusHabis = value;
                     },
@@ -116,8 +120,8 @@ class _StokProdukState extends State<StokProduk> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 12, right: 12, bottom: 16),
+                                      padding: const EdgeInsets.only(
+                                          left: 12, right: 12, bottom: 16),
                                       child: Text(
                                         stokProduk[i].nama,
                                         style: const TextStyle(
@@ -131,9 +135,11 @@ class _StokProdukState extends State<StokProduk> {
                                       child: OutlinedButton(
                                           onPressed: () {
                                             var toBeEdited =
-                                                produkProv.getProduk(stokProduk[i].id - 1);
+                                                produkProv.getProduk(
+                                                    stokProduk[i].id - 1);
 
-                                            formProv.namaProdukController.text = toBeEdited.nama;
+                                            formProv.namaProdukController.text =
+                                                toBeEdited.nama;
                                             formProv.deskripsiController.text =
                                                 toBeEdited.deskripsi;
                                             formProv.stokController.text =
@@ -142,27 +148,34 @@ class _StokProdukState extends State<StokProduk> {
                                                 toBeEdited.hargaJual.toString();
                                             formProv.hargaBeliController.text =
                                                 toBeEdited.hargaBeli.toString();
-                                            formProv.updateKategori = toBeEdited.kategori;
+                                            formProv.updateKategori =
+                                                toBeEdited.kategori;
                                             formProv.updateEditIdx = 1;
 
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   fullscreenDialog: true,
-                                                  builder: (context) => EditProduk(
-                                                        idxProduk: stokProduk[i].id,
+                                                  builder: (context) =>
+                                                      EditProduk(
+                                                        idxProduk:
+                                                            stokProduk[i].id,
                                                       )),
                                             );
                                           },
                                           style: OutlinedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(10))),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10))),
                                           child: Text(
                                             "Restock",
                                             style: TextStyle(
                                               color: Colors.teal[500],
-                                              fontSize:
-                                                  Theme.of(context).textTheme.bodySmall?.fontSize,
+                                              fontSize: Theme.of(context)
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.fontSize,
                                             ),
                                           )),
                                     ),
@@ -179,9 +192,11 @@ class _StokProdukState extends State<StokProduk> {
                                         color: stokProduk[i].stok == 0
                                             ? Colors.red
                                             : Colors.yellow[500],
-                                        borderRadius: BorderRadius.circular(10)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         const Text(
                                           "Sisa",

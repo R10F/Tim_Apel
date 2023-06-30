@@ -1,4 +1,6 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
@@ -16,10 +18,13 @@ class _EditProdukState extends State<EditProduk> {
   final _formKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> kategori = [
-      const DropdownMenuItem(value: "none", child: Text("Pilih Kategori Produk")),
+      const DropdownMenuItem(
+          value: "none", child: Text("Pilih Kategori Produk")),
       const DropdownMenuItem(value: "ATK", child: Text("ATK")),
-      const DropdownMenuItem(value: "Craft Supply", child: Text("Craft Supply")),
-      const DropdownMenuItem(value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
+      const DropdownMenuItem(
+          value: "Craft Supply", child: Text("Craft Supply")),
+      const DropdownMenuItem(
+          value: "Keperluan Jahit", child: Text("Keperluan Jahit")),
       const DropdownMenuItem(value: "Dekorasi", child: Text("Dekorasi")),
     ];
     return kategori;
@@ -68,7 +73,8 @@ class _EditProdukState extends State<EditProduk> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, top: 35, bottom: 15),
+                padding: const EdgeInsets.only(
+                    left: 25, right: 25, top: 35, bottom: 15),
                 child: TextFormField(
                   controller: formProv.namaProdukController,
                   decoration: const InputDecoration(
@@ -84,7 +90,8 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.deskripsiController,
                   keyboardType: TextInputType.multiline,
@@ -97,7 +104,8 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: DropdownButtonFormField(
                   items: dropdownItems,
                   value: formProv.getKategoriSelected,
@@ -105,8 +113,9 @@ class _EditProdukState extends State<EditProduk> {
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Kategori',
                       border: OutlineInputBorder()),
-                  validator: (value) =>
-                      (value == null || value == "none") ? "Pilih kategori" : null,
+                  validator: (value) => (value == null || value == "none")
+                      ? "Pilih kategori"
+                      : null,
                   onChanged: (val) {
                     formProv.kategoriSelected = val as String;
                   },
@@ -114,7 +123,8 @@ class _EditProdukState extends State<EditProduk> {
               ),
               const Divider(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.stokController,
                   keyboardType: TextInputType.number,
@@ -131,10 +141,16 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaBeliController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9,]')),
+                    CurrencyTextInputFormatter(
+                        locale: "id", symbol: "Rp", decimalDigits: 0)
+                  ],
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Harga Beli',
@@ -148,10 +164,16 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: TextFormField(
                   controller: formProv.hargaJualController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9,]')),
+                    CurrencyTextInputFormatter(
+                        locale: "id", symbol: "Rp", decimalDigits: 0)
+                  ],
                   decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.black),
                       labelText: 'Harga Jual',
@@ -165,7 +187,8 @@ class _EditProdukState extends State<EditProduk> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 50),
+                padding: const EdgeInsets.only(
+                    left: 25, right: 25, top: 25, bottom: 50),
                 child: Row(
                   children: [
                     Expanded(
@@ -181,11 +204,20 @@ class _EditProdukState extends State<EditProduk> {
                               gambar = "produk_2.jpg"; //temp
                               deskripsi = formProv.getDeskripsi;
                               stok = int.parse(formProv.getStok);
-                              hargaJual = int.parse(formProv.getHargaJual);
-                              hargaBeli = int.parse(formProv.getHargaBeli);
+                              hargaJual = int.parse(formProv.getHargaJual
+                                  .replaceAll(RegExp(r'[^0-9]'), ''));
+                              hargaBeli = int.parse(formProv.getHargaBeli
+                                  .replaceAll(RegExp(r'[^0-9]'), ''));
                               kategori = formProv.kategoriSelected;
-                              produkProv.updateProduk(toBeEdited.id, nama, gambar, deskripsi,
-                                  kategori, stok, hargaJual, hargaBeli);
+                              produkProv.updateProduk(
+                                  toBeEdited.id,
+                                  nama,
+                                  gambar,
+                                  deskripsi,
+                                  kategori,
+                                  stok,
+                                  hargaJual,
+                                  hargaBeli);
 
                               Navigator.pop(context);
 
@@ -203,11 +235,15 @@ class _EditProdukState extends State<EditProduk> {
                             null;
                           }
                         },
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal[700]),
                         child: Text(
                           'Simpan',
                           style: TextStyle(
-                            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.fontSize,
                           ),
                         ),
                       ),

@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 
 class ProdukProvider extends ChangeNotifier {
@@ -39,7 +43,8 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateProduk(id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
+  updateProduk(
+      id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
     Produk edited = Produk(
       id: id,
       nama: nama,
@@ -55,10 +60,32 @@ class ProdukProvider extends ChangeNotifier {
   }
 
   List<Produk> getProdukHampirHabis() {
-    return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
+    return semuaProduk
+        .where((produk) => produk.stok <= 5 && produk.stok != 0)
+        .toList();
   }
 
   List<Produk> getProdukHabis() {
     return semuaProduk.where((produk) => produk.stok == 0).toList();
+  }
+
+  Future<File> getImageFileFromAssets(String assetPath) async {
+    // Load the asset image file
+    ByteData byteData = await rootBundle.load(assetPath);
+    List<int> imageData = byteData.buffer.asUint8List();
+
+    // Get the temporary directory to store the image file
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+
+    // Create a temporary file path
+    String tempFileName = assetPath.split('/').last;
+    String tempFilePath = '$tempPath/$tempFileName';
+
+    // Write the image data to the temporary file
+    File tempFile = File(tempFilePath);
+    await tempFile.writeAsBytes(imageData);
+
+    return tempFile;
   }
 }

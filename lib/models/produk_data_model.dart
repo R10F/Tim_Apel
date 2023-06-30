@@ -25,7 +25,7 @@ class ProdukData {
     Produk(
         id: 1,
         nama: "Lem Kertas Kenko Uk. Besar",
-        gambar: "produk_1.jpg",
+        gambar: "assets/product_images/produk_1.jpg",
         stok: 10,
         hargaJual: 10000,
         hargaBeli: 9000,
@@ -35,7 +35,7 @@ class ProdukData {
     Produk(
         id: 2,
         nama: "Lem Kertas Kenko Uk. Kecil",
-        gambar: "produk_1.jpg",
+        gambar: "assets/product_images/produk_1.jpg",
         stok: 10,
         hargaJual: 5000,
         hargaBeli: 4000,
@@ -45,7 +45,7 @@ class ProdukData {
     Produk(
         id: 3,
         nama: "Lem Lilin Uk. Kecil",
-        gambar: "produk_2.jpg",
+        gambar: "assets/product_images/produk_2.jpg",
         stok: 100,
         hargaJual: 1000,
         hargaBeli: 700,
@@ -55,7 +55,7 @@ class ProdukData {
     Produk(
         id: 4,
         nama: "Lem Lilin Uk. Besar",
-        gambar: "produk_2.jpg",
+        gambar: "assets/product_images/produk_2.jpg",
         stok: 80,
         hargaJual: 3000,
         hargaBeli: 2500,
@@ -65,7 +65,7 @@ class ProdukData {
     Produk(
         id: 5,
         nama: "Set Jarum Jahit",
-        gambar: "produk_3.jpg",
+        gambar: "assets/product_images/produk_3.jpg",
         stok: 10,
         hargaJual: 8000,
         hargaBeli: 7000,
@@ -73,7 +73,7 @@ class ProdukData {
     Produk(
         id: 6,
         nama: "Meteran Kain",
-        gambar: "produk_4.jpg",
+        gambar: "assets/product_images/produk_4.jpg",
         stok: 0,
         hargaJual: 4000,
         hargaBeli: 3500,
@@ -81,7 +81,7 @@ class ProdukData {
     Produk(
         id: 7,
         nama: "Pita Satin Meteran 0.5 cm Merah",
-        gambar: "produk_5.jpg",
+        gambar: "assets/product_images/produk_5.jpg",
         stok: 100,
         hargaJual: 500,
         hargaBeli: 400,
@@ -89,12 +89,17 @@ class ProdukData {
     Produk(
         id: 8,
         nama: "Pita Satin Roll 1 cm Merah",
-        gambar: "produk_6.jpg",
+        gambar: "assets/product_images/produk_6.jpg",
         stok: 3,
         hargaJual: 10000,
         hargaBeli: 7000,
         kategori: "Dekorasi"),
   ];
 
-  List<String> kategori = ["ATK", "Craft Supply", "Keperluan Jahit", "Dekorasi"];
+  List<String> kategori = [
+    "ATK",
+    "Craft Supply",
+    "Keperluan Jahit",
+    "Dekorasi"
+  ];
 }
