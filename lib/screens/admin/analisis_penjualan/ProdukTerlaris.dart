@@ -33,6 +33,10 @@ class ProdukTerlaris extends StatelessWidget {
           .toList();
       Map<int, int> terjual = {};
 
+      for (var id in ids){
+        terjual[id] = 0;
+      }
+      
       for (Map<int, int> listProduk in transaksi) {
         listProduk.forEach((id, qty) {
           if (ids.contains(id)) {
