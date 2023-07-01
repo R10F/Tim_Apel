@@ -23,10 +23,10 @@ class ProdukProvider extends ChangeNotifier {
     return _semuaProduk[idx];
   }
 
-  getProdukById(id){
-    return semuaProduk.where((produk) => produk.id == id);
+  getProdukById(id) {
+    return semuaProduk.where((produk) => produk.id == id).toList()[0];
   }
-  
+
   getProdukPerKategori(kategori) {
     return semuaProduk.where((produk) => produk.kategori == kategori).toList();
   }
@@ -47,7 +47,8 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateProduk(id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
+  updateProduk(
+      id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
     Produk edited = Produk(
       id: id,
       nama: nama,
@@ -63,7 +64,9 @@ class ProdukProvider extends ChangeNotifier {
   }
 
   List<Produk> getProdukHampirHabis() {
-    return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
+    return semuaProduk
+        .where((produk) => produk.stok <= 5 && produk.stok != 0)
+        .toList();
   }
 
   List<Produk> getProdukHabis() {

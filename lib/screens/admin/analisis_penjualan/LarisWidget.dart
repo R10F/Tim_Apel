@@ -17,11 +17,12 @@ class _LarisBuilderState extends State<LarisBuilder> {
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
 
-    return
-    Column(
+    return Column(
       children: [
-        for (int i=0; i<widget.idAndQty[0].length; i++)
-          LarisWidget(produk: produkProv.getProdukById(widget.idAndQty[0][i]), qty: widget.idAndQty[1][i]),
+        for (int i = 0; i < widget.idAndQty[0].length; i++)
+          LarisWidget(
+              produk: produkProv.getProdukById(widget.idAndQty[0][i]),
+              qty: widget.idAndQty[1][i]),
       ],
     );
   }
@@ -40,9 +41,8 @@ class _LarisWidgetState extends State<LarisWidget> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
-    
-    return
-    Padding(
+
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
         child: Row(
@@ -52,7 +52,8 @@ class _LarisWidgetState extends State<LarisWidget> {
               height: 75,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                    color: Colors.green[500], borderRadius: BorderRadius.circular(5)),
+                    color: Colors.green[500],
+                    borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.produk.stok.toString(),
@@ -72,10 +73,10 @@ class _LarisWidgetState extends State<LarisWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     widget.produk.nama,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 Padding(
