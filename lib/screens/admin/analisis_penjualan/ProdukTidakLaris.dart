@@ -32,15 +32,16 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
               transaksi.inProcess == false &&
               DateTime.now().difference(parseDate(transaksi.date)).inDays <= 30)
           .toList();
+
       List<Map<int, int>> transaksi = last30day
           .map(
             (e) => e.listProduk,
           )
           .toList();
-      Map<int, int> terjual = {};
+      Map<int, List<int>> terjual = {};
 
       for (var id in ids){
-        terjual[id] = 0;
+        terjual[id] = [0,0];
       }
       
       for (Map<int, int> listProduk in transaksi) {
@@ -48,20 +49,43 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
           if (ids.contains(id)) {
             terjual.update(
               id,
-              (value) => terjual[id]! + qty,
-              ifAbsent: () => qty,
+              (value) => [terjual[id]![0] + qty, terjual[id]![1]],
             ); 
           }
         });
       }
 
-      var temp = terjual.entries.toList()
-        ..sort((a, b) => a.value.compareTo(b.value));
-      terjual = Map<int, int>.fromEntries(temp);
-      List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
-      List<int> slicedQty = List<int>.from(terjual.values.toList().take(3));
+      List<Map<int, int>> allTimeTransaksi = transaksiProv.listTransaksi
+          .map(
+            (e) => e.listProduk,
+          )
+          .toList();
 
-      return [slicedKey, slicedQty];
+      for (Map<int, int> listProduk in allTimeTransaksi) {
+        listProduk.forEach((id, qty) {
+          if (ids.contains(id)) {
+            terjual.update(
+              id,
+              (value) => [terjual[id]![0], terjual[id]![1]+qty],
+            ); 
+          }
+        });
+      }
+      
+      var temp = terjual.entries.toList()
+        ..sort((a, b){
+          int cmp = a.value[0].compareTo(b.value[0]);
+          if (cmp != 0) return cmp;
+          return a.value[1].compareTo(b.value[1]);
+        });
+
+      terjual = Map<int, List<int>>.fromEntries(temp);
+      List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
+      List<List<int>> allQty = List<List<int>>.from(terjual.values.toList().take(3));
+      List<int> slicedQty = allQty.map((e) => e[0]).toList();
+      List<int> slicedAllQty = allQty.map((e) => e[1]).toList();
+
+      return [slicedKey, slicedQty, slicedAllQty];
     }
     
     return Scaffold(

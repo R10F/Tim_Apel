@@ -23,6 +23,7 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
           TidakLarisWidget(
               produk: produkProv.getProdukById(widget.idAndQty[0][i]),
               qty: widget.idAndQty[1][i],
+              allTimeQty: widget.idAndQty[2][i],
               rank: i+1),
       ],
     );
@@ -32,8 +33,9 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
 class TidakLarisWidget extends StatefulWidget {
   final Produk produk;
   final int qty;
+  final int allTimeQty;
   final int rank;
-  const TidakLarisWidget({super.key, required this.produk, required this.qty, required this.rank});
+  const TidakLarisWidget({super.key, required this.produk, required this.qty, required this.allTimeQty, required this.rank});
 
   @override
   State<TidakLarisWidget> createState() => _TidakLarisWidgetState();
@@ -91,7 +93,7 @@ class _TidakLarisWidgetState extends State<TidakLarisWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Text(
-                    "total terjual : 10",
+                    "total terjual : ${widget.allTimeQty.toString()}",
                     style: TextStyle(fontSize: 14, color: Colors.red[600]),
                   ),
                 ),
