@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/transaksi_data_model.dart';
-import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/providers/search_laris_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/CustomSearchLaris.dart';
 import 'package:tim_apel/screens/admin/analisis_penjualan/TidakLarisWidget.dart';
 import 'package:tim_apel/utilities/datetime.dart';
+
 class ProdukTidakLaris extends StatefulWidget {
   const ProdukTidakLaris({super.key});
 
@@ -16,9 +18,9 @@ class ProdukTidakLaris extends StatefulWidget {
 class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
   @override
   Widget build(BuildContext context) {
-    var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProv = Provider.of<TransaksiProvider>(context);
     var produkProv = Provider.of<ProdukProvider>(context);
+    var searchProv = Provider.of<SearchLarisProvider>(context);
 
     List<List<int>> getProdukLaris(String kategori) {
       List ids = produkProv.semuaProduk
@@ -91,20 +93,27 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Produk Tidak Laris"),
+        leading: BackButton(
+          onPressed: () {
+            searchProv.resetController();
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-                    labelText: 'Nama Produk',
-                    suffixIcon: const Icon(Icons.search)),
-              ),
-            ),
+            CustomSearchLaris(),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+            //         labelText: 'Nama Produk',
+            //         suffixIcon: const Icon(Icons.search)),
+            //   ),
+            // ),
             for (int i = 0; i < produkProv.kategori.length; i++)
             Column(
               children: [

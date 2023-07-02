@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
+import 'package:tim_apel/providers/search_laris_provider.dart';
 
 class TidakLarisBuilder extends StatefulWidget {
   final List<List<int>> idAndQty;
@@ -16,10 +17,12 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
   @override
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
-
+    var searchProv = Provider.of<SearchLarisProvider>(context);
+    
     return Column(
       children: [
         for (int i = 0; i < widget.idAndQty[0].length; i++)
+        if (produkProv.semuaProduk[i].nama.toString().toLowerCase().contains(searchProv.query.toLowerCase()))
           TidakLarisWidget(
               produk: produkProv.getProdukById(widget.idAndQty[0][i]),
               qty: widget.idAndQty[1][i],

@@ -7,6 +7,7 @@ import 'package:tim_apel/providers/form_handler/register_staf_form_provider.dart
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/image_provider.dart';
 import 'package:tim_apel/providers/qty_produk_provider.dart';
+import 'package:tim_apel/providers/search_laris_provider.dart';
 import 'package:tim_apel/providers/stok_produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
@@ -51,6 +52,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => StokProdukProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => SearchLarisProvider(),
       ),
       ChangeNotifierProvider(
         create: (_) => TunaiProvider(),
