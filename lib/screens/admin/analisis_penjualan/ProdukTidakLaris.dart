@@ -57,7 +57,8 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
         });
       }
 
-      List<Map<int, int>> allTimeTransaksi = transaksiProv.listTransaksi
+      List allTimeTransaksi = transaksiProv.listTransaksi
+          .where((transaksi) => transaksi.inProcess == false).toList()
           .map(
             (e) => e.listProduk,
           )
