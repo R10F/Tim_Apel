@@ -25,7 +25,7 @@ class _LarisBuilderState extends State<LarisBuilder> {
           if (produkProv.getProdukById(widget.idAndQty[0][i]).nama.toString().toLowerCase().contains(searchProv.query.toLowerCase()))
           LarisWidget(
               produk: produkProv.getProdukById(widget.idAndQty[0][i]),
-              qty: widget.idAndQty[1][i] ==  0 ? 0 :  1* widget.idAndQty[1][i],
+              qty: widget.idAndQty[1][i] ==  0 ? 0 :  -1* widget.idAndQty[1][i],
               rank: i+1),
       ],
     );
