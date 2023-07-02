@@ -25,7 +25,7 @@ class _RegisterStafState extends State<RegisterStaf> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25),
+            padding: const EdgeInsets.only(top: 25, bottom: 30),
             child: Center(
               child: Image.asset(
                 'assets/images/logo.png',
@@ -137,7 +137,7 @@ class _RegisterStafState extends State<RegisterStaf> {
           //       )),
           // ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+            padding: const EdgeInsets.only(left: 25, right: 25, bottom: 5, top: 20),
             child: Text(
               "Pilih Jadwal",
               style: TextStyle(fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
@@ -223,7 +223,7 @@ class _RegisterStafState extends State<RegisterStaf> {
             ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 50),
+            padding: const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 80),
             child: Row(
               children: [
                 Expanded(

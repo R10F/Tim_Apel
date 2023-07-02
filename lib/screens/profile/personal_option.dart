@@ -26,8 +26,7 @@ class _PersonalOptionState extends State<PersonalOption> {
         padding: EdgeInsets.only(top: 20, bottom: 10),
         child: Text(
           'Preferensi',
-          style: TextStyle(
-              fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontFamily: 'Figtree', fontSize: 16, color: Colors.grey),
         ),
       ),
       Padding(
@@ -92,9 +91,10 @@ class _PersonalOptionState extends State<PersonalOption> {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text('Logout',
                       style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium?.fontSize,
-                        color: const Color(0xFF00796B),
+                        fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        color: accountProvider.getSetting('dark_mode')
+                            ? Colors.white
+                            : const Color(0xFF00796B),
                       )),
                 )),
           ),

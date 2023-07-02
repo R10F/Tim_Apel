@@ -54,7 +54,7 @@ class AppBarOwner extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(
-                    color: Colors.black,
+                    color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black,
                     width: 1,
                   )),
               margin: const EdgeInsets.all(10),

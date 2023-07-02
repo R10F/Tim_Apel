@@ -4,6 +4,7 @@ import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
+import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/stok_produk_provider.dart';
@@ -19,9 +20,10 @@ class StokProduk extends StatefulWidget {
 class _StokProdukState extends State<StokProduk> {
   @override
   Widget build(BuildContext context) {
-    var stokProdukProv = Provider.of<StokProdukProvider>(context);
-    var formProv = Provider.of<ProdukFormProvider>(context);
     var produkProv = Provider.of<ProdukProvider>(context);
+    var formProv = Provider.of<ProdukFormProvider>(context);
+    var accountProv = Provider.of<AccountProvider>(context);
+    var stokProdukProv = Provider.of<StokProdukProvider>(context);
     // var filteredStokProduk = stokProdukProv.getStokProduk;
 
     List<Produk> stokProduk = [];
@@ -72,6 +74,7 @@ class _StokProdukState extends State<StokProduk> {
                   alignment: Alignment.center,
                   child: const Text(
                     'Tidak ada produk yang sudah habis atau segera habis',
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -170,7 +173,9 @@ class _StokProdukState extends State<StokProduk> {
                                             child: Text(
                                               "Restock",
                                               style: TextStyle(
-                                                color: Colors.teal[500],
+                                                color: accountProv.getSetting('dark_mode')
+                                                    ? Colors.white
+                                                    : Colors.teal[500],
                                                 fontSize:
                                                     Theme.of(context).textTheme.bodySmall?.fontSize,
                                               ),

@@ -20,38 +20,41 @@ class _DatePickerState extends State<DatePicker> {
     return Scaffold(
       appBar: AppBar(
           title: Text(filterType == 'date_range' ? 'Date Range Picker' : 'Multi Date Picker')),
-      body: SfDateRangePicker(
-        showActionButtons: true,
-        minDate: widget.prov.startDate,
-        maxDate: widget.prov.endDate,
-        initialSelectedDates: filterType == 'multi_date'
-            ? widget.prov.dateFilterItem['multi_date']['result'].cast<DateTime>().toList()
-            : null,
-        initialSelectedRange: filterType == 'date_range'
-            ? widget.prov.dateFilterItem['date_range']['result'].isEmpty
-                ? PickerDateRange(widget.prov.startDate, widget.prov.endDate)
-                : PickerDateRange(
-                    widget.prov.dateFilterItem['date_range']['result'][0],
-                    widget.prov.dateFilterItem['date_range']['result'][1],
-                  )
-            : null,
-        selectionMode: filterType == 'date_range'
-            ? DateRangePickerSelectionMode.range
-            : DateRangePickerSelectionMode.multiple,
-        onSubmit: (value) {
-          if (value != null) {
-            if (filterType == 'date_range') {
-              PickerDateRange date = value as PickerDateRange;
-              widget.prov.setDateFilterItemResult('date_range', [date.startDate, date.endDate]);
-            } else if (filterType == 'multi_date') {
-              widget.prov.setDateFilterItemResult('multi_date', value);
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SfDateRangePicker(
+          showActionButtons: true,
+          minDate: widget.prov.startDate,
+          maxDate: widget.prov.endDate,
+          initialSelectedDates: filterType == 'multi_date'
+              ? widget.prov.dateFilterItem['multi_date']['result'].cast<DateTime>().toList()
+              : null,
+          initialSelectedRange: filterType == 'date_range'
+              ? widget.prov.dateFilterItem['date_range']['result'].isEmpty
+                  ? PickerDateRange(widget.prov.startDate, widget.prov.endDate)
+                  : PickerDateRange(
+                      widget.prov.dateFilterItem['date_range']['result'][0],
+                      widget.prov.dateFilterItem['date_range']['result'][1],
+                    )
+              : null,
+          selectionMode: filterType == 'date_range'
+              ? DateRangePickerSelectionMode.range
+              : DateRangePickerSelectionMode.multiple,
+          onSubmit: (value) {
+            if (value != null) {
+              if (filterType == 'date_range') {
+                PickerDateRange date = value as PickerDateRange;
+                widget.prov.setDateFilterItemResult('date_range', [date.startDate, date.endDate]);
+              } else if (filterType == 'multi_date') {
+                widget.prov.setDateFilterItemResult('multi_date', value);
+              }
             }
-          }
-          Navigator.pop(context);
-        },
-        onCancel: () {
-          Navigator.pop(context);
-        },
+            Navigator.pop(context);
+          },
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }

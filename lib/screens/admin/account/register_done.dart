@@ -12,8 +12,7 @@ class RegisterDone extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 50, bottom: 15, left: 50, right: 50),
+                padding: const EdgeInsets.only(top: 50, bottom: 15, left: 50, right: 50),
                 child: Image.asset('assets/images/register-done.png'),
               ),
               const Padding(
@@ -28,24 +27,20 @@ class RegisterDone extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Row(
                   children: [
                     Expanded(
                       child: OutlinedButton(
                           onPressed: () {
-                            Navigator.popUntil(
-                                context, (route) => route.isFirst);
+                            Navigator.popUntil(context, (route) => route.isFirst);
                           },
                           child: Text(
                             'Kembali Ke Beranda',
                             style: TextStyle(
                               color: Colors.teal[500],
                               fontFamily: 'Figtree',
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.fontSize,
+                              fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                             ),
                           )),
                     )
@@ -53,27 +48,21 @@ class RegisterDone extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 75, left: 20, right: 20),
+                padding: const EdgeInsets.only(bottom: 100, left: 20, right: 20),
                 child: Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                           onPressed: () {
                             Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const RegisterStaf()));
+                                context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
                           },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal[700]),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                           child: Text(
                             'Tambah Staf Lagi',
                             style: TextStyle(
                               fontFamily: 'Figtree',
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.fontSize,
+                              fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                             ),
                           )),
                     )

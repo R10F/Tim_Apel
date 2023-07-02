@@ -11,11 +11,13 @@ class CardTransaksiSelesai extends StatefulWidget {
       required this.transaksi,
       required this.namaKasir,
       required this.index,
+      required this.accountProvider,
       required this.prov});
 
   final Transaksi transaksi;
   final String namaKasir;
   final int index;
+  final accountProvider;
   final prov;
 
   @override
@@ -92,7 +94,9 @@ class _CardTransaksiSelesaiState extends State<CardTransaksiSelesai> {
                         child: Text('Rincian',
                             style: TextStyle(
                               fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
-                              color: const Color(0xFF00796B),
+                              color: widget.accountProvider.getSetting('dark_mode')
+                                  ? Colors.white
+                                  : const Color(0xFF00796B),
                             ))),
                   )
                 ])),

@@ -142,7 +142,10 @@ class _TransaksiBaruDiselesaikanState extends State<TransaksiBaruDiselesaikan> {
                                               style: TextStyle(
                                                 fontSize:
                                                     Theme.of(context).textTheme.bodySmall?.fontSize,
-                                                color: const Color(0xFF00796B),
+                                                color:
+                                                    widget.accountProvider.getSetting('dark_mode')
+                                                        ? Colors.white
+                                                        : const Color(0xFF00796B),
                                               ))),
                                     )
                                   ],
@@ -167,7 +170,7 @@ class _TransaksiBaruDiselesaikanState extends State<TransaksiBaruDiselesaikan> {
                           color: Colors.grey,
                           fontFamily: 'Figtree',
                           fontSize: 16),
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ))

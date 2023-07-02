@@ -170,6 +170,7 @@ class _ListTransaksiStateSelesai extends State<ListTransaksiSelesai> {
                   index: i,
                   transaksi: listTransaksi[i],
                   namaKasir: widget.accountProvider.userAccounts[listTransaksi[i].idKasir].nama,
+                  accountProvider: widget.accountProvider,
                   prov: widget.transaksiProvider)
           ]);
         })

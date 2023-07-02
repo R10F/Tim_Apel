@@ -41,6 +41,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
                                 transaksi: listTransaksi[index],
                                 namaKasir:
                                     accountProvider.userAccounts[listTransaksi[index].idKasir].nama,
+                                accountProvider: accountProvider,
                                 prov: transaksiProvider)
                             : Container())),
               )
@@ -49,6 +50,7 @@ class _ListTransaksiState extends State<ListTransaksi> {
                   alignment: Alignment.center,
                   child: const Text(
                     'Tidak ada pesanan yang sedang berlangsung',
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20),
                   ),
                 ),

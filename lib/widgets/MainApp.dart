@@ -77,6 +77,8 @@ class _MainAppState extends State<MainApp> {
             ? SpeedDial(
                 animatedIcon: AnimatedIcons.menu_close,
                 backgroundColor: Colors.teal[700],
+                foregroundColor:
+                    accountProvider.getSetting('dark_mode') ? Colors.white70 : Colors.white,
                 childMargin: const EdgeInsets.all(20),
                 children: [
                     SpeedDialChild(
@@ -116,7 +118,8 @@ class _MainAppState extends State<MainApp> {
                 },
                 tooltip: 'Buat Order Baru',
                 backgroundColor: Colors.teal[700],
-                child: const Icon(Icons.add_shopping_cart),
+                child: Icon(Icons.add_shopping_cart,
+                    color: accountProvider.getSetting('dark_mode') ? Colors.white70 : Colors.white),
               ),
       ),
     );
