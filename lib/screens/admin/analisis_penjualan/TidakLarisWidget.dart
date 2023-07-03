@@ -22,7 +22,7 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
     return Column(
       children: [
         for (int i = 0; i < widget.idAndQty[0].length; i++)
-          if (produkProv.semuaProduk[i].nama
+          if (produkProv.getProdukById(widget.idAndQty[0][i]).nama
               .toString()
               .toLowerCase()
               .contains(searchProv.query.toLowerCase()))
