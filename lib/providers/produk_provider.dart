@@ -1,8 +1,5 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 
 class ProdukProvider extends ChangeNotifier {
@@ -76,25 +73,5 @@ class ProdukProvider extends ChangeNotifier {
   void hapusProduk(int idProduk) {
     semuaProduk[idProduk - 1].isDeleted = true;
     notifyListeners();
-  }
-
-  Future<File> getImageFileFromAssets(String assetPath) async {
-    // Load the asset image file
-    ByteData byteData = await rootBundle.load(assetPath);
-    List<int> imageData = byteData.buffer.asUint8List();
-
-    // Get the temporary directory to store the image file
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-
-    // Create a temporary file path
-    String tempFileName = assetPath.split('/').last;
-    String tempFilePath = '$tempPath/$tempFileName';
-
-    // Write the image data to the temporary file
-    File tempFile = File(tempFilePath);
-    await tempFile.writeAsBytes(imageData);
-
-    return tempFile;
   }
 }

@@ -9,14 +9,13 @@ class ProdukFormProvider extends ChangeNotifier {
 
   int _editIdx = 0;
   get editIdx => _editIdx;
-  set updateEditIdx(int newIdx){
+  set updateEditIdx(int newIdx) {
     _editIdx = newIdx;
   }
-  
 
   bool _edited = true;
   get edited => _edited;
-  set isEdited(val){
+  set isEdited(val) {
     _edited = _edited || val;
   }
 
@@ -71,4 +70,13 @@ class ProdukFormProvider extends ChangeNotifier {
   //   hargaBeli = null;
   //   kategoriSelected = "none";
   // }
+
+  clearController() {
+    namaProdukController.clear();
+    deskripsiController.clear();
+    hargaJualController.clear();
+    stokController.clear();
+    hargaBeliController.clear();
+    updateKategori = "none";
+  }
 }

@@ -36,10 +36,10 @@ class ProdukTerlaris extends StatelessWidget {
           .toList();
       Map<int, int> terjual = {};
 
-      for (var id in ids){
+      for (var id in ids) {
         terjual[id] = 0;
       }
-      
+
       for (Map<int, int> listProduk in transaksi) {
         listProduk.forEach((id, qty) {
           if (ids.contains(id)) {
@@ -73,7 +73,7 @@ class ProdukTerlaris extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          CustomSearchLaris(),
+          const CustomSearchLaris(),
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
           //   child: TextField(
@@ -99,8 +99,7 @@ class ProdukTerlaris extends StatelessWidget {
                 LarisBuilder(idAndQty: getProdukLaris(produkProv.kategori[i])),
               ],
             ),
-          ]
-        ),
+        ]),
       ),
     );
   }

@@ -42,23 +42,24 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
           .toList();
       Map<int, List<int>> terjual = {};
 
-      for (var id in ids){
-        terjual[id] = [0,0];
+      for (var id in ids) {
+        terjual[id] = [0, 0];
       }
-      
+
       for (Map<int, int> listProduk in transaksi) {
         listProduk.forEach((id, qty) {
           if (ids.contains(id)) {
             terjual.update(
               id,
               (value) => [terjual[id]![0] + qty, terjual[id]![1]],
-            ); 
+            );
           }
         });
       }
 
       List allTimeTransaksi = transaksiProv.listTransaksi
-          .where((transaksi) => transaksi.inProcess == false).toList()
+          .where((transaksi) => transaksi.inProcess == false)
+          .toList()
           .map(
             (e) => e.listProduk,
           )
@@ -69,14 +70,14 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
           if (ids.contains(id)) {
             terjual.update(
               id,
-              (value) => [terjual[id]![0], terjual[id]![1]+qty],
-            ); 
+              (value) => [terjual[id]![0], terjual[id]![1] + qty],
+            );
           }
         });
       }
-      
+
       var temp = terjual.entries.toList()
-        ..sort((a, b){
+        ..sort((a, b) {
           int cmp = a.value[0].compareTo(b.value[0]);
           if (cmp != 0) return cmp;
           return a.value[1].compareTo(b.value[1]);
@@ -84,13 +85,14 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
 
       terjual = Map<int, List<int>>.fromEntries(temp);
       List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
-      List<List<int>> allQty = List<List<int>>.from(terjual.values.toList().take(3));
+      List<List<int>> allQty =
+          List<List<int>>.from(terjual.values.toList().take(3));
       List<int> slicedQty = allQty.map((e) => e[0]).toList();
       List<int> slicedAllQty = allQty.map((e) => e[1]).toList();
 
       return [slicedKey, slicedQty, slicedAllQty];
     }
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Produk Tidak Laris"),
@@ -102,95 +104,94 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomSearchLaris(),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-            //   child: TextField(
-            //     decoration: InputDecoration(
-            //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-            //         labelText: 'Nama Produk',
-            //         suffixIcon: const Icon(Icons.search)),
-            //   ),
-            // ),
-            for (int i = 0; i < produkProv.kategori.length; i++)
-            Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                    "${produkProv.kategori[i]}",
-                    style: TextStyle(
-                      fontSize: 23,
-                    ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const CustomSearchLaris(),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+        //   child: TextField(
+        //     decoration: InputDecoration(
+        //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+        //         labelText: 'Nama Produk',
+        //         suffixIcon: const Icon(Icons.search)),
+        //   ),
+        // ),
+        for (int i = 0; i < produkProv.kategori.length; i++)
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Text(
+                  "${produkProv.kategori[i]}",
+                  style: const TextStyle(
+                    fontSize: 23,
                   ),
                 ),
-                TidakLarisBuilder(idAndQty: getProdukLaris(produkProv.kategori[i])),
-              ],
-            ),
-          ]
-        )
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Card(
-            //     child: Row(
-            //       children: [
-            //         SizedBox(
-            //           width: 75,
-            //           height: 75,
-            //           child: DecoratedBox(
-            //             decoration: BoxDecoration(
-            //                 color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
-            //             child: Center(
-            //               child: Text(
-            //                 "1",
-            //                 style: TextStyle(
-            //                   fontSize: 30,
-            //                   fontWeight: FontWeight.bold,
-            //                   color: accountProvider.getSetting('dark_mode')
-            //                       ? Colors.black
-            //                       : Colors.white,
-            //                 ),
-            //                 textAlign: TextAlign.center,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             const Padding(
-            //               padding: EdgeInsets.all(8.0),
-            //               child: Text(
-            //                 "Lem Lilin Uk. Kecil",
-            //                 style: TextStyle(fontSize: 16),
-            //               ),
-            //             ),
-            //             Padding(
-            //               padding: const EdgeInsets.symmetric(horizontal: 8),
-            //               child: Text(
-            //                 "terjual: 0/bulan",
-            //                 style: TextStyle(fontSize: 15, color: Colors.red[600]),
-            //               ),
-            //             ),
-            //             Padding(
-            //               padding: const EdgeInsets.symmetric(horizontal: 8),
-            //               child: Text(
-            //                 "total terjual : 10",
-            //                 style: TextStyle(fontSize: 14, color: Colors.red[600]),
-            //               ),
-            //             ),
-            //           ],
-            //         )
-            //       ],
-            //     ),
+              ),
+              TidakLarisBuilder(
+                  idAndQty: getProdukLaris(produkProv.kategori[i])),
+            ],
+          ),
+      ])
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Card(
+          //     child: Row(
+          //       children: [
+          //         SizedBox(
+          //           width: 75,
+          //           height: 75,
+          //           child: DecoratedBox(
+          //             decoration: BoxDecoration(
+          //                 color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
+          //             child: Center(
+          //               child: Text(
+          //                 "1",
+          //                 style: TextStyle(
+          //                   fontSize: 30,
+          //                   fontWeight: FontWeight.bold,
+          //                   color: accountProvider.getSetting('dark_mode')
+          //                       ? Colors.black
+          //                       : Colors.white,
+          //                 ),
+          //                 textAlign: TextAlign.center,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //         Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             const Padding(
+          //               padding: EdgeInsets.all(8.0),
+          //               child: Text(
+          //                 "Lem Lilin Uk. Kecil",
+          //                 style: TextStyle(fontSize: 16),
+          //               ),
+          //             ),
+          //             Padding(
+          //               padding: const EdgeInsets.symmetric(horizontal: 8),
+          //               child: Text(
+          //                 "terjual: 0/bulan",
+          //                 style: TextStyle(fontSize: 15, color: Colors.red[600]),
+          //               ),
+          //             ),
+          //             Padding(
+          //               padding: const EdgeInsets.symmetric(horizontal: 8),
+          //               child: Text(
+          //                 "total terjual : 10",
+          //                 style: TextStyle(fontSize: 14, color: Colors.red[600]),
+          //               ),
+          //             ),
+          //           ],
+          //         )
+          //       ],
+          //     ),
           //     ),
           //   )
           // ],
-        // ),
-      ),
+          // ),
+          ),
     );
   }
 }

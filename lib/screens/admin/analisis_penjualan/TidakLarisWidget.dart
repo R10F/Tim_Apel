@@ -18,16 +18,19 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
   Widget build(BuildContext context) {
     var produkProv = Provider.of<ProdukProvider>(context);
     var searchProv = Provider.of<SearchLarisProvider>(context);
-    
+
     return Column(
       children: [
         for (int i = 0; i < widget.idAndQty[0].length; i++)
-        if (produkProv.semuaProduk[i].nama.toString().toLowerCase().contains(searchProv.query.toLowerCase()))
-          TidakLarisWidget(
-              produk: produkProv.getProdukById(widget.idAndQty[0][i]),
-              qty: widget.idAndQty[1][i],
-              allTimeQty: widget.idAndQty[2][i],
-              rank: i+1),
+          if (produkProv.semuaProduk[i].nama
+              .toString()
+              .toLowerCase()
+              .contains(searchProv.query.toLowerCase()))
+            TidakLarisWidget(
+                produk: produkProv.getProdukById(widget.idAndQty[0][i]),
+                qty: widget.idAndQty[1][i],
+                allTimeQty: widget.idAndQty[2][i],
+                rank: i + 1),
       ],
     );
   }
@@ -38,7 +41,12 @@ class TidakLarisWidget extends StatefulWidget {
   final int qty;
   final int allTimeQty;
   final int rank;
-  const TidakLarisWidget({super.key, required this.produk, required this.qty, required this.allTimeQty, required this.rank});
+  const TidakLarisWidget(
+      {super.key,
+      required this.produk,
+      required this.qty,
+      required this.allTimeQty,
+      required this.rank});
 
   @override
   State<TidakLarisWidget> createState() => _TidakLarisWidgetState();

@@ -122,4 +122,18 @@ class RegisterStafFormProvider extends ChangeNotifier {
     _passwordVisible = value;
     notifyListeners();
   }
+
+  getTime(startTime, endTime) {
+    bool result = false;
+    int startTimeInt = (startTime.hour * 60 + startTime.minute) * 60;
+    int EndTimeInt = (endTime.hour * 60 + endTime.minute) * 60;
+    int dif = EndTimeInt - startTimeInt;
+
+    if (EndTimeInt > startTimeInt) {
+      result = true;
+    } else {
+      result = false;
+    }
+    return result;
+  }
 }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SearchLarisProvider extends ChangeNotifier{
+class SearchLarisProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
   String _query = "";
   get query => _query;
 
-  void queryListener(){
+  void queryListener() {
     search(searchController.text);
   }
 
-  void resetController(){
-    searchController.text = "";
+  void resetController() {
+    searchController.clear();
   }
-  
-  void search(String query){
+
+  void search(String query) {
     _query = query;
     notifyListeners();
   }

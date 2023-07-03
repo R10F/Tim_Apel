@@ -4,6 +4,7 @@ import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/produk/edit_produk.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class PopupMenu extends StatefulWidget {
   final int idxProduk;
@@ -25,8 +26,10 @@ class _PopupMenuState extends State<PopupMenu> {
       formProv.namaProdukController.text = toBeEdited.nama;
       formProv.deskripsiController.text = toBeEdited.deskripsi;
       formProv.stokController.text = toBeEdited.stok.toString();
-      formProv.hargaJualController.text = toBeEdited.hargaJual.toString();
-      formProv.hargaBeliController.text = toBeEdited.hargaBeli.toString();
+      formProv.hargaJualController.text =
+          currency(toBeEdited.hargaJual).toString();
+      formProv.hargaBeliController.text =
+          currency(toBeEdited.hargaBeli).toString();
       formProv.updateKategori = toBeEdited.kategori;
       formProv.updateEditIdx = 1;
     }

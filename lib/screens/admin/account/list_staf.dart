@@ -32,13 +32,15 @@ class _ListStafState extends State<ListStaf> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
+        title:
+            Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
       ),
       body: itemCount > 0
           ? ListView(
               children: List.generate(
                   userAccounts.length,
-                  (index) => userAccounts[index].isActive == widget.isActiveAccountsPage
+                  (index) => userAccounts[index].isActive ==
+                          widget.isActiveAccountsPage
                       ? GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -56,11 +58,14 @@ class _ListStafState extends State<ListStaf> {
                           },
                           child: Container(
                             decoration: const BoxDecoration(
-                                border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey))),
+                                border: Border(
+                                    bottom: BorderSide(
+                                        width: 0.5, color: Colors.grey))),
                             child: Align(
                               alignment: Alignment.center,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
                                 child: ListTile(
                                   leading: Image.asset(
                                     'assets/profile_pictures/${userAccounts[index].profilePicture}',
@@ -73,27 +78,37 @@ class _ListStafState extends State<ListStaf> {
                                               onPressed: () {
                                                 QuickAlert.show(
                                                     context: context,
-                                                    type: QuickAlertType.warning,
-                                                    confirmBtnColor: Colors.teal[700]!,
-                                                    title: 'Nonaktifkan staf ini?',
-                                                    confirmBtnText: 'Nonaktifkan',
+                                                    type:
+                                                        QuickAlertType.warning,
+                                                    confirmBtnColor:
+                                                        Colors.teal[700]!,
+                                                    title:
+                                                        'Nonaktifkan staf ini?',
+                                                    confirmBtnText:
+                                                        'Nonaktifkan',
                                                     cancelBtnText: 'Tutup',
                                                     showCancelBtn: true,
                                                     onConfirmBtnTap: () {
-                                                      accountProvider.deactivateAccount(index);
+                                                      accountProvider
+                                                          .deactivateAccount(
+                                                              index);
                                                       Navigator.pop(context);
                                                     });
                                               },
                                               child: const Text('Nonaktifkan'))
                                           : TextButton(
                                               onPressed: () {
-                                                accountProvider.activateAccount(index);
+                                                accountProvider
+                                                    .activateAccount(index);
 
                                                 Fluttertoast.showToast(
-                                                  msg: 'Staf sudah diaktifkan kembali',
-                                                  toastLength: Toast.LENGTH_LONG,
+                                                  msg:
+                                                      'Staf sudah diaktifkan kembali',
+                                                  toastLength:
+                                                      Toast.LENGTH_LONG,
                                                   gravity: ToastGravity.TOP,
-                                                  backgroundColor: Colors.teal[300],
+                                                  backgroundColor:
+                                                      Colors.teal[300],
                                                   textColor: Colors.white,
                                                   fontSize: 16,
                                                 );
@@ -126,7 +141,8 @@ class _ListStafState extends State<ListStaf> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const RegisterStaf()));
               },
             )
           : null,

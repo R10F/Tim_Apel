@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/screens/admin/account/register_done.dart';
@@ -38,9 +40,13 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.namaController,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isNameEmpty ? 'Nama Tidak Boleh Kosong' : null,
+                  errorText: registerFormProvider.isNameEmpty
+                      ? 'Nama Tidak Boleh Kosong'
+                      : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
+                      color: accountProvider.getSetting('dark_mode')
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Nama',
                   border: const OutlineInputBorder()),
             ),
@@ -50,10 +56,13 @@ class _RegisterStafState extends State<RegisterStaf> {
             child: TextFormField(
               controller: registerFormProvider.usernameController,
               decoration: InputDecoration(
-                  errorText:
-                      registerFormProvider.isUsernameEmpty ? 'Username Tidak Boleh Kosong' : null,
+                  errorText: registerFormProvider.isUsernameEmpty
+                      ? 'Username Tidak Boleh Kosong'
+                      : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
+                      color: accountProvider.getSetting('dark_mode')
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Username',
                   border: const OutlineInputBorder()),
             ),
@@ -64,10 +73,13 @@ class _RegisterStafState extends State<RegisterStaf> {
               controller: registerFormProvider.passwordController,
               obscureText: !registerFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText:
-                      registerFormProvider.isPasswordEmpty ? 'Password Tidak Boleh Kosong' : null,
+                  errorText: registerFormProvider.isPasswordEmpty
+                      ? 'Password Tidak Boleh Kosong'
+                      : null,
                   labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode') ? Colors.white : Colors.black),
+                      color: accountProvider.getSetting('dark_mode')
+                          ? Colors.white
+                          : Colors.black),
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -137,10 +149,12 @@ class _RegisterStafState extends State<RegisterStaf> {
           //       )),
           // ),
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, bottom: 5, top: 20),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, bottom: 5, top: 20),
             child: Text(
               "Pilih Jadwal",
-              style: TextStyle(fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
+              style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
             ),
           ),
 
@@ -158,7 +172,9 @@ class _RegisterStafState extends State<RegisterStaf> {
                 Flexible(
                   child: Text(
                     registerFormProvider.getListHari[i],
-                    style: TextStyle(fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize),
+                    style: TextStyle(
+                        fontSize:
+                            Theme.of(context).textTheme.bodyMedium?.fontSize),
                   ),
                 ),
                 const SizedBox(
@@ -179,7 +195,8 @@ class _RegisterStafState extends State<RegisterStaf> {
                     },
                     child: TextField(
                       enabled: false,
-                      controller: registerFormProvider.getStartTimeController(i),
+                      controller:
+                          registerFormProvider.getStartTimeController(i),
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         labelText: "Jam Mulai",
@@ -200,14 +217,37 @@ class _RegisterStafState extends State<RegisterStaf> {
                 Expanded(
                     child: GestureDetector(
                   onTap: () async {
+                    var error = "";
                     var res = await showTimePicker(
                         context: context,
                         initialTime: const TimeOfDay(hour: 15, minute: 00),
-                        initialEntryMode: TimePickerEntryMode.inputOnly);
+                        initialEntryMode: TimePickerEntryMode.inputOnly,
+                        errorInvalidText: error);
 
                     if (res != null) {
                       var hasil = res.format(context);
-                      registerFormProvider.setEndTime(i, hasil);
+
+                      var startTime = TimeOfDay.fromDateTime(DateFormat('Hm')
+                          .parse(registerFormProvider
+                              .getStartTimeController(i)
+                              .text));
+                      var endTime =
+                          TimeOfDay.fromDateTime(DateFormat('Hm').parse(hasil));
+
+                      if (!registerFormProvider.getTime(startTime, endTime)) {
+                        Fluttertoast.showToast(
+                          msg: 'Jam Selesai Tidak Boleh Dibawah Jam Mulai',
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
+                          // timeInSecForIosWeb: 10,
+                          backgroundColor: Colors.redAccent[700],
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                        registerFormProvider.setEndTime(i, "");
+                      } else {
+                        registerFormProvider.setEndTime(i, hasil);
+                      }
                     }
                   },
                   child: TextField(
@@ -223,7 +263,8 @@ class _RegisterStafState extends State<RegisterStaf> {
             ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 80),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 80),
             child: Row(
               children: [
                 Expanded(
@@ -239,11 +280,19 @@ class _RegisterStafState extends State<RegisterStaf> {
                     bool timeIsEmpty = false;
                     bool isChecked = false;
 
-                    for (var i = 0; i < registerFormProvider.getListHari.length; i++) {
+                    for (var i = 0;
+                        i < registerFormProvider.getListHari.length;
+                        i++) {
                       if (registerFormProvider.getCheckboxValue(i)) {
                         isChecked = true;
-                        if (registerFormProvider.getStartTimeController(i).text.isEmpty ||
-                            registerFormProvider.getEndTimeController(i).text.isEmpty) {
+                        if (registerFormProvider
+                                .getStartTimeController(i)
+                                .text
+                                .isEmpty ||
+                            registerFormProvider
+                                .getEndTimeController(i)
+                                .text
+                                .isEmpty) {
                           timeIsEmpty = true;
                         }
                       }
@@ -268,8 +317,10 @@ class _RegisterStafState extends State<RegisterStaf> {
                         !timeIsEmpty) {
                       var result = accountProvider.register({
                         'nama': registerFormProvider.namaController.text,
-                        'username': registerFormProvider.usernameController.text,
-                        'password': registerFormProvider.passwordController.text,
+                        'username':
+                            registerFormProvider.usernameController.text,
+                        'password':
+                            registerFormProvider.passwordController.text,
                         'jadwal': registerFormProvider.getJadwal()
                       });
 
@@ -282,18 +333,22 @@ class _RegisterStafState extends State<RegisterStaf> {
                       }
 
                       Navigator.pushReplacement(
-                          context, MaterialPageRoute(builder: (_) => const RegisterDone()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const RegisterDone()));
 
                       registerFormProvider.setToDefault();
                       //registerFormProvider.setHari = "none";
                       // registerFormProvider.jadwalController.clear();
                     }
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal[700]),
                   child: Text(
                     'Simpan',
                     style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium?.fontSize,
                     ),
                   ),
                 )),

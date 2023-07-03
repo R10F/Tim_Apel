@@ -1,8 +1,10 @@
+import 'package:colours/colours.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/tunai_provider.dart';
+import 'package:tim_apel/utilities/formatting.dart';
 
 class PembayaranTunai extends StatefulWidget {
   const PembayaranTunai(
@@ -77,12 +79,31 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                 }
                 tunaiProv.setKembalian();
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Jumlah Uang',
+                enabled: tunaiProv.getChipStatus ? false : true,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
+          ),
+
+          InputChip(
+            label: const Text('Uang Pas'),
+            selected: tunaiProv.getChipStatus,
+            selectedColor: Colours.lightSalmon,
+            onPressed: () {
+              tunaiProv.setChipStatus = !tunaiProv.getChipStatus;
+
+              if (tunaiProv.getChipStatus) {
+                tunaiProv.setHargaPas = widget.totalHarga;
+                tunaiProv.jumlahUangController.text =
+                    currency(tunaiProv.getHargaPas).toString();
+              } else {
+                tunaiProv.jumlahUangController.clear();
+              }
+              tunaiProv.setKembalian();
+            },
           ),
           // Wrap(
           //     spacing: 8,
@@ -110,12 +131,12 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
           //                 setKembalian();
           //               });
           //             }))),
-          tunaiProv.getKembalian > -1
+          tunaiProv.getKembalian > -1 || tunaiProv.getChipStatus
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 8),
+                      padding: EdgeInsets.only(top: 15, bottom: 8),
                       child: Text(
                         'Kembalian',
                         style: TextStyle(

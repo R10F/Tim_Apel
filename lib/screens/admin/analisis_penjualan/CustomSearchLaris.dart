@@ -12,15 +12,14 @@ class CustomSearchLaris extends StatefulWidget {
 class _CustomSearchLarisState extends State<CustomSearchLaris> {
   @override
   Widget build(BuildContext context) {
-    var searchProv = Provider.of<SearchLarisProvider>(context);   
-    return
-    Padding(
+    var searchProv = Provider.of<SearchLarisProvider>(context);
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
       child: SearchBar(
         hintText: 'Nama Produk',
         leading: const Icon(Icons.search),
         controller: searchProv.searchController,
-        elevation: MaterialStatePropertyAll(0.0),
+        elevation: const MaterialStatePropertyAll(0.0),
         onChanged: (_) => searchProv.queryListener(),
       ),
     );
