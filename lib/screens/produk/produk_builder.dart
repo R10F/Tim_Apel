@@ -52,11 +52,11 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                         widget.produk[i].gambar.contains('assets')
                             ? Image.asset(
                                 widget.produk[i].gambar,
-                                height: 160,
+                                height: MediaQuery.sizeOf(context).height / 4.7,
                               )
                             : Image.file(
                                 File(widget.produk[i].gambar),
-                                height: 160,
+                                height: MediaQuery.sizeOf(context).height / 4.7,
                               ),
                         Padding(
                           padding: const EdgeInsets.all(8),
