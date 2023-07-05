@@ -6,6 +6,8 @@ import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/screens/produk/edit_produk.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
+import '../../providers/image_provider.dart';
+
 class PopupMenu extends StatefulWidget {
   final int idxProduk;
   const PopupMenu({super.key, required this.idxProduk});
@@ -20,12 +22,14 @@ class _PopupMenuState extends State<PopupMenu> {
     var produkProv = Provider.of<ProdukProvider>(context);
     var formProv = Provider.of<ProdukFormProvider>(context);
     var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
-    var nama = toBeEdited.stok;
+    var imgProv = Provider.of<ImgProvider>(context);
 
     void _updateFormProvider() {
       formProv.namaProdukController.text = toBeEdited.nama;
       formProv.deskripsiController.text = toBeEdited.deskripsi;
       formProv.stokController.text = toBeEdited.stok.toString();
+      imgProv.setImage = toBeEdited.gambar.toString();
+
       formProv.hargaJualController.text =
           currency(toBeEdited.hargaJual).toString();
       formProv.hargaBeliController.text =

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/tunai_provider.dart';
 
 class PaymentDone extends StatelessWidget {
   const PaymentDone({super.key, required this.nomorAntrean});
@@ -7,6 +10,7 @@ class PaymentDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tunaiProv = Provider.of<TunaiProvider>(context);
     return Scaffold(
       body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -39,6 +43,8 @@ class PaymentDone extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal[700]),
                             onPressed: () {
+                              tunaiProv.setKembalianHarga = 0;
+                              tunaiProv.setChipStatus = false;
                               Navigator.popUntil(
                                   context, (route) => route.isFirst);
                             },

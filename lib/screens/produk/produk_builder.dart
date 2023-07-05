@@ -24,10 +24,11 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
 
     return GridView.count(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 40),
+        padding:
+            const EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 40),
         crossAxisCount: 2,
-        childAspectRatio:
-            (MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 1.05)),
+        childAspectRatio: (MediaQuery.of(context).size.width /
+            (MediaQuery.of(context).size.height)),
         children: [
           for (int i = 0; i < widget.produk.length; i++)
             if (widget.produk[i].stok > 0 && !widget.produk[i].isDeleted)
@@ -40,15 +41,23 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                           context,
                           MaterialPageRoute(
                               builder: (_) => DetailProduk(
-                                  idTransaksi: transaksiProvider.selectedAntrean,
+                                  idTransaksi:
+                                      transaksiProvider.selectedAntrean,
                                   produk: widget.produk[i])));
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         widget.produk[i].gambar.contains('assets')
-                            ? Image.asset(widget.produk[i].gambar)
-                            : Image.file(File(widget.produk[i].gambar)),
+                            ? Image.asset(
+                                widget.produk[i].gambar,
+                                height: 160,
+                              )
+                            : Image.file(
+                                File(widget.produk[i].gambar),
+                                height: 160,
+                              ),
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Row(
@@ -61,13 +70,15 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                           child: Text(
                                             widget.produk[i].nama,
                                             style: const TextStyle(
-                                                fontFamily: 'Figtree', fontSize: 16),
+                                                fontFamily: 'Figtree',
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
                                       Transform.translate(
                                           offset: const Offset(12.5, 0),
-                                          child: PopupMenu(idxProduk: widget.produk[i].id)),
+                                          child: PopupMenu(
+                                              idxProduk: widget.produk[i].id)),
                                     ]
                                   : [
                                       Flexible(
@@ -78,7 +89,8 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                                             child: Text(
                                               widget.produk[i].nama,
                                               style: const TextStyle(
-                                                  fontFamily: 'Figtree', fontSize: 16),
+                                                  fontFamily: 'Figtree',
+                                                  fontSize: 16),
                                             ),
                                           ),
                                         ),
@@ -92,7 +104,9 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                             child: Text(
                               '@ ${currency(widget.produk[i].hargaJual)}',
                               style: TextStyle(
-                                  fontFamily: 'Figtree', fontSize: 14, color: Colors.teal[500]),
+                                  fontFamily: 'Figtree',
+                                  fontSize: 14,
+                                  color: Colors.teal[500]),
                             ),
                           ),
                         ),
@@ -102,7 +116,8 @@ class _ProdukBuilderState extends State<ProdukBuilder> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               'Stok: ${widget.produk[i].stok} item',
-                              style: const TextStyle(fontFamily: 'Figtree', fontSize: 14),
+                              style: const TextStyle(
+                                  fontFamily: 'Figtree', fontSize: 14),
                             ),
                           ),
                         ),

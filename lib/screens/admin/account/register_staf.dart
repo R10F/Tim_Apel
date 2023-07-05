@@ -264,7 +264,7 @@ class _RegisterStafState extends State<RegisterStaf> {
 
           Padding(
             padding:
-                const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 80),
+                const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 30),
             child: Row(
               children: [
                 Expanded(

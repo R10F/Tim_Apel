@@ -59,7 +59,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 20),
+            padding: const EdgeInsets.only(top: 8, bottom: 10),
             child: TextField(
               controller: tunaiProv.jumlahUangController,
               keyboardType: TextInputType.number,
@@ -99,10 +99,10 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                 tunaiProv.setHargaPas = widget.totalHarga;
                 tunaiProv.jumlahUangController.text =
                     currency(tunaiProv.getHargaPas).toString();
+                tunaiProv.setKembalian();
               } else {
                 tunaiProv.jumlahUangController.clear();
               }
-              tunaiProv.setKembalian();
             },
           ),
           // Wrap(
@@ -131,7 +131,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
           //                 setKembalian();
           //               });
           //             }))),
-          tunaiProv.getKembalian > -1 || tunaiProv.getChipStatus
+          tunaiProv.getChipStatus || tunaiProv.getKembalian > 0
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -153,7 +153,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         children: [
                           Expanded(

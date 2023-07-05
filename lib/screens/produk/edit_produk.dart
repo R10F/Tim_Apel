@@ -2,10 +2,13 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/form_handler/produk_form_provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
+
+import '../../providers/image_provider.dart';
 
 class EditProduk extends StatefulWidget {
   final int idxProduk;
@@ -43,6 +46,7 @@ class _EditProdukState extends State<EditProduk> {
     var produkProv = Provider.of<ProdukProvider>(context);
     var formProv = Provider.of<ProdukFormProvider>(context);
     var accountProv = Provider.of<AccountProvider>(context);
+    var imgProv = Provider.of<ImgProvider>(context);
     var toBeEdited = produkProv.getProduk(widget.idxProduk - 1);
 
     // void _clearController() {
@@ -130,6 +134,57 @@ class _EditProdukState extends State<EditProduk> {
                   onChanged: (val) {
                     formProv.kategoriSelected = val as String;
                   },
+                ),
+              ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Gambar",
+                        style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.fontSize),
+                      ),
+                      OutlinedButton(
+                          onPressed: imgProv.pickImage,
+                          child: Text(
+                            "Upload Gambar",
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.fontSize),
+                          )),
+                    ],
+                  )),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                child: Row(
+                  children: [
+                    Text(
+                      'Image :',
+                      style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge?.fontSize),
+                    ),
+                    Flexible(
+                      child: Text(
+                        imgProv.imagePath != null
+                            ? basename('${imgProv.imagePath}')
+                            : 'No Selected Image',
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const Divider(),
@@ -221,7 +276,7 @@ class _EditProdukState extends State<EditProduk> {
                               int stok, hargaJual, hargaBeli;
 
                               nama = formProv.getNama;
-                              gambar = "produk_2.jpg"; //temp
+                              gambar = '${imgProv.imagePath}';
                               deskripsi = formProv.getDeskripsi;
                               stok = int.parse(formProv.getStok);
                               hargaJual = int.parse(formProv.getHargaJual

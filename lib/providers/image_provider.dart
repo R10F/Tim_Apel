@@ -17,6 +17,11 @@ class ImgProvider extends ChangeNotifier {
     }
   }
 
+  set setImage(value) {
+    _imagePath = value;
+    notifyListeners();
+  }
+
   clearImage() {
     _imagePath = null;
     notifyListeners();
