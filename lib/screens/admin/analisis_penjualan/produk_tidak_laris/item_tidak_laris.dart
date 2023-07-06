@@ -31,8 +31,8 @@ class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
         child: Row(
           children: [
             SizedBox(
-              width: 83,
-              height: 83,
+              width: 90,
+              height: 90,
               child: DecoratedBox(
                 decoration:
                     BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
@@ -53,7 +53,7 @@ class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
                   child: Text(
                     widget.produk.nama,
                     style: const TextStyle(fontSize: 18),
