@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class SearchLarisProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
   String _query = "";
+
   get query => _query;
 
   void queryListener() {
@@ -10,6 +11,7 @@ class SearchLarisProvider extends ChangeNotifier {
   }
 
   void resetController() {
+    _query = "";
     searchController.clear();
   }
 

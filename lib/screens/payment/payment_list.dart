@@ -4,10 +4,7 @@ import 'package:tim_apel/screens/payment/item_metode_pembayaran.dart';
 
 class PaymentList extends StatelessWidget {
   const PaymentList(
-      {super.key,
-      required this.idTransaksi,
-      required this.totalHarga,
-      required this.nomorAntrean});
+      {super.key, required this.idTransaksi, required this.totalHarga, required this.nomorAntrean});
 
   final int idTransaksi;
   final int totalHarga;
@@ -19,7 +16,7 @@ class PaymentList extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pembayaran'),
+        title: const Text('List Metode Pembayaran'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -46,8 +43,7 @@ class PaymentList extends StatelessWidget {
                       width: 100,
                     ),
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal[300]),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[300]),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -55,20 +51,15 @@ class PaymentList extends StatelessWidget {
                                   builder: (_) => ItemMetodePembayaran(
                                         idTransaksi: idTransaksi,
                                         totalHarga: totalHarga,
-                                        metodePembayaran:
-                                            listMetodePembayaran[i],
-                                        iconName: listMetodePembayaran[i]
-                                            .toLowerCase(),
+                                        metodePembayaran: listMetodePembayaran[i],
+                                        iconName: listMetodePembayaran[i].toLowerCase(),
                                         nomorAntrean: nomorAntrean,
                                       )));
                         },
                         child: Text(
                           'Pilih',
                           style: TextStyle(
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.fontSize,
+                            fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                           ),
                         ))
                   ],

@@ -4,8 +4,8 @@ import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/search_laris_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/CustomSearchLaris.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/LarisWidget.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/custom_search.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/produk_laris/laris_builder.dart';
 import 'package:tim_apel/utilities/datetime.dart';
 
 class ProdukTerlaris extends StatelessWidget {
@@ -52,13 +52,35 @@ class ProdukTerlaris extends StatelessWidget {
         });
       }
 
-      var temp = terjual.entries.toList()
-        ..sort((a, b) => a.value.compareTo(b.value));
+      var temp = terjual.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
       terjual = Map<int, int>.fromEntries(temp);
       List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
       List<int> slicedQty = List<int>.from(terjual.values.toList().take(3));
 
       return [slicedKey, slicedQty];
+    }
+
+    List listProdukLaris = [];
+    for (int i = 0; i < produkProv.kategori.length; i++) {
+      var produkLaris = getProdukLaris(produkProv.kategori[i]);
+      int produkCount = 0;
+
+      for (int i = 0; i < produkLaris[0].length; i++) {
+        if (produkProv
+            .getProdukById(produkLaris[0][i])
+            .nama
+            .toString()
+            .toLowerCase()
+            .contains(searchProv.query.toLowerCase())) {
+          produkCount++;
+        }
+      }
+
+      listProdukLaris.add({
+        'kategori': produkProv.kategori[i],
+        'produk_count': produkCount,
+        'list_produk': produkLaris,
+      });
     }
 
     return Scaffold(
@@ -72,6 +94,7 @@ class ProdukTerlaris extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const CustomSearchLaris(),
           // Padding(
@@ -84,21 +107,22 @@ class ProdukTerlaris extends StatelessWidget {
           //         suffixIcon: const Icon(Icons.search)),
           //   ),
           // ),
-          for (int i = 0; i < produkProv.kategori.length; i++)
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Text(
-                    "${produkProv.kategori[i]}",
-                    style: const TextStyle(
-                      fontSize: 23,
+          for (int i = 0; i < listProdukLaris.length; i++)
+            if (listProdukLaris[i]['produk_count'] > 0)
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 10),
+                    child: Text(
+                      "${listProdukLaris[i]['kategori']}",
+                      style: const TextStyle(
+                        fontSize: 23,
+                      ),
                     ),
                   ),
-                ),
-                LarisBuilder(idAndQty: getProdukLaris(produkProv.kategori[i])),
-              ],
-            ),
+                  LarisBuilder(idAndQty: listProdukLaris[i]['list_produk']),
+                ],
+              ),
         ]),
       ),
     );
