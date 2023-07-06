@@ -22,7 +22,9 @@ class _TidakLarisBuilderState extends State<TidakLarisBuilder> {
     return Column(
       children: [
         for (int i = 0; i < widget.idAndQty[0].length; i++)
-          if (produkProv.getProdukById(widget.idAndQty[0][i]).nama
+          if (produkProv
+              .getProdukById(widget.idAndQty[0][i])
+              .nama
               .toString()
               .toLowerCase()
               .contains(searchProv.query.toLowerCase()))
@@ -66,18 +68,15 @@ class _TidakLarisWidgetState extends State<TidakLarisWidget> {
               width: 75,
               height: 75,
               child: DecoratedBox(
-                decoration: BoxDecoration(
-                    color: Colors.red[800],
-                    borderRadius: BorderRadius.circular(5)),
+                decoration:
+                    BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.rank.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.black
-                          : Colors.white,
+                      color: accountProvider.getSetting('dark_mode') ? Colors.black : Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -88,24 +87,24 @@ class _TidakLarisWidgetState extends State<TidakLarisWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
                     widget.produk.nama,
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
-                    "terjual: ${widget.qty.toString()}/bulan",
+                    "Terjual: ${widget.qty} / bulan",
                     style: TextStyle(fontSize: 15, color: Colors.red[600]),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    "total terjual : ${widget.allTimeQty.toString()}",
-                    style: TextStyle(fontSize: 14, color: Colors.red[600]),
+                    "Total Terjual : ${widget.allTimeQty}",
+                    style: TextStyle(fontSize: 15, color: Colors.red[600]),
                   ),
                 ),
               ],

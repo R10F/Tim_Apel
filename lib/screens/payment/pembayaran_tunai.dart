@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:colours/colours.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +9,9 @@ import 'package:tim_apel/providers/tunai_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class PembayaranTunai extends StatefulWidget {
-  const PembayaranTunai(
-      {super.key,
-      required this.totalHarga,
-      required this.konfirmasiPembayaran});
+  const PembayaranTunai({super.key, required this.totalHarga, required this.konfirmasiPembayaran});
 
   final int totalHarga;
-  // ignore: prefer_typing_uninitialized_variables
   final konfirmasiPembayaran;
 
   @override
@@ -65,14 +63,12 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9,]')),
-                CurrencyTextInputFormatter(
-                    locale: "id", symbol: "Rp", decimalDigits: 0)
+                CurrencyTextInputFormatter(locale: "id", symbol: "Rp", decimalDigits: 0)
               ],
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   tunaiProv.setTotalHarga = widget.totalHarga;
-                  final numericValue =
-                      int.tryParse(value.replaceAll(RegExp(r'[^0-9]'), ''));
+                  final numericValue = int.tryParse(value.replaceAll(RegExp(r'[^0-9]'), ''));
                   tunaiProv.setJumlahUang = numericValue ?? 0;
                 } else {
                   tunaiProv.setJumlahUang = 0;
@@ -97,8 +93,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
 
               if (tunaiProv.getChipStatus) {
                 tunaiProv.setHargaPas = widget.totalHarga;
-                tunaiProv.jumlahUangController.text =
-                    currency(tunaiProv.getHargaPas).toString();
+                tunaiProv.jumlahUangController.text = currency(tunaiProv.getHargaPas).toString();
                 tunaiProv.setKembalian();
               } else {
                 tunaiProv.jumlahUangController.clear();
@@ -136,7 +131,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 15, bottom: 8),
+                      padding: EdgeInsets.only(top: 25, bottom: 8),
                       child: Text(
                         'Kembalian',
                         style: TextStyle(
@@ -153,13 +148,12 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 40),
                       child: Row(
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.teal[700]),
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                                 onPressed: () {
                                   widget.konfirmasiPembayaran();
                                   tunaiProv.jumlahUangController.clear();
@@ -171,10 +165,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                                   'Konfirmasi Pembayaran',
                                   style: TextStyle(
                                     fontFamily: 'Figtree',
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.fontSize,
+                                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
                                   ),
                                 )),
                           ),

@@ -22,11 +22,16 @@ class _LarisBuilderState extends State<LarisBuilder> {
     return Column(
       children: [
         for (int i = 0; i < widget.idAndQty[0].length; i++)
-          if (produkProv.getProdukById(widget.idAndQty[0][i]).nama.toString().toLowerCase().contains(searchProv.query.toLowerCase()))
-          LarisWidget(
-              produk: produkProv.getProdukById(widget.idAndQty[0][i]),
-              qty: widget.idAndQty[1][i] ==  0 ? 0 :  -1* widget.idAndQty[1][i],
-              rank: i+1),
+          if (produkProv
+              .getProdukById(widget.idAndQty[0][i])
+              .nama
+              .toString()
+              .toLowerCase()
+              .contains(searchProv.query.toLowerCase()))
+            LarisWidget(
+                produk: produkProv.getProdukById(widget.idAndQty[0][i]),
+                qty: widget.idAndQty[1][i] == 0 ? 0 : -1 * widget.idAndQty[1][i],
+                rank: i + 1),
       ],
     );
   }
@@ -56,18 +61,15 @@ class _LarisWidgetState extends State<LarisWidget> {
               width: 75,
               height: 75,
               child: DecoratedBox(
-                decoration: BoxDecoration(
-                    color: Colors.green[500],
-                    borderRadius: BorderRadius.circular(5)),
+                decoration:
+                    BoxDecoration(color: Colors.green[500], borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.rank.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.black
-                          : Colors.white,
+                      color: accountProvider.getSetting('dark_mode') ? Colors.black : Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -78,16 +80,16 @@ class _LarisWidgetState extends State<LarisWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
                     widget.produk.nama,
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
-                    "terjual: ${widget.qty.toString()}/bulan",
+                    "Terjual: ${widget.qty} / bulan",
                     style: TextStyle(fontSize: 15, color: Colors.green[500]),
                   ),
                 ),

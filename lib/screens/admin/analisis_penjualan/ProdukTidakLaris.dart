@@ -22,7 +22,7 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
     var produkProv = Provider.of<ProdukProvider>(context);
     var searchProv = Provider.of<SearchLarisProvider>(context);
 
-    List<List<int>> getProdukLaris(String kategori) {
+    List<List<int>> getProdukTidakLaris(String kategori) {
       List ids = produkProv.semuaProduk
           .where((produk) => produk.kategori == kategori)
           .toList()
@@ -85,12 +85,34 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
 
       terjual = Map<int, List<int>>.fromEntries(temp);
       List<int> slicedKey = List<int>.from(terjual.keys.toList().take(3));
-      List<List<int>> allQty =
-          List<List<int>>.from(terjual.values.toList().take(3));
+      List<List<int>> allQty = List<List<int>>.from(terjual.values.toList().take(3));
       List<int> slicedQty = allQty.map((e) => e[0]).toList();
       List<int> slicedAllQty = allQty.map((e) => e[1]).toList();
 
       return [slicedKey, slicedQty, slicedAllQty];
+    }
+
+    List listProdukTidakLaris = [];
+    for (int i = 0; i < produkProv.kategori.length; i++) {
+      var produkTidakLaris = getProdukTidakLaris(produkProv.kategori[i]);
+      int produkCount = 0;
+
+      for (int i = 0; i < produkTidakLaris[0].length; i++) {
+        if (produkProv
+            .getProdukById(produkTidakLaris[0][i])
+            .nama
+            .toString()
+            .toLowerCase()
+            .contains(searchProv.query.toLowerCase())) {
+          produkCount++;
+        }
+      }
+
+      listProdukTidakLaris.add({
+        'kategori': produkProv.kategori[i],
+        'produk_count': produkCount,
+        'list_produk': produkTidakLaris,
+      });
     }
 
     return Scaffold(
@@ -104,35 +126,35 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
         ),
       ),
       body: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const CustomSearchLaris(),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-        //   child: TextField(
-        //     decoration: InputDecoration(
-        //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-        //         labelText: 'Nama Produk',
-        //         suffixIcon: const Icon(Icons.search)),
-        //   ),
-        // ),
-        for (int i = 0; i < produkProv.kategori.length; i++)
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Text(
-                  "${produkProv.kategori[i]}",
-                  style: const TextStyle(
-                    fontSize: 23,
-                  ),
+          padding: const EdgeInsets.only(bottom: 80),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const CustomSearchLaris(),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+            //         labelText: 'Nama Produk',
+            //         suffixIcon: const Icon(Icons.search)),
+            //   ),
+            // ),
+            for (int i = 0; i < listProdukTidakLaris.length; i++)
+              if (listProdukTidakLaris[i]['produk_count'] > 0)
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 25, top: 30, bottom: 10),
+                      child: Text(
+                        "${listProdukTidakLaris[i]['kategori']}",
+                        style: const TextStyle(
+                          fontSize: 23,
+                        ),
+                      ),
+                    ),
+                    TidakLarisBuilder(idAndQty: listProdukTidakLaris[i]['list_produk']),
+                  ],
                 ),
-              ),
-              TidakLarisBuilder(
-                  idAndQty: getProdukLaris(produkProv.kategori[i])),
-            ],
-          ),
-      ])
+          ])
           // Padding(
           //   padding: const EdgeInsets.all(8.0),
           //   child: Card(

@@ -14,7 +14,7 @@ class _CustomSearchLarisState extends State<CustomSearchLaris> {
   Widget build(BuildContext context) {
     var searchProv = Provider.of<SearchLarisProvider>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
       child: SearchBar(
         hintText: 'Nama Produk',
         leading: const Icon(Icons.search),
