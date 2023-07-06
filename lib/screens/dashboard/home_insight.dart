@@ -119,7 +119,7 @@ class _HomeInsightState extends State<HomeInsight> {
           Expanded(
               child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 15),
-                  margin: const EdgeInsets.only(left: 8, right: 25, bottom: 16),
+                  margin: const EdgeInsets.only(left: 8, right: 20, bottom: 16),
                   decoration: BoxDecoration(
                     color: accountProvider.getSetting('dark_mode') ? Colors.black54 : Colors.white,
                     boxShadow: [
@@ -179,7 +179,7 @@ class _HomeInsightState extends State<HomeInsight> {
           Expanded(
               child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 15),
-                  margin: const EdgeInsets.only(left: 8, right: 25),
+                  margin: const EdgeInsets.only(left: 8, right: 20),
                   decoration: BoxDecoration(
                     color: accountProvider.getSetting('dark_mode') ? Colors.black54 : Colors.white,
                     boxShadow: [
@@ -208,7 +208,7 @@ class _HomeInsightState extends State<HomeInsight> {
         ]),
         Container(
           padding: const EdgeInsets.only(top: 20, bottom: 4, left: 4, right: 4),
-          margin: const EdgeInsets.only(left: 20, right: 25, top: 30, bottom: 15),
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 15),
           decoration: BoxDecoration(
             color: accountProvider.getSetting('dark_mode') ? Colors.black54 : Colors.white,
             boxShadow: [
