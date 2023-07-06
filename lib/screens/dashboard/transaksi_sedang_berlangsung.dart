@@ -69,7 +69,7 @@ class _TransaksiSedangBerlangsungState extends State<TransaksiSedangBerlangsung>
       ),
       Container(
           padding: const EdgeInsets.only(top: 20, bottom: 24, left: 4, right: 4),
-          margin: const EdgeInsets.only(left: 20, right: 25, bottom: 30),
+          margin: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
           decoration: BoxDecoration(
             color: widget.accountProvider.getSetting('dark_mode') ? Colors.black54 : Colors.white,
             boxShadow: [
