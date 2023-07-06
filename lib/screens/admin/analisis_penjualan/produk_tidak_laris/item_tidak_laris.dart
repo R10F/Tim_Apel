@@ -31,8 +31,8 @@ class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
         child: Row(
           children: [
             SizedBox(
-              width: 75,
-              height: 75,
+              width: 83,
+              height: 83,
               child: DecoratedBox(
                 decoration:
                     BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
@@ -67,7 +67,7 @@ class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
                     "Total Terjual : ${widget.allTimeQty}",
                     style: TextStyle(fontSize: 15, color: Colors.red[600]),

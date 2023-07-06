@@ -126,7 +126,7 @@ class _ProdukTidakLarisState extends State<ProdukTidakLaris> {
         ),
       ),
       body: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 80),
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const CustomSearchLaris(),
             // Padding(

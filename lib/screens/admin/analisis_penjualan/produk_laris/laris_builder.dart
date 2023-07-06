@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/search_laris_provider.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/laris/item_laris.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/produk_laris/item_laris.dart';
 
 class LarisBuilder extends StatefulWidget {
   const LarisBuilder({super.key, required this.idAndQty});

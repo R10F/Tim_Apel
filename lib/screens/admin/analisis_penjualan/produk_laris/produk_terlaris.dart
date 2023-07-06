@@ -5,7 +5,7 @@ import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/search_laris_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/screens/admin/analisis_penjualan/custom_search.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/laris/laris_builder.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/produk_laris/laris_builder.dart';
 import 'package:tim_apel/utilities/datetime.dart';
 
 class ProdukTerlaris extends StatelessWidget {
@@ -94,7 +94,7 @@ class ProdukTerlaris extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 80),
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 80),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const CustomSearchLaris(),
           // Padding(

@@ -79,38 +79,6 @@ class TransaksiData {
     Transaksi(
         nomorAntrean: 1,
         idKasir: 4,
-        listProduk: {3: 1, 7: 4},
-        listProdukAkhir: [
-          [
-            Produk(
-                id: 3,
-                nama: "Lem Lilin Uk. Kecil",
-                gambar: "produk_2.jpg",
-                stok: 100,
-                hargaJual: 1000,
-                hargaBeli: 700,
-                kategori: "Craft Supply"),
-            1
-          ],
-          [
-            Produk(
-                id: 7,
-                nama: "Pita Satin Meteran 0.5 cm Merah",
-                gambar: "produk_5.jpg",
-                stok: 100,
-                hargaJual: 500,
-                hargaBeli: 400,
-                kategori: "Dekorasi"),
-            4
-          ],
-        ],
-        date: getPreviousDate(2),
-        time: getCurrentTime(),
-        inProcess: false,
-        metodePembayaran: 'GoPay'),
-    Transaksi(
-        nomorAntrean: 2,
-        idKasir: 3,
         listProduk: {1: 2, 3: 3, 5: 4},
         listProdukAkhir: [
           [
@@ -145,6 +113,38 @@ class TransaksiData {
                 hargaJual: 8000,
                 hargaBeli: 7000,
                 kategori: "Keperluan Jahit"),
+            4
+          ],
+        ],
+        date: getPreviousDate(50),
+        time: getCurrentTime(),
+        inProcess: false,
+        metodePembayaran: 'GoPay'),
+    Transaksi(
+        nomorAntrean: 2,
+        idKasir: 3,
+        listProduk: {3: 1, 7: 4},
+        listProdukAkhir: [
+          [
+            Produk(
+                id: 3,
+                nama: "Lem Lilin Uk. Kecil",
+                gambar: "produk_2.jpg",
+                stok: 100,
+                hargaJual: 1000,
+                hargaBeli: 700,
+                kategori: "Craft Supply"),
+            1
+          ],
+          [
+            Produk(
+                id: 7,
+                nama: "Pita Satin Meteran 0.5 cm Merah",
+                gambar: "produk_5.jpg",
+                stok: 100,
+                hargaJual: 500,
+                hargaBeli: 400,
+                kategori: "Dekorasi"),
             4
           ],
         ],
