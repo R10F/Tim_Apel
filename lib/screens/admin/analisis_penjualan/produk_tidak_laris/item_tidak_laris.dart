@@ -2,52 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/providers/produk_provider.dart';
-import 'package:tim_apel/providers/search_laris_provider.dart';
 
-class LarisBuilder extends StatefulWidget {
-  final List<List<int>> idAndQty;
-  const LarisBuilder({super.key, required this.idAndQty});
+class ItemTidakLaris extends StatefulWidget {
+  const ItemTidakLaris(
+      {super.key,
+      required this.produk,
+      required this.qty,
+      required this.allTimeQty,
+      required this.rank});
 
-  @override
-  State<LarisBuilder> createState() => _LarisBuilderState();
-}
-
-class _LarisBuilderState extends State<LarisBuilder> {
-  @override
-  Widget build(BuildContext context) {
-    var produkProv = Provider.of<ProdukProvider>(context);
-    var searchProv = Provider.of<SearchLarisProvider>(context);
-
-    return Column(
-      children: [
-        for (int i = 0; i < widget.idAndQty[0].length; i++)
-          if (produkProv
-              .getProdukById(widget.idAndQty[0][i])
-              .nama
-              .toString()
-              .toLowerCase()
-              .contains(searchProv.query.toLowerCase()))
-            LarisWidget(
-                produk: produkProv.getProdukById(widget.idAndQty[0][i]),
-                qty: widget.idAndQty[1][i] == 0 ? 0 : -1 * widget.idAndQty[1][i],
-                rank: i + 1),
-      ],
-    );
-  }
-}
-
-class LarisWidget extends StatefulWidget {
   final Produk produk;
   final int qty;
+  final int allTimeQty;
   final int rank;
-  const LarisWidget({super.key, required this.produk, required this.qty, required this.rank});
 
   @override
-  State<LarisWidget> createState() => _LarisWidgetState();
+  State<ItemTidakLaris> createState() => _ItemTidakLarisWidge();
 }
 
-class _LarisWidgetState extends State<LarisWidget> {
+class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
   @override
   Widget build(BuildContext context) {
     var accountProvider = Provider.of<AccountProvider>(context);
@@ -62,7 +35,7 @@ class _LarisWidgetState extends State<LarisWidget> {
               height: 75,
               child: DecoratedBox(
                 decoration:
-                    BoxDecoration(color: Colors.green[500], borderRadius: BorderRadius.circular(5)),
+                    BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.rank.toString(),
@@ -90,7 +63,14 @@ class _LarisWidgetState extends State<LarisWidget> {
                   padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
                   child: Text(
                     "Terjual: ${widget.qty} / bulan",
-                    style: TextStyle(fontSize: 15, color: Colors.green[500]),
+                    style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    "Total Terjual : ${widget.allTimeQty}",
+                    style: TextStyle(fontSize: 15, color: Colors.red[600]),
                   ),
                 ),
               ],

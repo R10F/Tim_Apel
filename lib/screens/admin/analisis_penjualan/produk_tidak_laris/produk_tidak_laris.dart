@@ -4,8 +4,8 @@ import 'package:tim_apel/models/transaksi_data_model.dart';
 import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/search_laris_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/CustomSearchLaris.dart';
-import 'package:tim_apel/screens/admin/analisis_penjualan/TidakLarisWidget.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/custom_search.dart';
+import 'package:tim_apel/screens/admin/analisis_penjualan/produk_tidak_laris/tidak_laris_builder.dart';
 import 'package:tim_apel/utilities/datetime.dart';
 
 class ProdukTidakLaris extends StatefulWidget {
