@@ -45,12 +45,13 @@ class TunaiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setKembalian() {
+  setKembalian() {
     if (_jumlahUang < _totalHarga) {
-      _kembalian = -1;
+      _kembalian = 0;
     } else {
       _kembalian = _jumlahUang - _totalHarga;
     }
-    kembalianController.text = _kembalian == -1 ? '-' : currency(_kembalian);
+    kembalianController.text = _kembalian == 0 ? '-' : currency(_kembalian);
+    notifyListeners();
   }
 }

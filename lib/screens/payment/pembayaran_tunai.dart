@@ -72,6 +72,8 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                   tunaiProv.setJumlahUang = numericValue ?? 0;
                 } else {
                   tunaiProv.setJumlahUang = 0;
+                  tunaiProv.setKembalianHarga = 0;
+                  tunaiProv.kembalianController.clear();
                 }
                 tunaiProv.setKembalian();
               },
@@ -94,9 +96,12 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
               if (tunaiProv.getChipStatus) {
                 tunaiProv.setHargaPas = widget.totalHarga;
                 tunaiProv.jumlahUangController.text = currency(tunaiProv.getHargaPas).toString();
+                tunaiProv.setJumlahUang = widget.totalHarga;
                 tunaiProv.setKembalian();
               } else {
                 tunaiProv.jumlahUangController.clear();
+                tunaiProv.kembalianController.clear();
+                tunaiProv.setKembalianHarga = 0;
               }
             },
           ),
@@ -155,11 +160,11 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
                                 onPressed: () {
-                                  widget.konfirmasiPembayaran();
                                   tunaiProv.jumlahUangController.clear();
                                   tunaiProv.kembalianController.clear();
-                                  tunaiProv.setKembalianHarga = -1;
+                                  tunaiProv.setKembalianHarga = 0;
                                   FocusScope.of(context).unfocus();
+                                  widget.konfirmasiPembayaran();
                                 },
                                 child: Text(
                                   'Konfirmasi Pembayaran',
