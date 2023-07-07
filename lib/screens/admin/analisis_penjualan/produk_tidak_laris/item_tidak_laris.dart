@@ -34,46 +34,54 @@ class _ItemTidakLarisWidge extends State<ItemTidakLaris> {
               width: 90,
               height: 90,
               child: DecoratedBox(
-                decoration:
-                    BoxDecoration(color: Colors.red[800], borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(
+                    color: Colors.red[800],
+                    borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.rank.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: accountProvider.getSetting('dark_mode') ? Colors.black : Colors.white,
+                      color: accountProvider.getSetting('dark_mode')
+                          ? Colors.black
+                          : Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-                  child: Text(
-                    widget.produk.nama,
-                    style: const TextStyle(fontSize: 18),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 16, top: 8, bottom: 8),
+                    child: Text(
+                      widget.produk.nama,
+                      style: const TextStyle(fontSize: 18),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  child: Text(
-                    "Terjual: ${widget.qty} / bulan",
-                    style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    child: Text(
+                      "Terjual: ${widget.qty} / bulan",
+                      style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  child: Text(
-                    "Total Terjual : ${widget.allTimeQty}",
-                    style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    child: Text(
+                      "Total Terjual : ${widget.allTimeQty}",
+                      style: TextStyle(fontSize: 15, color: Colors.red[600]),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

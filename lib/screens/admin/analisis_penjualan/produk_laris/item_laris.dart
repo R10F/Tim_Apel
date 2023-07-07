@@ -4,7 +4,8 @@ import 'package:tim_apel/models/produk_data_model.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 
 class ItemLaris extends StatefulWidget {
-  const ItemLaris({super.key, required this.produk, required this.qty, required this.rank});
+  const ItemLaris(
+      {super.key, required this.produk, required this.qty, required this.rank});
 
   final Produk produk;
   final int qty;
@@ -28,39 +29,46 @@ class _ItemLarisWidge extends State<ItemLaris> {
               width: 75,
               height: 75,
               child: DecoratedBox(
-                decoration:
-                    BoxDecoration(color: Colors.green[500], borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(
+                    color: Colors.green[500],
+                    borderRadius: BorderRadius.circular(5)),
                 child: Center(
                   child: Text(
                     widget.rank.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: accountProvider.getSetting('dark_mode') ? Colors.black : Colors.white,
+                      color: accountProvider.getSetting('dark_mode')
+                          ? Colors.black
+                          : Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  child: Text(
-                    widget.produk.nama,
-                    style: const TextStyle(fontSize: 18),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    child: Text(
+                      widget.produk.nama,
+                      style: const TextStyle(fontSize: 18),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                  child: Text(
-                    "Terjual: ${widget.qty} / bulan",
-                    style: TextStyle(fontSize: 15, color: Colors.green[500]),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                    child: Text(
+                      "Terjual: ${widget.qty} / bulan",
+                      style: TextStyle(fontSize: 15, color: Colors.green[500]),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),
