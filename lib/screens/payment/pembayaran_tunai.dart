@@ -50,7 +50,7 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
   @override
   Widget build(BuildContext context) {
     var tunaiProv = Provider.of<TunaiProvider>(context);
-    tunaiProv.setTotalHarga = widget.totalHarga;
+    // tunaiProv.setTotalHarga = widget.totalHarga;
 
     return SingleChildScrollView(
       child: Column(
@@ -93,7 +93,6 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
             selectedColor: Colours.lightSalmon,
             onPressed: () {
               tunaiProv.setChipStatus = !tunaiProv.getChipStatus;
-              tunaiProv.setJumlahUang = widget.totalHarga;
 
               if (tunaiProv.getChipStatus) {
                 tunaiProv.setTotalHarga = widget.totalHarga;
@@ -140,7 +139,8 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                                 onPressed: () {
                                   tunaiProv.jumlahUangController.clear();
                                   tunaiProv.kembalianController.clear();
-                                  tunaiProv.setKembalianHarga = 0;
+                                  tunaiProv.setKembalianHarga = -1;
+                                  tunaiProv.setChipStatus = false;
                                   FocusScope.of(context).unfocus();
                                   widget.konfirmasiPembayaran();
                                 },

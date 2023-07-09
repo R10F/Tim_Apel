@@ -43,8 +43,8 @@ class PaymentDone extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal[700]),
                             onPressed: () {
-                              tunaiProv.setKembalianHarga = 0;
-                              tunaiProv.setChipStatus = false;
+                              // tunaiProv.setKembalianHarga = -1;
+                              // tunaiProv.setChipStatus = false;
                               Navigator.popUntil(
                                   context, (route) => route.isFirst);
                             },

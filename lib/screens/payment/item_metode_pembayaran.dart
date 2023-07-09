@@ -33,12 +33,14 @@ class ItemMetodePembayaran extends StatelessWidget {
     var tunaiProv = Provider.of<TunaiProvider>(context);
 
     void konfirmasiPembayaran() {
-      transaksiProvider.transaksiSelesai(idTransaksi, metodePembayaran, produkProvider.semuaProduk);
+      transaksiProvider.transaksiSelesai(
+          idTransaksi, metodePembayaran, produkProvider.semuaProduk);
 
       Navigator.push(
           context,
           MaterialPageRoute(
-              fullscreenDialog: true, builder: (_) => PaymentDone(nomorAntrean: nomorAntrean)));
+              fullscreenDialog: true,
+              builder: (_) => PaymentDone(nomorAntrean: nomorAntrean)));
     }
 
     return Scaffold(
@@ -75,7 +77,8 @@ class ItemMetodePembayaran extends StatelessWidget {
             ),
             metodePembayaran == 'Tunai'
                 ? PembayaranTunai(
-                    totalHarga: totalHarga, konfirmasiPembayaran: konfirmasiPembayaran)
+                    totalHarga: totalHarga,
+                    konfirmasiPembayaran: konfirmasiPembayaran)
                 : Column(
                     children: [
                       const Padding(
@@ -87,11 +90,14 @@ class ItemMetodePembayaran extends StatelessWidget {
                         ),
                       ),
                       QrImageView(
-                        data: 'Pembayaran $metodePembayaran sebesar ${currency(totalHarga)}',
+                        data:
+                            'Pembayaran $metodePembayaran sebesar ${currency(totalHarga)}',
                         version: QrVersions.auto,
                         size: 250,
-                        embeddedImage: AssetImage("assets/payment/$iconName-logo.png"),
-                        embeddedImageStyle: const QrEmbeddedImageStyle(size: Size(50, 50)),
+                        embeddedImage:
+                            AssetImage("assets/payment/$iconName-logo.png"),
+                        embeddedImageStyle:
+                            const QrEmbeddedImageStyle(size: Size(50, 50)),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 30),
@@ -99,14 +105,15 @@ class ItemMetodePembayaran extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-                                  style:
-                                      ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.teal[700]),
                                   onPressed: () {
                                     konfirmasiPembayaran();
                                   },
                                   child: const Text(
                                     'Konfirmasi Pembayaran',
-                                    style: TextStyle(fontFamily: 'Figtree', fontSize: 16),
+                                    style: TextStyle(
+                                        fontFamily: 'Figtree', fontSize: 16),
                                   )),
                             ),
                           ],

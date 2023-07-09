@@ -5,7 +5,7 @@ import '../utilities/formatting.dart';
 class TunaiProvider extends ChangeNotifier {
   int _totalHarga = 0;
   int _jumlahUang = 0;
-  int _kembalian = 0;
+  int _kembalian = -1;
 
   int _hargaPas = 0;
   bool _chipStatus = false;
@@ -51,7 +51,7 @@ class TunaiProvider extends ChangeNotifier {
     } else {
       _kembalian = _jumlahUang - _totalHarga;
     }
-    kembalianController.text = _kembalian == -1 ? '-' : currency(_kembalian);
+    kembalianController.text = _kembalian == 0 ? '-' : currency(_kembalian);
     notifyListeners();
   }
 }
