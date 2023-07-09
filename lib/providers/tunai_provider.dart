@@ -47,11 +47,11 @@ class TunaiProvider extends ChangeNotifier {
 
   setKembalian() {
     if (_jumlahUang < _totalHarga) {
-      _kembalian = 0;
+      _kembalian = -1;
     } else {
       _kembalian = _jumlahUang - _totalHarga;
     }
-    kembalianController.text = _kembalian == 0 ? '-' : currency(_kembalian);
+    kembalianController.text = _kembalian == -1 ? '-' : currency(_kembalian);
     notifyListeners();
   }
 }

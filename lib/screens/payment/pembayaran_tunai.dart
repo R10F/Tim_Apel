@@ -44,13 +44,10 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
   //   kembalianController.text = _kembalian == -1 ? '-' : currency(_kembalian);
   // }
 
-  // TextEditingController jumlahUangController = TextEditingController();
-  // TextEditingController kembalianController = TextEditingController();
-  // CurrencyTextInputFormatter _formatter = CurrencyTextInputFormatter();
-
   @override
   Widget build(BuildContext context) {
     var tunaiProv = Provider.of<TunaiProvider>(context);
+    tunaiProv.setTotalHarga = widget.totalHarga;
 
     return SingleChildScrollView(
       child: Column(
@@ -72,10 +69,10 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                   tunaiProv.setJumlahUang = numericValue ?? 0;
                 } else {
                   tunaiProv.setJumlahUang = 0;
-                  tunaiProv.setKembalianHarga = 0;
+                  tunaiProv.setKembalianHarga = -1; //-1 = invalid
                   tunaiProv.kembalianController.clear();
                 }
-                tunaiProv.setKembalian();
+                tunaiProv.hitungKembalian();
               },
               decoration: InputDecoration(
                 labelText: 'Jumlah Uang',
@@ -94,44 +91,18 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
               tunaiProv.setChipStatus = !tunaiProv.getChipStatus;
 
               if (tunaiProv.getChipStatus) {
-                tunaiProv.setHargaPas = widget.totalHarga;
-                tunaiProv.jumlahUangController.text = currency(tunaiProv.getHargaPas).toString();
+                tunaiProv.setTotalHarga = widget.totalHarga;
+                tunaiProv.jumlahUangController.text = currency(widget.totalHarga).toString();
                 tunaiProv.setJumlahUang = widget.totalHarga;
-                tunaiProv.setKembalian();
+                tunaiProv.hitungKembalian();
               } else {
                 tunaiProv.jumlahUangController.clear();
                 tunaiProv.kembalianController.clear();
-                tunaiProv.setKembalianHarga = 0;
+                tunaiProv.setKembalianHarga = -1; //-1 = invalid
               }
             },
           ),
-          // Wrap(
-          //     spacing: 8,
-          //     runSpacing: 8,
-          //     children: List.generate(
-          //         _chipValue.length,
-          //         (index) => InputChip(
-          //             selected: _chipStatus[index],
-          //             selectedColor: Colours.lightSalmon,
-          //             showCheckmark: false,
-          //             label: Text(index == 0
-          //                 ? 'Uang Pas'
-          //                 : currency(_chipValue[index])),
-          //             onPressed: () {
-          //               setState(() {
-          //                 _chipStatus[index] = !_chipStatus[index];
-
-          //                 if (_chipStatus[index]) {
-          //                   _jumlahUang += _chipValue[index];
-          //                 } else {
-          //                   _jumlahUang -= _chipValue[index];
-          //                 }
-          //                 jumlahUangController.text = _jumlahUang.toString();
-
-          //                 setKembalian();
-          //               });
-          //             }))),
-          tunaiProv.getChipStatus || tunaiProv.getKembalian > 0
+          tunaiProv.getChipStatus || tunaiProv.getKembalian >= 0
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
