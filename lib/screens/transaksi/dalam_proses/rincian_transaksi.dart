@@ -9,7 +9,10 @@ import 'package:tim_apel/utilities/formatting.dart';
 
 class RincianTransaksi extends StatefulWidget {
   const RincianTransaksi(
-      {super.key, required this.idTransaksi, required this.transaksi, required this.namaKasir});
+      {super.key,
+      required this.idTransaksi,
+      required this.transaksi,
+      required this.namaKasir});
 
   final int idTransaksi;
   final Transaksi transaksi;
@@ -24,9 +27,10 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
   Widget build(BuildContext context) {
     var produkProvider = Provider.of<ProdukProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
-    List keranjang =
-        transaksiProvider.listTransaksi[widget.idTransaksi].keranjang(produkProvider.semuaProduk);
-    int totalHargaBelanja = widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk);
+    List keranjang = transaksiProvider.listTransaksi[widget.idTransaksi]
+        .keranjang(produkProvider.semuaProduk);
+    int totalHargaBelanja =
+        widget.transaksi.totalHargaBelanja(produkProvider.semuaProduk);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Rincian Transaksi')),
@@ -38,7 +42,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Nomor Antrean')),
-                Expanded(flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
+                Expanded(
+                    flex: 5, child: Text(': ${widget.transaksi.nomorAntrean}'))
               ],
             ),
             Row(
@@ -56,7 +61,8 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
             Row(
               children: [
                 const Expanded(flex: 3, child: Text('Total')),
-                Expanded(flex: 5, child: Text(': ${currency(totalHargaBelanja)}'))
+                Expanded(
+                    flex: 5, child: Text(': ${currency(totalHargaBelanja)}'))
               ],
             ),
             Expanded(
@@ -66,26 +72,32 @@ class _RincianTransaksiState extends State<RincianTransaksi> {
                     children: List.generate(
                         keranjang.length,
                         (index) => ItemRincianBelanja(
-                            idTransaksi: widget.idTransaksi, data: keranjang[index]))),
+                            idTransaksi: widget.idTransaksi,
+                            data: keranjang[index]))),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 25),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Text('Total', style: TextStyle(fontSize: 18)),
-                Text(currency(totalHargaBelanja),
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600))
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Total', style: TextStyle(fontSize: 18)),
+                    Text(currency(totalHargaBelanja),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600))
+                  ]),
             ),
             Row(
               children: [
                 Expanded(
                     child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal[700]),
                   child: Text(
                     'Pilih metode pembayaran',
                     style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium?.fontSize,
                     ),
                   ),
                   onPressed: () {

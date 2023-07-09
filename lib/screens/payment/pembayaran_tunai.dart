@@ -9,7 +9,10 @@ import 'package:tim_apel/providers/tunai_provider.dart';
 import 'package:tim_apel/utilities/formatting.dart';
 
 class PembayaranTunai extends StatefulWidget {
-  const PembayaranTunai({super.key, required this.totalHarga, required this.konfirmasiPembayaran});
+  const PembayaranTunai(
+      {super.key,
+      required this.totalHarga,
+      required this.konfirmasiPembayaran});
 
   final int totalHarga;
   final konfirmasiPembayaran;
@@ -63,12 +66,14 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9,]')),
-                CurrencyTextInputFormatter(locale: "id", symbol: "Rp", decimalDigits: 0)
+                CurrencyTextInputFormatter(
+                    locale: "id", symbol: "Rp", decimalDigits: 0)
               ],
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   tunaiProv.setTotalHarga = widget.totalHarga;
-                  final numericValue = int.tryParse(value.replaceAll(RegExp(r'[^0-9]'), ''));
+                  final numericValue =
+                      int.tryParse(value.replaceAll(RegExp(r'[^0-9]'), ''));
                   tunaiProv.setJumlahUang = numericValue ?? 0;
                 } else {
                   tunaiProv.setJumlahUang = 0;
@@ -92,11 +97,12 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
             selectedColor: Colours.lightSalmon,
             onPressed: () {
               tunaiProv.setChipStatus = !tunaiProv.getChipStatus;
+              tunaiProv.setJumlahUang = widget.totalHarga;
 
               if (tunaiProv.getChipStatus) {
                 tunaiProv.setHargaPas = widget.totalHarga;
-                tunaiProv.jumlahUangController.text = currency(tunaiProv.getHargaPas).toString();
-                tunaiProv.setJumlahUang = widget.totalHarga;
+                tunaiProv.jumlahUangController.text =
+                    currency(tunaiProv.getHargaPas).toString();
                 tunaiProv.setKembalian();
               } else {
                 tunaiProv.jumlahUangController.clear();
@@ -158,7 +164,8 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.teal[700]),
                                 onPressed: () {
                                   tunaiProv.jumlahUangController.clear();
                                   tunaiProv.kembalianController.clear();
@@ -170,7 +177,10 @@ class _PembayaranTunaiState extends State<PembayaranTunai> {
                                   'Konfirmasi Pembayaran',
                                   style: TextStyle(
                                     fontFamily: 'Figtree',
-                                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.fontSize,
                                   ),
                                 )),
                           ),

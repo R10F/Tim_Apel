@@ -78,6 +78,17 @@ class _ListStafState extends State<ListStaf> {
                                               onPressed: () {
                                                 QuickAlert.show(
                                                     context: context,
+                                                    confirmBtnTextStyle:
+                                                        const TextStyle(
+                                                            fontSize: 17,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                    cancelBtnTextStyle:
+                                                        const TextStyle(
+                                                            fontSize: 15,
+                                                            color: Colors.grey),
                                                     type:
                                                         QuickAlertType.warning,
                                                     confirmBtnColor:
