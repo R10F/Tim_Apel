@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
 import 'package:tim_apel/widgets/AppBarOwner.dart';
@@ -42,8 +43,7 @@ class _MainAppState extends State<MainApp> {
     Future<void> addProdukAndShowMessage(BuildContext context) async {
       final result = await Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => const TambahProduk(), fullscreenDialog: true),
+        MaterialPageRoute(builder: (context) => const TambahProduk(), fullscreenDialog: true),
       );
       //temp dlu utk message setelah berhasil ditambahkan
       // if (! mounted) return;
@@ -52,56 +52,70 @@ class _MainAppState extends State<MainApp> {
       // );
     }
 
+    void createNewOrder() {
+      QuickAlert.show(
+          context: context,
+          type: QuickAlertType.info,
+          confirmBtnColor: Colors.teal[700]!,
+          title: 'Buat transaksi baru?',
+          confirmBtnText: 'Buat',
+          cancelBtnText: 'Tutup',
+          showCancelBtn: true,
+          onConfirmBtnTap: () {
+            transaksiProvider.createNewOrder(accountProvider.id);
+            bottomnavProvider.setSelectedIdx = 1; // Goto: Halaman produk
+
+            Fluttertoast.showToast(
+              msg:
+                  'Transaksi dengan nomor antrean ${transaksiProvider.currentAntrean - 1} berhasil dibuat',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.TOP,
+              backgroundColor: Colors.teal[300],
+              textColor: Colors.white,
+              fontSize: 16,
+            );
+            Navigator.pop(context);
+          });
+    }
+
     return DefaultTabController(
       length: bottomnavProvider.getSelectedIdx == 1 ? 5 : 2,
       child: Scaffold(
         appBar: accountProvider.isOwner
             ? PreferredSize(
-                preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
-                        bottomnavProvider.getSelectedIdx == 2
-                    ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
-                    : const Size.fromHeight(kToolbarHeight),
+                preferredSize:
+                    bottomnavProvider.getSelectedIdx == 1 || bottomnavProvider.getSelectedIdx == 2
+                        ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
+                        : const Size.fromHeight(kToolbarHeight),
                 child: const AppBarOwner(),
               )
             : PreferredSize(
-                preferredSize: bottomnavProvider.getSelectedIdx == 1 ||
-                        bottomnavProvider.getSelectedIdx == 2
-                    ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
-                    : const Size.fromHeight(kToolbarHeight),
+                preferredSize:
+                    bottomnavProvider.getSelectedIdx == 1 || bottomnavProvider.getSelectedIdx == 2
+                        ? const Size.fromHeight(kToolbarHeight + kTextTabBarHeight)
+                        : const Size.fromHeight(kToolbarHeight),
                 child: const AppBarStaf(),
               ),
         body: halamanBottomNav[bottomnavProvider.getSelectedIdx],
         drawer: accountProvider.isOwner &&
-                (bottomnavProvider.getSelectedIdx == 0 ||
-                    bottomnavProvider.getSelectedIdx == 3)
+                (bottomnavProvider.getSelectedIdx == 0 || bottomnavProvider.getSelectedIdx == 3)
             ? const DrawerOwner()
             : null,
         bottomNavigationBar: const BottomNavbar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: accountProvider.isOwner &&
-                bottomnavProvider.getSelectedIdx == 1
+        floatingActionButton: accountProvider.isOwner && bottomnavProvider.getSelectedIdx == 1
             ? SpeedDial(
                 animatedIcon: AnimatedIcons.menu_close,
                 backgroundColor: Colors.teal[700],
-                foregroundColor: accountProvider.getSetting('dark_mode')
-                    ? Colors.white70
-                    : Colors.white,
+                foregroundColor:
+                    accountProvider.getSetting('dark_mode') ? Colors.white70 : Colors.white,
                 childMargin: const EdgeInsets.all(20),
                 children: [
                     SpeedDialChild(
-                        label: 'Buat Order Baru',
+                        label: 'Buat Transaksi Baru',
                         child: const Icon(Icons.add_shopping_cart),
                         onTap: () {
-                          transaksiProvider.createNewOrder(accountProvider.id);
-
-                          Fluttertoast.showToast(
-                            msg: 'Order baru berhasil dibuat',
-                            toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.TOP,
-                            backgroundColor: Colors.teal[300],
-                            textColor: Colors.white,
-                            fontSize: 16,
-                          );
+                          createNewOrder();
                         }),
                     SpeedDialChild(
                         label: 'Tambah Produk',
@@ -113,23 +127,12 @@ class _MainAppState extends State<MainApp> {
                   ])
             : FloatingActionButton(
                 onPressed: () {
-                  transaksiProvider.createNewOrder(accountProvider.id);
-
-                  Fluttertoast.showToast(
-                    msg: 'Order baru berhasil dibuat',
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.TOP,
-                    backgroundColor: Colors.teal[300],
-                    textColor: Colors.white,
-                    fontSize: 16,
-                  );
+                  createNewOrder();
                 },
-                tooltip: 'Buat Order Baru',
+                tooltip: 'Buat Transaksi Baru',
                 backgroundColor: Colors.teal[700],
                 child: Icon(Icons.add_shopping_cart,
-                    color: accountProvider.getSetting('dark_mode')
-                        ? Colors.white70
-                        : Colors.white),
+                    color: accountProvider.getSetting('dark_mode') ? Colors.white70 : Colors.white),
               ),
       ),
     );

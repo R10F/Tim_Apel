@@ -45,7 +45,9 @@ class TransaksiProvider extends ChangeNotifier {
   }
 
   void createNewOrder(int idKasir) {
-    _listTransaksi.add(Transaksi(nomorAntrean: _currentNomorAntrean++, idKasir: idKasir));
+    _listTransaksi.add(Transaksi(nomorAntrean: _currentNomorAntrean, idKasir: idKasir));
+    _selectedAntrean = _currentNomorAntrean - 1;
+    _currentNomorAntrean++;
     notifyListeners();
   }
 
