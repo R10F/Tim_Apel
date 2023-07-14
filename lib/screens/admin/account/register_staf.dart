@@ -167,6 +167,14 @@ class _RegisterStafState extends State<RegisterStaf> {
                   value: registerFormProvider.getCheckboxValue(i),
                   onChanged: (value) {
                     registerFormProvider.setCheckboxValue(i, value);
+
+                    if (value == true) {
+                      registerFormProvider.setStartTime(i, "09:00");
+                      registerFormProvider.setEndTime(i, "15:00");
+                    } else {
+                      registerFormProvider.setStartTime(i, "");
+                      registerFormProvider.setEndTime(i, "");
+                    }
                   },
                 ),
                 Flexible(
@@ -188,9 +196,21 @@ class _RegisterStafState extends State<RegisterStaf> {
                           initialTime: const TimeOfDay(hour: 09, minute: 00),
                           initialEntryMode: TimePickerEntryMode.inputOnly);
 
-                      if (res != null) {
-                        var hasil = res.format(context);
-                        registerFormProvider.setStartTime(i, hasil);
+                      if (registerFormProvider.getCheckboxValue(i)) {
+                        if (res != null) {
+                          var hasil = res.format(context);
+                          registerFormProvider.setStartTime(i, hasil);
+                        }
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'Harap Menceklis Jadwal Terlebih Dahulu',
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
+                          // timeInSecForIosWeb: 10,
+                          backgroundColor: Colors.redAccent[700],
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
                       }
                     },
                     child: TextField(
@@ -224,30 +244,46 @@ class _RegisterStafState extends State<RegisterStaf> {
                         initialEntryMode: TimePickerEntryMode.inputOnly,
                         errorInvalidText: error);
 
-                    if (res != null) {
-                      var hasil = res.format(context);
+                    if (registerFormProvider
+                            .getStartTimeController(i)
+                            .text
+                            .isNotEmpty &&
+                        registerFormProvider.getCheckboxValue(i)) {
+                      if (res != null) {
+                        var hasil = res.format(context);
 
-                      var startTime = TimeOfDay.fromDateTime(DateFormat('Hm')
-                          .parse(registerFormProvider
-                              .getStartTimeController(i)
-                              .text));
-                      var endTime =
-                          TimeOfDay.fromDateTime(DateFormat('Hm').parse(hasil));
+                        var startTime = TimeOfDay.fromDateTime(DateFormat('Hm')
+                            .parse(registerFormProvider
+                                .getStartTimeController(i)
+                                .text));
+                        var endTime = TimeOfDay.fromDateTime(
+                            DateFormat('Hm').parse(hasil));
 
-                      if (!registerFormProvider.getTime(startTime, endTime)) {
-                        Fluttertoast.showToast(
-                          msg: 'Jam Selesai Tidak Boleh Dibawah Jam Mulai',
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.TOP,
-                          // timeInSecForIosWeb: 10,
-                          backgroundColor: Colors.redAccent[700],
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                        registerFormProvider.setEndTime(i, "");
-                      } else {
-                        registerFormProvider.setEndTime(i, hasil);
+                        if (!registerFormProvider.getTime(startTime, endTime)) {
+                          Fluttertoast.showToast(
+                            msg: 'Jam Selesai Tidak Boleh Dibawah Jam Mulai',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.TOP,
+                            // timeInSecForIosWeb: 10,
+                            backgroundColor: Colors.redAccent[700],
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                          registerFormProvider.setEndTime(i, "");
+                        } else {
+                          registerFormProvider.setEndTime(i, hasil);
+                        }
                       }
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: 'Harap Memilih Jam Mulai Terlebih Dahulu',
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                        // timeInSecForIosWeb: 10,
+                        backgroundColor: Colors.redAccent[700],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     }
                   },
                   child: TextField(
