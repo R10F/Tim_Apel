@@ -125,57 +125,6 @@ class _RegisterStafState extends State<RegisterStaf> {
               },
             ),
           ),
-          // Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-          //     child: DropdownButtonFormField(
-          //       value: registerFormProvider.getHari,
-          //       decoration: const InputDecoration(
-          //           labelStyle: TextStyle(color: Colors.black),
-          //           labelText: 'Hari',
-          //           border: OutlineInputBorder()),
-          //       items: const [
-          //         DropdownMenuItem(
-          //           value: "none",
-          //           child: Text("Pilih Hari"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Senin",
-          //           child: Text("Senin"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Selasa",
-          //           child: Text("Selasa"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Rabu",
-          //           child: Text("Rabu"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Kamis",
-          //           child: Text("Kamis"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Jumat",
-          //           child: Text("Jumat"),
-          //         ),
-          //         DropdownMenuItem(
-          //           value: "Sabtu",
-          //           child: Text("Sabtu"),
-          //         ),
-          //       ],
-          //       onChanged: (value) {
-          //         registerFormProvider.setHari = value;
-          //       },
-          //     )),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: TextButton(
-          //       onPressed: () {},
-          //       child: Text(
-          //         "Pilih Jadwal",
-          //         style: TextStyle(color: Colors.teal[500], fontSize: 15),
-          //       )),
-          // ),
           Padding(
             padding:
                 const EdgeInsets.only(left: 25, right: 25, bottom: 5, top: 20),
@@ -185,7 +134,6 @@ class _RegisterStafState extends State<RegisterStaf> {
                   fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize),
             ),
           ),
-
           for (var i = 0; i < registerFormProvider.getListHari.length; i++)
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,10 +175,23 @@ class _RegisterStafState extends State<RegisterStaf> {
                         if (res != null) {
                           var hasil = res.format(context);
                           registerFormProvider.setStartTime(i, hasil);
+                          var startTime = TimeOfDay.fromDateTime(
+                              DateFormat('Hm').parse(hasil));
+                          var endTime = TimeOfDay.fromDateTime(DateFormat('Hm')
+                              .parse(registerFormProvider
+                                  .getEndTimeController(i)
+                                  .text));
+
+                          if (!registerFormProvider.getTime(
+                              startTime, endTime)) {
+                            registerFormProvider.setEndTime(i, "");
+                          } else {
+                            registerFormProvider.setEndTime(i, hasil);
+                          }
                         }
                       } else {
                         Fluttertoast.showToast(
-                          msg: 'Harap Menceklis Jadwal Terlebih Dahulu',
+                          msg: 'Jadwal belum dipilih!',
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.TOP,
                           // timeInSecForIosWeb: 10,
@@ -288,7 +249,8 @@ class _RegisterStafState extends State<RegisterStaf> {
 
                         if (!registerFormProvider.getTime(startTime, endTime)) {
                           Fluttertoast.showToast(
-                            msg: 'Jam Selesai Tidak Boleh Dibawah Jam Mulai',
+                            msg:
+                                'Pastikan Jam Selesai Lebih Besar Dari Jam Mulai',
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.TOP,
                             // timeInSecForIosWeb: 10,
@@ -303,7 +265,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                       }
                     } else {
                       Fluttertoast.showToast(
-                        msg: 'Harap Memilih Jam Mulai Terlebih Dahulu',
+                        msg: 'Jadwal Dan Jam Mulai Belum Dipilih',
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.TOP,
                         // timeInSecForIosWeb: 10,
@@ -324,7 +286,6 @@ class _RegisterStafState extends State<RegisterStaf> {
                 )),
               ],
             ),
-
           Padding(
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 30),
@@ -364,7 +325,7 @@ class _RegisterStafState extends State<RegisterStaf> {
 
                     if (!isChecked) {
                       Fluttertoast.showToast(
-                        msg: 'Harap Memilih Jadwal Terlebih Dahulu ',
+                        msg: 'Pilih Jadwal Yang Tersedia! ',
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.TOP,
                         // timeInSecForIosWeb: 10,
