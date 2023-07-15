@@ -34,15 +34,24 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 25),
+              padding: const EdgeInsets.only(
+                  left: 25, right: 25, top: 50, bottom: 25),
               child: TextFormField(
                 controller: loginFormProvider.usernameController,
                 decoration: InputDecoration(
-                    errorText:
-                        loginFormProvider.isUsernameEmpty ? 'Username Tidak Boleh Kosong' : null,
+                    errorText: loginFormProvider.isUsernameEmpty
+                        ? 'Username Tidak Boleh Kosong'
+                        : null,
                     labelStyle: const TextStyle(color: Colors.black),
                     labelText: 'Username',
                     border: const OutlineInputBorder()),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    loginFormProvider.setIsUsernameEmpty = false;
+                  } else {
+                    loginFormProvider.setIsUsernameEmpty = true;
+                  }
+                },
               ),
             ),
             Padding(
@@ -51,8 +60,9 @@ class _LoginState extends State<Login> {
                 controller: loginFormProvider.passwordController,
                 obscureText: !loginFormProvider.getPasswordVisible,
                 decoration: InputDecoration(
-                    errorText:
-                        loginFormProvider.isPasswordEmpty ? 'Password Tidak Boleh Kosong' : null,
+                    errorText: loginFormProvider.isPasswordEmpty
+                        ? 'Password Tidak Boleh Kosong'
+                        : null,
                     labelStyle: const TextStyle(color: Colors.black),
                     labelText: 'Password',
                     border: const OutlineInputBorder(),
@@ -69,6 +79,13 @@ class _LoginState extends State<Login> {
                             !loginFormProvider.getPasswordVisible;
                       },
                     )),
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    loginFormProvider.setIsPasswordEmpty = false;
+                  } else {
+                    loginFormProvider.setIsPasswordEmpty = true;
+                  }
+                },
               ),
             ),
             Padding(
@@ -78,6 +95,7 @@ class _LoginState extends State<Login> {
                   Expanded(
                       child: ElevatedButton(
                     onPressed: () async {
+                      FocusScope.of(context).unfocus();
                       loginFormProvider.setIsUsernameEmpty =
                           loginFormProvider.usernameController.text.isEmpty;
                       loginFormProvider.setIsPasswordEmpty =
@@ -101,11 +119,13 @@ class _LoginState extends State<Login> {
                       loginFormProvider.usernameController.clear();
                       loginFormProvider.passwordController.clear();
                     },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal[700]),
                     child: Text(
                       'Log In',
                       style: TextStyle(
-                        fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        fontSize:
+                            Theme.of(context).textTheme.bodyMedium?.fontSize,
                       ),
                     ),
                   )),
@@ -114,7 +134,8 @@ class _LoginState extends State<Login> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const ResetPassword()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const ResetPassword()));
               },
               child: Text(
                 'Reset Password',

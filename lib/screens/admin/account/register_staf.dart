@@ -23,6 +23,12 @@ class _RegisterStafState extends State<RegisterStaf> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrasi Staf'),
+        leading: IconButton(
+            onPressed: () {
+              registerFormProvider.setToDefault();
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: ListView(
         children: [
@@ -49,6 +55,13 @@ class _RegisterStafState extends State<RegisterStaf> {
                           : Colors.black),
                   labelText: 'Nama',
                   border: const OutlineInputBorder()),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  registerFormProvider.setIsNameEmpty = false;
+                } else {
+                  registerFormProvider.setIsNameEmpty = true;
+                }
+              },
             ),
           ),
           Padding(
@@ -65,6 +78,13 @@ class _RegisterStafState extends State<RegisterStaf> {
                           : Colors.black),
                   labelText: 'Username',
                   border: const OutlineInputBorder()),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  registerFormProvider.setIsUsernameEmpty = false;
+                } else {
+                  registerFormProvider.setIsUsernameEmpty = true;
+                }
+              },
             ),
           ),
           Padding(
@@ -73,28 +93,36 @@ class _RegisterStafState extends State<RegisterStaf> {
               controller: registerFormProvider.passwordController,
               obscureText: !registerFormProvider.getPasswordVisible,
               decoration: InputDecoration(
-                  errorText: registerFormProvider.isPasswordEmpty
-                      ? 'Password Tidak Boleh Kosong'
-                      : null,
-                  labelStyle: TextStyle(
-                      color: accountProvider.getSetting('dark_mode')
-                          ? Colors.white
-                          : Colors.black),
-                  labelText: 'Password',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      // Based on passwordVisible state choose the icon
-                      registerFormProvider.getPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                    onPressed: () {
-                      registerFormProvider.setPasswordVisible =
-                          !registerFormProvider.getPasswordVisible;
-                    },
-                  )),
+                errorText: registerFormProvider.isPasswordEmpty
+                    ? 'Password Tidak Boleh Kosong'
+                    : null,
+                labelStyle: TextStyle(
+                    color: accountProvider.getSetting('dark_mode')
+                        ? Colors.white
+                        : Colors.black),
+                labelText: 'Password',
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    // Based on passwordVisible state choose the icon
+                    registerFormProvider.getPasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    registerFormProvider.setPasswordVisible =
+                        !registerFormProvider.getPasswordVisible;
+                  },
+                ),
+              ),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  registerFormProvider.setIsPasswordEmpty = false;
+                } else {
+                  registerFormProvider.setIsPasswordEmpty = true;
+                }
+              },
             ),
           ),
           // Padding(
@@ -191,12 +219,11 @@ class _RegisterStafState extends State<RegisterStaf> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      var res = await showTimePicker(
-                          context: context,
-                          initialTime: const TimeOfDay(hour: 09, minute: 00),
-                          initialEntryMode: TimePickerEntryMode.inputOnly);
-
                       if (registerFormProvider.getCheckboxValue(i)) {
+                        var res = await showTimePicker(
+                            context: context,
+                            initialTime: const TimeOfDay(hour: 09, minute: 00),
+                            initialEntryMode: TimePickerEntryMode.inputOnly);
                         if (res != null) {
                           var hasil = res.format(context);
                           registerFormProvider.setStartTime(i, hasil);
@@ -238,17 +265,17 @@ class _RegisterStafState extends State<RegisterStaf> {
                     child: GestureDetector(
                   onTap: () async {
                     var error = "";
-                    var res = await showTimePicker(
-                        context: context,
-                        initialTime: const TimeOfDay(hour: 15, minute: 00),
-                        initialEntryMode: TimePickerEntryMode.inputOnly,
-                        errorInvalidText: error);
 
                     if (registerFormProvider
                             .getStartTimeController(i)
                             .text
                             .isNotEmpty &&
                         registerFormProvider.getCheckboxValue(i)) {
+                      var res = await showTimePicker(
+                          context: context,
+                          initialTime: const TimeOfDay(hour: 15, minute: 00),
+                          initialEntryMode: TimePickerEntryMode.inputOnly,
+                          errorInvalidText: error);
                       if (res != null) {
                         var hasil = res.format(context);
 
@@ -306,6 +333,7 @@ class _RegisterStafState extends State<RegisterStaf> {
                 Expanded(
                     child: ElevatedButton(
                   onPressed: () {
+                    FocusScope.of(context).unfocus();
                     registerFormProvider.setIsNameEmpty =
                         registerFormProvider.namaController.text.isEmpty;
                     registerFormProvider.setIsUsernameEmpty =
@@ -335,15 +363,15 @@ class _RegisterStafState extends State<RegisterStaf> {
                     }
 
                     if (!isChecked) {
-                      QuickAlert.show(
-                          context: context,
-                          type: QuickAlertType.warning,
-                          text: 'Harap Memilih Jadwal');
-                    } else if (timeIsEmpty) {
-                      QuickAlert.show(
-                          context: context,
-                          type: QuickAlertType.warning,
-                          text: 'Harap Memilih Jam Mulai & Selesai');
+                      Fluttertoast.showToast(
+                        msg: 'Harap Memilih Jadwal Terlebih Dahulu ',
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                        // timeInSecForIosWeb: 10,
+                        backgroundColor: Colors.redAccent[700],
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     }
 
                     if (!registerFormProvider.isNameEmpty &&
