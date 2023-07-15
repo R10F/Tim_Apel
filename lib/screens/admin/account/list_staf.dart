@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:tim_apel/screens/admin/account/list_staf_item.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/providers/account_provider.dart';
 import 'package:tim_apel/screens/profile/profile.dart';
@@ -32,106 +33,59 @@ class _ListStafState extends State<ListStaf> {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
+        title: Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
       ),
       body: itemCount > 0
-          ? ListView(
-              children: List.generate(
-                  userAccounts.length,
-                  (index) => userAccounts[index].isActive ==
-                          widget.isActiveAccountsPage
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    fullscreenDialog: true,
-                                    builder: (_) => Scaffold(
-                                        appBar: AppBar(
-                                          title: Text(userAccounts[index].nama),
-                                        ),
-                                        body: Profile(
-                                            id: index,
-                                            asMyself: false,
-                                            data: userAccounts[index]))));
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        width: 0.5, color: Colors.grey))),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 15),
-                                child: ListTile(
-                                  leading: Image.asset(
-                                    'assets/profile_pictures/${userAccounts[index].profilePicture}',
-                                    width: 45,
-                                  ),
-                                  title: Text(userAccounts[index].nama),
-                                  trailing: accountProvider.id != index
-                                      ? widget.isActiveAccountsPage
-                                          ? TextButton(
-                                              onPressed: () {
-                                                QuickAlert.show(
-                                                    context: context,
-                                                    confirmBtnTextStyle:
-                                                        const TextStyle(
-                                                            fontSize: 17,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                    cancelBtnTextStyle:
-                                                        const TextStyle(
-                                                            fontSize: 15,
-                                                            color: Colors.grey),
-                                                    type:
-                                                        QuickAlertType.warning,
-                                                    confirmBtnColor:
-                                                        Colors.teal[700]!,
-                                                    title:
-                                                        'Nonaktifkan staf ini?',
-                                                    confirmBtnText:
-                                                        'Nonaktifkan',
-                                                    cancelBtnText: 'Tutup',
-                                                    showCancelBtn: true,
-                                                    onConfirmBtnTap: () {
-                                                      accountProvider
-                                                          .deactivateAccount(
-                                                              index);
-                                                      Navigator.pop(context);
-                                                    });
-                                              },
-                                              child: const Text('Nonaktifkan'))
-                                          : TextButton(
-                                              onPressed: () {
-                                                accountProvider
-                                                    .activateAccount(index);
-
-                                                Fluttertoast.showToast(
-                                                  msg:
-                                                      'Staf sudah diaktifkan kembali',
-                                                  toastLength:
-                                                      Toast.LENGTH_LONG,
-                                                  gravity: ToastGravity.TOP,
-                                                  backgroundColor:
-                                                      Colors.teal[300],
-                                                  textColor: Colors.white,
-                                                  fontSize: 16,
-                                                );
-                                              },
-                                              child: const Text('Aktifkan'))
-                                      : null,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container()))
+          ? Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: ListView(children: [
+                widget.isActiveAccountsPage
+                    ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        const Padding(
+                          padding: EdgeInsets.only(top: 6, left: 15, bottom: 6),
+                          child: Text('Owner',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                        ),
+                        Divider(color: Colors.teal[300], thickness: 0.75),
+                        userAccounts[0].isActive == widget.isActiveAccountsPage
+                            ? ListStafItem(
+                                index: 0,
+                                userAccounts: userAccounts,
+                                accountProvider: accountProvider,
+                                isActiveAccountsPage: widget.isActiveAccountsPage)
+                            : Container(),
+                        Divider(color: Colors.teal[300], thickness: 0.75),
+                        widget.isActiveAccountsPage
+                            ? const Padding(
+                                padding: EdgeInsets.only(top: 6, left: 15, bottom: 6),
+                                child: Text('Staf',
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                              )
+                            : Container(),
+                        Divider(color: Colors.teal[300], thickness: 0.75),
+                      ])
+                    : Container(),
+                if (itemCount > 1)
+                  for (int i = 1; i < userAccounts.length; i++)
+                    if (userAccounts[i].isActive == widget.isActiveAccountsPage)
+                      ListStafItem(
+                          index: i,
+                          userAccounts: userAccounts,
+                          accountProvider: accountProvider,
+                          isActiveAccountsPage: widget.isActiveAccountsPage),
+                if (itemCount == 1)
+                  Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 16),
+                      child: const Text(
+                        'Tidak ada staf aktif',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+              ]),
+            )
           : Center(
               child: Container(
                 alignment: Alignment.center,
@@ -152,8 +106,7 @@ class _ListStafState extends State<ListStaf> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const RegisterStaf()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
               },
             )
           : null,

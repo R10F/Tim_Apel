@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tim_apel/providers/account_provider.dart';
+import 'package:tim_apel/providers/produk_provider.dart';
 import 'package:tim_apel/providers/transaksi_provider.dart';
+import 'package:tim_apel/screens/admin/restock/stok_produk.dart';
 import 'package:tim_apel/screens/dashboard/home_insight.dart';
 import 'package:tim_apel/screens/dashboard/transaksi_baru_diselesaikan.dart';
 import 'package:tim_apel/screens/dashboard/transaksi_sedang_berlangsung.dart';
@@ -17,6 +19,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    var produkProv = Provider.of<ProdukProvider>(context);
     var accountProvider = Provider.of<AccountProvider>(context);
     var transaksiProvider = Provider.of<TransaksiProvider>(context);
     var listTransaksi = transaksiProvider.listTransaksi;
@@ -35,6 +38,18 @@ class _HomeState extends State<Home> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          MaterialBanner(
+              dividerColor: Colors.black,
+              content: Text(
+                  'Ada ${produkProv.getProdukHabis().length} barang yang sudah habis dan ${produkProv.getProdukHampirHabis().length} barang yang hampir habis!'),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => const StokProduk()));
+                    },
+                    child: const Text('Segera Restock'))
+              ]),
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 25),
             child: Container(
