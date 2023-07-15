@@ -39,19 +39,34 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           MaterialBanner(
-              dividerColor: Colors.black,
+              elevation: 2,
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
               content: Text(
                   'Ada ${produkProv.getProdukHabis().length} barang yang sudah habis dan ${produkProv.getProdukHampirHabis().length} barang yang hampir habis!'),
+              leading: const CircleAvatar(child: Icon(Icons.warning)),
               actions: [
-                ElevatedButton(
+                TextButton(
                     onPressed: () {
                       Navigator.push(
                           context, MaterialPageRoute(builder: (_) => const StokProduk()));
                     },
-                    child: const Text('Segera Restock'))
+                    child: const Text('INGATKAN NANTI',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 14))),
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => const StokProduk()));
+                      },
+                      child: const Text('RESTOCK SEKARANG',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 14))),
+                ),
               ]),
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 25),
+            padding: const EdgeInsets.only(left: 20, top: 10),
             child: Container(
               alignment: Alignment.topLeft,
               child: Text(
