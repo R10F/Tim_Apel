@@ -1,13 +1,8 @@
-// import 'package:cherry_toast/cherry_toast.dart';
-// import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:quickalert/quickalert.dart';
 import 'package:tim_apel/screens/admin/account/list_staf_item.dart';
 import 'package:tim_apel/screens/admin/account/register_staf.dart';
 import 'package:tim_apel/providers/account_provider.dart';
-import 'package:tim_apel/screens/profile/profile.dart';
 
 class ListStaf extends StatefulWidget {
   const ListStaf({super.key, required this.isActiveAccountsPage});
@@ -65,15 +60,15 @@ class _ListStafState extends State<ListStaf> {
                         Divider(color: Colors.teal[300], thickness: 0.75),
                       ])
                     : Container(),
-                if (itemCount > 1)
-                  for (int i = 1; i < userAccounts.length; i++)
-                    if (userAccounts[i].isActive == widget.isActiveAccountsPage)
-                      ListStafItem(
-                          index: i,
-                          userAccounts: userAccounts,
-                          accountProvider: accountProvider,
-                          isActiveAccountsPage: widget.isActiveAccountsPage),
-                if (itemCount == 1)
+                // if (itemCount > 1)
+                for (int i = 1; i < userAccounts.length; i++)
+                  if (userAccounts[i].isActive == widget.isActiveAccountsPage)
+                    ListStafItem(
+                        index: i,
+                        userAccounts: userAccounts,
+                        accountProvider: accountProvider,
+                        isActiveAccountsPage: widget.isActiveAccountsPage),
+                if (widget.isActiveAccountsPage && itemCount == 1)
                   Center(
                     child: Container(
                       alignment: Alignment.center,
