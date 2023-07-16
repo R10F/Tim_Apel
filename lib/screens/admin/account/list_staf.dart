@@ -28,37 +28,48 @@ class _ListStafState extends State<ListStaf> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
+        title:
+            Text(widget.isActiveAccountsPage ? 'List Staf' : 'Staf Nonaktif'),
       ),
       body: itemCount > 0
           ? Padding(
               padding: const EdgeInsets.only(top: 8),
               child: ListView(children: [
                 widget.isActiveAccountsPage
-                    ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 6, left: 15, bottom: 6),
-                          child: Text('Owner',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                        ),
-                        Divider(color: Colors.teal[300], thickness: 0.75),
-                        userAccounts[0].isActive == widget.isActiveAccountsPage
-                            ? ListStafItem(
-                                index: 0,
-                                userAccounts: userAccounts,
-                                accountProvider: accountProvider,
-                                isActiveAccountsPage: widget.isActiveAccountsPage)
-                            : Container(),
-                        Divider(color: Colors.teal[300], thickness: 0.75),
-                        widget.isActiveAccountsPage
-                            ? const Padding(
-                                padding: EdgeInsets.only(top: 6, left: 15, bottom: 6),
-                                child: Text('Staf',
-                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                              )
-                            : Container(),
-                        Divider(color: Colors.teal[300], thickness: 0.75),
-                      ])
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            const Padding(
+                              padding:
+                                  EdgeInsets.only(top: 6, left: 15, bottom: 6),
+                              child: Text('Owner',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                            Divider(color: Colors.teal[300], thickness: 0.75),
+                            userAccounts[0].isActive ==
+                                    widget.isActiveAccountsPage
+                                ? ListStafItem(
+                                    index: 0,
+                                    userAccounts: userAccounts,
+                                    accountProvider: accountProvider,
+                                    isActiveAccountsPage:
+                                        widget.isActiveAccountsPage)
+                                : Container(),
+                            Divider(color: Colors.teal[300], thickness: 0.75),
+                            widget.isActiveAccountsPage
+                                ? const Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 6, left: 15, bottom: 6),
+                                    child: Text('Staf',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600)),
+                                  )
+                                : Container(),
+                            Divider(color: Colors.teal[300], thickness: 0.75),
+                          ])
                     : Container(),
                 // if (itemCount > 1)
                 for (int i = 1; i < userAccounts.length; i++)
@@ -101,7 +112,8 @@ class _ListStafState extends State<ListStaf> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterStaf()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const RegisterStaf()));
               },
             )
           : null,
