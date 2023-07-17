@@ -70,8 +70,8 @@ class _ListStafItemState extends State<ListStafItem> {
                                         fontSize: 17,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
-                                    cancelBtnTextStyle: const TextStyle(
-                                        fontSize: 15, color: Colors.grey),
+                                    cancelBtnTextStyle:
+                                        const TextStyle(fontSize: 15, color: Colors.grey),
                                     type: QuickAlertType.warning,
                                     confirmBtnColor: Colors.teal[700]!,
                                     title: 'Nonaktifkan staf ini?',
@@ -79,23 +79,18 @@ class _ListStafItemState extends State<ListStafItem> {
                                     cancelBtnText: 'Tutup',
                                     showCancelBtn: true,
                                     onConfirmBtnTap: () {
-                                      widget.accountProvider
-                                          .deactivateAccount(widget.index);
+                                      widget.accountProvider.deactivateAccount(widget.index);
                                       Navigator.pop(context);
                                     });
                               },
                               child: Text(
                                 'Nonaktifkan',
                                 style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.fontSize),
+                                    fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize),
                               ))
                           : TextButton(
                               onPressed: () {
-                                widget.accountProvider
-                                    .activateAccount(widget.index);
+                                widget.accountProvider.activateAccount(widget.index);
 
                                 Fluttertoast.showToast(
                                   msg: 'Staf sudah diaktifkan kembali',
@@ -106,7 +101,9 @@ class _ListStafItemState extends State<ListStafItem> {
                                   fontSize: 16,
                                 );
                               },
-                              child: const Text('Aktifkan'))
+                              child: Text('Aktifkan',
+                                  style: TextStyle(
+                                      fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize)))
                       : null,
                 ),
               ),
