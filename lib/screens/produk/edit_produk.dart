@@ -177,7 +177,7 @@ class _EditProdukState extends State<EditProduk> {
                       child: Text(
                         imgProv.imagePath != null
                             ? basename('${imgProv.imagePath}')
-                            : 'No Selected Image',
+                            : 'Image Not Found',
                         style: TextStyle(
                           fontSize:
                               Theme.of(context).textTheme.bodyMedium?.fontSize,

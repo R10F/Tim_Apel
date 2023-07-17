@@ -126,10 +126,10 @@ class RegisterStafFormProvider extends ChangeNotifier {
   getTime(startTime, endTime) {
     bool result = false;
     int startTimeInt = (startTime.hour * 60 + startTime.minute) * 60;
-    int EndTimeInt = (endTime.hour * 60 + endTime.minute) * 60;
-    int dif = EndTimeInt - startTimeInt;
+    int endTimeInt = (endTime.hour * 60 + endTime.minute) * 60;
+    // int dif = endTimeInt - startTimeInt;
 
-    if (EndTimeInt > startTimeInt) {
+    if (endTimeInt > startTimeInt) {
       result = true;
     } else {
       result = false;

@@ -56,29 +56,39 @@ class _ResetPasswordState extends State<ResetPassword> {
                     });
 
                     if (formController.text.isNotEmpty) {
-                      var response = accountProvider.resetPassword(formController.text);
+                      var response =
+                          accountProvider.resetPassword(formController.text);
 
                       QuickAlert.show(
                           context: context,
-                          type: QuickAlertType.warning,
+                          type: response['success']
+                              ? QuickAlertType.success
+                              : QuickAlertType.error,
                           confirmBtnColor: Colors.teal[700]!,
-                          confirmBtnText: response['success'] ? 'Login Sekarang' : 'Coba Lagi',
-                          title: response['success'] ? 'Password Berhasil Direset' : 'Proses Gagal',
+                          confirmBtnText: response['success']
+                              ? 'Login Sekarang'
+                              : 'Coba Lagi',
+                          title: response['success']
+                              ? 'Password Berhasil Direset'
+                              : 'Proses Gagal',
                           text: response['message'],
                           onConfirmBtnTap: () {
                             if (response['success']) {
-                              Navigator.of(context).popUntil((route) => route.isFirst);
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
                             } else {
                               Navigator.pop(context);
                             }
                           });
                     }
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.teal[700]),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal[700]),
                   child: Text(
                     'Reset Password',
                     style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium?.fontSize,
                     ),
                   ),
                 ),

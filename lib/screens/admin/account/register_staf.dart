@@ -186,7 +186,11 @@ class _RegisterStafState extends State<RegisterStaf> {
                               startTime, endTime)) {
                             registerFormProvider.setEndTime(i, "");
                           } else {
-                            registerFormProvider.setEndTime(i, hasil);
+                            registerFormProvider.setEndTime(
+                                i,
+                                registerFormProvider
+                                    .getEndTimeController(i)
+                                    .text);
                           }
                         }
                       } else {
@@ -319,6 +323,20 @@ class _RegisterStafState extends State<RegisterStaf> {
                                 .text
                                 .isEmpty) {
                           timeIsEmpty = true;
+                        }
+                        if (registerFormProvider
+                            .getEndTimeController(i)
+                            .text
+                            .isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: 'Lengkapi Jam Selesai Anda! ',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.TOP,
+                            // timeInSecForIosWeb: 10,
+                            backgroundColor: Colors.redAccent[700],
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
                         }
                       }
                     }
