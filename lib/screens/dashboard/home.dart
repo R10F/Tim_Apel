@@ -41,7 +41,9 @@ class _HomeState extends State<Home> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          produkProv.showBanner && (listProdukHabis.isNotEmpty || listProdukHampirHabis.isNotEmpty)
+          accountProvider.isOwner &&
+                  produkProv.showBanner &&
+                  (listProdukHabis.isNotEmpty || listProdukHampirHabis.isNotEmpty)
               ? MaterialBanner(
                   elevation: 2,
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
