@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tim_apel/models/produk_data_model.dart';
 
@@ -44,8 +43,7 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updateProduk(
-      id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
+  updateProduk(id, nama, gambar, deskripsi, kategori, stok, hargaJual, hargaBeli) {
     Produk edited = Produk(
       id: id,
       nama: nama,
@@ -60,18 +58,25 @@ class ProdukProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void hapusProduk(int idProduk) {
+    semuaProduk[idProduk - 1].isDeleted = true;
+    notifyListeners();
+  }
+
+  bool _showBanner = true;
+
+  get showBanner => _showBanner;
+
+  set showBanner(value) {
+    _showBanner = value;
+    notifyListeners();
+  }
+
   List<Produk> getProdukHampirHabis() {
-    return semuaProduk
-        .where((produk) => produk.stok <= 5 && produk.stok != 0)
-        .toList();
+    return semuaProduk.where((produk) => produk.stok <= 5 && produk.stok != 0).toList();
   }
 
   List<Produk> getProdukHabis() {
     return semuaProduk.where((produk) => produk.stok == 0).toList();
-  }
-
-  void hapusProduk(int idProduk) {
-    semuaProduk[idProduk - 1].isDeleted = true;
-    notifyListeners();
   }
 }

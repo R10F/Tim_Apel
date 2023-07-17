@@ -35,38 +35,46 @@ class _HomeState extends State<Home> {
       }
     }
 
+    List listProdukHabis = produkProv.getProdukHabis();
+    List listProdukHampirHabis = produkProv.getProdukHampirHabis();
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          MaterialBanner(
-              elevation: 2,
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              content: Text(
-                  'Ada ${produkProv.getProdukHabis().length} barang yang sudah habis dan ${produkProv.getProdukHampirHabis().length} barang yang hampir habis!'),
-              leading: const CircleAvatar(child: Icon(Icons.warning)),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => const StokProduk()));
-                    },
-                    child: const Text('INGATKAN NANTI',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 14))),
-                Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => const StokProduk()));
-                      },
-                      child: const Text('RESTOCK SEKARANG',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontFamily: 'Figtree', fontSize: 14))),
-                ),
-              ]),
+          produkProv.showBanner && (listProdukHabis.isNotEmpty || listProdukHampirHabis.isNotEmpty)
+              ? MaterialBanner(
+                  elevation: 2,
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                  content: Text(
+                      "Ada ${listProdukHabis.isNotEmpty ? '${listProdukHabis.length} barang yang sudah habis' : ''}${listProdukHabis.isNotEmpty && listProdukHampirHabis.isNotEmpty ? ' dan ' : ''}${listProdukHampirHabis.isNotEmpty ? '${listProdukHampirHabis.length} barang yang hampir habis' : ''}!"),
+                  leading: const CircleAvatar(child: Icon(Icons.warning)),
+                  actions: [
+                      TextButton(
+                          onPressed: () {
+                            produkProv.showBanner = false;
+                          },
+                          child: const Text('INGATKAN NANTI',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Figtree',
+                                  fontSize: 14))),
+                      Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => const StokProduk()));
+                            },
+                            child: const Text('RESTOCK SEKARANG',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Figtree',
+                                    fontSize: 14))),
+                      ),
+                    ])
+              : Container(),
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
+            padding: const EdgeInsets.only(left: 20, top: 20),
             child: Container(
               alignment: Alignment.topLeft,
               child: Text(
