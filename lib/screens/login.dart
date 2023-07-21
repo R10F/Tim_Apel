@@ -109,7 +109,7 @@ class _LoginState extends State<Login> {
                         if (!response['success']) {
                           QuickAlert.show(
                               context: context,
-                              type: QuickAlertType.warning,
+                              type: QuickAlertType.error,
                               confirmBtnColor: Colors.teal[700]!,
                               title: 'Login Gagal',
                               text: response['message']);

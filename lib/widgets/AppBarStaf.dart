@@ -8,6 +8,7 @@ import 'package:tim_apel/widgets/TabNavigasiTransaksi.dart';
 
 import '../providers/account_provider.dart';
 import '../providers/transaksi_provider.dart';
+import '../screens/transaksi/dalam_proses/rincian_transaksi.dart';
 
 class AppBarStaf extends StatelessWidget {
   const AppBarStaf({super.key});
@@ -29,9 +30,27 @@ class AppBarStaf extends StatelessWidget {
                 icon: const Icon(Icons.search)),
           if (bottomNavProvider.getSelectedIdx == 1) // Cart icon - Page Produk
             IconButton(
-                onPressed: () {
-                  showSearch(context: context, delegate: CustomProdukSearch());
-                },
+                onPressed: transaksiProvider.hasTransaksiActive
+                    ? () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (_) => RincianTransaksi(
+                                      idTransaksi:
+                                          transaksiProvider.selectedAntrean,
+                                      namaKasir: accountProvider
+                                          .userAccounts[transaksiProvider
+                                              .listTransaksi[transaksiProvider
+                                                  .selectedAntrean]
+                                              .idKasir]
+                                          .nama,
+                                      transaksi: transaksiProvider
+                                              .listTransaksi[
+                                          transaksiProvider.selectedAntrean],
+                                    )));
+                      }
+                    : null,
                 icon: const Icon(Icons.receipt_long)),
           PopupMenuButton(
             tooltip: 'Pilih nomor antrean',
